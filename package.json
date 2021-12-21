@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "node src/index.js",
-    "test": "jest --testTimeout=10000"
+    "test": "jest"
   },
   "license": "unlicensed",
   "dependencies": {
