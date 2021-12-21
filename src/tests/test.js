@@ -53,6 +53,58 @@ describe('User Endpoints', () => {
         
         });
 
+        it('should throw a 400 if bad password (no uppercase)', async () => {
+            
+            const res = await requestWithSupertest.post('/user/signup').send({
+                username: 'william-mcgonagle',
+                email: 'testing@fairfieldprogramming.org',
+                password: 'testing123!'
+            });
+    
+            expect(res.status).toEqual(400);
+            expect(res.type).toEqual(expect.stringContaining('html'));
+        
+        });
+
+        it('should throw a 400 if bad password (no lowercase)', async () => {
+            
+            const res = await requestWithSupertest.post('/user/signup').send({
+                username: 'william-mcgonagle',
+                email: 'testing@fairfieldprogramming.org',
+                password: 'TESTING123!'
+            });
+    
+            expect(res.status).toEqual(400);
+            expect(res.type).toEqual(expect.stringContaining('html'));
+        
+        });
+
+        it('should throw a 400 if bad password (no numbers)', async () => {
+            
+            const res = await requestWithSupertest.post('/user/signup').send({
+                username: 'william-mcgonagle',
+                email: 'testing@fairfieldprogramming.org',
+                password: 'Testing!'
+            });
+    
+            expect(res.status).toEqual(400);
+            expect(res.type).toEqual(expect.stringContaining('html'));
+        
+        });
+
+        it('should throw a 400 if bad password (no symbols)', async () => {
+            
+            const res = await requestWithSupertest.post('/user/signup').send({
+                username: 'william-mcgonagle',
+                email: 'testing@fairfieldprogramming.org',
+                password: 'Testing123'
+            });
+    
+            expect(res.status).toEqual(400);
+            expect(res.type).toEqual(expect.stringContaining('html'));
+         
+        });
+
         it('should throw a 200 if successful', async () => {
             
             const res = await requestWithSupertest.post('/user/signup').send({

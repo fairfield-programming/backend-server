@@ -7,11 +7,11 @@ module.exports = (req, res) => {
 	if (!req.body.password.match(/[A-Z]/)) return res.status(400).send("Invalid Password.")
 	if (!req.body.password.match(/[a-z]/)) return res.status(400).send("Invalid Password.")
 	if (!req.body.password.match(/[0-9]/)) return res.status(400).send("Invalid Password.")
-	if (!req.body.password.match(/(?=.*?[#?!@$%^&*-_])/)) return res.status(400).send("Invalid Password.")
+	if (!req.body.password.match(/(\#|\?|\!|\@|\$|\%|\^|\&|\*|\-|\_)/)) return res.status(400).send("Invalid Password.")
 	if (req.body.password.length > 14) return res.status(400).send("Invalid Password.")
 	if (req.body.password.length < 4) return res.status(400).send("Invalid Password.")
 	
-	// Verify Email
+	// Verify Email 
 	const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	if (!re.test(req.body.email)) return res.status(400).send("Invalid Email.")
 	
