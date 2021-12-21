@@ -21,10 +21,10 @@ app.use(express.json());
 app.get("/article/create", require('./routes/Article/createArticle'));
 app.get("/article/:id/", require('./routes/Article/queryArticle'));
 app.get("/article/", require('./routes/Article/listArticles'));
-
+ 
 // User Endpoints
-app.get("/user/signup", require('./routes/User/signup'));
-app.get("/user/login", require('./routes/User/login'));
+app.post("/user/signup", require('./routes/User/signup'));
+app.post("/user/login", require('./routes/User/login'));
 app.get("/user/:id/", require('./routes/User/queryUser'));
 app.get("/user/", require('./routes/User/listUsers'));
 
