@@ -8,9 +8,9 @@ global.Op = Op;
 var sequelize;
 sequelize = new Sequelize({
     "dialect": "sqlite",
-    "logging": true,
+    "logging": false,
     "storage": "./database.db"
-})
+});
 
 // Import Models
 const Article = require('./Article')

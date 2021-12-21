@@ -11,7 +11,7 @@ const models = require('./models')
 var app = express();
 var port = process.env.PORT || 8080;
 global.bcrypt = bcrypt;
-global.jwt = jwt;
+global.jwt = jwt; 
 
 // Configure Middleware
 app.use(express.static("public"));
@@ -32,6 +32,6 @@ app.get("/user/", require('./routes/User/listUsers'));
 app.listen(port, function () {
 
 	// Log Server Port to the Console.
-	console.log("Server Listening at http://localhost:" + port);
+	// console.log("Server Listening at http://localhost:" + port);
 
 })
