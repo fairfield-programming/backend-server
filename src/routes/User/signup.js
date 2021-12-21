@@ -16,10 +16,14 @@ module.exports = (req, res) => {
 	if (!re.test(req.body.email)) return res.status(400).send("Invalid Email.")
 	
 	// Verify Username
+	if (req.body.username.length > 30) return res.status(400).send("Invalid Username.");
+	if (req.body.username.length < 4) return res.status(400).send("Invalid Username.");
+
 	if (req.body.username.includes(' ')) return res.status(400).send("Invalid Username.");
 	if (/[0-9]/g.test(req.body.username)) return res.status(400).send("Invalid Username.");
+	if (/[!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/g.test(req.body.username)) return res.status(400).send("Invalid Username");
 	if (req.body.username.toLowerCase() !== req.body.username) return res.status(400).send("Invalid Username.");
- 
+
 	User.findAll({
 		where: {
 			[Op.or]: [

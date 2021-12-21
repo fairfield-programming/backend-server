@@ -144,6 +144,84 @@ describe('User Endpoints', () => {
          
         });
 
+        it('should throw a 400 if bad username (spaces)', async () => {
+            
+            const res = await requestWithSupertest.post('/user/signup').send({
+                username: 'william mcgonagle',
+                email: 'testing@fairfieldprogramming',
+                password: 'Testing123!'
+            });
+    
+            expect(res.status).toEqual(400); 
+            expect(res.type).toEqual(expect.stringContaining('html'));
+         
+        });
+
+        it('should throw a 400 if bad username (uppercase)', async () => {
+            
+            const res = await requestWithSupertest.post('/user/signup').send({
+                username: 'William-McGonagle',
+                email: 'testing@fairfieldprogramming',
+                password: 'Testing123!'
+            });
+    
+            expect(res.status).toEqual(400); 
+            expect(res.type).toEqual(expect.stringContaining('html'));
+         
+        });
+
+        it('should throw a 400 if bad username (numbers)', async () => {
+            
+            const res = await requestWithSupertest.post('/user/signup').send({
+                username: 'william-mcgonagle1',
+                email: 'testing@fairfieldprogramming',
+                password: 'Testing123!'
+            });
+    
+            expect(res.status).toEqual(400); 
+            expect(res.type).toEqual(expect.stringContaining('html'));
+         
+        });
+
+        it('should throw a 400 if bad username (symbols)', async () => {
+            
+            const res = await requestWithSupertest.post('/user/signup').send({
+                username: 'william@mcgonagle',
+                email: 'testing@fairfieldprogramming',
+                password: 'Testing123!'
+            });
+    
+            expect(res.status).toEqual(400); 
+            expect(res.type).toEqual(expect.stringContaining('html'));
+         
+        });
+
+        it('should throw a 400 if bad username (short)', async () => {
+            
+            const res = await requestWithSupertest.post('/user/signup').send({
+                username: 'wil',
+                email: 'testing@fairfieldprogramming',
+                password: 'Testing123!'
+            });
+    
+            expect(res.status).toEqual(400); 
+            expect(res.type).toEqual(expect.stringContaining('html'));
+         
+        });
+
+        it('should throw a 400 if bad username (long)', async () => {
+            
+            const res = await requestWithSupertest.post('/user/signup').send({
+                username: 'william-mcgonagle-the-best-programmer-in-the-world',
+                email: 'testing@fairfieldprogramming',
+                password: 'Testing123!'
+            });
+     
+            expect(res.status).toEqual(400); 
+            expect(res.type).toEqual(expect.stringContaining('html'));
+         
+        });
+
         it('should throw a 200 if successful', async () => {
             
             const res = await requestWithSupertest.post('/user/signup').send({
@@ -158,6 +236,8 @@ describe('User Endpoints', () => {
         });
 
     })
+
+    // describe('POST /user/login')
 
     describe('GET /user', () => {
 
