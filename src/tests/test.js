@@ -126,7 +126,20 @@ describe('User Endpoints', () => {
                 password: 'Testing11111111111111111111111!'
             });
     
-            expect(res.status).toEqual(400);
+            expect(res.status).toEqual(400); 
+            expect(res.type).toEqual(expect.stringContaining('html'));
+         
+        });
+
+        it('should throw a 400 if bad email', async () => {
+            
+            const res = await requestWithSupertest.post('/user/signup').send({
+                username: 'william-mcgonagle',
+                email: 'testing@fairfieldprogramming',
+                password: 'Testing123!'
+            });
+    
+            expect(res.status).toEqual(400); 
             expect(res.type).toEqual(expect.stringContaining('html'));
          
         });
