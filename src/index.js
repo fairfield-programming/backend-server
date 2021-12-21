@@ -29,11 +29,15 @@ app.get("/user/:id/", require('./routes/User/queryUser'));
 app.get("/user/", require('./routes/User/listUsers'));
 
 // Start Server
-app.listen(port, function () {
+if (process.env.NODE_ENV != 'test') {
+	
+	app.listen(port, function () {
 
-	// Log Server Port to the Console.
-	// console.log("Server Listening at http://localhost:" + port);
+		// Log Server Port to the Console.
+		console.log("Server Listening at http://localhost:" + port);
 
-})
+	})
+
+}
 
 module.exports = app;
