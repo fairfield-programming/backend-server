@@ -237,7 +237,33 @@ describe('User Endpoints', () => {
 
     })
 
-    // describe('POST /user/login')
+    describe('POST /user/login', () => {
+
+        it('should throw a 200 if successful (username)', async () => {
+            
+            const res = await requestWithSupertest.post('/user/login').send({
+                username: 'william-mcgonagle',
+                password: 'Testing123!'
+            });
+    
+            expect(res.status).toEqual(200);
+            expect(res.type).toEqual(expect.stringContaining('json'));
+        
+        });
+
+        it('should throw a 200 if successful (email)', async () => {
+            
+            const res = await requestWithSupertest.post('/user/login').send({
+                email: 'testing@fairfieldprogramming.org',
+                password: 'Testing123!'
+            });
+    
+            expect(res.status).toEqual(200);
+            expect(res.type).toEqual(expect.stringContaining('json'));
+        
+        });
+
+    })
 
     describe('GET /user', () => {
 
