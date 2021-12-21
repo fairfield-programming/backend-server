@@ -1,6 +1,6 @@
-<center>
-<img src="https://raw.githubusercontent.com/fairfield-programming/backend-server/2d8826df2790798c0c0e8e47ca64c45432d9b5cb/.github/media/logo-full.svg">
-</center>
+<p align="center">
+<img width="200" src="https://raw.githubusercontent.com/fairfield-programming/backend-server/2d8826df2790798c0c0e8e47ca64c45432d9b5cb/.github/media/logo-full.svg">
+</p>
 
 # Backend Server
 
