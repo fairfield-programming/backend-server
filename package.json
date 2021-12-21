@@ -1,0 +1,25 @@
+{
+  "name": "fairfield-programming-association",
+  "version": "1.0.0",
+  "description": "The Fairfield Programming Association is a league of schools in the south-eastern Connecticut area that focuses on teaching students important lessons in programming.",
+  "author": "William McGonagle",
+  "keywords": [],
+  "homepage": "https://fairfieldprogramming.org/",
+  "bugs": {
+    "url": "https://fairfieldprogramming.org/bugs",
+    "email": "bugs@fairfieldprogramming.org"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"No Test Script Exists;"
+  },
+  "license": "unlicensed",
+  "dependencies": {
+    "express": "^4.17.1",
+    "sequelize": "^6.3.5",
+    "bcrypt": "^5.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "react": "17.0.1",
+    "react-dom": "17.0.1"
+  }
+}
