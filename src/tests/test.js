@@ -105,6 +105,32 @@ describe('User Endpoints', () => {
          
         });
 
+        it('should throw a 400 if bad password (short)', async () => {
+            
+            const res = await requestWithSupertest.post('/user/signup').send({
+                username: 'william-mcgonagle',
+                email: 'testing@fairfieldprogramming.org',
+                password: 'Te!'
+            });
+    
+            expect(res.status).toEqual(400);
+            expect(res.type).toEqual(expect.stringContaining('html'));
+         
+        });
+
+        it('should throw a 400 if bad password (long)', async () => {
+            
+            const res = await requestWithSupertest.post('/user/signup').send({
+                username: 'william-mcgonagle',
+                email: 'testing@fairfieldprogramming.org',
+                password: 'Testing11111111111111111111111!'
+            });
+    
+            expect(res.status).toEqual(400);
+            expect(res.type).toEqual(expect.stringContaining('html'));
+         
+        });
+
         it('should throw a 200 if successful', async () => {
             
             const res = await requestWithSupertest.post('/user/signup').send({
