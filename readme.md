@@ -12,3 +12,15 @@
 ![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/fairfield-programming/backend-server)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/fairfield-programming/backend-server)
 ![Lines of code](https://img.shields.io/tokei/lines/github/fairfield-programming/backend-server)
+
+## Features
+
+### Duck Generator
+
+<img align="left" width="100" height="100" src="https://fairfield-programming.herokuapp.com/duck/0103000135/30">
+
+We didn't want to use people's faces for the profile pictures. This was for three reasons: we didn't want to pay for hosting the image files, we were scared of what people would upload, and since our main audience is minors, we didn't want their faces to be publicly available.
+
+<img align="right" width="100" height="100" src="https://fairfield-programming.herokuapp.com/duck/0201000054/30">
+
+To solve these problems, we decided to use rubber duck avatars instead of photos. Users are able to customize their ducks by adding glasses, hats, items, etc (and they can even set their own colors).
