@@ -9,7 +9,7 @@ module.exports = (req, res) => {
     // Send the Duck
     return res.send(
         duckGenerator.formatSVG(
-            duckGenerator.generateDuck({})
+            duckGenerator.generateDuck(duckData)
         )
     );
 

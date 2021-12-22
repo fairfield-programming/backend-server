@@ -26,7 +26,7 @@ function parseDuckString(input) {
     var color = parseInt(colorString, 16);
 
     // Get Duck Beak Color
-    var beakColorString = input.substring(6, 8);
+    var beakColorString = input.substring(9, 10);
     var beakColor = parseInt(beakColorString, 16);
 
     console.log({
