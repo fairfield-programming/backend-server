@@ -249,7 +249,7 @@ describe('User Endpoints', () => {
             expect(res.status).toEqual(200);
             expect(res.type).toEqual(expect.stringContaining('json'));
         
-        });
+        }); 
 
         it('should throw a 200 if successful (email)', async () => {
             
@@ -260,6 +260,30 @@ describe('User Endpoints', () => {
     
             expect(res.status).toEqual(200);
             expect(res.type).toEqual(expect.stringContaining('json'));
+        
+        });
+
+        it('should throw a 404 if account not found (email)', async () => {
+            
+            const res = await requestWithSupertest.post('/user/login').send({
+                email: 'testing@fairfieldprogramming.or',
+                password: 'Testing123!' 
+            });
+    
+            expect(res.status).toEqual(404);
+            expect(res.type).toEqual(expect.stringContaining('html'));
+        
+        });
+
+        it('should throw a 404 if account not found (username)', async () => {
+            
+            const res = await requestWithSupertest.post('/user/login').send({
+                username: 'will-mcgonagle', 
+                password: 'Testing123!' 
+            });
+    
+            expect(res.status).toEqual(404);
+            expect(res.type).toEqual(expect.stringContaining('html'));
         
         });
 
