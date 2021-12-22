@@ -17,8 +17,10 @@ global.jwt = jwt;
 app.use(express.static("public"));
 app.use(express.json());
 
-// Article Endpoints
+// Duck Endpoints
 app.get("/duck", require('./routes/Duck/index'));
+app.get("/duck/:id", require('./routes/Duck/id'));
+app.get("/duck/:id/:zoom", require('./routes/Duck/idZoom'));
 
 // Article Endpoints
 app.get("/article/create", require('./routes/Article/createArticle'));
