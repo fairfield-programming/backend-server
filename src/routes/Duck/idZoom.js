@@ -2,6 +2,9 @@ duckGenerator = require('./duckGenerator');
 
 module.exports = (req, res) => {
 
+    // Set the Headers
+    res.set("Content-Type", "image/svg+xml");
+    
     // Get the Zoom
     var zoom = req.params.zoom;
     var zoomInt = parseInt(zoom);
