@@ -17,19 +17,21 @@ module.exports = (req, res) => {
 		
 		bcrypt.compare(req.body.password, userData.password, function (err, result) {
 		
-			if (err) return res.status(403).send("Incorrect Password.")
-			
-			if (result) {
-				return res.json({ 
-					token: jwt.sign({
-						username: userData.username,
-						email: userData.email
-					}, process.env.JWT_KEY) 
-				}) 
-			} else {
+			if (err) {
+
 				console.log(err) 
 				return res.status(500).send("Internal Server Error.")
+
 			}
+			
+			if (!result) return res.status(403).send("Incorrect Password.")
+
+			return res.json({
+				token: jwt.sign({
+					username: userData.username,
+					email: userData.email
+				}, process.env.JWT_KEY) 
+			})
 		
 		})
 	

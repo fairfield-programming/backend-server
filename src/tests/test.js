@@ -6,7 +6,7 @@ process.env.JWT_KEY = '4f1dde6a54346ab08b04785a7a8baf076e917293ae189ccda95358045
 
 describe('User Endpoints', () => {
 
-    describe('POST /user/signup', () => {
+    describe('POST /user/signup', () => { 
 
         it('should throw a 400 if not all params are given', async () => {
         
@@ -283,6 +283,18 @@ describe('User Endpoints', () => {
             });
     
             expect(res.status).toEqual(404);
+            expect(res.type).toEqual(expect.stringContaining('html'));
+        
+        });
+
+        it('should throw a 403 if incorrect password', async () => {
+            
+            const res = await requestWithSupertest.post('/user/login').send({
+                username: 'william-mcgonagle',
+                password: 'Testing123'
+            });
+    
+            expect(res.status).toEqual(403);
             expect(res.type).toEqual(expect.stringContaining('html'));
         
         });
