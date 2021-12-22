@@ -18,6 +18,9 @@ app.use(express.static("public"));
 app.use(express.json());
 
 // Article Endpoints
+app.get("/duck", require('./routes/Duck/index'));
+
+// Article Endpoints
 app.get("/article/create", require('./routes/Article/createArticle'));
 app.get("/article/:id/", require('./routes/Article/queryArticle'));
 app.get("/article/", require('./routes/Article/listArticles'));
