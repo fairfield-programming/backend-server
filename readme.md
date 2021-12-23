@@ -19,7 +19,7 @@
 
 We didn't want to use people's faces for the profile pictures. This was for three reasons: we didn't want to pay for hosting the image files, we were scared of what people would upload, and since our main audience is minors, we didn't want their faces to be publicly available. To solve these problems, we decided to use rubber duck avatars instead of photos. Users are able to customize their ducks by adding glasses, hats, items, etc (and they can even set their own colors).
 
-<p align="left">
+<p align="center">
 
 <img width="100" src="https://fairfield-programming.herokuapp.com/duck/0103000135/30" alt="Cool Duck">
 <img width="100" src="https://fairfield-programming.herokuapp.com/duck/0201000054/30" alt="Red Duck">
