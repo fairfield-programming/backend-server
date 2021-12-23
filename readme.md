@@ -31,4 +31,4 @@ We didn't want to use people's faces for the profile pictures. This was for thre
 
 ### Authentication Support
 
-We realized early on that there needed to be support for users subscribing to events, email lists, and team features. To do this, we needed the ability for users to create accounts and sign into them. To do this, we added an authentication system that uses many of the strongest security protocols offered today.
+We realized early on that there needed to be support for users subscribing to events, email lists, and team features. To do this, we needed the ability for users to create accounts and sign into them. To do this, we added an authentication system that uses many of the strongest security protocols offered today. On top of this security, we built our API to be as strict as possible so that fake accounts cannot be easily created and users with improper credentials cannot mess with accounts.
