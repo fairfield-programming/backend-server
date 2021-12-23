@@ -28,3 +28,7 @@ We didn't want to use people's faces for the profile pictures. This was for thre
 <img width="100" src="https://fairfield-programming.herokuapp.com/duck/0002000021/30" alt="Brown Duck">
 
 </p>
+
+### Authentication Support
+
+We realized early on that there needed to be support for users subscribing to events, email lists, and team features. To do this, we needed the ability for users to create accounts and sign into them. To do this, we added an authentication system that uses many of the strongest security protocols offered today.
