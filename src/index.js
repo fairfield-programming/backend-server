@@ -38,6 +38,8 @@ app.get("/article/", require('./routes/Article/listArticles'));
 app.post("/user/signup", require('./routes/User/signup'));
 app.post("/user/login", require('./routes/User/login'));
 app.get("/user/:id/", require('./routes/User/queryUser'));
+app.get("/user/:id/status", require('./routes/User/getStatus'));
+app.post("/user/:id/status", require('./routes/User/setStatus'));
 app.get("/user/", require('./routes/User/listUsers'));
 
 // Start Server
