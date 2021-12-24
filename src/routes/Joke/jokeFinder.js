@@ -40,12 +40,18 @@ function getJokeCount() {
 // Get a Random Joke
 function getRandomJoke() {
 
-    
+    // Get All of the Jokes
+    var jokes = getAllJokes();
+    var jokeIndex = Math.floor(Math.random() * jokes.length);
+
+    // Return the Joke at the Index
+    return jokes[jokeIndex];
 
 }
 
 module.exports = {
     getAllJokes,
     getJokeAtIndex,
-    getJokeCount
+    getJokeCount,
+    getRandomJoke
 };
