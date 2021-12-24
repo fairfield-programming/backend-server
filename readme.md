@@ -1,5 +1,5 @@
 <p align="center">
-<img width="200" src="https://raw.githubusercontent.com/fairfield-programming/backend-server/2d8826df2790798c0c0e8e47ca64c45432d9b5cb/.github/media/logo-full.svg">
+<img width="200" src="https://raw.githubusercontent.com/fairfield-programming/backend-server/d84cd53499177b9069d3a0a72c80701627190c18/.github/media/logo-full.svg">
 </p>
 
 # Backend Server
