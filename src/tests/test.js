@@ -30,15 +30,69 @@ describe('User Endpoints', () => {
 
         });
 
+        it('should return a 400 when a bad id is sent (short)', async () => {
+
+            const res = await requestWithSupertest.get('/duck/000000000');
+    
+            expect(res.status).toEqual(400);
+            expect(res.type).toEqual(expect.stringContaining('svg'));
+
+        });
+
+        it('should return a 400 when a bad id is sent (long)', async () => {
+
+            const res = await requestWithSupertest.get('/duck/00000000000');
+    
+            expect(res.status).toEqual(400);
+            expect(res.type).toEqual(expect.stringContaining('svg'));
+
+        });
+
+        it('should return a 400 when a bad id is sent (cant parse)', async () => {
+
+            const res = await requestWithSupertest.get('/duck/0z00000000');
+    
+            expect(res.status).toEqual(400); 
+            expect(res.type).toEqual(expect.stringContaining('svg'));
+
+        });
+
     });
 
     describe('GET /duck/:id/:zoom', () => {
 
         it('should return a 200 and a duck along with it', async () => {
 
-            const res = await requestWithSupertest.get('/duck');
+            const res = await requestWithSupertest.get('/duck/0000000000/20');
     
             expect(res.status).toEqual(200);
+            expect(res.type).toEqual(expect.stringContaining('svg'));
+
+        });
+
+        it('should return a 400 when a bad id is sent (short)', async () => {
+
+            const res = await requestWithSupertest.get('/duck/000000000/20');
+    
+            expect(res.status).toEqual(400);
+            expect(res.type).toEqual(expect.stringContaining('svg'));
+
+        });
+
+        it('should return a 400 when a bad id is sent (long)', async () => {
+
+            const res = await requestWithSupertest.get('/duck/00000000000/20');
+    
+            expect(res.status).toEqual(400);
+            expect(res.type).toEqual(expect.stringContaining('svg'));
+
+        });
+
+        it('should return a 400 when a bad id is sent (cant parse)', async () => {
+
+            const res = await requestWithSupertest.get('/duck/0z00000000/20');
+    
+            expect(res.status).toEqual(400); 
             expect(res.type).toEqual(expect.stringContaining('svg'));
 
         });
