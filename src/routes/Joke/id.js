@@ -2,6 +2,9 @@ const jokeLib = require('./jokeFinder');
 
 module.exports = (req, res) => {
 
+    // Set the Access-Control-Allow-Origin Header
+    res.set('Access-Control-Allow-Origin', '*');
+    
     // Check for ID
     if (req.params.id == undefined) return res.status(400).send("ID Not Given.");
 
