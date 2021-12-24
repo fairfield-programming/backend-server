@@ -412,7 +412,12 @@ describe('User Endpoints', () => {
 
         it('should show a user', async () => {
 
+            const res = await requestWithSupertest.get('/user/1');
 
+            expect(typeof res.body).toEqual('object');
+            expect(Array.isArray(res.body)).toEqual(false);
+            expect(res.status).toEqual(200);
+            expect(res.type).toEqual(expect.stringContaining('json'));
 
         });
 
