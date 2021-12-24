@@ -35,12 +35,14 @@ app.get("/article/:id/", require('./routes/Article/queryArticle'));
 app.get("/article/", require('./routes/Article/listArticles'));
  
 // User Endpoints
-app.post("/user/signup", require('./routes/User/signup'));
-app.post("/user/login", require('./routes/User/login'));
 app.get("/user/:id/", require('./routes/User/queryUser'));
 app.get("/user/:id/status", require('./routes/User/getStatus'));
-app.post("/user/:id/status", require('./routes/User/setStatus'));
 app.get("/user/", require('./routes/User/listUsers'));
+
+app.post("/user/signup", require('./routes/User/signup'));
+app.post("/user/login", require('./routes/User/login'));
+app.post("/user/:id/status", require('./routes/User/setStatus'));
+app.post('/user/:id/setPass',require('./routes/User/setPass'));
 
 // Start Server
 if (process.env.NODE_ENV != 'test') {
