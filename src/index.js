@@ -18,10 +18,10 @@ app.use(express.static("public"));
 app.use(express.json());
 
 // Duck Joke Endpoints
-app.get("/jokes", require('./routes/Duck/all'));
-app.get("/jokes/count", require('./routes/Duck/count'));
-app.get("/jokes/random", require('./routes/Duck/random'));
-app.get("/jokes/:id", require('./routes/Duck/id'));
+app.get("/jokes", require('./routes/Joke/all'));
+app.get("/jokes/count", require('./routes/Joke/count'));
+app.get("/jokes/random", require('./routes/Joke/random'));
+app.get("/jokes/:id", require('./routes/Joke/id'));
 
 // Duck Endpoints
 app.get("/duck", require('./routes/Duck/index'));
