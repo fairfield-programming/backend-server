@@ -1,0 +1,5 @@
+Node_Modules
+Dockerfile
+OpenAPI.json
+.env
+database.db
