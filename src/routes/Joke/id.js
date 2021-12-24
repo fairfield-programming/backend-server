@@ -9,7 +9,11 @@ module.exports = (req, res) => {
     var numID = parseInt(req.params.id, 10);
     if (isNaN(numID)) return res.status(400).send("Poorly Formatted ID.");
 
+    // Get the Joke
+    var joke = jokeLib.getJokeAtIndex(numID);
+    if (joke == false) return res.status(404).send("Joke Not Found.");
+
     // Return the Joke
-    return res.send(jokeLib.getJokeAtIndex(numID));
+    return res.send(joke);
 
 }
