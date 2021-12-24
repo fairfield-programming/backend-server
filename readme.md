@@ -38,9 +38,9 @@ We realized early on that there needed to be support for users subscribing to ev
 I was really bored and also thought it would be a nice feature, so I added a joke API. The whole point of it is that you can query it and get a random joke about ducks. I am not really sure why I picked ducks, but I think that there is something cute and pure about them. Did you know ducks mate for life? My dad taught me that, I guess this API is dedicated to him. If you want to query the Duck Joke API, you can use any of the below links.
 
 ```python
-/joke # gets a random joke
-/jokes/count # gets the amount of jokes the api has
+/joke         # gets a random joke
+/jokes/count  # gets the amount of jokes the api has
 /jokes/random # gets a random joke
-/jokes/1 # gets a joke with an id of '1'
-/jokes/3 # gets a joke with an id of '3'
+/jokes/1      # gets a joke with an id of '1'
+/jokes/3      # gets a joke with an id of '3'
 ```
