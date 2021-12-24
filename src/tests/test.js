@@ -50,7 +50,7 @@ describe('User Endpoints', () => {
 
         it('should return a 400 when a bad id is sent (cant parse)', async () => {
 
-            const res = await requestWithSupertest.get('/duck/0z00000000');
+            const res = await requestWithSupertest.get('/duck/0z000@0000');
     
             expect(res.status).toEqual(400); 
             expect(res.type).toEqual(expect.stringContaining('svg'));
@@ -90,7 +90,7 @@ describe('User Endpoints', () => {
 
         it('should return a 400 when a bad id is sent (cant parse)', async () => {
 
-            const res = await requestWithSupertest.get('/duck/0z00000000/20');
+            const res = await requestWithSupertest.get('/duck/0z00000@00/20');
     
             expect(res.status).toEqual(400); 
             expect(res.type).toEqual(expect.stringContaining('svg'));
