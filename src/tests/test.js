@@ -414,8 +414,14 @@ describe('User Endpoints', () => {
 
             const res = await requestWithSupertest.get('/user/1');
 
+            // Expect to be Object
             expect(typeof res.body).toEqual('object');
             expect(Array.isArray(res.body)).toEqual(false);
+
+            // Expect Parameters to be Existant
+            
+
+            // Expect HTTP Data
             expect(res.status).toEqual(200);
             expect(res.type).toEqual(expect.stringContaining('json'));
 
