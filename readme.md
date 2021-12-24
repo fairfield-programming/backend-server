@@ -10,7 +10,6 @@
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/fairfield-programming/backend-server/Main)
 ![GitHub Org's stars](https://img.shields.io/github/stars/fairfield-programming)
 ![GitHub top language](https://img.shields.io/github/languages/top/fairfield-programming/backend-server)
-![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/fairfield-programming/backend-server)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/fairfield-programming/backend-server)
 ![Lines of code](https://img.shields.io/tokei/lines/github/fairfield-programming/backend-server)
 
