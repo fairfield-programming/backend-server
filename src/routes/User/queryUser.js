@@ -13,6 +13,8 @@ module.exports = (req, res) => {
 		return res.json({
 			username: data.username,
 			email: data.email,
+			profilePicture: data.profilePicture,
+			biography: data.biography,
 			createdAt: data.createdAt,
 			updatedAt: data.updatedAt
 		})
