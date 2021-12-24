@@ -101,7 +101,21 @@ describe('User Endpoints', () => {
 
     describe('GET /jokes', () => {
 
+        it ('should return a 200 and all the jokes', async () => {
 
+            const res = await requestWithSupertest.get('/jokes');
+            
+            // Make Sure None of the Jokes are Funny
+            var funny = false;
+            expect(funny).toBe(false);
+
+            expect(typeof res.body).toBe('object');
+            expect(Array.isArray(res.body)).toBe(true);
+
+            expect(res.status).toEqual(200); 
+            expect(res.type).toEqual(expect.stringContaining('json'));
+
+        });
 
     });
 
