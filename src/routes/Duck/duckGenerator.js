@@ -54,6 +54,7 @@ function generateDuck (duckData) {
         "#F7D23D", // yellow
         "#4C89E4", // blue
         "#E05050", // red
+        "url(#rainbow)", // rainbow
     ];
 
     var trueDuckData = {
@@ -67,6 +68,27 @@ function generateDuck (duckData) {
     var output = [
         `<path d="M108.269 63.2162C88.5016 65.824 90.5809 82.7746 94.0914 90.924C91.7961 89.7016 86.3142 86.8493 82.7497 85.2194C78.294 83.1821 71.813 85.6269 70.5978 86.4419C69.3826 87.2568 65.332 96.6285 67.7624 111.705C70.1927 126.781 81.5345 132.486 88.4206 135.338C95.3066 138.19 110.699 137.783 122.041 130.856C133.383 123.929 132.167 111.297 128.117 106.815C124.876 103.229 124.336 96.3569 124.471 93.3688C127.307 82.2314 128.036 60.6085 108.269 63.2162Z" fill="${trueDuckData.color}" stroke="black"/>`,
     ];
+
+    // Check if Gradient Background
+    if (trueDuckData.color === "url(#rainbow)" || trueDuckData.beakColor) { 
+
+        output.push(`<defs>
+            <linearGradient id="rainbow" gradientTransform="translate(0.2, 0), rotate(20)">
+                <stop offset="0"     stop-color="#FF0018"/>
+                <stop offset="0.166" stop-color="#FF0018"/>
+                <stop offset="0.166" stop-color="#FFA52C"/>
+                <stop offset="0.333" stop-color="#FFA52C"/>
+                <stop offset="0.333"   stop-color="#FFFF41"/>
+                <stop offset="0.5" stop-color="#FFFF41"/>
+                <stop offset="0.5" stop-color="#008018"/>
+                <stop offset="0.666" stop-color="#008018"/>
+                <stop offset="0.666" stop-color="#0000F9"/>
+                <stop offset="0.833" stop-color="#0000F9"/>
+                <stop offset="0.833" stop-color="#86007D"/>
+            </linearGradient>
+        </defs>`);
+
+    }
 
     // Add Smoke 
     switch (trueDuckData.smoke) {
