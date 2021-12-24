@@ -38,7 +38,7 @@ We realized early on that there needed to be support for users subscribing to ev
 I was really bored and also thought it would be a nice feature, so I added a joke API. The whole point of it is that you can query it and get a random joke about ducks. I am not really sure why I picked ducks, but I think that there is something cute and pure about them. Did you know ducks mate for life? My dad taught me that, I guess this API is dedicated to him. If you want to query the Duck Joke API, you can use any of the below links.
 
 <p align="center">
-_Why did the duck go to the chiropractor? To get its back quacked._
+<i>Why did the duck go to the chiropractor? To get its back quacked.</i>
 </p>
 
 ```python
