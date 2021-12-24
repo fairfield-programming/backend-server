@@ -400,9 +400,20 @@ describe('User Endpoints', () => {
         
             const res = await requestWithSupertest.get('/user/');
 
+            expect(Array.isArray(res.body)).toEqual(true);
             expect(res.status).toEqual(200);
             expect(res.type).toEqual(expect.stringContaining('json'));
         
+        });
+
+    })
+
+    describe('GET /user/:id', () => {
+
+        it('should show a user', async () => {
+
+
+
         });
 
     })
