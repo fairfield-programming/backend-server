@@ -418,8 +418,14 @@ describe('User Endpoints', () => {
             expect(typeof res.body).toEqual('object');
             expect(Array.isArray(res.body)).toEqual(false);
 
+            console.log(res.body);
+
             // Expect Parameters to be Existant
-            
+            expect(res.body.username).toBeDefined();
+            expect(res.body.email).toBeDefined();
+            expect(res.body.createdAt).toBeDefined();
+            expect(res.body.updatedAt).toBeDefined();
+            expect(res.body.password).toBe(undefined);
 
             // Expect HTTP Data
             expect(res.status).toEqual(200);
