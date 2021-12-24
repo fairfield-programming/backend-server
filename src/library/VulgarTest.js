@@ -32,9 +32,12 @@ function DetectVulgarWords(input) {
     var tokenizedString = TokenizeString(input);
     var vulgarWords = GetVulgarWords();
 
+    // Loop Through All the Words
     for (var i = 0; i < vulgarWords.length; i++) {
 
-        
+        // Check if the Word Appears in the String
+        if (tokenizedString.includes(vulgarWords[i]))
+            return true;
 
     }
 
