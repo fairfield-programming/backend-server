@@ -5,6 +5,10 @@ function parseDuckString(input) {
     if (typeof input != 'string') return false;
     if (input.length != 10) return false;
 
+    // Check if String has Bad Characters
+    if (/[g-zG-Z]/g.test(input)) return false;
+    if (/[$-/:-?{-~!"^_`\[\]]/g.test(input)) return false;
+
     // Get Duck Eyes
     var eyeString = input.substring(0, 2);
     var eyes = parseInt(eyeString, 16);
