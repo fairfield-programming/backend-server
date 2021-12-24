@@ -32,3 +32,15 @@ We didn't want to use people's faces for the profile pictures. This was for thre
 ### Authentication Support
 
 We realized early on that there needed to be support for users subscribing to events, email lists, and team features. To do this, we needed the ability for users to create accounts and sign into them. To do this, we added an authentication system that uses many of the strongest security protocols offered today. On top of this security, we built our API to be as strict as possible so that fake accounts cannot be easily created and users with improper credentials cannot mess with accounts.
+
+### Joke API
+
+I was really bored and also thought it would be a nice feature, so I added a joke API. The whole point of it is that you can query it and get a random joke about ducks. I am not really sure why I picked ducks, but I think that there is something cute and pure about them. Did you know ducks mate for life? My dad taught me that, I guess this API is dedicated to him. If you want to query the Duck Joke API, you can use any of the below links.
+
+```python
+/joke # gets a random joke
+/jokes/count # gets the amount of jokes the api has
+/jokes/random # gets a random joke
+/jokes/1 # gets a joke with an id of '1'
+/jokes/3 # gets a joke with an id of '3'
+```
