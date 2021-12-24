@@ -10,6 +10,8 @@ module.exports = (req, res) => {
 	
 		if (data == null) return res.status(404).send("Not Found.")
 		
+        res.set('Content-Type', 'text/html');
+
 		return res.send(data.status)
 	
 	}).catch(function (error) {

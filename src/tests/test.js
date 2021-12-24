@@ -509,6 +509,16 @@ describe('User Endpoints', () => {
 
     describe('GET /user/:id', () => {
 
+        it('should show a 404 when user not found', async () => {
+
+            const res = await requestWithSupertest.get('/user/40000');
+
+            // Expect HTTP Data
+            expect(res.status).toEqual(404);
+            expect(res.type).toEqual(expect.stringContaining('html'));
+
+        });
+
         it('should show a user', async () => {
 
             const res = await requestWithSupertest.get('/user/1');
@@ -520,6 +530,8 @@ describe('User Endpoints', () => {
             // Expect Parameters to be Existant
             expect(res.body.username).toBeDefined();
             expect(res.body.email).toBeDefined();
+            expect(res.body.biography).toBeDefined();
+            expect(res.body.profilePicture).toBeDefined();
             expect(res.body.createdAt).toBeDefined();
             expect(res.body.updatedAt).toBeDefined();
             expect(res.body.password).toBe(undefined);
@@ -531,6 +543,23 @@ describe('User Endpoints', () => {
         });
 
     })
+
+    describe("GET /user/:id/status", () => {
+
+        it('should show a user', async () => {
+
+            const res = await requestWithSupertest.get('/user/1/status');
+
+            // Check the Type
+            expect(typeof res.text).toEqual('string');
+
+            // Expect HTTP Data
+            expect(res.status).toEqual(200);
+            expect(res.type).toEqual(expect.stringContaining('html'));
+
+        });
+
+    });
 
     describe("Test Vulgar Library", () => {
 
