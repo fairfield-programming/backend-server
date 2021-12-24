@@ -70,7 +70,7 @@ function generateDuck (duckData) {
         case 0:
             break;
 
-        case 1:
+        case 1: 
 
             output.push(`<path d="M137.087 90.3564L126.838 93.0423L126.415 91.519L136.663 88.833L138 88.5627L139.5 90.0627L142.5 105.563L141 106.063L138 91.0627L137.087 90.3564Z" fill="white" stroke="black"/>`); 
             output.push(`<path d="M144 96.5627L136.5 98.0627L138.5 113.063L145.5 112.563L144 96.5627Z" stroke="black" stroke-miterlimit="16"/>`);

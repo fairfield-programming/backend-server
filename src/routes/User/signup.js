@@ -38,8 +38,10 @@ module.exports = (req, res) => {
 		bcrypt.hash(req.body.password, 10, function (err, hash) {
 		
 			if (err) {
-				console.log(err)
+				
+				console.log(error);
 				return res.status(500).send("Internal Server Error.")
+
 			}
 			
 			User.create({
@@ -63,11 +65,13 @@ module.exports = (req, res) => {
 			
 			})
 		
-		});
-	
+		}); 
+		
 	}).catch(function (error) {
-	
+
+		/* istanbul ignore next */
 		console.log(error);
+		/* istanbul ignore next */
 		return res.status(500).send("Internal Server Error.")
 	
 	})

@@ -6,6 +6,45 @@ process.env.JWT_KEY = '4f1dde6a54346ab08b04785a7a8baf076e917293ae189ccda95358045
 
 describe('User Endpoints', () => {
 
+    describe('GET /duck', () => {
+
+        it('should return a 200 and a duck along with it', async () => {
+
+            const res = await requestWithSupertest.get('/duck');
+    
+            expect(res.status).toEqual(200);
+            expect(res.type).toEqual(expect.stringContaining('svg'));
+
+        });
+
+    });
+
+    describe('GET /duck/:id/', () => {
+
+        it('should return a 200 and a duck along with it', async () => {
+
+            const res = await requestWithSupertest.get('/duck/0000000000');
+    
+            expect(res.status).toEqual(200);
+            expect(res.type).toEqual(expect.stringContaining('svg'));
+
+        });
+
+    });
+
+    describe('GET /duck/:id/:zoom', () => {
+
+        it('should return a 200 and a duck along with it', async () => {
+
+            const res = await requestWithSupertest.get('/duck');
+    
+            expect(res.status).toEqual(200);
+            expect(res.type).toEqual(expect.stringContaining('svg'));
+
+        });
+
+    });
+
     describe('POST /user/signup', () => {
 
         it('should throw a 400 if not all params are given', async () => {
