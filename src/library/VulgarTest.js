@@ -20,6 +20,7 @@ function TokenizeString(input) {
     // Switch Around Similar Looking Symbols
     var partsRemoved = lowercase;
     partsRemoved = partsRemoved.replace(/\$/g, 's');
+    partsRemoved = partsRemoved.replace(/\@/g, 'a');
 
     // Return the Final Result
     return partsRemoved;
