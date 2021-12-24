@@ -42,7 +42,7 @@ app.get("/user/", require('./routes/User/listUsers'));
 app.post("/user/signup", require('./routes/User/signup'));
 app.post("/user/login", require('./routes/User/login'));
 app.post("/user/:id/status", require('./routes/User/setStatus'));
-app.post('/user/:id/setPass','./routes/User/setPass');
+app.post('/user/:id/setPass',require('./routes/User/setPass'));
 
 // Start Server
 if (process.env.NODE_ENV != 'test') {
