@@ -99,6 +99,31 @@ describe('User Endpoints', () => {
 
     });
 
+    describe('GET /jokes', () => {
+
+
+
+    });
+
+    describe('GET /joke', () => {
+
+        it ('should return a 200 and a joke', async () => {
+
+            const res = await requestWithSupertest.get('/joke');
+            
+            // Make Sure None of the Jokes are Funny
+            var funny = false;
+            expect(funny).toBe(false);
+
+            expect(typeof res.text).toBe('string');
+
+            expect(res.status).toEqual(200); 
+            expect(res.type).toEqual(expect.stringContaining('html'));
+
+        });
+
+    });
+
     describe('POST /user/signup', () => {
 
         it('should throw a 400 if not all params are given', async () => {
@@ -417,8 +442,6 @@ describe('User Endpoints', () => {
             // Expect to be Object
             expect(typeof res.body).toEqual('object');
             expect(Array.isArray(res.body)).toEqual(false);
-
-            console.log(res.body);
 
             // Expect Parameters to be Existant
             expect(res.body.username).toBeDefined();
