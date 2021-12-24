@@ -18,6 +18,7 @@ app.use(express.static("public"));
 app.use(express.json());
 
 // Duck Joke Endpoints
+app.get("/joke", require('./routes/Joke/random')); 
 app.get("/jokes", require('./routes/Joke/all'));
 app.get("/jokes/count", require('./routes/Joke/count'));
 app.get("/jokes/random", require('./routes/Joke/random'));
