@@ -101,11 +101,7 @@ describe('Duck Endpoints', () => {
 
 });
 
-describe('User Endpoints', () => {
-
-    var testing = "";
-
-    
+describe('Joke Endpoints', () => {
 
     describe('GET /jokes', () => {
 
@@ -205,6 +201,12 @@ describe('User Endpoints', () => {
         });
 
     });
+
+});
+
+describe('User Endpoints', () => {
+
+    var token = "";
 
     describe('POST /user/signup', () => {
 
@@ -458,6 +460,8 @@ describe('User Endpoints', () => {
                 password: 'Testing123!'
             });
     
+            token = res.body.token;
+
             expect(res.status).toEqual(200);
             expect(res.type).toEqual(expect.stringContaining('json'));
         
