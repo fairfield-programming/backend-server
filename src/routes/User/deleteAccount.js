@@ -23,7 +23,7 @@ module.exports = (req, res) => {
             
 			userData.destroy().then(function () {
 
-				res.status(200).send("Success.");
+				return res.status(200).send("Success.");
 
 			}).catch(function (error) {
 
