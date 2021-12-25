@@ -18,33 +18,24 @@ app.use(express.static("public"));
 app.use(express.json());
 
 // Auth Middleware
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
+	
+    const authHeader = req.headers.authorization;
 
-	if (req.get("authorization") != undefined) {
+    if (authHeader) {
+        const token = authHeader.split(' ')[1];
 
-		var authData = req.get("authorization");
-		var splitData = authData.split(" ");
+        jwt.verify(token, accessTokenSecret, (err, user) => {
+            if (err) {
+                return res.sendStatus(403);
+            }
 
-		if (splitData.length != 2) return next();
-
-		var token = splitData[1];
-
-		jwt.verify(token, process.env.JWT_KEY, function(err, decoded) {
-			
-			if (err) return next();
-
-			req.auth = decoded;
-
-			return next();
-
-		});
-
-		return next();
-
-	}
-
-	return next();
-
+            req.user = user;
+            next();
+        });
+    } else {
+        res.sendStatus(401);
+    }
 });
 
 // Duck Joke Endpoints
