@@ -48,6 +48,8 @@ app.post('/user/:id/deleteAccount', require('./routes/User/deleteAccount'));
 //Event Endpoints
 app.get('/event/', require('./routes/Events/listEvents'))
 
+app.post('/event/create', require('./routes/Events/createEvent'))
+
 // Start Server
 if (process.env.NODE_ENV != 'test') {
 	
