@@ -561,6 +561,20 @@ describe('User Endpoints', () => {
 
     });
 
+    describe("POST /user/:id/delete", () => {
+
+        it('should throw a 400 if account not found', async () => {
+
+            const res = await requestWithSupertest.post('/user/400/delete');
+
+            // Expect HTTP Data
+            expect(res.status).toEqual(400);
+            expect(res.type).toEqual(expect.stringContaining('html'));
+
+        })
+
+    });
+
     describe("Test Vulgar Library", () => {
 
         it('should not trigger for normal sentences', async () => {
