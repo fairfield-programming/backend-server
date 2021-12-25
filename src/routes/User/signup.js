@@ -53,6 +53,7 @@ module.exports = (req, res) => {
 				return res.json({ 
 					token: jwt.sign(
 						{
+							id: userData.id,
 							username: data.username,
 							email: data.email
 						}, process.env.JWT_KEY)
