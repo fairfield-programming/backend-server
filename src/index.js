@@ -18,9 +18,32 @@ app.use(express.static("public"));
 app.use(express.json());
 
 // Auth Middleware
-app.use(function () {
+app.use(function (req, res, next) {
 
+	if (req.get("authorization") != undefined) {
 
+		var authData = req.get("authorization");
+		var splitData = authData.split(" ");
+
+		if (splitData.length != 2) return next();
+
+		var token = splitData[1];
+
+		jwt.verify(token, process.env.JWT_KEY, function(err, decoded) {
+			
+			if (err) return next();
+
+			req.auth = decoded;
+
+			return next();
+
+		});
+
+		return next();
+
+	}
+
+	return next();
 
 });
 
