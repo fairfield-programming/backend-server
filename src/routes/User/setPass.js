@@ -29,7 +29,7 @@ module.exports = (req, res) => {
 
 				// Update Password
 				userData.update({
-					password: req.body.newPassword
+					password: hash
 				}).then(function (newUserData) {
 
 					// Save the Data
@@ -51,7 +51,7 @@ module.exports = (req, res) => {
 				
 				});
 
-			}
+			})
 
         })
 	
