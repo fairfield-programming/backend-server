@@ -18,16 +18,40 @@ module.exports = (req, res) => {
             if (!result) return res.status(403).send("Incorrect Password.")
             
 			// Hash New Password
+			bcrypt.hash(req.body.newPassword, 10, function (err, hash) {
+		
+				if (err) {
+				
+					console.log(error);
+					return res.status(500).send("Internal Server Error.")
+	
+				}
 
-			// Update Password
+				// Update Password
+				userData.update({
+					password: req.body.newPassword
+				}).then(function (newUserData) {
 
-			// Save the Data
+					// Save the Data
+					newUserData.save().then(function () {
 
-			(async () => {
-				//await sequelize.sync({ force: true });
-				await userData.update({password:req.body.newPassword})
-            	await userData.save()
-			})();
+						return res.status(200).send("Success.");
+
+					}).catch(function (error) {
+				
+						console.log(error);
+						return res.status(500).send("Internal Server Error.")
+					
+					});
+
+				}).catch(function (error) {
+				
+					console.log(error);
+					return res.status(500).send("Internal Server Error.")
+				
+				});
+
+			}
 
         })
 	
