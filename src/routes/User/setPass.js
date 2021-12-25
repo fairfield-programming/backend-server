@@ -17,6 +17,12 @@ module.exports = (req, res) => {
 			}
             if (!result) return res.status(403).send("Incorrect Password.")
             
+			// Hash New Password
+
+			// Update Password
+
+			// Save the Data
+
 			(async () => {
 				//await sequelize.sync({ force: true });
 				await userData.update({password:req.body.newPassword})

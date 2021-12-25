@@ -14,6 +14,7 @@ module.exports = (req, res) => {
 				return res.status(500).send("Internal Server Error.")
 
 			}
+			
             if (!result) return res.status(403).send("Incorrect Password.")
             
 			userData.destroy().then(function () {
