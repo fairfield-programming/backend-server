@@ -45,6 +45,9 @@ app.post("/user/:id/status", require('./routes/User/setStatus'));
 app.post('/user/:id/setPass',require('./routes/User/setPass'));
 app.post('/user/:id/deleteAccount', require('./routes/User/deleteAccount'));
 
+//Event Endpoints
+app.get('/event/', require('./routes/Events/listEvents'))
+
 // Start Server
 if (process.env.NODE_ENV != 'test') {
 	
