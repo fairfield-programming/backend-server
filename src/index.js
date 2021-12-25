@@ -47,6 +47,7 @@ app.post('/user/:id/deleteAccount', require('./routes/User/deleteAccount'));
 
 //Event Endpoints
 app.get('/event/', require('./routes/Events/listEvents'))
+app.get('/event/:id/', require('./routes/Events/queryEvent'))
 
 app.post('/event/create', require('./routes/Events/createEvent'))
 
