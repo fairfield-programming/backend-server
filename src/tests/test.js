@@ -573,6 +573,24 @@ describe('User Endpoints', () => {
 
     });
 
+    describe("POST /user/1/status", () => {
+
+        it('should send a 403 if auth not provided', async () => {
+
+            const res = await requestWithSupertest
+            .post('/user/1/delete')
+            .send({
+                password: 'Testing123!'
+            }).set('Authorization', 'Bearer ' + token);
+
+            // Expect HTTP Data
+            expect(res.status).toEqual(200);
+            expect(res.type).toEqual(expect.stringContaining('html'));
+
+        });
+
+    });
+    
     describe("POST /user/:id/delete", () => {
 
         it('should throw a 400 if account not found', async () => {
@@ -610,24 +628,6 @@ describe('User Endpoints', () => {
             expect(res.type).toEqual(expect.stringContaining('html'));
 
         })
-
-    });
-
-    describe("POST /user/1/status", () => {
-
-        it('should send a 403 if auth not provided', async () => {
-
-            const res = await requestWithSupertest.post('/user/1/delete')
-            .set('Authorization', 'Bearer ' + token)
-            .send({
-                password: 'Testing123!'
-            });
-
-            // Expect HTTP Data
-            expect(res.status).toEqual(200);
-            expect(res.type).toEqual(expect.stringContaining('html'));
-
-        });
 
     });
 
