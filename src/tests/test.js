@@ -578,9 +578,9 @@ describe('User Endpoints', () => {
         it('should send a 403 if auth not provided', async () => {
 
             const res = await requestWithSupertest
-            .post('/user/1/delete')
+            .post('/user/1/status')
             .send({
-                password: 'Testing123!'
+                status: 'Just Hanging Out.'
             }).set('Authorization', 'Bearer ' + token);
 
             // Expect HTTP Data
@@ -590,7 +590,7 @@ describe('User Endpoints', () => {
         });
 
     });
-    
+
     describe("POST /user/:id/delete", () => {
 
         it('should throw a 400 if account not found', async () => {
