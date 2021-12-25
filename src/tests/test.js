@@ -556,14 +556,30 @@ describe('User Endpoints', () => {
 
     })
 
-    describe("GET /user/:id/status", () => {
+    describe("POST /user/1/status", () => {
 
-        it('should show a user', async () => {
+        it('should send a 403 if no auth given', async () => {
 
-            const res = await requestWithSupertest.get('/user/1/status');
+            const res = await requestWithSupertest
+            .post('/user/1/status')
+            .send({
+                status: 'Just Hanging Out.'
+            });
 
-            // Check the Type
-            expect(typeof res.text).toEqual('string');
+            // Expect HTTP Data
+            expect(res.status).toEqual(403);
+            expect(res.type).toEqual(expect.stringContaining('html'));
+
+        });
+
+        it('should send a 200 if successful', async () => {
+
+            const res = await requestWithSupertest
+            .post('/user/1/status')
+            .send({
+                status: 'Just Hanging Out.'
+            })
+            .set('Authorization', 'Bearer ' + token);
 
             // Expect HTTP Data
             expect(res.status).toEqual(200);
@@ -573,15 +589,14 @@ describe('User Endpoints', () => {
 
     });
 
-    describe("POST /user/1/status", () => {
+    describe("GET /user/:id/status", () => {
 
-        it('should send a 403 if auth not provided', async () => {
+        it('should show a user', async () => {
 
-            const res = await requestWithSupertest
-            .post('/user/1/status')
-            .send({
-                status: 'Just Hanging Out.'
-            }).set('Authorization', 'Bearer ' + token);
+            const res = await requestWithSupertest.get('/user/1/status');
+
+            // Check the Type
+            expect(typeof res.text).toEqual('string');
 
             // Expect HTTP Data
             expect(res.status).toEqual(200);
