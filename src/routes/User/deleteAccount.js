@@ -16,9 +16,16 @@ module.exports = (req, res) => {
 			}
             if (!result) return res.status(403).send("Incorrect Password.")
             
-			(async () => {
-				await userData.destroy()
-			})();
+			userData.destroy().then(function () {
+
+				res.status(200).send("Success.");
+
+			}).catch(function (error) {
+
+				console.log(error);
+				return res.status(500).send("Internal Server Error.")
+
+			});
 
         })
 
