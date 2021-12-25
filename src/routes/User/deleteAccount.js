@@ -1,10 +1,14 @@
 module.exports = (req, res) => {
 
+	if (req.params.id == undefined) return res.status(400).send("Not All Parameters Given.");
+
     User.findOne({
 		where: {
 			id: req.params.id
 		}
 	}).then(function (userData) {
+
+		if (userData == null) return res.status(404).send("User Not Found.");
 
         bcrypt.compare(req.body.password, userData.password, function (err, result) {
 

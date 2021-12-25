@@ -565,10 +565,26 @@ describe('User Endpoints', () => {
 
         it('should throw a 400 if account not found', async () => {
 
-            const res = await requestWithSupertest.post('/user/400/delete');
+            const res = await requestWithSupertest.post('/user/400/delete').send({
+                password: 'Testing123!',
+                newPassword: 'Testing1234!',
+            });
 
             // Expect HTTP Data
-            expect(res.status).toEqual(400);
+            expect(res.status).toEqual(404);
+            expect(res.type).toEqual(expect.stringContaining('html'));
+
+        })
+
+        it('should throw a 403 if wrong password given', async () => {
+
+            const res = await requestWithSupertest.post('/user/1/delete').send({
+                password: 'WrongPassword',
+                newPassword: 'Testing1234!',
+            });
+
+            // Expect HTTP Data
+            expect(res.status).toEqual(403);
             expect(res.type).toEqual(expect.stringContaining('html'));
 
         })
