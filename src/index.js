@@ -17,6 +17,13 @@ global.jwt = jwt;
 app.use(express.static("public"));
 app.use(express.json());
 
+// Auth Middleware
+app.use(function () {
+
+
+
+});
+
 // Duck Joke Endpoints
 app.get("/joke", require('./routes/Joke/random')); 
 app.get("/jokes", require('./routes/Joke/all'));
