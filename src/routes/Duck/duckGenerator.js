@@ -3,44 +3,41 @@ function parseDuckString(input) {
     // Check that the String is Correctly Formatted
     if (input == undefined) return false;
     if (typeof input != 'string') return false;
-    if (input.length != 10) return false;
 
     // Check if String has Bad Characters
     if (/[g-zG-Z]/g.test(input)) return false;
     if (/[$-/:-?{-~!"^_`\[\]]/g.test(input)) return false;
 
-    // Get Duck Eyes
-    var eyeString = input.substring(0, 2);
-    var eyes = parseInt(eyeString, 16);
+    // Check Version of Duck String
+    if (input.length == 0) return false;
+    
+    switch(input[0]) {
 
-    // Get Duck Smoke
-    var smokeString = input.substring(2, 4);
-    var smoke = parseInt(smokeString, 16);
+        case '1':
+            return parseDuckV1String(input);
+        default:
+            return false;
+
+    }
+
+}
+
+function parseDuckV1String(input) {
+
+    // Make Sure Length is Right
+    if (input.length != 15) return false;
 
     // Get Duck Hat
-    var hatString = input.substring(4, 6);
+    var hatString = input.substring(1, 3);
     var hat = parseInt(hatString, 16);
 
-    // Get Duck Item
-    var itemString = input.substring(6, 8);
-    var item = parseInt(itemString, 16);
+    // Get Duck Eyes
+    var eyesString = input.substring(1, 3);
+    var eyes = parseInt(eyesString, 16);
 
-    // Get Duck Color
-    var colorString = input.substring(8, 9);
-    var color = parseInt(colorString, 16);
-
-    // Get Duck Beak Color
-    var beakColorString = input.substring(9, 10);
-    var beakColor = parseInt(beakColorString, 16);
-
-    // Return the Duck Data
     return {
-        eyes,
-        smoke,
-        hat,
-        item, 
-        color,
-        beakColor
+        hat: hat,
+        eyes: eyes
     };
 
 }
