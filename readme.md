@@ -4,14 +4,13 @@
 
 # Backend Server
 
+![GitHub contributors](https://img.shields.io/github/contributors/fairfield-programming/backend-server)
 [![Open Source Helpers](https://www.codetriage.com/fairfield-programming/backend-server/badges/users.svg)](https://www.codetriage.com/fairfield-programming/backend-server)
 ![Website](https://img.shields.io/website?down_color=lightgrey&down_message=offline&up_color=blue&up_message=online&url=https%3A%2F%2Ffairfieldprogramming.org)
 ![GitHub issues](https://img.shields.io/github/issues/fairfield-programming/backend-server)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/fairfield-programming/backend-server/Main)
 ![GitHub Org's stars](https://img.shields.io/github/stars/fairfield-programming)
 ![GitHub top language](https://img.shields.io/github/languages/top/fairfield-programming/backend-server)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/fairfield-programming/backend-server)
-![Lines of code](https://img.shields.io/tokei/lines/github/fairfield-programming/backend-server)
 
 ## Features
 
