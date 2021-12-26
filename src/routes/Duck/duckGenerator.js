@@ -97,7 +97,7 @@ function generateDuck (duckData) {
     ];
 
     // Check if Gradient Background
-    if (trueDuckData.color === "url(#rainbow)" || trueDuckData.beakColor) { 
+    if (trueDuckData.color === "url(#rainbow)" || trueDuckData.beakColor === "url(#rainbow)") { 
 
         output.push(`<defs>
             <linearGradient id="rainbow" gradientTransform="translate(0.2, 0), rotate(20)">
