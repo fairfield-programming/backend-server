@@ -2,8 +2,6 @@ module.exports = (req, res) => {
     
     if (req.user == undefined) return res.status(403).send("Not Logged In.");
 
-	console.log(req.user);
-
     User.findOne({
 		where: {
 			id: req.user.id
