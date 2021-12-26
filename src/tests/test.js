@@ -519,6 +519,39 @@ describe('User Endpoints', () => {
 
     })
 
+    describe("POST /user/:id/update", () => {
+
+        it('should send a 403 if no auth given', async () => {
+
+            const res = await requestWithSupertest
+            .post('/user/1/update')
+            .send({
+                username: 'williammcgonagle'
+            });
+
+            // Expect HTTP Data
+            expect(res.status).toEqual(403);
+            expect(res.type).toEqual(expect.stringContaining('html'));
+
+        });
+
+        it('should send a 200 if successful', async () => {
+
+            const res = await requestWithSupertest
+            .post('/user/1/update')
+            .send({
+                username: 'williammcgonagle'
+            })
+            .set('Authorization', 'Bearer ' + token);
+
+            // Expect HTTP Data
+            expect(res.status).toEqual(200);
+            expect(res.type).toEqual(expect.stringContaining('json'));
+
+        });
+
+    });
+
     describe('GET /user/:id', () => {
 
         it('should show a 404 when user not found', async () => {
