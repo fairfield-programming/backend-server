@@ -1,0 +1,6 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="114.5" cy="82.5" rx="3.5" ry="5.5" fill="white"/>
+<ellipse cx="123.5" cy="79" rx="2.5" ry="4" fill="white"/>
+<path d="M115.316 80.5C116.073 81.5182 113.75 82.0151 114.022 84M124.803 77C125.534 78.0956 123.998 78.558 123.941 80.5" stroke="black"/>
+<path d="M110.5 77L109.5 74M112.5 76V73.5M115.5 76L116 73.5M121 75.5L119.5 73.5M122.5 74.5L122 72.5M124.5 74.5L125 72.5" stroke="black" stroke-miterlimit="2.9238"/>
+</svg>
