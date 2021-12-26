@@ -32,12 +32,42 @@ function parseDuckV1String(input) {
     var hat = parseInt(hatString, 16);
 
     // Get Duck Eyes
-    var eyesString = input.substring(1, 3);
+    var eyesString = input.substring(3, 5);
     var eyes = parseInt(eyesString, 16);
 
+    // Get Duck Beak
+    var beakString = input.substring(5, 7);
+    var beak = parseInt(beakString, 16);
+
+    // Get Duck Wings
+    var wingString = input.substring(7, 9);
+    var wings = parseInt(wingString, 16);
+
+    // Get Duck Smoke
+    var smokeString = input.substring(9, 11);
+    var smoke = parseInt(smokeString, 16);
+
+    // Get Duck Tail
+    var tailString = input.substring(11, 13);
+    var tail = parseInt(tailString, 16);
+
+    // Get Beak Color
+    var beakString = input.substring(13, 14);
+    var beakColor = parseInt(beakString, 16);
+
+    // Get Feather Color
+    var featherString = input.substring(14, 15);
+    var featherColor = parseInt(featherString, 16);
+
+    // Return the Final Duck Data
     return {
         hat: hat,
-        eyes: eyes
+        eyes: eyes,
+        beak: beak,
+        wings: wings,
+        smoke: smoke,
+        beakColor: beakColor,
+        color: featherColor
     };
 
 }
