@@ -639,6 +639,111 @@ describe('User Endpoints', () => {
 
     });
 
+    describe("POST /user/:id/password", () => {
+
+        it('should throw a 400 if no old password is given', async () => {
+
+            const res = await requestWithSupertest.post('/user/1/password').send({
+                newPassword: 'Testing1234!'
+            });
+
+            // Expect HTTP Data
+            expect(res.status).toEqual(400);
+            expect(res.type).toEqual(expect.stringContaining('html'));
+
+        })
+
+        it('should throw a 400 if no new password is given', async () => {
+
+            const res = await requestWithSupertest.post('/user/1/password').send({
+                password: 'Testing123!'
+            });
+
+            // Expect HTTP Data
+            expect(res.status).toEqual(400);
+            expect(res.type).toEqual(expect.stringContaining('html'));
+
+        })
+
+        it('should throw a 400 if no new password is given', async () => {
+
+            const res = await requestWithSupertest.post('/user/1/password').send({
+                password: 'Testing123!'
+            });
+
+            // Expect HTTP Data
+            expect(res.status).toEqual(400);
+            expect(res.type).toEqual(expect.stringContaining('html'));
+
+        })
+
+        it('should throw a 403 if no auth is given', async () => {
+
+            const res = await requestWithSupertest.post('/user/1/password').send({
+                password: 'Testing123!',
+                newPassword: 'Testing1234!'
+            });
+
+            // Expect HTTP Data
+            expect(res.status).toEqual(403);
+            expect(res.type).toEqual(expect.stringContaining('html'));
+
+        })
+
+        it('should throw a 403 if no auth is given', async () => {
+
+            const res = await requestWithSupertest.post('/user/1/password').send({
+                password: 'Testing123!',
+                newPassword: 'Testing1234!'
+            });
+
+            // Expect HTTP Data
+            expect(res.status).toEqual(403);
+            expect(res.type).toEqual(expect.stringContaining('html'));
+
+        })
+    
+        it('should throw a 401 if auth doesnt match', async () => {
+
+            const res = await requestWithSupertest.post('/user/2/password').send({
+                password: 'Testing123!',
+                newPassword: 'Testing1234!'
+            }).set('Authorization', 'Bearer ' + token);
+
+            // Expect HTTP Data
+            expect(res.status).toEqual(401);
+            expect(res.type).toEqual(expect.stringContaining('html'));
+
+        })
+
+        it('should throw a 403 if incorrect password given', async () => {
+
+            const res = await requestWithSupertest.post('/user/1/password').send({
+                password: 'Testing13!',
+                newPassword: 'Testing1234!'
+            }).set('Authorization', 'Bearer ' + token);
+
+            // Expect HTTP Data
+            expect(res.status).toEqual(403);
+            expect(res.type).toEqual(expect.stringContaining('html'));
+
+        })
+
+        it('should throw a 200 if its successful', async () => {
+
+            const res = await requestWithSupertest.post('/user/1/password').send({
+                password: 'Testing123!',
+                newPassword: 'Testing1234!'
+            }).set('Authorization', 'Bearer ' + token);
+
+            // Expect HTTP Data
+            expect(res.status).toEqual(200);
+            expect(res.type).toEqual(expect.stringContaining('html'));
+
+        })
+
+    })
+
     describe("POST /user/:id/delete", () => {
 
         it('should throw a 400 if account not found', async () => {
