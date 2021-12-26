@@ -1,26 +1,36 @@
 const Events = require("../../models/Events");
 
 module.exports = (req, res) => {
+    
     if (req.user == undefined) return res.status(403).send("Not Logged In.");
 
-    const eventData = Events.findOne({
+    Events.findOne({
         where: {
             id:req.params.id
         }
-    }).catch(function (error){
-        console.log(error)
-        return res.status(500).send("Internal Server Error.")
-    })
+    }).then(function (eventData) {
 
-    const userData = User.findOne({
-        where: {
-            id:req.user.id
-        }
-    }).catch(function (error){
+        User.findOne({
+            where: {
+                id:req.user.id
+            }
+        }).then(function (userData) {
+    
+            userData.addEvents(eventData)
+            return json(userData)
+    
+        }).catch(function (error) {
+            
+            console.log(error)
+            return res.status(500).send("Internal Server Error.")
+
+        })
+
+    }).catch(function (error) {
+
         console.log(error)
         return res.status(500).send("Internal Server Error.")
+
     })
     
-    userData.addEvents(eventData)
-    return json(userData)
 }
