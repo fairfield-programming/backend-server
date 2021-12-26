@@ -85,7 +85,7 @@ function getItemString (type, number) {
     if (!fs.existsSync(itemPath)) return [];
 
     // Get the File Data
-    var itemData = fs.readFileSync(itemPath);
+    var itemData = fs.readFileSync(itemPath, 'ascii');
     var strippedData = stripSVGData(itemData);
 
     // Break Each Line
