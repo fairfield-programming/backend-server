@@ -23,7 +23,7 @@ describe('Duck Endpoints', () => {
 
         it('should return a 200 and a duck along with it', async () => {
 
-            const res = await requestWithSupertest.get('/duck/0000000000');
+            const res = await requestWithSupertest.get('/duck/10100000004000032');
     
             expect(res.status).toEqual(200);
             expect(res.type).toEqual(expect.stringContaining('svg'));
@@ -32,7 +32,7 @@ describe('Duck Endpoints', () => {
 
         it('should return a 400 when a bad id is sent (short)', async () => {
 
-            const res = await requestWithSupertest.get('/duck/000000000');
+            const res = await requestWithSupertest.get('/duck/1010000000400003');
     
             expect(res.status).toEqual(400);
             expect(res.type).toEqual(expect.stringContaining('html'));
@@ -41,7 +41,7 @@ describe('Duck Endpoints', () => {
 
         it('should return a 400 when a bad id is sent (long)', async () => {
 
-            const res = await requestWithSupertest.get('/duck/00000000000');
+            const res = await requestWithSupertest.get('/duck/101000000040000323');
     
             expect(res.status).toEqual(400);
             expect(res.type).toEqual(expect.stringContaining('html'));
@@ -50,7 +50,7 @@ describe('Duck Endpoints', () => {
 
         it('should return a 400 when a bad id is sent (cant parse)', async () => {
 
-            const res = await requestWithSupertest.get('/duck/0z000@0000');
+            const res = await requestWithSupertest.get('/duck/1010!0000@4000032');
     
             expect(res.status).toEqual(400); 
             expect(res.type).toEqual(expect.stringContaining('html'));
@@ -63,7 +63,7 @@ describe('Duck Endpoints', () => {
 
         it('should return a 200 and a duck along with it', async () => {
 
-            const res = await requestWithSupertest.get('/duck/0000000000/20');
+            const res = await requestWithSupertest.get('/duck/10100000004000032/20');
     
             expect(res.status).toEqual(200);
             expect(res.type).toEqual(expect.stringContaining('svg'));
@@ -72,7 +72,7 @@ describe('Duck Endpoints', () => {
 
         it('should return a 400 when a bad id is sent (short)', async () => {
 
-            const res = await requestWithSupertest.get('/duck/000000000/20');
+            const res = await requestWithSupertest.get('/duck/1010000000400003/20');
     
             expect(res.status).toEqual(400);
             expect(res.type).toEqual(expect.stringContaining('html'));
@@ -81,7 +81,7 @@ describe('Duck Endpoints', () => {
 
         it('should return a 400 when a bad id is sent (long)', async () => {
 
-            const res = await requestWithSupertest.get('/duck/00000000000/20');
+            const res = await requestWithSupertest.get('/duck/101000000040000323/20');
     
             expect(res.status).toEqual(400);
             expect(res.type).toEqual(expect.stringContaining('html'));
@@ -90,7 +90,7 @@ describe('Duck Endpoints', () => {
 
         it('should return a 400 when a bad id is sent (cant parse)', async () => {
 
-            const res = await requestWithSupertest.get('/duck/0z00000@00/20');
+            const res = await requestWithSupertest.get('/duck/10100(00@04000032/20');
     
             expect(res.status).toEqual(400); 
             expect(res.type).toEqual(expect.stringContaining('html'));
