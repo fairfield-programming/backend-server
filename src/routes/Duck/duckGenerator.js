@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+
 function parseDuckString(input) {
 
     // Check that the String is Correctly Formatted
@@ -66,9 +69,19 @@ function parseDuckV1String(input) {
         beak: beak,
         wings: wings,
         smoke: smoke,
+        tail: tail,
         beakColor: beakColor,
         color: featherColor
     };
+
+}
+
+function getItemString (type, number) {
+
+    // Get the File Path
+    var itemPath = path.join(__dirname, '../');
+
+    console.log(itemPath);
 
 }
 
@@ -87,14 +100,16 @@ function generateDuck (duckData) {
     var trueDuckData = {
         eyes: duckData.eyes || 0,
         smoke: duckData.smoke || 0,
+        tail: duckData.tail || 0,
         color: colors[duckData.color] || colors[3],
         beakColor: colors[duckData.beakColor] || colors[5],
     };
 
-    // Add Duck Background
-    var output = [
-        `<path d="M108.269 63.2162C88.5016 65.824 90.5809 82.7746 94.0914 90.924C91.7961 89.7016 86.3142 86.8493 82.7497 85.2194C78.294 83.1821 71.813 85.6269 70.5978 86.4419C69.3826 87.2568 65.332 96.6285 67.7624 111.705C70.1927 126.781 81.5345 132.486 88.4206 135.338C95.3066 138.19 110.699 137.783 122.041 130.856C133.383 123.929 132.167 111.297 128.117 106.815C124.876 103.229 124.336 96.3569 124.471 93.3688C127.307 82.2314 128.036 60.6085 108.269 63.2162Z" fill="${trueDuckData.color}" stroke="black"/>`,
-    ];
+    // Create the Base Data
+    var output = [];
+
+    // Add the Body (Spread it First)
+    output.push(...getItemString('body', trueDuckData.tail));
 
     // Check if Gradient Background
     if (trueDuckData.color === "url(#rainbow)" || trueDuckData.beakColor === "url(#rainbow)") { 
