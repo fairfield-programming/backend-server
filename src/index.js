@@ -76,6 +76,7 @@ app.post('/user/:id/delete', require('./routes/User/deleteAccount'));
 app.get('/event/', require('./routes/Events/listEvents'))
 app.get('/event/:id/', require('./routes/Events/queryEvent'))
 
+app.post('/event/:id/delete', require('./routes/Events/deleteEvent'))
 app.post('/event/:id/rsvp', require('./routes/Events/rsvpEvent'))
 app.post('/event/create', require('./routes/Events/createEvent'))
 
