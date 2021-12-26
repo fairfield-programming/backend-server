@@ -35,7 +35,7 @@ describe('Duck Endpoints', () => {
             const res = await requestWithSupertest.get('/duck/000000000');
     
             expect(res.status).toEqual(400);
-            expect(res.type).toEqual(expect.stringContaining('svg'));
+            expect(res.type).toEqual(expect.stringContaining('html'));
 
         });
 
@@ -44,7 +44,7 @@ describe('Duck Endpoints', () => {
             const res = await requestWithSupertest.get('/duck/00000000000');
     
             expect(res.status).toEqual(400);
-            expect(res.type).toEqual(expect.stringContaining('svg'));
+            expect(res.type).toEqual(expect.stringContaining('html'));
 
         });
 
@@ -53,7 +53,7 @@ describe('Duck Endpoints', () => {
             const res = await requestWithSupertest.get('/duck/0z000@0000');
     
             expect(res.status).toEqual(400); 
-            expect(res.type).toEqual(expect.stringContaining('svg'));
+            expect(res.type).toEqual(expect.stringContaining('html'));
 
         });
 
@@ -75,7 +75,7 @@ describe('Duck Endpoints', () => {
             const res = await requestWithSupertest.get('/duck/000000000/20');
     
             expect(res.status).toEqual(400);
-            expect(res.type).toEqual(expect.stringContaining('svg'));
+            expect(res.type).toEqual(expect.stringContaining('html'));
 
         });
 
@@ -84,7 +84,7 @@ describe('Duck Endpoints', () => {
             const res = await requestWithSupertest.get('/duck/00000000000/20');
     
             expect(res.status).toEqual(400);
-            expect(res.type).toEqual(expect.stringContaining('svg'));
+            expect(res.type).toEqual(expect.stringContaining('html'));
 
         });
 
@@ -93,7 +93,7 @@ describe('Duck Endpoints', () => {
             const res = await requestWithSupertest.get('/duck/0z00000@00/20');
     
             expect(res.status).toEqual(400); 
-            expect(res.type).toEqual(expect.stringContaining('svg'));
+            expect(res.type).toEqual(expect.stringContaining('html'));
 
         });
 
