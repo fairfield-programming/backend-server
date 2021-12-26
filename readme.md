@@ -4,6 +4,8 @@
 
 # Backend Server
 
+<p algin="center">
+
 ![GitHub contributors](https://img.shields.io/github/contributors/fairfield-programming/backend-server)
 [![Open Source Helpers](https://www.codetriage.com/fairfield-programming/backend-server/badges/users.svg)](https://www.codetriage.com/fairfield-programming/backend-server)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/fairfield-programming/backend-server)
@@ -12,6 +14,8 @@
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/fairfield-programming/backend-server/Main)
 ![GitHub Org's stars](https://img.shields.io/github/stars/fairfield-programming)
 ![GitHub top language](https://img.shields.io/github/languages/top/fairfield-programming/backend-server)
+
+</p>
 
 ## Contribute
 
