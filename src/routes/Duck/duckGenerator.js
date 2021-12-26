@@ -79,9 +79,34 @@ function parseDuckV1String(input) {
 function getItemString (type, number) {
 
     // Get the File Path
-    var itemPath = path.join(__dirname, '../');
+    var itemPath = path.join(__dirname, '../../../', 'ducks/', type, `/${number}.svg`);
 
-    console.log(itemPath);
+    // Check if File Exists
+    if (!fs.existsSync(itemPath)) return [];
+
+    // Get the File Data
+    var itemData = fs.readFileSync(itemPath);
+    var strippedData = stripSVGData(itemData);
+
+    // Break Each Line
+    return strippedData.split("\n");
+
+}
+
+function stripSVGData(input) {
+
+    // Just Do a Pipeline Technique
+    var output = input;
+
+    // Strip out Annoying Stuff
+    output = output.replace(/<svg[ -\=\?-\~\n]*>/g, '');
+    output = output.replace(/<\/svg>/g, '');
+
+    // Trim It
+    output = output.trim();
+
+    // Return the Rest
+    return output;
 
 }
 
