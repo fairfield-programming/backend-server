@@ -1,3 +1,5 @@
+var vulgarTester = require('../../library/VulgarTest');
+
 module.exports = (req, res) => {
     
     if (req.user == undefined) return res.status(403).send("Not Logged In.");
@@ -10,6 +12,10 @@ module.exports = (req, res) => {
 	
 		if (data == null) return res.status(404).send("Not Found.")
 		
+		if (req.body.status != undefined)
+			if (vulgarTester.DetectVulgarWords(req.body.status))
+				return res.status(406).send("Vulgar Language Detected.");
+
 		data.update({
 			status: req.body.status,
 		}).then(function (newData) {
