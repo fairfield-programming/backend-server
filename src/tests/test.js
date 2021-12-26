@@ -773,7 +773,7 @@ describe('User Endpoints', () => {
         it('should throw a 200 if correct password', async () => {
 
             const res = await requestWithSupertest.post('/user/1/delete').send({
-                password: 'Testing123!'
+                password: 'Testing1234!'
             });
 
             // Expect HTTP Data
