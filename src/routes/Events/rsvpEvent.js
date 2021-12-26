@@ -3,9 +3,6 @@ const Events = require("../../models/Events");
 module.exports = (req, res) => {
     if (req.user == undefined) return res.status(403).send("Not Logged In.");
 
-    User.belongsToMany(Events, { through : 'UserEvents'})
-    Events.belongsToMany(User, { through : 'UserEvents'})
-
     const eventData = Events.findOne({
         where: {
             id:req.params.id
