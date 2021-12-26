@@ -19,8 +19,6 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
     "sequelize": "^6.3.5",
     "sqlite3": "^4.2.0"
   },
