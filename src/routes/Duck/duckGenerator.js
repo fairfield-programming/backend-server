@@ -128,7 +128,10 @@ function generateDuck (duckData) {
     ];
 
     var trueDuckData = {
+        hat: duckData.hat || 0,
         eyes: duckData.eyes || 0,
+        beak: duckData.beak || 0,
+        wings: duckData.wings || 0,
         smoke: duckData.smoke || 0,
         tail: duckData.tail || 0,
         item: duckData.item || 0,
