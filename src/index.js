@@ -69,7 +69,7 @@ app.post("/user/signup", require('./routes/User/signup'));
 app.post("/user/login", require('./routes/User/login'));
 app.post("/user/:id/update", require('./routes/User/setData'));
 app.post("/user/:id/status", require('./routes/User/setStatus'));
-app.post('/user/:id/setPass',require('./routes/User/setPass'));
+app.post('/user/:id/password',require('./routes/User/setPass'));
 app.post('/user/:id/delete', require('./routes/User/deleteAccount'));
 
 //Event Endpoints
