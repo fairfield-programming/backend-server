@@ -4,7 +4,7 @@
 
 # Backend Server
 
-<p align="center">
+<p align="left">
 
 <img src="https://img.shields.io/github/contributors/fairfield-programming/backend-server" alt="GitHub contributors">
 <img src="https://img.shields.io/github/commit-activity/w/fairfield-programming/backend-server" alt="GitHub commit activity">
