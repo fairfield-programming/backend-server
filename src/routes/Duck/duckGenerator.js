@@ -184,7 +184,15 @@ function generateDuck (duckData) {
     // Add the Hat (Spread it First)
     output.push(...getItemString('hat', trueDuckData.hat));
 
-    return output.join("\n");
+    // Create Some Output Text
+    var outputText = output.join("\n");
+
+    // Replace the Text with Color
+    outputText = outputText.replace(/DUCK_COLOR/g, trueDuckData.color);
+    outputText = outputText.replace(/BEAK_COLOR/g, trueDuckData.beakColor); 
+
+    // Return the Output Text
+    return outputText;
 
 } 
 
