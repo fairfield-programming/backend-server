@@ -24,11 +24,11 @@ We didn't want to use people's faces for the profile pictures. This was for thre
 
 <p align="center">
 
-<img width="100" src="https://fairfield-programming.herokuapp.com/duck/0103000135/30" alt="Cool Duck">
-<img width="100" src="https://fairfield-programming.herokuapp.com/duck/0201000054/30" alt="Red Duck">
-<img width="100" src="https://fairfield-programming.herokuapp.com/duck/0300000040/30" alt="Blue Duck">
-<img width="100" src="https://fairfield-programming.herokuapp.com/duck/0100000011/30" alt="Outline Duck">
-<img width="100" src="https://fairfield-programming.herokuapp.com/duck/0002000021/30" alt="Brown Duck">
+<img width="100" src="https://fairfield-programming.herokuapp.com/duck/10001000007000053/30" alt="Cool Duck">
+<img width="100" src="https://fairfield-programming.herokuapp.com/duck/10102000005000045/30" alt="Red Duck">
+<img width="100" src="https://fairfield-programming.herokuapp.com/duck/10603000000000004/30" alt="Blue Duck">
+<img width="100" src="https://fairfield-programming.herokuapp.com/duck/10001000000000011/30" alt="Outline Duck">
+<img width="100" src="https://fairfield-programming.herokuapp.com/duck/10000000006000012/30" alt="Brown Duck">
 
 </p>
 
