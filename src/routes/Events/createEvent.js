@@ -9,7 +9,8 @@ module.exports = (req, res) => {
 		description: req.body.description,
         host: req.body.host,
         status: req.body.status,
-        date: req.body.date
+        date: req.body.date,
+		owner:req.user.id,
 	}).then(function (data) {
 	
 		return res.json(data)

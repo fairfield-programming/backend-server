@@ -2,11 +2,15 @@ module.exports = (req, res) => {
     if (req.user == undefined) return res.status(403).send("Not Logged In.");
     if (req.params.id == undefined) return res.status(400).send("Not All Parameters Provided.")
 
+
     Events.findOne({
         where: {
             id:req.params.id
         }
     }).then(function(eventData){
+        if (eventData.owner != req.user.id){
+            return res.status(401).send('Not Authorized to Delete')
+        }
         User.findAll({
             where: {
                 events : eventData
