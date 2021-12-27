@@ -10,9 +10,9 @@ module.exports = (req, res) => {
         host: req.body.host,
         status: req.body.status,
         date: req.body.date,
-		owner:req.user.id,
+		ownerId: req.user.id,
 	}).then(function (eventData) {
-	
+		
 		User.findOne({
             where: {
                 id:req.user.id

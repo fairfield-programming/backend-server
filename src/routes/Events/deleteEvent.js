@@ -8,7 +8,7 @@ module.exports = (req, res) => {
             id:req.params.id
         }
     }).then(function(eventData){
-        if (eventData.owner != req.user.id){
+        if (eventData.ownerId != req.user.id){
             return res.status(401).send('Not Authorized to Delete')
         }
         User.findAll({
