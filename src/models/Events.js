@@ -7,7 +7,8 @@ module.exports = function (sequelize, DataTypes) {
 		host: DataTypes.STRING,
 		eventImage: DataTypes.TEXT,
 		status: DataTypes.STRING,
-        date: DataTypes.DATE
+        date: DataTypes.DATE,
+		ownerId : DataTypes.INTEGER
 	})
 
 };
