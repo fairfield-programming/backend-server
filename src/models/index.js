@@ -6,11 +6,16 @@ global.Op = Op;
 
 // Define Sequelize Server
 var sequelize;
-sequelize = new Sequelize({
-    "dialect": "sqlite",
-    "logging": false,
-    "storage": "./database.db"
-});
+sequelize = new Sequelize(process.env.DATABASE_URL, {
+    logging: false,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    }
+  }
+);
 
 // Import Models
 const Article = require('./Article')
