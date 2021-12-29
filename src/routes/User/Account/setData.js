@@ -1,11 +1,11 @@
 const vulgarTester = require('../../../library/VulgarTest');
-const { notEnoughParameters } = require('./utils');
+const { notEnoughParametersForSetData } = require('./utils');
 
 module.exports = (req, res) => {
     
 	if (req.user == undefined) return res.status(403).send("Not Logged In.");
 
-	if (notEnoughParameters(req)) return res.status(400).send("Not All Parameters Given.");
+	if (notEnoughParametersForSetData(req)) return res.status(400).send("Not All Parameters Given.");
 
     User.findOne({
 		where: {

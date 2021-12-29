@@ -1,19 +1,25 @@
 function propertyNotFound(property) {
-	return (property == undefined);
+	return (typeof property === "undefined");
 }
 
 function notEnoughParametersForSignup(req) {
+	const username = req.body.username;
 	const password = req.body.password;
 	const email = req.body.email;
-	const username = req.body.username;
-	return (propertyNotFound(password) && propertyNotFound(email) && propertyNotFound(username));
+	if (propertyNotFound(username)) return true;
+	if (propertyNotFound(password)) return true;
+	if (propertyNotFound(email)) return true;
+	return false;
 }
 
 function notEnoughParametersForSetData(req) {
 	const biography = req.body.biography;
 	const profilePicture = req.body.profilePicture;
 	const username = req.body.username;
-	return (propertyNotFound(biography) && propertyNotFound(profilePicture) && propertyNotFound(username));
+	if (propertyNotFound(biography)) return true;
+	if (propertyNotFound(profilePicture)) return true;
+	if (propertyNotFound(username)) return true;
+	return false;
 }
 
 function invalidPassword(password) {
@@ -44,6 +50,7 @@ function invalidEmail(email) {
 
 module.exports = { notEnoughParametersForSetData,
 									 notEnoughParametersForSignup,
+									 propertyNotFound,
 									 invalidPassword,
 									 invalidUsername,
 									 invalidEmail	};
