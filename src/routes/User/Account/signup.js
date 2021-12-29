@@ -1,11 +1,11 @@
-const { notEnoughParameters,
+const { notEnoughParametersForSignup,
 				invalidPassword, 
 				invalidUsername,
 				invalidEmail} = require('./utils');
 
 module.exports = (req, res) => {
 
-	if (notEnoughParameters(req)) return res.status(400).send("Not All Parameters Provided.")
+	if (notEnoughParametersForSignup(req)) return res.status(400).send("Not All Parameters Provided.")
 	if (invalidPassword(req.body.password)) return res.status(400).send("Invalid Password.")
 	if (invalidEmail(req.body.email)) return res.status(400).send("Invalid Email.")
 	if (invalidUsername(req.body.username)) return res.status(400).send("Invalid Username.");

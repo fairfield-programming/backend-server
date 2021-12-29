@@ -1,20 +1,19 @@
-function noBiography(biography) {
-	return (biography == undefined);
+function propertyNotFound(property) {
+	return (property == undefined);
 }
 
-function noProfilePicture(profilePicture) {
-	return (profilePicture == undefined);
+function notEnoughParametersForSignup(req) {
+	const password = req.body.password;
+	const email = req.body.email;
+	const username = req.body.username;
+	return (propertyNotFound(password) && propertyNotFound(email) && propertyNotFound(username));
 }
 
-function noUsername(username) {
-	return (username == undefined);
-}
-
-function notEnoughParameters(req) {
+function notEnoughParametersForSetData(req) {
 	const biography = req.body.biography;
 	const profilePicture = req.body.profilePicture;
 	const username = req.body.username;
-	return (noBiography(biography) && noProfilePicture(profilePicture) && noUsername(username));
+	return (propertyNotFound(biography) && propertyNotFound(profilePicture) && propertyNotFound(username));
 }
 
 function invalidPassword(password) {
@@ -43,7 +42,8 @@ function invalidEmail(email) {
 	return false;
 }
 
-module.exports = { notEnoughParameters,
+module.exports = { notEnoughParametersForSetData,
+									 notEnoughParametersForSignup,
 									 invalidPassword,
 									 invalidUsername,
 									 invalidEmail	};
