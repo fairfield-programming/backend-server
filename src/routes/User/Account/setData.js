@@ -5,9 +5,12 @@ module.exports = (req, res) =>
 {
     if (req.user == undefined) return res.status(403).send("Not Logged In.");
 
-    if (propertyNotFound(req.body.biography)) return res.status(400).send("Not All Parameters Given.");
-    if (propertyNotFound(req.body.profilePicture)) return res.status(400).send("Not All Parameters Given.");
-    if (propertyNotFound(req.body.username)) return res.status(400).send("Not All Parameters Given.");
+    if (propertyNotFound(req.body.biography))
+        return res.status(400).send("Not All Parameters Given.");
+    if (propertyNotFound(req.body.profilePicture))
+        return res.status(400).send("Not All Parameters Given.");
+    if (propertyNotFound(req.body.username))
+        return res.status(400).send("Not All Parameters Given.");
 
     User.findOne(
         {
