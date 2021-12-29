@@ -53,11 +53,12 @@ I was really bored and also thought it would be a nice feature, so I added a jok
 ```
 
 ## Setup
+
 To setup this project, you have to follow these simple steps. The required code to start the project is node.js and npm.
 
-1. Clone the repository by using the github cli, app, or the `git clone https://github.com/fairfield-programming/backend-server` command. 
-2. Run the `npm install` command to install all of the dependencies. 
-3. Run the `npm start` command to run the server or `npm test` to test the code. 
+1. Clone the repository by using the github cli, app, or the `git clone https://github.com/fairfield-programming/backend-server` command.
+2. Run the `npm install` command to install all of the dependencies.
+3. Run the `npm start` command to run the server or `npm test` to test the code.
 
 ## Contribute
 
