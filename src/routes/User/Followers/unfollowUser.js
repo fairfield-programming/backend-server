@@ -4,12 +4,12 @@ module.exports = (req,res) => {
 
     User.findOne({
         where: {id:req.params.id}
-    }).then(function (followerData){
+    }).then(function (followeeData){
         User.findOne({
             where: {id:req.user.id}
-        }).then(function (followeeData){
-            if (!followeeData.hasFollower(followerData)){
-                return res.status(401).send('This person does not follow you')
+        }).then(function (followerData){
+            if (!followerData.hasFollower(followeeData)){
+                return res.status(401).send('You do not follow this person')
             }
             followeeData.removeFollower(followerData).then(function (success) {
 

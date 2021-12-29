@@ -1,4 +1,4 @@
-var vulgarTester = require('../../library/VulgarTest');
+var vulgarTester = require('../../../library/VulgarTest');
 
 module.exports = (req, res) => {
     
