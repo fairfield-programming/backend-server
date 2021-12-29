@@ -15,15 +15,22 @@ process.env.JWT_KEY = '4f1dde6a54346ab08b04785a7a8baf076e917293ae189ccda95358045
 // Create User
 var token = "";
 
-beforeAll(async () => {
+before((done) => {
 
-    const res = await requestWithSupertest.post('/user/signup').send({
+    app.on("database-started", () => {
+
+    requestWithSupertest.post('/user/signup').send({
         username: 'william-mcgonagle',
         email: 'testing@fairfieldprogramming.org',
         password: 'Testing123!'
+    }).then((res) => {
+
+        token = res.body.token;
+        done();
+
     });
-    
-    token = res.body.token;
+
+    });
 
 })
 

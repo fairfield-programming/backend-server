@@ -46,4 +46,8 @@ global.User.belongsToMany(global.Events, { through : 'EventSubscribers'})
 global.Events.belongsToMany(global.User, { through : 'EventSubscribers'})
 
 // Sync Sequelize
-sequelize.sync();
+sequelize.sync().then(() => {
+
+    app.emit("database-started");
+
+});
