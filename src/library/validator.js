@@ -6,6 +6,12 @@ function propertyNotFound(property)
     return false;
 }
 
+// Check if Object is Null
+function objectNotFound(property) {
+    return property == null;
+}
+
+// Check if Valid Password
 function invalidPassword(password)
 {
     if (password.length > 14) return true;
@@ -17,6 +23,7 @@ function invalidPassword(password)
     return false;
 }
 
+// Check if Valid Username
 function invalidUsername(username)
 {
     if (username.length > 30) return true;
@@ -28,17 +35,18 @@ function invalidUsername(username)
     return false;
 }
 
+// Check if Valid Email
 function invalidEmail(email)
 {
     if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return false;
     return true;
 }
 
+// Export Functions
 module.exports = {
-    notEnoughParametersForSetData,
-    notEnoughParametersForSignup,
     propertyNotFound,
     invalidPassword,
+    objectNotFound,
     invalidUsername,
     invalidEmail,
 };
