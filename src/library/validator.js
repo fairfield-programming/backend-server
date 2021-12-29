@@ -7,7 +7,8 @@ function propertyNotFound(property)
 }
 
 // Check if Object is Null
-function objectNotFound(property) {
+function objectNotFound(property)
+{
     return property == null;
 }
 
