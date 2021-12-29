@@ -3,7 +3,7 @@ module.exports = (req,res) => {
     if (req.params.id == undefined) return res.status(400).send("Not All Parameters Provided.")
 
     User.findOne({
-        where: {id:req.params.id}
+        where: {id:req.params.followerId}
     }).then(function (followeeData){
         User.findOne({
             where: {id:req.user.id}

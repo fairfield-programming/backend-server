@@ -6,7 +6,7 @@ module.exports = (req, res) => {
         where: {id:req.user.id}
     }).then(function (followerData){
         User.findOne({
-            where: {id:req.params.id}
+            where: {id:req.params.followerId}
         }).then(function (followeeData){
             followeeData.addFollower(followerData).then(function (success) {
 

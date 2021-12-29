@@ -5,7 +5,7 @@ module.exports = (req, res) => {
 	
 	User.findOne({
 		where: {
-			id: req.params.id
+			id: req.params.followerId
 		}
 	}).then(function (followerData) {
         if (data == null) return res.status(404).send("Not Found.")
