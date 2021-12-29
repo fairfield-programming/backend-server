@@ -3,3 +3,6 @@ Dockerfile
 OpenAPI.json
 .env
 database.db
+
+# SonarQube working files
+.scannerwork 

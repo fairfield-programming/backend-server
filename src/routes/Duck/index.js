@@ -1,4 +1,4 @@
-duckGenerator = require('./duckGenerator');
+const duckGenerator = require('./duckGenerator');
 
 module.exports = (req, res) => {
 

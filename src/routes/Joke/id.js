@@ -14,7 +14,7 @@ module.exports = (req, res) => {
 
     // Get the Joke
     var joke = jokeLib.getJokeAtIndex(numID);
-    if (joke == false) return res.status(404).send("Joke Not Found.");
+    if (!joke) return res.status(404).send("Joke Not Found.");
 
     // Return the Joke
     return res.send(joke);

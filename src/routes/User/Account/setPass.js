@@ -1,7 +1,6 @@
 module.exports = (req, res) => {
 
-    if (req.params.id == undefined) return res.status(400).send("Not All Parameters Given.")
-
+	if (req.params.id == undefined) return res.status(400).send("Not All Parameters Given.")
 	if (req.body.password == undefined) return res.status(400).send("Not All Parameters Given.")
 	if (req.body.newPassword == undefined) return res.status(400).send("Not All Parameters Given.")
 	

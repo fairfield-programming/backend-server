@@ -1,28 +1,14 @@
+const { notEnoughParametersForSignup,
+				invalidPassword, 
+				invalidUsername,
+				invalidEmail} = require('./utils');
+
 module.exports = (req, res) => {
 
-	// Check That All Parameters Are Given
-	if (req.body.username == undefined || req.body.password == undefined || req.body.email == undefined) return res.status(400).send("Not All Parameters Provided.")
-	
-	// Verify Password
-	if (req.body.password.length > 14) return res.status(400).send("Invalid Password.")
-	if (req.body.password.length < 4) return res.status(400).send("Invalid Password.")
-	if (!req.body.password.match(/[A-Z]/)) return res.status(400).send("Invalid Password.")
-	if (!req.body.password.match(/[a-z]/)) return res.status(400).send("Invalid Password.")
-	if (!req.body.password.match(/[0-9]/)) return res.status(400).send("Invalid Password.")
-	if (!req.body.password.match(/(\#|\?|\!|\@|\$|\%|\^|\&|\*|\-|\_)/)) return res.status(400).send("Invalid Password.")
-	
-	// Verify Email 
-	const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	if (!re.test(req.body.email)) return res.status(400).send("Invalid Email.")
-	
-	// Verify Username
-	if (req.body.username.length > 30) return res.status(400).send("Invalid Username.");
-	if (req.body.username.length < 4) return res.status(400).send("Invalid Username.");
-
-	if (req.body.username.includes(' ')) return res.status(400).send("Invalid Username.");
-	if (/[0-9]/g.test(req.body.username)) return res.status(400).send("Invalid Username.");
-	if (/[!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/g.test(req.body.username)) return res.status(400).send("Invalid Username");
-	if (req.body.username.toLowerCase() !== req.body.username) return res.status(400).send("Invalid Username.");
+	if (notEnoughParametersForSignup(req)) return res.status(400).send("Not All Parameters Provided.")
+	if (invalidPassword(req.body.password)) return res.status(400).send("Invalid Password.")
+	if (invalidEmail(req.body.email)) return res.status(400).send("Invalid Email.")
+	if (invalidUsername(req.body.username)) return res.status(400).send("Invalid Username.");
 
 	User.findAll({
 		where: {

@@ -1,6 +1,8 @@
+const { propertyNotFound } = require("./utils");
+
 module.exports = (req, res) => {
 
-	if (req.params.id == undefined) return res.status(400).send("Not All Parameters Provided.")
+	if (propertyNotFound(req.params.id)) return res.status(400).send("Not All Parameters Provided.")
 	
 	User.findOne({
 		where: {
@@ -8,7 +10,7 @@ module.exports = (req, res) => {
 		}
 	}).then(function (data) {
 	
-		if (data == null) return res.status(404).send("Not Found.")
+		if (propertyNotFound(data)) return res.status(404).send("Not Found.")
 		
         res.set('Content-Type', 'text/html');
 

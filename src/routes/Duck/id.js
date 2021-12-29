@@ -1,10 +1,10 @@
-duckGenerator = require('./duckGenerator');
+const duckGenerator = require('./duckGenerator');
 
 module.exports = (req, res) => {
 
     // Parse the String
-    var duckData = duckGenerator.parseDuckString(req.params.id);
-    if (duckData == false) return res.status(400).send("Bad Request.");
+    const duckData = duckGenerator.parseDuckString(req.params.id);
+    if (!duckData) return res.status(400).send("Bad Request.");
 
     // Set the Headers
     res.set("Content-Type", "image/svg+xml");
