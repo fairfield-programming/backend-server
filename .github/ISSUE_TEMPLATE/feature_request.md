@@ -1,20 +1,18 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: "[IDEA]"
+title: ""
 labels: enhancement, help wanted
 assignees: ''
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+## Idea
+_This is where you write what your idea is_
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+If you want to help with this issue- just leave a comment saying that, and we will mark you as an assignee. 
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+Cheers!
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+## Todo
+- [ ] Make a todo list here
