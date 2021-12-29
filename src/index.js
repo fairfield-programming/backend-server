@@ -65,6 +65,7 @@ app.get("/user/:id/", require('./routes/User/queryUser'));
 app.get("/user/:id/status", require('./routes/User/Account/getStatus'));
 app.get("/user/", require('./routes/User/listUsers'));
 app.get('/user/:id/followers', require('./routes/User/Followers/listFollowers'))
+app.get('/user/:id/followers/find', require('./routes/User/Followers/queryFollower'))
 
 app.post("/user/signup", require('./routes/User/Account/signup'));
 app.post("/user/login", require('./routes/User/Account/login'));
