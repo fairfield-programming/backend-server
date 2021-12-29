@@ -1,5 +1,5 @@
 const vulgarTester = require("../../../library/VulgarTest");
-const { notEnoughParametersForSetData } = require("../../../library/validator");
+const { propertyNotFound, objectNotFound } = require("../../../library/validator");
 
 module.exports = (req, res) =>
 {
@@ -18,14 +18,12 @@ module.exports = (req, res) =>
         })
         .then(function(data)
         {
-            if (data == null) return res.status(404).send("Not Found.");
+            if (objectNotFound(data)) return res.status(404).send("Not Found.");
 
-            if (vulgarWordsFound(req))
-                return res.status(406).send("Vulgar Language Detected.");
+            if (vulgarTester.DetectVulgarWords(req.body.biography)) return res.status(406).send("Vulgar Language Detected.");
+            if (vulgarTester.DetectVulgarWords(req.body.username)) return res.status(406).send("Vulgar Language Detected.");
 
-            data
-                .update(
-                {
+            data.update({
                     biography: req.body.biography || data.biography,
                     profilePicture: req.body.profilePicture || data.profilePicture,
                     username: req.body.username || data.username,
@@ -42,8 +40,10 @@ module.exports = (req, res) =>
                 })
                 .catch(function(error)
                 {
+                    
                     console.log(error);
                     return res.status(500).send("Internal Server Error.");
+
                 });
         })
         .catch(function(error)
@@ -52,10 +52,3 @@ module.exports = (req, res) =>
             return res.status(500).send("Internal Server Error.");
         });
 };
-
-function vulgarWordsFound(req)
-{
-    if (vulgarTester.DetectVulgarWords(req.body.biography)) return true;
-    if (vulgarTester.DetectVulgarWords(req.body.username)) return true;
-    return false;
-}
