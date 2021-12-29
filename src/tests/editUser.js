@@ -15,7 +15,7 @@ process.env.JWT_KEY = '4f1dde6a54346ab08b04785a7a8baf076e917293ae189ccda95358045
 // Create User
 var token = "";
 
-before((done) => {
+beforeAll((done) => {
 
     server.on("database-started", () => {
 
