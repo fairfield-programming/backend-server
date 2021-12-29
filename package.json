@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "node src/index.js",
-    "test": "jest"
+    "test": "rm database.db; jest"
   },
   "jest": {
     "testMatch": [
