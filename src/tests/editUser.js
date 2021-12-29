@@ -24,7 +24,7 @@ beforeAll(async () => {
     });
     
     token = res.body.token;
-    
+
 })
 
 describe("POST /user/:id/update", () => {
@@ -127,19 +127,6 @@ describe("POST /user/:id/password", () => {
 
         // Expect HTTP Data
         expect(res.status).toEqual(400);
-        expect(res.type).toEqual(expect.stringContaining('html'));
-
-    })
-
-    it('should throw a 403 if no auth is given', async () => {
-
-        const res = await requestWithSupertest.post('/user/1/password').send({
-            password: 'Testing123!',
-            newPassword: 'Testing1234!'
-        });
-
-        // Expect HTTP Data
-        expect(res.status).toEqual(403);
         expect(res.type).toEqual(expect.stringContaining('html'));
 
     })
