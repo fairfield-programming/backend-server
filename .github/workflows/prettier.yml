@@ -21,4 +21,10 @@ jobs:
         with:
           # This part is also where you can pass other options, for example:
           prettier_options: --write **/*.{js,md} --config package.json
-          commit_message: 🍯 Beautified Code
+          commit_message: 💅 Prettified Code
+
+      - name: Beautify code
+        run: npx js-beautify "**/**.js" -b expand
+
+      - name: Recommit
+        run: git add *; git commit -m "🍯 Beautified Code"; git push origin master
