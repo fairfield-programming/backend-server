@@ -200,8 +200,8 @@ function lengthIsCorrect(input) {
 }
 
 function notString(input) {
-  if (input == undefined) return true;
-  if (typeof input != "string") return true;
+  if (input === undefined) return true;
+  if (typeof input !== "string") return true;
   return false;
 }
 
@@ -209,4 +209,8 @@ function hasBadCharacters(input) {
   if (/[g-zG-Z]/g.test(input)) return true;
   if (/[$-/:-?{-~!"^_`\[\]]/g.test(input)) return true;
   return false;
+}
+
+function lengthIs0(input) {
+  return input.length === 0 ? true : false;
 }
