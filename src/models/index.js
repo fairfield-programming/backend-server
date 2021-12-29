@@ -45,9 +45,4 @@ global.Events = Events(sequelize, DataTypes);
 global.User.belongsToMany(global.Events, { through : 'EventSubscribers'})
 global.Events.belongsToMany(global.User, { through : 'EventSubscribers'})
 
-// Sync Sequelize
-sequelize.sync().then(() => {
-
-    app.emit("database-started");
-
-});
+global.sequelize = sequelize;

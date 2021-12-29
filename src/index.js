@@ -81,6 +81,12 @@ app.post('/event/:id/delete', require('./routes/Events/deleteEvent'))
 app.post('/event/:id/edit', require('./routes/Events/editEvent'))
 app.post('/event/:id/rsvp', require('./routes/Events/rsvpEvent'))
 
+// Sync the Database
+sequelize.sync().then(() => {
+
+    app.emit("database-started");
+
+});
 
 // Start Server
 if (process.env.NODE_ENV != 'test') {

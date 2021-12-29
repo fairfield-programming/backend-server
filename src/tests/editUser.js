@@ -17,18 +17,18 @@ var token = "";
 
 before((done) => {
 
-    app.on("database-started", () => {
+    server.on("database-started", () => {
 
-    requestWithSupertest.post('/user/signup').send({
-        username: 'william-mcgonagle',
-        email: 'testing@fairfieldprogramming.org',
-        password: 'Testing123!'
-    }).then((res) => {
+        requestWithSupertest.post('/user/signup').send({
+            username: 'william-mcgonagle',
+            email: 'testing@fairfieldprogramming.org',
+            password: 'Testing123!'
+        }).then((res) => {
 
-        token = res.body.token;
-        done();
+            token = res.body.token;
+            done();
 
-    });
+        });
 
     });
 
