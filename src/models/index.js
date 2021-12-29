@@ -8,6 +8,9 @@ global.Op = Op;
 var sequelize;
 var env = process.env.NODE_ENV || 'development';
 
+// Second Check
+if (process.env.DATABASE_URL == undefined) env = 'development';
+
 if (env == 'development') {
 
     sequelize = new Sequelize('sqlite::memory:', {
