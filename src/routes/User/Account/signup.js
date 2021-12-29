@@ -39,7 +39,6 @@ module.exports = (req, res) =>
         })
         .then(function(userData)
         {
-
             // If Similar Accounts Exist, Don't Let Them Create an Account
             if (userData.length > 0)
                 return res.status(403).send("Account Already Exists.");
@@ -62,7 +61,6 @@ module.exports = (req, res) =>
                     })
                     .then(function(data)
                     {
-
                         // Return the Token from the New Account
                         return res.json(
                         {
