@@ -12,9 +12,10 @@ module.exports = (req, res) => {
             return res.status(401).send('Not Authorized to Edit')
         }
 
-        if (req.body.status != undefined)
+        if (req.body.status != undefined) {
 			if (vulgarTester.DetectVulgarWords(req.body.status))
 				return res.status(406).send("Vulgar Language Detected.");
+        }
         
         eventData.update({
 			name: req.body.name,

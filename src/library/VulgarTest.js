@@ -5,10 +5,7 @@ function GetVulgarWords() {
 
     // Get the File Data
     var fileData = fs.readFileSync(path.join(__dirname, './vulgar.txt'), 'ascii');
-    var wordArray = fileData.split('\n');
-
-    // Return the Words
-    return wordArray;
+    return fileData.split('\n');
 
 }
 
@@ -30,14 +27,14 @@ function TokenizeString(input) {
 function DetectVulgarWords(input) {
 
     // Tokenize the Input String
-    var tokenizedString = TokenizeString(input);
-    var vulgarWords = GetVulgarWords();
+    const tokenizedString = TokenizeString(input);
+    const vulgarWords = GetVulgarWords();
 
     // Loop Through All the Words
-    for (var i = 0; i < vulgarWords.length; i++) {
+    for (let word of vulgarWords) {
 
         // Check if the Word Appears in the String
-        if (tokenizedString.includes(vulgarWords[i]))
+        if (tokenizedString.includes(word))
             return true;
 
     }

@@ -1,27 +1,22 @@
-var vulgarTester = require('../../../library/VulgarTest');
+const vulgarTester = require('../../../library/VulgarTest');
+const { notEnoughParameters } = require('./utils');
 
 module.exports = (req, res) => {
     
-    if (req.user == undefined) return res.status(403).send("Not Logged In.");
+	if (req.user == undefined) return res.status(403).send("Not Logged In.");
 
-	if (req.body.biography == undefined && req.body.profilePicture == undefined && req.body.username == undefined) return res.status(400).send("Not All Parameters Given.");
+	if (notEnoughParameters(req)) return res.status(400).send("Not All Parameters Given.");
 
     User.findOne({
 		where: {
 			id: req.user.id
 		}
 	}).then(function (data) {
-	
-		if (data == null) return res.status(404).send("Not Found.")
+		if (data == null) return res.status(404).send("Not Found.");
 
-		if (req.body.biography != undefined)
-			if (vulgarTester.DetectVulgarWords(req.body.biography))
-				return res.status(406).send("Vulgar Language Detected.");
+		if (vulgarWordsFound(req))
+			return res.status(406).send("Vulgar Language Detected.");
 
-		if (req.body.username != undefined)
-			if (vulgarTester.DetectVulgarWords(req.body.username))
-				return res.status(406).send("Vulgar Language Detected.");
-		
 		data.update({
 			biography: req.body.biography || data.biography,
 			profilePicture: req.body.profilePicture || data.profilePicture,
@@ -43,10 +38,15 @@ module.exports = (req, res) => {
 		});
 	
 	}).catch(function (error) {
-	
 		console.log(error);
 		return res.status(500).send("Internal Server Error.")
-	
 	})
-
 };
+
+function vulgarWordsFound(req) {
+	if (vulgarTester.DetectVulgarWords(req.body.biography))
+		return true;
+	if (vulgarTester.DetectVulgarWords(req.body.username))
+		return true;
+	return false;
+}

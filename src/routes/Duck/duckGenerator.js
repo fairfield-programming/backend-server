@@ -4,31 +4,24 @@ const path = require('path');
 function parseDuckString(input) {
 
     // Check that the String is Correctly Formatted
-    if (input == undefined) return false;
-    if (typeof input != 'string') return false;
+    if (input == undefined) return null;
+    if (typeof input != 'string') return null;
 
     // Check if String has Bad Characters
-    if (/[g-zG-Z]/g.test(input)) return false;
-    if (/[$-/:-?{-~!"^_`\[\]]/g.test(input)) return false;
+    if (/[g-zG-Z]/g.test(input)) return null;
+    if (/[$-/:-?{-~!"^_`\[\]]/g.test(input)) return null;
 
     // Check Version of Duck String
-    if (input.length == 0) return false;
+    if (input.length == 0) return null;
     
-    switch(input[0]) {
-
-        case '1':
-            return parseDuckV1String(input);
-        default:
-            return false;
-
+    if (input[0] === '1' && lengthIsCorrect(input)) {
+        return parseDuckV1String(input);
+    } else {
+        return null;
     }
-
 }
 
 function parseDuckV1String(input) {
-
-    // Make Sure Length is Right
-    if (input.length != 17) return false;
 
     // Get Duck Hat
     var hatString = input.substring(1, 3);
@@ -59,8 +52,8 @@ function parseDuckV1String(input) {
     var item = parseInt(itemString, 16);
 
     // Get Beak Color
-    var beakString = input.substring(15, 16);
-    var beakColor = parseInt(beakString, 16);
+    var beakColorString = input.substring(15, 16);
+    var beakColor = parseInt(beakColorString, 16);
 
     // Get Feather Color
     var featherString = input.substring(16, 17);
@@ -208,3 +201,7 @@ function formatSVG(data, zoom) {
 }
 
 module.exports = { generateDuck, parseDuckString, formatSVG };
+
+function lengthIsCorrect(input) {
+    return (input.length !== 17 ? false : true);
+}

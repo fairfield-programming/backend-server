@@ -4,12 +4,9 @@ const fs = require('fs');
 // Get the Jokes as an Array
 function getAllJokes() {
 
-    // Get the File Data and Make it into an Array
+    // Return the Jokes array
     var fileData = fs.readFileSync(path.join(__dirname, '/jokes.txt'), 'ascii');
-    var arrayData = fileData.split('\n');
-
-    // Return the Jokes
-    return arrayData;
+    return fileData.split('\n');
 
 }
 
