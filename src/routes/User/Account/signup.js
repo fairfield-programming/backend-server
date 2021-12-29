@@ -2,16 +2,18 @@ const
 {
     invalidPassword,
     invalidUsername,
-    invalidEmail,
+    invalidEmail
 } = require("./utils");
 
 module.exports = (req, res) =>
 {
-    
     // Make sure all Params Exist
-    if (propertyNotFound(req.body.username)) return res.status(400).send("Not All Parameters Provided.");
-    if (propertyNotFound(req.body.password)) return res.status(400).send("Not All Parameters Provided.");
-    if (propertyNotFound(req.body.email)) return res.status(400).send("Not All Parameters Provided.");
+    if (propertyNotFound(req.body.username))
+        return res.status(400).send("Not All Parameters Provided.");
+    if (propertyNotFound(req.body.password))
+        return res.status(400).send("Not All Parameters Provided.");
+    if (propertyNotFound(req.body.email))
+        return res.status(400).send("Not All Parameters Provided.");
 
     // Check Password, Email and Username
     if (invalidPassword(req.body.password))
