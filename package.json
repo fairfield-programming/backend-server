@@ -19,6 +19,7 @@
       "**/tests/**.js"
     ]
   },
+  "prettier": {},
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.0.0",
