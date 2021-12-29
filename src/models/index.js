@@ -6,16 +6,33 @@ global.Op = Op;
 
 // Define Sequelize Server
 var sequelize;
-sequelize = new Sequelize(process.env.DATABASE_URL, {
-    logging: false,
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false
-      }
-    }
-  }
-);
+var env = process.env.NODE_ENV || 'development';
+
+if (env == 'development') {
+
+    sequelize = new Sequelize(process.env.DATABASE_URL, {
+        logging: false,
+        dialectOptions: {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false
+            }
+        }
+    });
+
+} else {
+
+    sequelize = new Sequelize(process.env.DATABASE_URL, {
+        logging: false,
+        dialectOptions: {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false
+            }
+        }
+    });
+
+}
 
 // Import Models
 const Article = require('./Article')
