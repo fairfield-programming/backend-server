@@ -10,14 +10,8 @@ var env = process.env.NODE_ENV || 'development';
 
 if (env == 'development') {
 
-    sequelize = new Sequelize(process.env.DATABASE_URL, {
-        logging: false,
-        dialectOptions: {
-            ssl: {
-                require: true,
-                rejectUnauthorized: false
-            }
-        }
+    sequelize = new Sequelize('sqlite::memory:', {
+        logging: false
     });
 
 } else {
