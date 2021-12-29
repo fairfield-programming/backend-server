@@ -11,7 +11,7 @@ module.exports = (req, res) => {
         if (data == null) return res.status(404).send("Not Found.")
 
 		User.findOne({
-            where:{id:req.user.id}
+            where:{id:req.params.id}
         }).then(function (followeeData) {
 
             if (!followeeData.hasFollower(followerData)){
