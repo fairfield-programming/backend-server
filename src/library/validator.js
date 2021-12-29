@@ -6,17 +6,6 @@ function propertyNotFound(property)
     return false;
 }
 
-function notEnoughParametersForSignup(req)
-{
-    const username = req.body.username;
-    const password = req.body.password;
-    const email = req.body.email;
-    if (propertyNotFound(username)) return true;
-    if (propertyNotFound(password)) return true;
-    if (propertyNotFound(email)) return true;
-    return false;
-}
-
 function invalidPassword(password)
 {
     if (password.length > 14) return true;
