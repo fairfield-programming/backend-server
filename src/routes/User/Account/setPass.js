@@ -34,11 +34,11 @@ module.exports = (req, res) =>
                     if (!result) return res.status(403).send("Incorrect Password.");
 
                     // Hash New Password
-                    bcrypt.hash(req.body.newPassword, 10, function(err, hash)
+                    bcrypt.hash(req.body.newPassword, 10, function(newPassErr, hash)
                     {
-                        if (err)
+                        if (newPassErr)
                         {
-                            console.log(error);
+                            console.log(newPassErr);
                             return res.status(500).send("Internal Server Error.");
                         }
 
