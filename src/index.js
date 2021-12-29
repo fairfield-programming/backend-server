@@ -71,6 +71,7 @@ app.post("/user/:id/update", require('./routes/User/setData'));
 app.post("/user/:id/status", require('./routes/User/setStatus'));
 app.post('/user/:id/password',require('./routes/User/setPass'));
 app.post('/user/:id/delete', require('./routes/User/deleteAccount'));
+app.post('/user/:id/follow', require('./routes/User/followUser'))
 
 //Event Endpoints
 app.get('/event/', require('./routes/Events/listEvents'))

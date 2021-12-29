@@ -45,4 +45,7 @@ global.Events = Events(sequelize, DataTypes);
 global.User.belongsToMany(global.Events, { through : 'EventSubscribers'})
 global.Events.belongsToMany(global.User, { through : 'EventSubscribers'})
 
+global.User.belongsToMany(global.User, { through: 'Followers', as: 'Followee', foreignKey: 'followeeId' });
+global.User.belongsToMany(global.User, { through: 'Followers', as: 'Follower', foreignKey: 'followerId' });
+
 global.sequelize = sequelize;
