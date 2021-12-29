@@ -30,12 +30,8 @@ function invalidUsername(username)
 
 function invalidEmail(email)
 {
-    const re1 = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)/;
-    if (re1.test(email)) return false;
-    const re =
-        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[(\d{1,3}\.){4}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (!re.test(email)) return true;
-    return false;
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return false;
+    return true;
 }
 
 module.exports = {
