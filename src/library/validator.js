@@ -1,6 +1,9 @@
+// Check if Undefined
 function propertyNotFound(property)
 {
-    return typeof property === "undefined";
+    if (typeof property === "undefined") return true;
+    if (property == undefined) return true;
+    return false;
 }
 
 function notEnoughParametersForSignup(req)
@@ -11,17 +14,6 @@ function notEnoughParametersForSignup(req)
     if (propertyNotFound(username)) return true;
     if (propertyNotFound(password)) return true;
     if (propertyNotFound(email)) return true;
-    return false;
-}
-
-function notEnoughParametersForSetData(req)
-{
-    const biography = req.body.biography;
-    const profilePicture = req.body.profilePicture;
-    const username = req.body.username;
-    if (propertyNotFound(biography)) return true;
-    if (propertyNotFound(profilePicture)) return true;
-    if (propertyNotFound(username)) return true;
     return false;
 }
 
