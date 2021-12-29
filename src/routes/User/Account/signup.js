@@ -21,6 +21,7 @@ module.exports = (req, res) =>
     if (invalidUsername(req.body.username))
         return res.status(400).send("Invalid Username.");
 
+    // Find All Users with Similar Usernames and Emails
     User.findAll(
         {
             where:
@@ -36,9 +37,12 @@ module.exports = (req, res) =>
         })
         .then(function(userData)
         {
+
+            // If Similar Accounts Exist, Don't Let Them Create an Account
             if (userData.length > 0)
                 return res.status(403).send("Account Already Exists.");
 
+            // Hash the Password
             bcrypt.hash(req.body.password, 10, function(err, hash)
             {
                 if (err)
@@ -47,6 +51,7 @@ module.exports = (req, res) =>
                     return res.status(500).send("Internal Server Error.");
                 }
 
+                // Create the New Account
                 User.create(
                     {
                         username: req.body.username,
@@ -55,6 +60,8 @@ module.exports = (req, res) =>
                     })
                     .then(function(data)
                     {
+
+                        // Return the Token from the New Account
                         return res.json(
                         {
                             token: jwt.sign(
