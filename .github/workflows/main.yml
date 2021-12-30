@@ -33,4 +33,4 @@ jobs:
       run: npx eaf-linter
     
     - name: Recommit
-      run: git config --global user.email "runner@fairfieldprogramming.org"; git config --global user.name "FPA Bot"; git add *; git commit -m "🍯 Beautified Code"; git push origin master
+      run: git config --global user.email "runner@fairfieldprogramming.org"; git config --global user.name "FPA Bot"; git add *; git pull; git commit -m "🍯 Beautified Code"; git push origin master
