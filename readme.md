@@ -13,7 +13,8 @@
 <img src="https://img.shields.io/github/workflow/status/fairfield-programming/backend-server/Main" alt="GitHub Workflow Status">
 <img src="https://img.shields.io/github/stars/fairfield-programming/backend-server" alt="GitHub Org's stars">
 <img src="https://img.shields.io/github/languages/top/fairfield-programming/backend-server" alt="GitHub top language">
-
+<img src="https://img.shields.io/badge/dynamic/json?color=blue&label=Dependencies&query=indirectDependenciesCount&url=https%3A%2F%2Fraw.githubusercontent.com%2Ffairfield-programming%2Fbackend-server%2Fmaster%2F.github%2Fmetrics.json" alt="Dependencies"> 
+  
 </p>
 
 ## Features
