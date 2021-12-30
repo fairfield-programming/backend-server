@@ -51,6 +51,8 @@ global.User = User(sequelize, DataTypes);
 global.Events = Events(sequelize, DataTypes);
 
 // Setup Relationships
+
+// Relationship for Events
 global.User.belongsToMany(global.Events,
 {
     through: "EventSubscribers",
@@ -60,6 +62,7 @@ global.Events.belongsToMany(global.User,
     through: "EventSubscribers",
 });
 
+// Relationship for Follower System
 global.User.belongsToMany(global.User,
 {
     through: "Followers",
@@ -72,5 +75,19 @@ global.User.belongsToMany(global.User,
     as: "Follower",
     foreignKey: "followerId",
 });
+
+// Relationship for Block System
+global.User.belongsToMany(global.User, 
+{
+    through: "Blocked",
+    as: "Blocker",
+    foreignKey: 'blockerId'
+});
+global.User.belongsToMany(global.User, 
+{
+    through: 'Blocked',
+    as: "Blocked",
+    foreignKey: "blockedId"
+})
 
 global.sequelize = sequelize;
