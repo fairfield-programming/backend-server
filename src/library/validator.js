@@ -1,15 +1,15 @@
 // Check if Undefined
-function propertyNotFound(property)
+function propertyUndefined(property)
 {
-    if (typeof property === "undefined") return true;
-    if (property == undefined) return true;
+    if (!property) return true;
     return false;
 }
 
 // Check if Object is Null
-function objectNotFound(property)
+function objectIsNull(obj)
 {
-    return property == null;
+    if (!obj) return true;
+    return false;
 }
 
 // Check if Valid Password
@@ -43,11 +43,12 @@ function invalidEmail(email)
     return true;
 }
 
+
 // Export Functions
 module.exports = {
-    propertyNotFound,
+    propertyUndefined,
     invalidPassword,
-    objectNotFound,
+    objectIsNull,
     invalidUsername,
     invalidEmail,
 };

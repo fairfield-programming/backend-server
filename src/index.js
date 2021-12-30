@@ -112,7 +112,7 @@ sequelize.sync().then(() =>
 });
 
 // Start Server
-if (process.env.NODE_ENV != "test")
+if (process.env.NODE_ENV !== "test")
 {
     app.listen(port, function()
     {

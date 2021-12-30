@@ -1,9 +1,10 @@
 module.exports = (req, res) =>
 {
     // Check That All Parameters Are Given
-    if (req.body.username == undefined && req.body.email == undefined)
+    if (noEmailAndUsername(req))
         return res.status(400).send("Not All Parameters Given.");
-    if (req.body.password == undefined)
+    
+    if (!req.body.password)
         return res.status(400).send("Not All Parameters Given.");
 
     User.findOne(
@@ -21,20 +22,20 @@ module.exports = (req, res) =>
         })
         .then(function(userData)
         {
-            if (userData == null) return res.status(404).send("Account Not Found.");
+            if (!userData) return res.status(404).send("Account Not Found.");
 
             bcrypt.compare(
                 req.body.password,
                 userData.password,
                 function(err, result)
                 {
+                    if (!result) return res.status(403).send("Incorrect Password.");
+
                     if (err)
                     {
                         console.log(err);
                         return res.status(500).send("Internal Server Error.");
                     }
-
-                    if (!result) return res.status(403).send("Incorrect Password.");
 
                     return res.json(
                     {
@@ -56,3 +57,8 @@ module.exports = (req, res) =>
             return res.status(500).send("Internal Server Error.");
         });
 };
+
+function noEmailAndUsername(req) {
+    if (!req.body.email && !req.body.username) return true;
+    return false;
+}

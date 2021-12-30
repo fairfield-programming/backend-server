@@ -6,3 +6,5 @@ database.db
 
 # SonarQube working files
 .scannerwork 
+
+node_modules/

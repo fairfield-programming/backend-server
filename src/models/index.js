@@ -86,7 +86,7 @@ global.User.belongsToMany(global.User,
 global.User.belongsToMany(global.User,
 {
     through: "Blocked",
-    as: "Blocked",
+    as: "BlockedUser",
     foreignKey: "blockedId",
 });
 

@@ -1,19 +1,19 @@
 const vulgarTester = require("../../../library/VulgarTest");
 const
 {
-    propertyNotFound,
-    objectNotFound,
+    propertyUndefined,
+    objectIsNull,
 } = require("../../../library/validator");
 
 module.exports = (req, res) =>
 {
     if (req.user == undefined) return res.status(403).send("Not Logged In.");
 
-    if (propertyNotFound(req.body.biography))
+    if (propertyUndefined(req.body.biography))
         return res.status(400).send("Not All Parameters Given.");
-    if (propertyNotFound(req.body.profilePicture))
+    if (propertyUndefined(req.body.profilePicture))
         return res.status(400).send("Not All Parameters Given.");
-    if (propertyNotFound(req.body.username))
+    if (propertyUndefined(req.body.username))
         return res.status(400).send("Not All Parameters Given.");
 
     User.findOne(
@@ -25,7 +25,7 @@ module.exports = (req, res) =>
         })
         .then(function(data)
         {
-            if (objectNotFound(data)) return res.status(404).send("Not Found.");
+            if (objectIsNull(data)) return res.status(404).send("Not Found.");
 
             if (vulgarTester.DetectVulgarWords(req.body.biography))
                 return res.status(406).send("Vulgar Language Detected.");
