@@ -6,6 +6,7 @@
 
 <p align="left">
 
+<img src="https://img.shields.io/badge/dynamic/json?color=green&label=Grade&query=grade&url=https%3A%2F%2Fraw.githubusercontent.com%2Ffairfield-programming%2Fbackend-server%2Fmaster%2F.github%2Fmetrics.json" alt="Code Score">
 <img src="https://img.shields.io/github/contributors/fairfield-programming/backend-server" alt="GitHub contributors">
 <img src="https://img.shields.io/github/commit-activity/w/fairfield-programming/backend-server" alt="GitHub commit activity">
 <img src="https://img.shields.io/website?down_color=lightgrey&down_message=offline&up_color=blue&up_message=online&url=https%3A%2F%2Ffairfieldprogramming.org" alt="Website">
