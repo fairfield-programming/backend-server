@@ -13,9 +13,6 @@
 <img src="https://img.shields.io/github/workflow/status/fairfield-programming/backend-server/Main" alt="GitHub Workflow Status">
 <img src="https://img.shields.io/github/stars/fairfield-programming/backend-server" alt="GitHub Org's stars">
 <img src="https://img.shields.io/github/languages/top/fairfield-programming/backend-server" alt="GitHub top language">
-<a href="https://sonarcloud.io/dashboard?id=fairfield-programming_backend-server"><img src="https://sonarcloud.io/api/project_badges/measure?project=fairfield-programming_backend-server&amp;metric=alert_status" alt="Sonarcloud Status"></a>
-<a href="https://sonarcloud.io/component_measures/metric/reliability_rating/list?id=fairfield-programming_backend-server"><img src="https://sonarcloud.io/api/project_badges/measure?project=fairfield-programming_backend-server&amp;metric=bugs" alt="SonarCloud Bugs"></a>
-<a href="https://sonarcloud.io/component_measures/metric/security_rating/list?id=fairfield-programming_backend-server"><img src="https://sonarcloud.io/api/project_badges/measure?project=fairfield-programming_backend-server&amp;metric=vulnerabilities" alt="SonarCloud Vulnerabilities"></a>
 
 </p>
 
