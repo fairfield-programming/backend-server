@@ -77,17 +77,17 @@ global.User.belongsToMany(global.User,
 });
 
 // Relationship for Block System
-global.User.belongsToMany(global.User, 
+global.User.belongsToMany(global.User,
 {
     through: "Blocked",
     as: "Blocker",
-    foreignKey: 'blockerId'
+    foreignKey: "blockerId",
 });
-global.User.belongsToMany(global.User, 
+global.User.belongsToMany(global.User,
 {
-    through: 'Blocked',
+    through: "Blocked",
     as: "Blocked",
-    foreignKey: "blockedId"
-})
+    foreignKey: "blockedId",
+});
 
 global.sequelize = sequelize;
