@@ -1,6 +1,6 @@
 module.exports = (req, res) =>
 {
-    if (req.params.id == undefined)
+    if (req.params.id || req.params.followerId == undefined)
         return res.status(400).send("Not All Parameters Provided.");
     if (req.user == undefined) return res.status(403).send("Not Logged In");
 
