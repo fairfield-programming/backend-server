@@ -1,4 +1,5 @@
 const Events = require("../../models/Events");
+const {missingParameters} = require("../../library/eventsUtils");
 
 module.exports = (req, res) =>
 {
@@ -52,13 +53,3 @@ module.exports = (req, res) =>
             return res.status(500).send("Internal Server Error.");
         });
 };
-
-function missingParameters(req) {
-    const { name, location,
-            description, host,
-            status, date } = req.body;
-    if (!name || !location || !description ||
-        !host || !status || !date )
-        return true;
-    return false;
-}
