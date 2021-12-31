@@ -18,9 +18,5 @@ function gradientBackground(trueDuckData) {
         trueDuckData.beakColor === "url(#rainbow)");
 }
 
-function addItem(input) {
-
-}
-
 module.exports = { gradientData,
                     gradientBackground };

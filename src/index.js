@@ -4,10 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const
-{
-    Sequelize
-} = require('sequelize');
+const { Sequelize } = require('sequelize');
 const models = require('./models');
 
 // Configure Local Variables
@@ -21,8 +18,7 @@ app.use(express.static('public'));
 app.use(express.json());
 
 // Auth Middleware
-app.use((req, res, next) =>
-{
+app.use((req, res, next) => {
     const authHeader = req.headers.authorization;
 
     if (authHeader)
@@ -106,10 +102,7 @@ app.post('/event/:id/rsvp', require('./routes/Events/rsvpEvent'));
 app.post('/event/:id/unrsvp', require('./routes/Events/unrsvpEvent'));
 
 // Sync the Database
-sequelize.sync().then(() =>
-{
-    app.emit('database-started');
-});
+sequelize.sync().then(() => { app.emit('database-started'); });
 
 // Start Server
 if (process.env.NODE_ENV !== 'test')
