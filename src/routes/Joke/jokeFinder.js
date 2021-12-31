@@ -1,5 +1,6 @@
 const path = require("path");
 const fs = require("fs");
+const { checkIfNumberInRange } = require("../../library/validator");
 
 // Get the Jokes as an Array
 function getAllJokes()
@@ -18,8 +19,7 @@ function getJokeAtIndex(id)
 
     // Check if Id is out of Range
     if (typeof id != "number") return false;
-    if (id < 0) return false;
-    if (id >= jokeCount) return false;
+    if (!checkIfNumberInRange(id, 0, jokeCount)) return false;
 
     // Return the Joke
     return jokes[id];

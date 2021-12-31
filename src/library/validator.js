@@ -12,6 +12,10 @@ function objectIsNull(obj)
     return false;
 }
 
+function checkIfNumberInRange(num, min, max) {
+  return num >= min && num <= max;
+}
+
 // Check if Valid Password
 function invalidPassword(password)
 {
@@ -48,6 +52,7 @@ function invalidEmail(email)
 module.exports = {
     propertyUndefined,
     invalidPassword,
+    checkIfNumberInRange,
     objectIsNull,
     invalidUsername,
     invalidEmail,
