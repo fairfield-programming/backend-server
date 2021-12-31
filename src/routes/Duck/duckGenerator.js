@@ -9,10 +9,7 @@ function parseDuckString(input)
     const eyes = getEyes(input);
     const beak = getBeak(input);
     const wings = getWings(input);
-
-    // Get Duck Smoke
-    var smokeString = input.substring(9, 11);
-    var smoke = parseInt(smokeString, 16);
+    const smoke = getSmoke(input);
 
     // Get Duck Tail
     var tailString = input.substring(11, 13);
@@ -234,4 +231,8 @@ function getBeak(input) {
 
 function getWings(input) {
     return getItem(input, 7, 9);
+}
+
+function getSmoke(input) {
+    return getItem(input, 9, 11);
 }
