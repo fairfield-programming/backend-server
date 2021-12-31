@@ -1,3 +1,5 @@
+const {missingParameters} = require("../../library/eventsUtils");
+
 module.exports = (req, res) =>
 {
     if (!req.user) return res.status(400).send("Not Logged In.");
@@ -60,13 +62,3 @@ module.exports = (req, res) =>
             return res.status(500).send("Internal Server Error.");
         });
 };
-
-function missingParameters(req) {
-    const { name, location,
-            description, host,
-            status, date } = req.body;
-    if (!name || !location || !description ||
-        !host || !status || !date )
-        return true;
-    return false;
-}
