@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const { gradientBackground } = require("../../library/duckGeneratorUtils");
 
 function getItemString(type, number)
 {
@@ -124,9 +125,3 @@ module.exports = {
     generateDuck,
     formatSVG,
 };
-
-
-function gradientBackground(trueDuckData) {
-    return ( trueDuckData.color === "url(#rainbow)" ||
-        trueDuckData.beakColor === "url(#rainbow)");
-}
