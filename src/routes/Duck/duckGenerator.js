@@ -13,10 +13,7 @@ function parseDuckString(input)
     const tail = getTail(input);
     const item = getItem(input);
     const beakColor = getBeakColor(input);
-
-    // Get Feather Color
-    var featherString = input.substring(16, 17);
-    var featherColor = parseInt(featherString, 16);
+    const featherColor = getFeatherColor(input);
 
     // Return the Final Duck Data
     return {
@@ -237,5 +234,9 @@ function getItem(input) {
 }
 
 function getBeakColor(input) {
-    return getObject(input, 15, 17);
+    return getObject(input, 15, 16);
+}
+
+function getFeatherColor(input) {
+    return getObject(input, 16, 17);
 }
