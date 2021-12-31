@@ -34,13 +34,13 @@ module.exports = (req, res) =>
                             return res.status(500).send("Internal Server Error.");
                         });
                 })
-                .catch(function()
+                .catch(function(error)
                 {
                     console.log(error);
                     return res.status(500).send("Internal Server Error.");
                 });
         })
-        .catch(function()
+        .catch(function(error)
         {
             console.log(error);
             return res.status(500).send("Internal Server Error.");

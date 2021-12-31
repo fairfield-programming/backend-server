@@ -2,17 +2,14 @@ const
 {
     invalidPassword,
     invalidUsername,
-    invalidEmail
-} = require("./utils");
+    invalidEmail,
+} = require("../../../library/validator");
 
 module.exports = (req, res) =>
 {
+    const { username, email, password } = req.body;
     // Make sure all Params Exist
-    if (propertyNotFound(req.body.username))
-        return res.status(400).send("Not All Parameters Provided.");
-    if (propertyNotFound(req.body.password))
-        return res.status(400).send("Not All Parameters Provided.");
-    if (propertyNotFound(req.body.email))
+    if (!username || !email || !password)
         return res.status(400).send("Not All Parameters Provided.");
 
     // Check Password, Email and Username
@@ -48,7 +45,7 @@ module.exports = (req, res) =>
             {
                 if (err)
                 {
-                    console.log(error);
+                    console.log(err);
                     return res.status(500).send("Internal Server Error.");
                 }
 

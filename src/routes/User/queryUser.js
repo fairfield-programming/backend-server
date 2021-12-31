@@ -1,6 +1,11 @@
+const
+{
+    propertyUndefined
+} = require("../../library/validator");
+
 module.exports = (req, res) =>
 {
-    if (req.params.id == undefined)
+    if (propertyUndefined(req.params.id))
         return res.status(400).send("Not All Parameters Provided.");
 
     User.findOne(
