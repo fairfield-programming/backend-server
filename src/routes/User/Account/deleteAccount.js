@@ -1,52 +1,44 @@
-module.exports = (req, res) =>
-{
-    if (!req.params.id)
-        return res.status(400).send("Not All Parameters Given.");
-    if (!req.user) return res.status(403).send("Not Logged In.");
-    if (req.user.id !== req.params.id)
-        return res.status(401).send("Not Authorized.");
+const { compare } = require("bcrypt");
 
-    User.findOne(
-        {
-            where:
-            {
-                id: req.params.id,
-            },
-        })
-        .then(function(userData)
-        {
-            if (!userData) return res.status(404).send("User Not Found.");
+module.exports = (req, res) => {
+  if (!req.params.id) return res.status(400).send("Not All Parameters Given.");
+  if (!req.user) return res.status(403).send("Not Logged In.");
+  if (req.user.id !== req.params.id) return res.status(401).send("Not Authorized.");
 
-            bcrypt.compare(
-                req.body.password,
-                userData.password,
-                function(err, result)
-                {
-                    if (err)
-                    {
-                        console.log(err);
-                        return res.status(500).send("Internal Server Error.");
-                    }
+  User.findOne(
+    {
+      where:
+      {
+        id: req.params.id,
+      },
+    },
+  )
+    .then((userData) => {
+      if (!userData) return res.status(404).send("User Not Found.");
 
-                    if (!result) return res.status(403).send("Incorrect Password.");
-
-                    userData
-                        .destroy()
-                        .then(function()
-                        {
-                            return res.status(200).send("Success.");
-                        })
-                        .catch(function(error)
-                        {
-                            console.log(error);
-                            return res.status(500).send("Internal Server Error.");
-                        });
-                }
-            );
-        })
-        .catch(function(error)
-        {
-            console.log(error);
+      compare(
+        req.body.password,
+        userData.password,
+        (err, result) => {
+          if (err) {
+            console.log(err);
             return res.status(500).send("Internal Server Error.");
-        });
+          }
+
+          if (!result) return res.status(403).send("Incorrect Password.");
+
+          userData
+            .destroy()
+            .then(() => res.status(200).send("Success."))
+            .catch((error) => {
+              console.log(error);
+              return res.status(500).send("Internal Server Error.");
+            });
+        },
+      );
+    })
+    .catch((error) => {
+      console.log(error);
+      return res.status(500).send("Internal Server Error.");
+    });
 };
