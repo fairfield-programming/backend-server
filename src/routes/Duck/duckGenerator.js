@@ -5,9 +5,7 @@ function parseDuckString(input)
 {
     if(stringNotValid(input)) return null;
     
-    // Get Duck Hat
-    var hatString = input.substring(1, 3);
-    var hat = parseInt(hatString, 16);
+    const hat = getDuckHat(input);
 
     // Get Duck Eyes
     var eyesString = input.substring(3, 5);
@@ -224,4 +222,9 @@ function stringNotValid(input) {
     if (lengthIs0(input)) return true;
     if (input[0] === "1" && lengthIsCorrect(input)) return false;
     return true;
+}
+
+function getDuckHat(input) {
+    const hatString = input.substring(1, 3);
+    return parseInt(hatString, 16);
 }
