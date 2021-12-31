@@ -76,11 +76,7 @@ function generateDuck(duckData)
     // Add the Body (Spread it First)
     output.push(...getItemString("body", trueDuckData.tail));
 
-    // Check if Gradient Background
-    if (
-        trueDuckData.color === "url(#rainbow)" ||
-        trueDuckData.beakColor === "url(#rainbow)"
-    )
+    if (gradientBackground(trueDuckData))
     {
         output.push(`<defs>
             <linearGradient id="rainbow" gradientTransform="translate(0.2, 0), rotate(20)">
@@ -118,7 +114,7 @@ function generateDuck(duckData)
     output.push(...getItemString("hat", trueDuckData.hat));
 
     // Create Some Output Text
-    var outputText = output.join("\n");
+    let outputText = output.join("\n");
 
     // Replace the Text with Color
     outputText = outputText.replace(/DUCK_COLOR/g, trueDuckData.color);
@@ -177,4 +173,9 @@ function stringNotValid(input) {
     if (lengthIs0(input)) return true;
     if (input[0] === "1" && lengthIsCorrect(input)) return false;
     return true;
+}
+
+function gradientBackground(trueDuckData) {
+    return ( trueDuckData.color === "url(#rainbow)" ||
+        trueDuckData.beakColor === "url(#rainbow)");
 }
