@@ -5,9 +5,8 @@ function parseDuckString(input)
 {
     if (notString(input)) return null;
     if (hasBadCharacters(input)) return null;
-
     // Check Version of Duck String
-    if (input.length == 0) return null;
+    if (lengthIs0(input)) return null;
 
     if (input[0] === "1" && lengthIsCorrect(input))
     {
