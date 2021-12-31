@@ -6,7 +6,7 @@ module.exports = (req, res) =>
         {
             if (data.length <= 0) return res.status(404).send("No Users.");
 
-            var output = [];
+            let output = [];
 
             // Cleanup the Output
             data.forEach(function(element)

@@ -11,8 +11,8 @@ const
 const models = require("./models");
 
 // Configure Local Variables
-var app = express();
-var port = process.env.PORT || 8080;
+const app = express();
+const port = process.env.PORT || 8080;
 global.bcrypt = bcrypt;
 global.jwt = jwt;
 

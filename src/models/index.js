@@ -11,8 +11,8 @@ const
 global.Op = Op;
 
 // Define Sequelize Server
-var sequelize;
-var env = process.env.NODE_ENV || "development";
+let sequelize;
+let env = process.env.NODE_ENV || "development";
 
 // Second Check
 if (process.env.DATABASE_URL == undefined) env = "development";

@@ -5,7 +5,7 @@ const fs = require("fs");
 function getAllJokes()
 {
     // Return the Jokes array
-    var fileData = fs.readFileSync(path.join(__dirname, "/jokes.txt"), "ascii");
+    const fileData = fs.readFileSync(path.join(__dirname, "/jokes.txt"), "ascii");
     return fileData.split("\n");
 }
 
@@ -13,8 +13,8 @@ function getAllJokes()
 function getJokeAtIndex(id)
 {
     // Get all of the Jokes
-    var jokes = getAllJokes();
-    var jokeCount = jokes.length;
+    const jokes = getAllJokes()
+    const jokeCount = jokes.length;
 
     // Check if Id is out of Range
     if (typeof id != "number") return false;
@@ -36,8 +36,8 @@ function getJokeCount()
 function getRandomJoke()
 {
     // Get All of the Jokes
-    var jokes = getAllJokes();
-    var jokeIndex = Math.floor(Math.random() * jokes.length);
+    const jokes = getAllJokes();
+    const jokeIndex = Math.floor(Math.random() * jokes.length);
 
     // Return the Joke at the Index
     return jokes[jokeIndex];

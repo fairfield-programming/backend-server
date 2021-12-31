@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const { getData } = require("../../library/duckStringParser");
 
 function getItemString(type, number)
 {

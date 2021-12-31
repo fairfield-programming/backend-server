@@ -4,17 +4,17 @@ const path = require("path");
 function GetVulgarWords()
 {
     // Get the File Data
-    var fileData = fs.readFileSync(path.join(__dirname, "./vulgar.txt"), "ascii");
+    const fileData = fs.readFileSync(path.join(__dirname, "./vulgar.txt"), "ascii");
     return fileData.split("\n");
 }
 
 function TokenizeString(input)
 {
     // Make it Lowercase
-    var lowercase = input.toLowerCase();
+    const lowercase = input.toLowerCase();
 
     // Switch Around Similar Looking Symbols
-    var partsRemoved = lowercase;
+    let partsRemoved = lowercase;
     partsRemoved = partsRemoved.replace(/\$/g, "s");
     partsRemoved = partsRemoved.replace(/\@/g, "a");
 

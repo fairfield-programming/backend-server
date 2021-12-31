@@ -301,10 +301,10 @@ describe("Auth Endpoints", () =>
 
     describe("Test Vulgar Library", () =>
     {
+        const library = require("../library/VulgarTest");
+
         it("should not trigger for normal sentences", async () =>
         {
-            var library = require("../library/VulgarTest");
-
             expect(library.DetectVulgarWords("Hey there! My name is William.")).toBe(
                 false
             );
@@ -315,24 +315,18 @@ describe("Auth Endpoints", () =>
 
         it("should trigger when swears are detected", async () =>
         {
-            var library = require("../library/VulgarTest");
-
             expect(library.DetectVulgarWords("Fuck")).toBe(true);
             expect(library.DetectVulgarWords("Shit")).toBe(true);
         });
 
         it("shouldn't care about capitalization", async () =>
         {
-            var library = require("../library/VulgarTest");
-
             expect(library.DetectVulgarWords("FuCK")).toBe(true);
             expect(library.DetectVulgarWords("ShIt")).toBe(true);
         });
 
         it("should block symbols as well", async () =>
         {
-            var library = require("../library/VulgarTest");
-
             expect(library.DetectVulgarWords("@ss")).toBe(true);
             expect(library.DetectVulgarWords("@$$")).toBe(true);
         });
