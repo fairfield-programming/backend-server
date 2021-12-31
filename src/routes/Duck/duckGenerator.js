@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
-const { gradientBackground } = require("../../library/duckGeneratorUtils");
+const { gradientData,
+        gradientBackground } = require("../../library/duckGeneratorUtils");
 
 function getItemString(type, number)
 {
@@ -62,23 +63,7 @@ function generateDuck(duckData)
     output.push(...getItemString("body", trueDuckData.tail));
 
     if (gradientBackground(trueDuckData))
-    {
-        output.push(`<defs>
-            <linearGradient id="rainbow" gradientTransform="translate(0.2, 0), rotate(20)">
-                <stop offset="0"     stop-color="#FF0018"/>
-                <stop offset="0.166" stop-color="#FF0018"/>
-                <stop offset="0.166" stop-color="#FFA52C"/>
-                <stop offset="0.333" stop-color="#FFA52C"/>
-                <stop offset="0.333"   stop-color="#FFFF41"/>
-                <stop offset="0.5" stop-color="#FFFF41"/>
-                <stop offset="0.5" stop-color="#008018"/>
-                <stop offset="0.666" stop-color="#008018"/>
-                <stop offset="0.666" stop-color="#0000F9"/>
-                <stop offset="0.833" stop-color="#0000F9"/>
-                <stop offset="0.833" stop-color="#86007D"/>
-            </linearGradient>
-        </defs>`);
-    }
+        output.push(gradientData);
 
     // Add the Smoke (Spread it First)
     output.push(...getItemString("smoke", trueDuckData.smoke));
