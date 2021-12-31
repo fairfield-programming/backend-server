@@ -11,7 +11,7 @@ function parseDuckString(input)
 function getItemString(type, number)
 {
     // Get the File Path
-    var itemPath = path.join(
+    const itemPath = path.join(
         __dirname,
         "../../../",
         "ducks/",
@@ -23,8 +23,8 @@ function getItemString(type, number)
     if (!fs.existsSync(itemPath)) return [];
 
     // Get the File Data
-    var itemData = fs.readFileSync(itemPath, "ascii");
-    var strippedData = stripSVGData(itemData);
+    const itemData = fs.readFileSync(itemPath, "ascii");
+    const strippedData = stripSVGData(itemData);
 
     // Break Each Line
     return strippedData.split("\n");
@@ -32,23 +32,16 @@ function getItemString(type, number)
 
 function stripSVGData(input)
 {
-    // Just Do a Pipeline Technique
-    var output = input;
-
     // Strip out Annoying Stuff
-    output = output.replace(/<svg[ -\=\?-\~\n]*>/g, "");
+    let output = input.replace(/<svg[ -\=\?-\~\n]*>/g, "");
     output = output.replace(/<\/svg>/g, "");
 
-    // Trim It
-    output = output.trim();
-
-    // Return the Rest
-    return output;
+    return output.trim();
 }
 
 function generateDuck(duckData)
 {
-    var colors = [
+    const colors = [
         "#000000", // black
         "#FFFFFF", // white
         "#9D8009", // brown
@@ -58,7 +51,7 @@ function generateDuck(duckData)
         "url(#rainbow)", // rainbow
     ];
 
-    var trueDuckData = {
+    const trueDuckData = {
         hat: duckData.hat || 0,
         eyes: duckData.eyes || 0,
         beak: duckData.beak || 0,
@@ -71,7 +64,7 @@ function generateDuck(duckData)
     };
 
     // Create the Base Data
-    var output = [];
+    let output = [];
 
     // Add the Body (Spread it First)
     output.push(...getItemString("body", trueDuckData.tail));
@@ -131,7 +124,7 @@ function formatSVG(data, zoom)
     if (zoom == undefined)
         return `<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">\n${data}\n</svg>`;
 
-    var size = 200 - zoom * 2;
+    const size = 200 - zoom * 2;
 
     return `<svg width="${size}" height="${size}" viewBox="${zoom} ${zoom} ${size} ${size}" fill="none" xmlns="http://www.w3.org/2000/svg">\n${data}\n</svg>`;
 }
