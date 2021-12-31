@@ -119,9 +119,9 @@ function generateDuck(duckData)
 
 function formatSVG(data, zoom)
 {
-    if (data == undefined)
+    if (!data)
         return `<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"></svg>`;
-    if (zoom == undefined)
+    if (!zoom)
         return `<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">\n${data}\n</svg>`;
 
     const size = 200 - zoom * 2;
@@ -142,7 +142,7 @@ function lengthIsCorrect(input)
 
 function notString(input)
 {
-    if (input === undefined) return true;
+    if (!input) return true;
     if (typeof input !== "string") return true;
     return false;
 }
