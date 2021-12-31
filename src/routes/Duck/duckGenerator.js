@@ -224,7 +224,15 @@ function stringNotValid(input) {
     return true;
 }
 
+function getDuckItem(input, start, end) {
+   const itemString = input.substring(start, end);
+   return parseInt(itemString, 16); 
+}
+
 function getDuckHat(input) {
-    const hatString = input.substring(1, 3);
-    return parseInt(hatString, 16);
+    return getDuckItem(input, 1, 3);
+}
+
+function getDuckEyes(input) {
+
 }
