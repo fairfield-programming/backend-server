@@ -12,7 +12,7 @@ module.exports = (req, res) =>
         })
         .then(function(data)
         {
-            if (data == null) return res.status(404).send("Not Found.");
+            if (!data) return res.status(404).send("Not Found.");
 
             return res.json(data);
         })

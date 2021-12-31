@@ -1,8 +1,4 @@
 const vulgarTester = require("../../../library/VulgarTest");
-const
-{
-    objectIsNull,
-} = require("../../../library/validator");
 
 module.exports = (req, res) =>
 {
@@ -21,7 +17,7 @@ module.exports = (req, res) =>
         })
         .then(function(data)
         {
-            if (objectIsNull(data)) return res.status(404).send("Not Found.");
+            if (!data) return res.status(404).send("Not Found.");
 
             if (vulgarTester.DetectVulgarWords(req.body.biography))
                 return res.status(406).send("Vulgar Language Detected.");

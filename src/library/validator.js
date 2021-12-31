@@ -1,10 +1,3 @@
-// Check if Object is Null
-function objectIsNull(obj)
-{
-    if (!obj) return true;
-    return false;
-}
-
 // Check if Valid Password
 function invalidPassword(password)
 {
@@ -40,7 +33,6 @@ function invalidEmail(email)
 // Export Functions
 module.exports = {
     invalidPassword,
-    objectIsNull,
     invalidUsername,
     invalidEmail,
 };

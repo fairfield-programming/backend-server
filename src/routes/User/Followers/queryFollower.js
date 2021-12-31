@@ -13,7 +13,7 @@ module.exports = (req, res) =>
         })
         .then(function(followerData)
         {
-            if (data == null) return res.status(404).send("Not Found.");
+            if (!data) return res.status(404).send("Not Found.");
 
             User.findOne(
                 {
