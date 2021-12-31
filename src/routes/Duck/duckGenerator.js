@@ -3,23 +3,8 @@ const path = require("path");
 
 function parseDuckString(input)
 {
-    if (notString(input)) return null;
-    if (hasBadCharacters(input)) return null;
-    // Check Version of Duck String
-    if (lengthIs0(input)) return null;
-
-    if (input[0] === "1" && lengthIsCorrect(input))
-    {
-        return parseDuckV1String(input);
-    }
-    else
-    {
-        return null;
-    }
-}
-
-function parseDuckV1String(input)
-{
+    if(stringNotValid(input)) return null;
+    
     // Get Duck Hat
     var hatString = input.substring(1, 3);
     var hat = parseInt(hatString, 16);
@@ -230,4 +215,13 @@ function hasBadCharacters(input)
 function lengthIs0(input)
 {
     return input.length === 0 ? true : false;
+}
+
+function stringNotValid(input) {
+    if (notString(input)) return true;
+    if (hasBadCharacters(input)) return true;
+    // Check Version of Duck String
+    if (lengthIs0(input)) return true;
+    if (input[0] === "1" && lengthIsCorrect(input)) return false;
+    return true;
 }
