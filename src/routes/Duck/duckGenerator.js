@@ -4,7 +4,6 @@ const { getData } = require("../../library/duckStringParser");
 
 function parseDuckString(input)
 {
-    if(stringNotValid(input)) return null;
     return getData(input);
 }
 
@@ -135,38 +134,6 @@ module.exports = {
     formatSVG,
 };
 
-function lengthIsCorrect(input)
-{
-    return input.length !== 17 ? false : true;
-}
-
-function notString(input)
-{
-    if (!input) return true;
-    if (typeof input !== "string") return true;
-    return false;
-}
-
-function hasBadCharacters(input)
-{
-    if (/[g-zG-Z]/g.test(input)) return true;
-    if (/[$-/:-?{-~!"^_`\[\]]/g.test(input)) return true;
-    return false;
-}
-
-function lengthIs0(input)
-{
-    return input.length === 0 ? true : false;
-}
-
-function stringNotValid(input) {
-    if (notString(input)) return true;
-    if (hasBadCharacters(input)) return true;
-    // Check Version of Duck String
-    if (lengthIs0(input)) return true;
-    if (input[0] === "1" && lengthIsCorrect(input)) return false;
-    return true;
-}
 
 function gradientBackground(trueDuckData) {
     return ( trueDuckData.color === "url(#rainbow)" ||
