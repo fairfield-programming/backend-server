@@ -4,29 +4,7 @@ const path = require("path");
 function parseDuckString(input)
 {
     if(stringNotValid(input)) return null;
-    
-    const hat = getHat(input);
-    const eyes = getEyes(input);
-    const beak = getBeak(input);
-    const wings = getWings(input);
-    const smoke = getSmoke(input);
-    const tail = getTail(input);
-    const item = getItem(input);
-    const beakColor = getBeakColor(input);
-    const featherColor = getFeatherColor(input);
-
-    // Return the Final Duck Data
-    return {
-        hat: hat,
-        eyes: eyes,
-        beak: beak,
-        wings: wings,
-        smoke: smoke,
-        tail: tail,
-        item: item,
-        beakColor: beakColor,
-        color: featherColor,
-    };
+    return getData(input);
 }
 
 function getItemString(type, number)
@@ -239,4 +217,26 @@ function getBeakColor(input) {
 
 function getFeatherColor(input) {
     return getObject(input, 16, 17);
+}
+
+function getData(input) {
+    const hat = getHat(input);
+    const eyes = getEyes(input);
+    const beak = getBeak(input);
+    const wings = getWings(input);
+    const smoke = getSmoke(input);
+    const tail = getTail(input);
+    const item = getItem(input);
+    const beakColor = getBeakColor(input);
+    const featherColor = getFeatherColor(input);
+
+    return { hat,
+            eyes,
+            beak,
+            wings,
+            smoke,
+            tail,
+            item,
+            beakColor,
+            featherColor};
 }
