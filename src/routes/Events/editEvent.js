@@ -2,15 +2,8 @@ const Events = require("../../models/Events");
 
 module.exports = (req, res) =>
 {
-    if (req.user == undefined) return res.status(403).send("Not Logged In.");
-    if (
-        req.body.name == undefined ||
-        req.body.location == undefined ||
-        req.body.description == undefined ||
-        req.body.host == undefined ||
-        req.body.status == undefined ||
-        req.body.date == undefined
-    )
+    if (!req.user) return res.status(403).send("Not Logged In.");
+    if ( missingParameters(req))
         return res.status(400).send("Not All Parameters Provided.");
 
     Events.findOne(
@@ -22,12 +15,12 @@ module.exports = (req, res) =>
         })
         .then(function(eventData)
         {
-            if (eventData.ownerId != req.user.id)
+            if (eventData.ownerId !== req.user.id)
             {
                 return res.status(401).send("Not Authorized to Edit");
             }
 
-            if (req.body.status != undefined)
+            if (!req.body.status)
             {
                 if (vulgarTester.DetectVulgarWords(req.body.status))
                     return res.status(406).send("Vulgar Language Detected.");
@@ -59,3 +52,13 @@ module.exports = (req, res) =>
             return res.status(500).send("Internal Server Error.");
         });
 };
+
+function missingParameters(req) {
+    const { name, location,
+            description, host,
+            status, date } = req.body;
+    if (!name || !location || !description ||
+        !host || !status || !date )
+        return true;
+    return false;
+}

@@ -1,6 +1,6 @@
 module.exports = (req, res) =>
 {
-    if (req.params.id == undefined)
+    if (!req.params.id)
         return res.status(400).send("Not All Parameters Provided.");
 
     Article.findOne(
@@ -12,7 +12,7 @@ module.exports = (req, res) =>
         })
         .then(function(data)
         {
-            if (data == null) return res.status(404).send("Not Found.");
+            if (!data) return res.status(404).send("Not Found.");
 
             return res.json(data);
         })

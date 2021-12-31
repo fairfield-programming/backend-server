@@ -1,12 +1,6 @@
-const
-{
-    propertyUndefined,
-    objectIsNull,
-} = require("../../../library/validator");
-
 module.exports = (req, res) =>
 {
-    if (propertyUndefined(req.params.id))
+    if (!req.params.id)
         return res.status(400).send("Not All Parameters Provided.");
 
     User.findOne(
@@ -18,7 +12,7 @@ module.exports = (req, res) =>
         })
         .then(function(data)
         {
-            if (objectIsNull(data)) return res.status(404).send("Not Found.");
+            if (!data) return res.status(404).send("Not Found.");
 
             res.set("Content-Type", "text/html");
 

@@ -1,15 +1,11 @@
 module.exports = (req, res) =>
 {
-    if (req.params.id == undefined)
-        return res.status(400).send("Not All Parameters Given.");
-    if (req.body.password == undefined)
-        return res.status(400).send("Not All Parameters Given.");
-    if (req.body.newPassword == undefined)
+    if (!req.params.id || !req.body.password || !req.body.newPassword)
         return res.status(400).send("Not All Parameters Given.");
 
-    if (req.user == undefined) return res.status(403).send("Not Logged In.");
+    if (!req.user) return res.status(403).send("Not Logged In.");
 
-    if (req.user.id != req.params.id)
+    if (req.user.id !== req.params.id)
         return res.status(401).send("Not Authorized.");
 
     User.findOne(

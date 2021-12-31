@@ -1,7 +1,7 @@
 module.exports = (req, res) =>
 {
-    if (req.user == undefined) return res.status(403).send("Not Logged In.");
-    if (req.params.id || req.params.blockId == undefined)
+    if (!req.user) return res.status(403).send("Not Logged In.");
+    if (!req.params.id || !req.params.blockId)
         return res.status(400).send("Not All Parameters Provided.");
 
     User.findOne(

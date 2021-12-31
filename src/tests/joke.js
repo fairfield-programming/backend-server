@@ -4,8 +4,6 @@ const requestWithSupertest = supertest(server);
 
 describe("GET /jokes", () =>
 {
-    const funny = false;
-
     it("should return a 200 and all the jokes", async () =>
     {
         const res = await requestWithSupertest.get("/jokes");

@@ -1,10 +1,7 @@
 module.exports = (req, res) =>
 {
-    if (
-        req.body.title == undefined ||
-        req.body.description == undefined ||
-        req.body.body == undefined
-    )
+    const { title, description, body } = req.body;
+    if ( !title || !description || !body )
         return res.status(400).send("Not All Parameters Provided.");
 
     Article.create(

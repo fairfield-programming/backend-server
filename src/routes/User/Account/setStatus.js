@@ -2,7 +2,7 @@ const vulgarTester = require("../../../library/VulgarTest");
 
 module.exports = (req, res) =>
 {
-    if (req.user == undefined) return res.status(403).send("Not Logged In.");
+    if (!req.user) return res.status(403).send("Not Logged In.");
 
     User.findOne(
         {
@@ -13,9 +13,9 @@ module.exports = (req, res) =>
         })
         .then(function(data)
         {
-            if (data == null) return res.status(404).send("Not Found.");
+            if (!data) return res.status(404).send("Not Found.");
 
-            if (req.body.status != undefined)
+            if (!req.body.status)
                 if (vulgarTester.DetectVulgarWords(req.body.status))
                     return res.status(406).send("Vulgar Language Detected.");
 

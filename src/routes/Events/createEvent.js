@@ -1,14 +1,9 @@
 module.exports = (req, res) =>
 {
-    if (req.user == undefined) return res.status(400).send("Not Logged In.");
-    if (
-        req.body.name == undefined ||
-        req.body.location == undefined ||
-        req.body.description == undefined ||
-        req.body.host == undefined ||
-        req.body.status == undefined ||
-        req.body.date == undefined
-    )
+    if (!req.user) return res.status(400).send("Not Logged In.");
+    
+
+    if (missingParameters(req))
         return res.status(400).send("Not All Parameters Provided.");
 
     Events.create(
@@ -65,3 +60,13 @@ module.exports = (req, res) =>
             return res.status(500).send("Internal Server Error.");
         });
 };
+
+function missingParameters(req) {
+    const { name, location,
+            description, host,
+            status, date } = req.body;
+    if (!name || !location || !description ||
+        !host || !status || !date )
+        return true;
+    return false;
+}

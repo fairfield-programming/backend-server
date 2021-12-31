@@ -1,19 +1,15 @@
 const vulgarTester = require("../../../library/VulgarTest");
 const
 {
-    propertyUndefined,
     objectIsNull,
 } = require("../../../library/validator");
 
 module.exports = (req, res) =>
 {
-    if (req.user == undefined) return res.status(403).send("Not Logged In.");
+    if (!req.user) return res.status(403).send("Not Logged In.");
 
-    if (propertyUndefined(req.body.biography))
-        return res.status(400).send("Not All Parameters Given.");
-    if (propertyUndefined(req.body.profilePicture))
-        return res.status(400).send("Not All Parameters Given.");
-    if (propertyUndefined(req.body.username))
+    const { biography, profilePicture, username } = req.body;
+    if (!biography || !profilePicture || !username)
         return res.status(400).send("Not All Parameters Given.");
 
     User.findOne(

@@ -74,7 +74,7 @@ describe("GET /user/:id", () =>
         expect(res.body.profilePicture).toBeDefined();
         expect(res.body.createdAt).toBeDefined();
         expect(res.body.updatedAt).toBeDefined();
-        expect(res.body.password).toBe(undefined);
+        expect(res.body.password).toBeUndefined();
 
         // Expect HTTP Data
         expect(res.status).toEqual(200);

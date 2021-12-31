@@ -1,10 +1,3 @@
-// Check if Undefined
-function propertyUndefined(property)
-{
-    if (!property) return true;
-    return false;
-}
-
 // Check if Object is Null
 function objectIsNull(obj)
 {
@@ -46,7 +39,6 @@ function invalidEmail(email)
 
 // Export Functions
 module.exports = {
-    propertyUndefined,
     invalidPassword,
     objectIsNull,
     invalidUsername,

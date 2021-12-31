@@ -1,9 +1,9 @@
 module.exports = (req, res) =>
 {
-    if (req.params.id == undefined)
+    if (!req.params.id)
         return res.status(400).send("Not All Parameters Given.");
-    if (req.user == undefined) return res.status(403).send("Not Logged In.");
-    if (req.user.id != req.params.id)
+    if (!req.user) return res.status(403).send("Not Logged In.");
+    if (req.user.id !== req.params.id)
         return res.status(401).send("Not Authorized.");
 
     User.findOne(
@@ -15,7 +15,7 @@ module.exports = (req, res) =>
         })
         .then(function(userData)
         {
-            if (userData == null) return res.status(404).send("User Not Found.");
+            if (!userData) return res.status(404).send("User Not Found.");
 
             bcrypt.compare(
                 req.body.password,
