@@ -1,4 +1,5 @@
 const duckGenerator = require("./duckGenerator");
+const {getData} = require("../../library/duckStringParser")
 
 module.exports = (req, res) =>
 {
@@ -7,7 +8,7 @@ module.exports = (req, res) =>
     var zoomInt = parseInt(zoom);
 
     // Parse the String
-    var duckData = duckGenerator.parseDuckString(req.params.id);
+    var duckData = getData(req.params.id);
     if (!duckData) return res.status(400).send("Bad Request.");
 
     // Set the Headers

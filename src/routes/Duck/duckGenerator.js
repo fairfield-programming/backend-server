@@ -2,11 +2,6 @@ const fs = require("fs");
 const path = require("path");
 const { getData } = require("../../library/duckStringParser");
 
-function parseDuckString(input)
-{
-    return getData(input);
-}
-
 function getItemString(type, number)
 {
     // Get the File Path
@@ -31,10 +26,8 @@ function getItemString(type, number)
 
 function stripSVGData(input)
 {
-    // Strip out Annoying Stuff
     let output = input.replace(/<svg[ -\=\?-\~\n]*>/g, "");
     output = output.replace(/<\/svg>/g, "");
-
     return output.trim();
 }
 
@@ -130,7 +123,6 @@ function formatSVG(data, zoom)
 
 module.exports = {
     generateDuck,
-    parseDuckString,
     formatSVG,
 };
 
