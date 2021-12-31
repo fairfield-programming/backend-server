@@ -6,6 +6,7 @@
 
 <p align="left">
 
+<img src="https://img.shields.io/badge/dynamic/json?color=green&label=Grade&query=grade&url=https%3A%2F%2Fraw.githubusercontent.com%2Ffairfield-programming%2Fbackend-server%2Fmaster%2F.github%2Fmetrics.json" alt="Code Score">
 <img src="https://img.shields.io/github/contributors/fairfield-programming/backend-server" alt="GitHub contributors">
 <img src="https://img.shields.io/github/commit-activity/w/fairfield-programming/backend-server" alt="GitHub commit activity">
 <img src="https://img.shields.io/website?down_color=lightgrey&down_message=offline&up_color=blue&up_message=online&url=https%3A%2F%2Ffairfieldprogramming.org" alt="Website">
@@ -13,10 +14,8 @@
 <img src="https://img.shields.io/github/workflow/status/fairfield-programming/backend-server/Main" alt="GitHub Workflow Status">
 <img src="https://img.shields.io/github/stars/fairfield-programming/backend-server" alt="GitHub Org's stars">
 <img src="https://img.shields.io/github/languages/top/fairfield-programming/backend-server" alt="GitHub top language">
-<a href="https://sonarcloud.io/dashboard?id=fairfield-programming_backend-server"><img src="https://sonarcloud.io/api/project_badges/measure?project=fairfield-programming_backend-server&amp;metric=alert_status" alt="Sonarcloud Status"></a>
-<a href="https://sonarcloud.io/component_measures/metric/reliability_rating/list?id=fairfield-programming_backend-server"><img src="https://sonarcloud.io/api/project_badges/measure?project=fairfield-programming_backend-server&amp;metric=bugs" alt="SonarCloud Bugs"></a>
-<a href="https://sonarcloud.io/component_measures/metric/security_rating/list?id=fairfield-programming_backend-server"><img src="https://sonarcloud.io/api/project_badges/measure?project=fairfield-programming_backend-server&amp;metric=vulnerabilities" alt="SonarCloud Vulnerabilities"></a>
-
+<img src="https://img.shields.io/badge/dynamic/json?color=blue&label=Dependencies&query=indirectDependenciesCount&url=https%3A%2F%2Fraw.githubusercontent.com%2Ffairfield-programming%2Fbackend-server%2Fmaster%2F.github%2Fmetrics.json" alt="Dependencies"> 
+  
 </p>
 
 ## Features

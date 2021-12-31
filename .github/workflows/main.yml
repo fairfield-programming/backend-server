@@ -1,7 +1,7 @@
-# This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+# We're switching over to using EAF-Linter because the other tech we were using for development was slowing us down
+# This new stack will increase readability, lower development time, and create better code. 
 
-name: Main
+name: EAF Linting
 
 on:
   push:
@@ -25,6 +25,12 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+        
+    - name: Install Packages
+      run: npm ci
+    
+    - name: Run the Linter
+      run: npx eaf-linter
+    
+    - name: Recommit
+      run: git config --global user.email "runner@fairfieldprogramming.org"; git config --global user.name "FPA Bot"; git pull; git add .; git commit -m "🍯 Beautified Code"; git push origin master

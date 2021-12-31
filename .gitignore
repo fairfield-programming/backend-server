@@ -1,4 +1,4 @@
-Node_Modules
+node_modules
 Dockerfile
 OpenAPI.json
 .env
@@ -6,5 +6,3 @@ database.db
 
 # SonarQube working files
 .scannerwork 
-
-node_modules/
