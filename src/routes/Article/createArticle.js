@@ -1,7 +1,6 @@
 module.exports = (req, res) =>
 {
-    const { title, description, body } = req.body;
-    if ( !title || !description || !body )
+    if (missingParameters(req))
         return res.status(400).send("Not All Parameters Provided.");
 
     Article.create(
@@ -20,3 +19,9 @@ module.exports = (req, res) =>
             return res.status(500).send("Internal Server Error.");
         });
 };
+
+function missingParameters(req) {
+    const { title, description, body } = req.body;
+    if ( !title || !description || !body ) return true;
+    return false;
+}
