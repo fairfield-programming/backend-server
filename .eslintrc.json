@@ -11,5 +11,8 @@
         "eslint:recommended",
         "airbnb-base",
         "plugin:jest/recommended"
-    ]
+    ],
+    "rules": {
+      "quotes": "off"
+    }
 }
