@@ -5,12 +5,9 @@ function parseDuckString(input)
 {
     if(stringNotValid(input)) return null;
     
-    const hat = getDuckHat(input);
-    const eyes = getDuckEyes(input);
-
-    // Get Duck Beak
-    var beakString = input.substring(5, 7);
-    var beak = parseInt(beakString, 16);
+    const hat = getHat(input);
+    const eyes = getEyes(input);
+    const beak = getBeak(input);
 
     // Get Duck Wings
     var wingString = input.substring(7, 9);
@@ -221,15 +218,19 @@ function stringNotValid(input) {
     return true;
 }
 
-function getDuckItem(input, start, end) {
+function getItem(input, start, end) {
    const itemString = input.substring(start, end);
    return parseInt(itemString, 16); 
 }
 
-function getDuckHat(input) {
-    return getDuckItem(input, 1, 3);
+function getHat(input) {
+    return getItem(input, 1, 3);
 }
 
-function getDuckEyes(input) {
-    return getDuckItem(input, 3, 5);
+function getEyes(input) {
+    return getItem(input, 3, 5);
+}
+
+function getBeak(input) {
+    return getItem(input, 5, 7);
 }
