@@ -22,7 +22,8 @@ module.exports = (req, res) => {
           {
             id: req.user.id,
           },
-      })
+      },
+    )
       .then((userData) => {
         userData
           .addEvents(eventData)
