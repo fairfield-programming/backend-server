@@ -11,10 +11,7 @@ function parseDuckString(input)
     const wings = getWings(input);
     const smoke = getSmoke(input);
     const tail = getTail(input);
-
-    // Get Duck Item
-    var itemString = input.substring(13, 15);
-    var item = parseInt(itemString, 16);
+    const item = getItem(input);
 
     // Get Beak Color
     var beakColorString = input.substring(15, 16);
@@ -209,31 +206,35 @@ function stringNotValid(input) {
     return true;
 }
 
-function getItem(input, start, end) {
+function getObject(input, start, end) {
    const itemString = input.substring(start, end);
    return parseInt(itemString, 16); 
 }
 
 function getHat(input) {
-    return getItem(input, 1, 3);
+    return getObject(input, 1, 3);
 }
 
 function getEyes(input) {
-    return getItem(input, 3, 5);
+    return getObject(input, 3, 5);
 }
 
 function getBeak(input) {
-    return getItem(input, 5, 7);
+    return getObject(input, 5, 7);
 }
 
 function getWings(input) {
-    return getItem(input, 7, 9);
+    return getObject(input, 7, 9);
 }
 
 function getSmoke(input) {
-    return getItem(input, 9, 11);
+    return getObject(input, 9, 11);
 }
 
 function getTail(input) {
-    return getItem(input, 11, 13);
+    return getObject(input, 11, 13);
+}
+
+function getItem(input) {
+    return getObject(input, 13, 15);
 }
