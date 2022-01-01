@@ -19,27 +19,22 @@ app.use(express.json());
 
 // Auth Middleware
 app.use((req, res, next) => {
-    const authHeader = req.headers.authorization;
+  const authHeader = req.headers.authorization;
 
-    if (authHeader)
-    {
-        const token = authHeader.split(' ')[1];
+  if (authHeader) {
+    const token = authHeader.split(' ')[1];
 
-        jwt.verify(token, process.env.JWT_KEY, (err, user) =>
-        {
-            if (err)
-            {
-                return res.sendStatus(403);
-            }
+    jwt.verify(token, process.env.JWT_KEY, (err, user) => {
+      if (err) {
+        return res.sendStatus(403);
+      }
 
-            req.user = user;
-            next();
-        });
-    }
-    else
-    {
-        next();
-    }
+      req.user = user;
+      next();
+    });
+  } else {
+    next();
+  }
 });
 
 // Duck Joke Endpoints
@@ -64,12 +59,12 @@ app.get('/user/:id/', require('./routes/User/queryUser'));
 app.get('/user/:id/status', require('./routes/User/Account/getStatus'));
 app.get('/user/', require('./routes/User/listUsers'));
 app.get(
-    '/user/:id/followers',
-    require('./routes/User/Followers/listFollowers')
+  '/user/:id/followers',
+  require('./routes/User/Followers/listFollowers')
 );
 app.get(
-    '/user/:id/followers/:followerId',
-    require('./routes/User/Followers/queryFollower')
+  '/user/:id/followers/:followerId',
+  require('./routes/User/Followers/queryFollower')
 );
 
 app.post('/user/signup', require('./routes/User/Account/signup'));
@@ -79,19 +74,19 @@ app.post('/user/:id/status', require('./routes/User/Account/setStatus'));
 app.post('/user/:id/password', require('./routes/User/Account/setPass'));
 app.post('/user/:id/delete', require('./routes/User/Account/deleteAccount'));
 app.post(
-    '/user/:id/follow/:followerId',
-    require('./routes/User/Followers/followUser')
+  '/user/:id/follow/:followerId',
+  require('./routes/User/Followers/followUser')
 );
 app.post(
-    '/user/:id/unfollow/:followerId',
-    require('./routes/User/Followers/unfollowUser')
+  '/user/:id/unfollow/:followerId',
+  require('./routes/User/Followers/unfollowUser')
 );
 app.post(
-    '/useruser/:id/block/:blockId',
-    require('./routes/User/Block/blockUser')
+  '/useruser/:id/block/:blockId',
+  require('./routes/User/Block/blockUser')
 );
 
-//Event Endpoints
+// Event Endpoints
 app.get('/event/', require('./routes/Events/listEvents'));
 app.get('/event/:id/', require('./routes/Events/queryEvent'));
 
@@ -105,13 +100,11 @@ app.post('/event/:id/unrsvp', require('./routes/Events/unrsvpEvent'));
 sequelize.sync().then(() => { app.emit('database-started'); });
 
 // Start Server
-if (process.env.NODE_ENV !== 'test')
-{
-    app.listen(port, function()
-    {
-        // Log Server Port to the Console.
-        console.log('Server Listening at http://localhost:' + port);
-    });
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(port, () => {
+    // Log Server Port to the Console.
+    console.log(`Server Listening at http://localhost:${port}`);
+  });
 }
 
 module.exports = app;
