@@ -2,7 +2,6 @@ require('dotenv').config();
 
 // Configure Imports
 const express = require('express');
-const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { Sequelize } = require('sequelize');
 const models = require('./models');
@@ -10,7 +9,6 @@ const models = require('./models');
 // Configure Local Variables
 const app = express();
 const port = process.env.PORT || 8080;
-global.bcrypt = bcrypt;
 global.jwt = jwt;
 
 // Configure Middleware

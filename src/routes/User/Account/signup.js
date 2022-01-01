@@ -1,3 +1,4 @@
+const { hash } = require("bcrypt");
 const
   {
     invalidPassword,
@@ -31,12 +32,13 @@ module.exports = async (req, res) => {
       .then((userData) => {
         if (accountExists(userData)) res.status(403).send("Account Already Exists.");
         else {
-          bcrypt.hash(req.body.password, 10, (err, hash) => {
-            if (err) { handleError500(req, res, err); } else {
+          hash(req.body.password, 10, (err, hashString) => {
+            if (err) handleError500(req, res, err);
+            else {
               User.create(
                 {
                   username: req.body.username,
-                  password: hash,
+                  password: hashString,
                   email: req.body.email,
                 },
               )
