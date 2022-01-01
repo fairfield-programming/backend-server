@@ -2,17 +2,16 @@ const duckGenerator = require("./duckGenerator");
 const { getData } = require("../../library/duckStringParser");
 
 module.exports = (req, res) => {
-  const zoomInt = parseInt(req.params.zoom);
-
   // Parse the String
   const duckData = getData(req.params.id);
-  if (!duckData) return res.status(400).send("Bad Request.");
+  if (!duckData) res.status(400).send("Bad Request.");
+  else {
+    const zoomInt = parseInt(req.params.zoom);
+    res.set("Content-Type", "image/svg+xml");
 
-  // Set the Headers
-  res.set("Content-Type", "image/svg+xml");
-
-  // Send the Duck
-  return res.send(
-    duckGenerator.formatSVG(duckGenerator.generateDuck(duckData), zoomInt),
-  );
+    // Send the Duck
+    res.send(
+      duckGenerator.formatSVG(duckGenerator.generateDuck(duckData), zoomInt),
+    );
+  }
 };
