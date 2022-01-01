@@ -5,12 +5,14 @@
         "es6": true
     },
     "plugins": [
-        "jest"
+        "jest",
+        "regexp"
     ],
     "extends": [
         "eslint:recommended",
         "airbnb-base",
-        "plugin:jest/recommended"
+        "plugin:jest/recommended",
+        "plugin:regexp/recommended"
     ],
     "rules": {
       "quotes": "off"
