@@ -1,25 +1,21 @@
-module.exports = (req, res) =>
-{
-    if (
-        req.body.title == undefined ||
-        req.body.description == undefined ||
-        req.body.body == undefined
-    )
-        return res.status(400).send("Not All Parameters Provided.");
+const { handleError500 } = require("../../library/errorHandler");
 
+function missingParameters(req) {
+  const { title, description, body } = req.body;
+  return !title || !description || !body;
+}
+
+module.exports = (req, res) => {
+  if (missingParameters(req)) res.status(400).send("Not All Parameters Provided.");
+  else {
     Article.create(
-        {
-            title: req.body.title,
-            description: req.body.description,
-            body: req.body.body,
-        })
-        .then(function(data)
-        {
-            return res.json(data);
-        })
-        .catch(function(error)
-        {
-            console.log(error);
-            return res.status(500).send("Internal Server Error.");
-        });
+      {
+        title: req.body.title,
+        description: req.body.description,
+        body: req.body.body,
+      },
+    )
+      .then((data) => res.json(data))
+      .catch((error) => handleError500(req, res, error));
+  }
 };

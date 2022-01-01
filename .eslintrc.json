@@ -2,19 +2,20 @@
     "env": {
         "browser": true,
         "commonjs": true,
-        "es2021": true
+        "es6": true
     },
     "plugins": [
-        "jest"
+        "jest",
+        "regexp"
     ],
     "extends": [
         "eslint:recommended",
-        "airbnb:recommended",
-        "plugin:jest/recommended"
+        "airbnb-base",
+        "plugin:jest/recommended",
+        "plugin:regexp/recommended"
     ],
-    "parserOptions": {
-        "ecmaVersion": 6
-    },
     "rules": {
+      "quotes": "off",
+      "no-console": "off"
     }
 }

@@ -1,80 +1,64 @@
-module.exports = (req, res) =>
-{
-    if (req.params.id == undefined)
-        return res.status(400).send("Not All Parameters Given.");
-    if (req.body.password == undefined)
-        return res.status(400).send("Not All Parameters Given.");
-    if (req.body.newPassword == undefined)
-        return res.status(400).send("Not All Parameters Given.");
+const {
+  compare,
+  hash,
+} = require("bcrypt");
+const { handleError500 } = require("../../../library/errorHandler");
 
-    if (req.user == undefined) return res.status(403).send("Not Logged In.");
+module.exports = (req, res) => {
+  if (!req.params.id || !req.body.password || !req.body.newPassword) return res.status(400).send("Not All Parameters Given.");
 
-    if (req.user.id != req.params.id)
-        return res.status(401).send("Not Authorized.");
+  if (!req.user) return res.status(403).send("Not Logged In.");
 
-    User.findOne(
-        {
-            where:
-            {
-                id: req.params.id,
-            },
-        })
-        .then(function(userData)
-        {
-            bcrypt.compare(
-                req.body.password,
-                userData.password,
-                function(err, result)
-                {
-                    if (err)
-                    {
-                        console.log(err);
-                        return res.status(500).send("Internal Server Error.");
-                    }
-                    if (!result) return res.status(403).send("Incorrect Password.");
+  if (req.user.id !== req.params.id) return res.status(401).send("Not Authorized.");
 
-                    // Hash New Password
-                    bcrypt.hash(req.body.newPassword, 10, function(newPassErr, hash)
-                    {
-                        if (newPassErr)
-                        {
-                            console.log(newPassErr);
-                            return res.status(500).send("Internal Server Error.");
-                        }
-
-                        // Update Password
-                        userData
-                            .update(
-                            {
-                                password: hash,
-                            })
-                            .then(function(newUserData)
-                            {
-                                // Save the Data
-                                newUserData
-                                    .save()
-                                    .then(function()
-                                    {
-                                        return res.status(200).send("Success.");
-                                    })
-                                    .catch(function(error)
-                                    {
-                                        console.log(error);
-                                        return res.status(500).send("Internal Server Error.");
-                                    });
-                            })
-                            .catch(function(error)
-                            {
-                                console.log(error);
-                                return res.status(500).send("Internal Server Error.");
-                            });
-                    });
-                }
-            );
-        })
-        .catch(function(error)
-        {
-            console.log(error);
+  User.findOne(
+    {
+      where:
+      {
+        id: req.params.id,
+      },
+    },
+  )
+    .then((userData) => {
+      compare(
+        req.body.password,
+        userData.password,
+        (err, result) => {
+          if (err) {
+            console.log(err);
             return res.status(500).send("Internal Server Error.");
-        });
+          }
+          if (!result) return res.status(403).send("Incorrect Password.");
+
+          // Hash New Password
+          hash(req.body.newPassword, 10, (newPassErr, hashString) => {
+            if (newPassErr) {
+              console.log(newPassErr);
+              return res.status(500).send("Internal Server Error.");
+            }
+
+            // Update Password
+            userData
+              .update(
+                { password: hashString },
+              )
+              .then((newUserData) => {
+                // Save the Data
+                newUserData
+                  .save()
+                  .then(() => res.status(200).send("Success."))
+                  .catch((error) => {
+                    console.log(error);
+                    return res.status(500).send("Internal Server Error.");
+                  });
+              })
+              .catch((error) => handleError500(error));
+          });
+        },
+      );
+    })
+    .catch((error) => {
+      console.log(error);
+      return res.status(500).send("Internal Server Error.");
+    });
 };
