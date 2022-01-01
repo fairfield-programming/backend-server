@@ -1,3 +1,8 @@
+const {
+  compare,
+  hash,
+} = require("bcrypt");
+
 module.exports = (req, res) => {
   if (!req.params.id || !req.body.password || !req.body.newPassword) return res.status(400).send("Not All Parameters Given.");
 
@@ -13,10 +18,10 @@ module.exports = (req, res) => {
       },
     })
     .then((userData) => {
-      bcrypt.compare(
+      compare(
         req.body.password,
         userData.password,
-        function (err, result) {
+        (err, result) => {
           if (err) {
             console.log(err);
             return res.status(500).send("Internal Server Error.");
@@ -24,7 +29,7 @@ module.exports = (req, res) => {
           if (!result) return res.status(403).send("Incorrect Password.");
 
           // Hash New Password
-          bcrypt.hash(req.body.newPassword, 10, function (newPassErr, hash) {
+          hash(req.body.newPassword, 10, (newPassErr, hashString) => {
             if (newPassErr) {
               console.log(newPassErr);
               return res.status(500).send("Internal Server Error.");
@@ -33,22 +38,19 @@ module.exports = (req, res) => {
             // Update Password
             userData
               .update(
-                {
-                  password: hash,
-                })
-              .then(function (newUserData) {
+                { password: hashString },
+              )
+              .then((newUserData) => {
                 // Save the Data
                 newUserData
                   .save()
-                  .then(function () {
-                    return res.status(200).send("Success.");
-                  })
-                  .catch(function (error) {
+                  .then(() => res.status(200).send("Success."))
+                  .catch((error) => {
                     console.log(error);
                     return res.status(500).send("Internal Server Error.");
                   });
               })
-              .catch(function (error) {
+              .catch((error) => {
                 console.log(error);
                 return res.status(500).send("Internal Server Error.");
               });
@@ -56,7 +58,7 @@ module.exports = (req, res) => {
         }
       );
     })
-    .catch(function (error) {
+    .catch((error) => {
       console.log(error);
       return res.status(500).send("Internal Server Error.");
     });
