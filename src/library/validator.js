@@ -22,7 +22,7 @@ function invalidUsername(username) {
 
 // Check if Valid Email
 function invalidEmail(email) {
-  return !(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+  return !(/^[^\s@]+@[^\s@][^\s.@]*\.[^\s@]+$/.test(email));
 }
 
 module.exports = {

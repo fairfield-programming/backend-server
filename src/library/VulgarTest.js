@@ -25,7 +25,8 @@ function DetectVulgarWords(input) {
   const tokenizedString = TokenizeString(input);
   const vulgarWords = getVulgarWords();
 
-  for (const word of vulgarWords) {
+  for (let i = 0; i < vulgarWords.length; i += 1) {
+    const word = vulgarWords[i];
     if (tokenizedString.includes(word)) return true;
   }
 
