@@ -37,13 +37,11 @@ module.exports = (req, res) => {
               return res.status(500).send("Internal Server Error.");
             }
 
-            // Update Password
             userData
               .update(
                 { password: hashString },
               )
               .then((newUserData) => {
-                // Save the Data
                 newUserData
                   .save()
                   .then(() => res.status(200).send("Success."))

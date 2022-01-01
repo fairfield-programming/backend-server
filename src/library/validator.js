@@ -1,11 +1,9 @@
-// Check if Undefined
 function propertyUndefined(property)
 {
     if (!property) return true;
     return false;
 }
 
-// Check if Object is Null
 function objectIsNull(obj)
 {
     if (!obj) return true;
@@ -16,7 +14,6 @@ function checkIfNumberInRange(num, min, max) {
   return num >= min && num <= max;
 }
 
-// Check if Valid Password
 function invalidPassword(password) {
   if (password.length > 14) return true;
   if (password.length < 4) return true;
@@ -27,7 +24,6 @@ function invalidPassword(password) {
   return false;
 }
 
-// Check if Valid Username
 function invalidUsername(username) {
   if (username.length > 30) return true;
   if (username.length < 4) return true;
@@ -38,7 +34,6 @@ function invalidUsername(username) {
   return false;
 }
 
-// Check if Valid Email
 function invalidEmail(email) {
   return !(/^[^\s@]+@[^\s@][^\s.@]*\.[^\s@]+$/.test(email));
 }

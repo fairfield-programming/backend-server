@@ -9,7 +9,6 @@ module.exports = (req, res) => {
     const zoomInt = parseInt(req.params.zoom);
     res.set("Content-Type", "image/svg+xml");
 
-    // Send the Duck
     res.send(
       duckGenerator.formatSVG(duckGenerator.generateDuck(duckData), zoomInt),
     );

@@ -4,7 +4,6 @@ const { propertyUndefined } = require("../../library/validator");
 module.exports = (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
 
-  // Check for ID
   if (propertyUndefined(req.params.id)) return res.status(400).send("ID Not Given.");
 
   const numID = parseInt(req.params.id, 10);

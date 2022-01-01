@@ -28,7 +28,6 @@ function getItemString(type, number) {
   const itemData = fs.readFileSync(itemPath, "ascii");
   const strippedData = stripSVGData(itemData);
 
-  // Break Each Line
   return strippedData.split("\n");
 }
 
@@ -55,7 +54,6 @@ function generateDuck(duckData) {
     beakColor: colors[duckData.beakColor] || colors[5],
   };
 
-  // Create the Base Data
   const output = [];
 
   // Add the Body (Spread it First)
@@ -88,7 +86,6 @@ function generateDuck(duckData) {
   outputText = outputText.replace(/DUCK_COLOR/g, trueDuckData.color);
   outputText = outputText.replace(/BEAK_COLOR/g, trueDuckData.beakColor);
 
-  // Return the Output Text
   return outputText;
 }
 
