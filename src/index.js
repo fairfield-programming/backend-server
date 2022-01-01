@@ -2,14 +2,13 @@ require('dotenv').config();
 
 // Configure Imports
 const express = require('express');
-const jwt = require('jsonwebtoken');
+const { verify } = require('jsonwebtoken');
 const { Sequelize } = require('sequelize');
 const models = require('./models');
 
 // Configure Local Variables
 const app = express();
 const port = process.env.PORT || 8080;
-global.jwt = jwt;
 
 // Configure Middleware
 app.use(express.static('public'));
@@ -22,7 +21,7 @@ app.use((req, res, next) => {
   if (authHeader) {
     const token = authHeader.split(' ')[1];
 
-    jwt.verify(token, process.env.JWT_KEY, (err, user) => {
+    verify(token, process.env.JWT_KEY, (err, user) => {
       if (err) res.sendStatus(403);
       else {
         req.user = user;

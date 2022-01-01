@@ -1,4 +1,5 @@
 const { hash } = require("bcrypt");
+const { sign } = require("jsonwebtoken");
 const
   {
     invalidPassword,
@@ -44,7 +45,7 @@ module.exports = async (req, res) => {
               )
                 .then((data) => res.json(
                   {
-                    token: jwt.sign(
+                    token: sign(
                       {
                         id: userData.id,
                         username: data.username,
