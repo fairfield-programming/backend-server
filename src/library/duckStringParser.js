@@ -9,9 +9,7 @@ function notString(input) {
 }
 
 function hasBadCharacters(input) {
-  if (/[g-zG-Z]/.test(input)) return true;
-  if (/[!-/:-?{-~[-`]/.test(input)) return true;
-  return false;
+  return /[^a-zA-Z\d]/.test(input);
 }
 
 function lengthIs0(input) {

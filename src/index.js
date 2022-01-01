@@ -25,12 +25,11 @@ app.use((req, res, next) => {
     const token = authHeader.split(' ')[1];
 
     jwt.verify(token, process.env.JWT_KEY, (err, user) => {
-      if (err) {
-        return res.sendStatus(403);
+      if (err) res.sendStatus(403);
+      else {
+        req.user = user;
+        next();
       }
-
-      req.user = user;
-      next();
     });
   } else {
     next();

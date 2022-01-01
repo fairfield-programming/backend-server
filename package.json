@@ -29,7 +29,8 @@
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.7.1",
     "sequelize": "^6.3.5",
-    "sqlite3": "^4.2.0"
+    "sqlite3": "^4.2.0",
+    "supertest": "^6.1.6"
   },
   "devDependencies": {
     "@babel/core": "^7.16.7",
@@ -40,7 +41,6 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-regexp": "^1.5.1",
-    "jest": "^27.4.5",
-    "supertest": "^6.1.6"
+    "jest": "^27.4.5"
   }
 }
