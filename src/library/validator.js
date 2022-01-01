@@ -1,3 +1,21 @@
+// Check if Undefined
+function propertyUndefined(property)
+{
+    if (!property) return true;
+    return false;
+}
+
+// Check if Object is Null
+function objectIsNull(obj)
+{
+    if (!obj) return true;
+    return false;
+}
+
+function checkIfNumberInRange(num, min, max) {
+  return num >= min && num <= max;
+}
+
 // Check if Valid Password
 function invalidPassword(password) {
   if (password.length > 14) return true;
@@ -26,7 +44,10 @@ function invalidEmail(email) {
 }
 
 module.exports = {
-  invalidPassword,
-  invalidUsername,
-  invalidEmail,
+    propertyUndefined,
+    invalidPassword,
+    checkIfNumberInRange,
+    objectIsNull,
+    invalidUsername,
+    invalidEmail,
 };
