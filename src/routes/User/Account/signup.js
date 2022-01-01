@@ -24,9 +24,10 @@ module.exports = (req, res) => {
           },
           {
             email: req.body.email,
-          },],
+          }],
       },
-    })
+    },
+  )
     .then((userData) => {
       // If Similar Accounts Exist, Don't Let Them Create an Account
       if (userData.length > 0) return res.status(403).send("Account Already Exists.");
@@ -44,7 +45,8 @@ module.exports = (req, res) => {
             username: req.body.username,
             password: hash,
             email: req.body.email,
-          })
+          },
+        )
           .then((data) => res.json(
             {
               token: jwt.sign(

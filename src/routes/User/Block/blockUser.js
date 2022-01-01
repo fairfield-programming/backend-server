@@ -1,7 +1,6 @@
 module.exports = (req, res) => {
   if (!req.user) return res.status(403).send("Not Logged In.");
-  if (!req.params.id || !req.params.blockId)
-    return res.status(400).send("Not All Parameters Provided.");
+  if (!req.params.id || !req.params.blockId) return res.status(400).send("Not All Parameters Provided.");
 
   User.findOne(
     {
@@ -10,7 +9,7 @@ module.exports = (req, res) => {
         id: req.user.id,
       },
     })
-    .then(function (userData) {
+    .then((userData) => {
       User.findOne(
         {
           where:
@@ -18,23 +17,21 @@ module.exports = (req, res) => {
             id: req.params.blockId,
           },
         })
-        .then(function (blockData) {
+        .then((blockData) => {
           userData
             .addBlocked(blockData)
-            .then(function (success) {
-              return res.json(userData);
-            })
-            .catch(function () {
+            .then(() => res.json(userData))
+            .catch((error) => {
               console.log(error);
               return res.status(500).send("Internal Server Error.");
             });
         })
-        .catch(function (error) {
+        .catch((error) => {
           console.log(error);
           return res.status(500).send("Internal Server Error.");
         });
     })
-    .catch(function (error) {
+    .catch((error) => {
       console.log(error);
       return res.status(500).send("Internal Server Error.");
     });
