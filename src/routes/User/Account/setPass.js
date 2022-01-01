@@ -2,6 +2,7 @@ const {
   compare,
   hash,
 } = require("bcrypt");
+const { handleError500 } = require("../../../library/errorHandler");
 
 module.exports = (req, res) => {
   if (!req.params.id || !req.body.password || !req.body.newPassword) return res.status(400).send("Not All Parameters Given.");
@@ -51,10 +52,7 @@ module.exports = (req, res) => {
                     return res.status(500).send("Internal Server Error.");
                   });
               })
-              .catch((error) => {
-                console.log(error);
-                return res.status(500).send("Internal Server Error.");
-              });
+              .catch((error) => handleError500(error));
           });
         },
       );
