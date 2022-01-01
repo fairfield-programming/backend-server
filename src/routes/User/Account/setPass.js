@@ -1,11 +1,9 @@
 module.exports = (req, res) => {
-  if (!req.params.id || !req.body.password || !req.body.newPassword)
-    return res.status(400).send("Not All Parameters Given.");
+  if (!req.params.id || !req.body.password || !req.body.newPassword) return res.status(400).send("Not All Parameters Given.");
 
   if (!req.user) return res.status(403).send("Not Logged In.");
 
-  if (req.user.id !== req.params.id)
-    return res.status(401).send("Not Authorized.");
+  if (req.user.id !== req.params.id) return res.status(401).send("Not Authorized.");
 
   User.findOne(
     {
@@ -14,7 +12,7 @@ module.exports = (req, res) => {
         id: req.params.id,
       },
     })
-    .then(function (userData) {
+    .then((userData) => {
       bcrypt.compare(
         req.body.password,
         userData.password,
