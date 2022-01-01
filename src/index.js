@@ -60,11 +60,11 @@ app.get('/user/:id/status', require('./routes/User/Account/getStatus'));
 app.get('/user/', require('./routes/User/listUsers'));
 app.get(
   '/user/:id/followers',
-  require('./routes/User/Followers/listFollowers')
+  require('./routes/User/Followers/listFollowers'),
 );
 app.get(
   '/user/:id/followers/:followerId',
-  require('./routes/User/Followers/queryFollower')
+  require('./routes/User/Followers/queryFollower'),
 );
 
 app.post('/user/signup', require('./routes/User/Account/signup'));
@@ -75,15 +75,15 @@ app.post('/user/:id/password', require('./routes/User/Account/setPass'));
 app.post('/user/:id/delete', require('./routes/User/Account/deleteAccount'));
 app.post(
   '/user/:id/follow/:followerId',
-  require('./routes/User/Followers/followUser')
+  require('./routes/User/Followers/followUser'),
 );
 app.post(
   '/user/:id/unfollow/:followerId',
-  require('./routes/User/Followers/unfollowUser')
+  require('./routes/User/Followers/unfollowUser'),
 );
 app.post(
   '/useruser/:id/block/:blockId',
-  require('./routes/User/Block/blockUser')
+  require('./routes/User/Block/blockUser'),
 );
 
 // Event Endpoints
