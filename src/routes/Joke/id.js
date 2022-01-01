@@ -1,4 +1,5 @@
 const jokeLib = require("./jokeFinder");
+const { propertyUndefined } = require("../../library/validator");
 
 module.exports = (req, res) =>
 {
@@ -6,7 +7,7 @@ module.exports = (req, res) =>
     res.set("Access-Control-Allow-Origin", "*");
 
     // Check for ID
-    if (req.params.id == undefined) return res.status(400).send("ID Not Given.");
+    if (propertyUndefined(req.params.id)) return res.status(400).send("ID Not Given.");
 
     // Make Sure ID is Correctly Formatted
     var numID = parseInt(req.params.id, 10);
