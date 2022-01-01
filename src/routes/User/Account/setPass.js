@@ -16,7 +16,8 @@ module.exports = (req, res) => {
       {
         id: req.params.id,
       },
-    })
+    },
+  )
     .then((userData) => {
       compare(
         req.body.password,

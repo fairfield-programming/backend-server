@@ -25,7 +25,8 @@ beforeAll((done) => {
           username: 'william-mcgonagle',
           email: 'testing@fairfieldprogramming.org',
           password: 'Testing123!',
-        })
+        },
+      )
       .then((res) => {
         token = res.body.token;
         done();

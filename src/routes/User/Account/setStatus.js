@@ -9,28 +9,26 @@ module.exports = (req, res) => {
       {
         id: req.user.id,
       },
-    })
-    .then(function (data) {
+    },
+  )
+    .then((data) => {
       if (!data) return res.status(404).send("Not Found.");
 
-      if (!req.body.status)
-        if (vulgarTester.DetectVulgarWords(req.body.status))
-          return res.status(406).send("Vulgar Language Detected.");
+      if (!req.body.status) if (vulgarTester.DetectVulgarWords(req.body.status)) return res.status(406).send("Vulgar Language Detected.");
 
       data
         .update(
           {
             status: req.body.status,
-          })
-        .then(function (newData) {
-          return res.status(200).send(newData.status);
-        })
-        .catch(function (error) {
+          },
+        )
+        .then((newData) => res.status(200).send(newData.status))
+        .catch((error) => {
           console.log(error);
           return res.status(500).send("Internal Server Error.");
         });
     })
-    .catch(function (error) {
+    .catch((error) => {
       console.log(error);
       return res.status(500).send("Internal Server Error.");
     });

@@ -1,6 +1,5 @@
 module.exports = (req, res) => {
-  if (!req.params.id || !req.params.followerId)
-    return res.status(400).send("Not All Parameters Provided.");
+  if (!req.params.id || !req.params.followerId) return res.status(400).send("Not All Parameters Provided.");
   if (!req.user) return res.status(403).send("Not Logged In");
 
   User.findOne(
@@ -9,8 +8,9 @@ module.exports = (req, res) => {
       {
         id: req.params.followerId,
       },
-    })
-    .then(function (followerData) {
+    },
+  )
+    .then((followerData) => {
       if (!data) return res.status(404).send("Not Found.");
 
       User.findOne(
@@ -19,20 +19,21 @@ module.exports = (req, res) => {
           {
             id: req.params.id,
           },
-        })
-        .then(function (followeeData) {
+        },
+      )
+        .then((followeeData) => {
           if (!followeeData.hasFollower(followerData)) {
             return res.status(401).send("You do not follow this person");
           }
 
           return res.json(followerData);
         })
-        .catch(function (error) {
+        .catch((error) => {
           console.log(error);
           return res.status(500).send("Internal Server Error.");
         });
     })
-    .catch(function (error) {
+    .catch((error) => {
       console.log(error);
       return res.status(500).send("Internal Server Error.");
     });

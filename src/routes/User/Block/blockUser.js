@@ -8,7 +8,8 @@ module.exports = (req, res) => {
       {
         id: req.user.id,
       },
-    })
+    },
+  )
     .then((userData) => {
       User.findOne(
         {
@@ -16,7 +17,8 @@ module.exports = (req, res) => {
           {
             id: req.params.blockId,
           },
-        })
+        },
+      )
         .then((blockData) => {
           userData
             .addBlocked(blockData)

@@ -12,7 +12,8 @@ module.exports = (req, res) => {
       title: req.body.title,
       description: req.body.description,
       body: req.body.body,
-    })
+    },
+  )
     .then((data) => res.json(data))
     .catch((error) => {
       console.log(error);

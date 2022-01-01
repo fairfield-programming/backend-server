@@ -14,8 +14,8 @@ function invalidUsername(username) {
   if (username.length > 30) return true;
   if (username.length < 4) return true;
   if (username.includes(" ")) return true;
-  if (/\d/g.test(username)) return true;
-  if (/[!$%^&*()_+|~=`{}[\]:";'<>?,./]/g.test(username)) return true;
+  if (/\d/.test(username)) return true;
+  if (/[!$%^&*()_+|~=`{}[\]:";'<>?,./]/.test(username)) return true;
   if (username.toLowerCase() !== username) return true;
   return false;
 }

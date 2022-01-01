@@ -298,7 +298,6 @@ describe("Auth Endpoints", () => {
   });
 
   describe("Test Vulgar Library", () => {
-
     it("should not trigger for normal sentences", async () => {
       expect(DetectVulgarWords("Hey there! My name is William.")).toBe(
         false,

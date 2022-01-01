@@ -32,8 +32,7 @@ module.exports = async (req, res) => {
         if (accountExists(userData)) res.status(403).send("Account Already Exists.");
         else {
           bcrypt.hash(req.body.password, 10, (err, hash) => {
-            if (err) { handleError500(req, res, err); }
-            else {
+            if (err) { handleError500(req, res, err); } else {
               User.create(
                 {
                   username: req.body.username,
