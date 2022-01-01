@@ -6,7 +6,7 @@ const {
 } = require("../../library/duckGeneratorUtils");
 
 function stripSVGData(input) {
-  let output = input.replace(/<svg[ -=?-~\n]*>/g, "");
+  let output = input.replace(/<svg[^a-zA-Z\]\n]*>/g, "");
   output = output.replace(/<\/svg>/g, "");
   return output.trim();
 }

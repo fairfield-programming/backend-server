@@ -1,40 +1,34 @@
-module.exports = (req, res) => {
-  if (!req.user) return res.status(403).send("Not Logged In.");
-  if (!req.params.id || !req.params.followerId) return res.status(400).send("Not All Parameters Provided.");
+const { handleError500 } = require("../../../library/errorHandler");
 
-  User.findOne(
-    {
-      where:
+module.exports = (req, res) => {
+  if (!req.user) res.status(403).send("Not Logged In.");
+  else if (!req.params.id || !req.params.followerId) res.status(400).send("Not All Parameters Provided.");
+  else {
+    User.findOne(
       {
-        id: req.user.id,
-      },
-    },
-  )
-    .then((followerData) => {
-      User.findOne(
+        where:
         {
-          where:
-          {
-            id: req.params.followerId,
-          },
+          id: req.user.id,
         },
-      )
-        .then((followeeData) => {
-          followeeData
-            .addFollower(followerData)
-            .then((success) => res.json(followeeData))
-            .catch(() => {
-              console.log(error);
-              return res.status(500).send("Internal Server Error.");
-            });
-        })
-        .catch(() => {
-          console.log(error);
-          return res.status(500).send("Internal Server Error.");
-        });
-    })
-    .catch(() => {
-      console.log(error);
-      return res.status(500).send("Internal Server Error.");
-    });
+      },
+    )
+      .then((followerData) => {
+        User.findOne(
+          {
+            where:
+            {
+              id: req.params.followerId,
+            },
+          },
+        )
+          .then((followeeData) => {
+            followeeData
+              .addFollower(followerData)
+              .then(() => res.json(followeeData))
+              .catch((error) => handleError500(error));
+          })
+          .catch((error) => handleError500(error));
+      })
+      .catch((error) => handleError500(error));
+  }
 };

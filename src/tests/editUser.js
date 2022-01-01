@@ -1,13 +1,13 @@
 // Setup Test
 const fs = require('fs');
 const path = require('path');
+const supertest = require('supertest');
 const { JWT_TOKEN } = require("../library/constants");
 
 if (fs.existsSync(path.join(__dirname, '../../database.db'))) fs.rmSync(path.join(__dirname, '../../database.db'));
 
 // Run Test
-const server = require('../index.js');
-const supertest = require('supertest');
+const server = require('../index');
 
 const requestWithSupertest = supertest(server);
 
