@@ -11,19 +11,13 @@ const requestWithSupertest = supertest(server);
 
 describe("GET /duck", () => {
   it("should return a 200 and a duck along with it", async () => {
-    const res = await requestWithSupertest.get("/duck");
-
-    expect200(res);
-    expect(res.type).toEqual(expect.stringContaining("svg"));
+    await expectSuccess("/duck");
   });
 });
 
 describe("GET /duck/:id/", () => {
   it("should return a 200 and a duck along with it", async () => {
-    const res = await requestWithSupertest.get("/duck/10100000004000032");
-
-    expect200(res);
-    expect(res.type).toEqual(expect.stringContaining("svg"));
+    await expectSuccess("/duck/10100000004000032");
   });
 
   it("should return a 400 when a bad id is sent (short)", async () => {
@@ -50,10 +44,7 @@ describe("GET /duck/:id/", () => {
 
 describe("GET /duck/:id/:zoom", () => {
   it("should return a 200 and a duck along with it", async () => {
-    const res = await requestWithSupertest.get("/duck/10100000004000032/20");
-
-    expect200(res);
-    expect(res.type).toEqual(expect.stringContaining("svg"));
+    await expectSuccess("/duck/10100000004000032/20");
   });
 
   it("should return a 400 when a bad id is sent (short)", async () => {
@@ -77,3 +68,9 @@ describe("GET /duck/:id/:zoom", () => {
     expectHtmlTypeHeader(res);
   });
 });
+
+async function expectSuccess(path) {
+  const res = await requestWithSupertest.get(path);
+  expect200(res);
+  expect(res.type).toEqual(expect.stringContaining("svg"));
+}
