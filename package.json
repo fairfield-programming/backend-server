@@ -13,13 +13,9 @@
     "start": "node src/index.js",
     "test": "jest"
   },
-  "jest": {
-    "resetMocks": true,
-    "testMatch": [
-      "**/tests/**.js"
-    ]
+  "eaf-linter": {
+    "force-fail": false
   },
-  "prettier": {},
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.0.0",
