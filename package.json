@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "node src/index.js",
-    "test": "jest"
+    "test": "npx eaf-linter"
   },
   "eaf-linter": {
     "force-fail": false,
