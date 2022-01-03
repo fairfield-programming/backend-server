@@ -1,5 +1,6 @@
 const supertest = require("supertest");
 const server = require("../index");
+const { expectHtmlTypeHeader } = require("../library/testUtils");
 
 const requestWithSupertest = supertest(server);
 
@@ -71,7 +72,3 @@ describe("GET /duck/:id/:zoom", () => {
     expectHtmlTypeHeader(res);
   });
 });
-
-function expectHtmlTypeHeader(res) {
-  expect(res.type).toEqual(expect.stringContaining("html"));
-}

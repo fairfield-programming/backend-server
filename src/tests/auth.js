@@ -1,5 +1,6 @@
 const supertest = require("supertest");
 const server = require("../index");
+const { expectHtmlTypeHeader } = require("../library/testUtils");
 const { JWT_TOKEN } = require("../library/constants");
 
 const requestWithSupertest = supertest(server);
@@ -296,7 +297,3 @@ describe("Auth Endpoints", () => {
     });
   });
 });
-
-function expectHtmlTypeHeader(res) {
-  expect(res.type).toEqual(expect.stringContaining("html"));
-}
