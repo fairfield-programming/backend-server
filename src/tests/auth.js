@@ -12,7 +12,7 @@ describe("Auth Endpoints", () => {
       const res = await requestWithSupertest.post("/user/signup");
 
       expect(res.status).toEqual(400);
-      expect(res.type).toEqual(expect.stringContaining("html"));
+      expectHtmlTypeHeader(res);
     });
 
     it("should throw a 400 if not all params are given (email)", async () => {
@@ -24,7 +24,7 @@ describe("Auth Endpoints", () => {
       );
 
       expect(res.status).toEqual(400);
-      expect(res.type).toEqual(expect.stringContaining("html"));
+      expectHtmlTypeHeader(res);
     });
 
     it("should throw a 400 if not all params are given (username)", async () => {
@@ -36,7 +36,7 @@ describe("Auth Endpoints", () => {
       );
 
       expect(res.status).toEqual(400);
-      expect(res.type).toEqual(expect.stringContaining("html"));
+      expectHtmlTypeHeader(res);
     });
 
     it("should throw a 400 if not all params are given (password)", async () => {
@@ -48,7 +48,7 @@ describe("Auth Endpoints", () => {
       );
 
       expect(res.status).toEqual(400);
-      expect(res.type).toEqual(expect.stringContaining("html"));
+      expectHtmlTypeHeader(res);
     });
 
     it("should throw a 400 if bad password (no uppercase)", async () => {
@@ -61,7 +61,7 @@ describe("Auth Endpoints", () => {
       );
 
       expect(res.status).toEqual(400);
-      expect(res.type).toEqual(expect.stringContaining("html"));
+      expectHtmlTypeHeader(res);
     });
 
     it("should throw a 400 if bad password (no lowercase)", async () => {
@@ -74,7 +74,7 @@ describe("Auth Endpoints", () => {
       );
 
       expect(res.status).toEqual(400);
-      expect(res.type).toEqual(expect.stringContaining("html"));
+      expectHtmlTypeHeader(res);
     });
 
     it("should throw a 400 if bad password (no numbers)", async () => {
@@ -87,7 +87,7 @@ describe("Auth Endpoints", () => {
       );
 
       expect(res.status).toEqual(400);
-      expect(res.type).toEqual(expect.stringContaining("html"));
+      expectHtmlTypeHeader(res);
     });
 
     it("should throw a 400 if bad password (no symbols)", async () => {
@@ -100,7 +100,7 @@ describe("Auth Endpoints", () => {
       );
 
       expect(res.status).toEqual(400);
-      expect(res.type).toEqual(expect.stringContaining("html"));
+      expectHtmlTypeHeader(res);
     });
 
     it("should throw a 400 if bad password (short)", async () => {
@@ -113,7 +113,7 @@ describe("Auth Endpoints", () => {
       );
 
       expect(res.status).toEqual(400);
-      expect(res.type).toEqual(expect.stringContaining("html"));
+      expectHtmlTypeHeader(res);
     });
 
     it("should throw a 400 if bad password (long)", async () => {
@@ -126,7 +126,7 @@ describe("Auth Endpoints", () => {
       );
 
       expect(res.status).toEqual(400);
-      expect(res.type).toEqual(expect.stringContaining("html"));
+      expectHtmlTypeHeader(res);
     });
 
     it("should throw a 400 if bad email", async () => {
@@ -139,7 +139,7 @@ describe("Auth Endpoints", () => {
       );
 
       expect(res.status).toEqual(400);
-      expect(res.type).toEqual(expect.stringContaining("html"));
+      expectHtmlTypeHeader(res);
     });
 
     it("should throw a 400 if bad username (spaces)", async () => {
@@ -152,7 +152,7 @@ describe("Auth Endpoints", () => {
       );
 
       expect(res.status).toEqual(400);
-      expect(res.type).toEqual(expect.stringContaining("html"));
+      expectHtmlTypeHeader(res);
     });
 
     it("should throw a 400 if bad username (uppercase)", async () => {
@@ -165,7 +165,7 @@ describe("Auth Endpoints", () => {
       );
 
       expect(res.status).toEqual(400);
-      expect(res.type).toEqual(expect.stringContaining("html"));
+      expectHtmlTypeHeader(res);
     });
 
     it("should throw a 400 if bad username (numbers)", async () => {
@@ -178,7 +178,7 @@ describe("Auth Endpoints", () => {
       );
 
       expect(res.status).toEqual(400);
-      expect(res.type).toEqual(expect.stringContaining("html"));
+      expectHtmlTypeHeader(res);
     });
 
     it("should throw a 400 if bad username (symbols)", async () => {
@@ -191,7 +191,7 @@ describe("Auth Endpoints", () => {
       );
 
       expect(res.status).toEqual(400);
-      expect(res.type).toEqual(expect.stringContaining("html"));
+      expectHtmlTypeHeader(res);
     });
 
     it("should throw a 400 if bad username (short)", async () => {
@@ -204,7 +204,7 @@ describe("Auth Endpoints", () => {
       );
 
       expect(res.status).toEqual(400);
-      expect(res.type).toEqual(expect.stringContaining("html"));
+      expectHtmlTypeHeader(res);
     });
 
     it("should throw a 400 if bad username (long)", async () => {
@@ -217,7 +217,7 @@ describe("Auth Endpoints", () => {
       );
 
       expect(res.status).toEqual(400);
-      expect(res.type).toEqual(expect.stringContaining("html"));
+      expectHtmlTypeHeader(res);
     });
 
     it("should throw a 200 if successful", async () => {
@@ -268,7 +268,7 @@ describe("Auth Endpoints", () => {
       );
 
       expect(res.status).toEqual(404);
-      expect(res.type).toEqual(expect.stringContaining("html"));
+      expectHtmlTypeHeader(res);
     });
 
     it("should throw a 404 if account not found (username)", async () => {
@@ -280,7 +280,7 @@ describe("Auth Endpoints", () => {
       );
 
       expect(res.status).toEqual(404);
-      expect(res.type).toEqual(expect.stringContaining("html"));
+      expectHtmlTypeHeader(res);
     });
 
     it("should throw a 403 if incorrect password", async () => {
@@ -292,7 +292,11 @@ describe("Auth Endpoints", () => {
       );
 
       expect(res.status).toEqual(403);
-      expect(res.type).toEqual(expect.stringContaining("html"));
+      expectHtmlTypeHeader(res);
     });
   });
 });
+
+function expectHtmlTypeHeader(res) {
+  expect(res.type).toEqual(expect.stringContaining("html"));
+}

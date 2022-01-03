@@ -24,21 +24,21 @@ describe("GET /duck/:id/", () => {
     const res = await requestWithSupertest.get("/duck/1010000000400003");
 
     expect(res.status).toEqual(400);
-    expect(res.type).toEqual(expect.stringContaining("html"));
+    expectHtmlTypeHeader(res);
   });
 
   it("should return a 400 when a bad id is sent (long)", async () => {
     const res = await requestWithSupertest.get("/duck/101000000040000323");
 
     expect(res.status).toEqual(400);
-    expect(res.type).toEqual(expect.stringContaining("html"));
+    expectHtmlTypeHeader(res);
   });
 
   it("should return a 400 when a bad id is sent (cant parse)", async () => {
     const res = await requestWithSupertest.get("/duck/1010!0000@4000032");
 
     expect(res.status).toEqual(400);
-    expect(res.type).toEqual(expect.stringContaining("html"));
+    expectHtmlTypeHeader(res);
   });
 });
 
@@ -54,20 +54,24 @@ describe("GET /duck/:id/:zoom", () => {
     const res = await requestWithSupertest.get("/duck/1010000000400003/20");
 
     expect(res.status).toEqual(400);
-    expect(res.type).toEqual(expect.stringContaining("html"));
+    expectHtmlTypeHeader(res);
   });
 
   it("should return a 400 when a bad id is sent (long)", async () => {
     const res = await requestWithSupertest.get("/duck/101000000040000323/20");
 
     expect(res.status).toEqual(400);
-    expect(res.type).toEqual(expect.stringContaining("html"));
+    expectHtmlTypeHeader(res);
   });
 
   it("should return a 400 when a bad id is sent (cant parse)", async () => {
     const res = await requestWithSupertest.get("/duck/10100(00@04000032/20");
 
     expect(res.status).toEqual(400);
-    expect(res.type).toEqual(expect.stringContaining("html"));
+    expectHtmlTypeHeader(res);
   });
 });
+
+function expectHtmlTypeHeader(res) {
+  expect(res.type).toEqual(expect.stringContaining("html"));
+}
