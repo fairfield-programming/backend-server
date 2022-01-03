@@ -12,25 +12,35 @@ const requestWithSupertest = supertest(server);
 
 process.env.JWT_KEY = JWT_TOKEN;
 
+async function expectFailureOnSend(path,
+  givenUsername = "william-mcgonagle",
+  givenEmail = "testing@fairfieldprogramming.org",
+  givenPassword = "Testing123!"
+  ) {
+    const res = await requestWithSupertest.post(path).send(
+      {
+        username: givenUsername,
+        email: givenEmail,
+        password: givenPassword,
+      }
+    );
+    expect400(res);
+    expectHtmlTypeHeader(res);
+}
+
 describe("Auth Endpoints", () => {
   describe("POST /user/signup", () => {
     it("should throw a 400 if not all params are given", async () => {
+
       const res = await requestWithSupertest.post("/user/signup");
 
       expect400(res);
       expectHtmlTypeHeader(res);
+      expect
     });
 
     it("should throw a 400 if not all params are given (email)", async () => {
-      const res = await requestWithSupertest.post("/user/signup").send(
-        {
-          username: "william-mcgonagle",
-          password: "Testing123!",
-        },
-      );
-
-      expect400(res);
-      expectHtmlTypeHeader(res);
+      expectFailureOnSend("/user/signup", email = null);
     });
 
     it("should throw a 400 if not all params are given (username)", async () => {
