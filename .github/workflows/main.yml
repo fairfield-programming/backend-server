@@ -1,36 +1,35 @@
 # We're switching over to using EAF-Linter because the other tech we were using for development was slowing us down
-# This new stack will increase readability, lower development time, and create better code. 
+# This new stack will increase readability, lower development time, and create better code.
 
 name: EAF Linting
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [ 16.x ]
+        node-version: [16.x]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-        
-    - name: Install Packages
-      run: npm ci
-    
-    - name: Run the Linter
-      run: npx eaf-linter
-    
-    - name: Recommit
-      run: git config --global user.email "runner@fairfieldprogramming.org"; git config --global user.name "FPA Bot"; git pull; git add .; git commit -m "🍯 Beautified Code"; git push origin master
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+
+      - name: Install Packages
+        run: npm ci
+
+    # - name: Run the Linter
+    #   run: npx eaf-linter
+
+    # - name: Recommit
+    #   run: git config --global user.email "runner@fairfieldprogramming.org"; git config --global user.name "FPA Bot"; git pull; git add .; git commit -m "🍯 Beautified Code"; git push origin master
