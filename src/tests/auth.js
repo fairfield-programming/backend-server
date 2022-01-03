@@ -253,67 +253,68 @@ describe("Auth Endpoints", () => {
     });
   });
 
-  describe("POST /user/login", () => {
-    const path = "/user/login";
+});
 
-    it("should throw a 200 if successful (username)", async () => {
-      const res = await requestWithSupertest.post(path).send(
-        {
-          username: "william-mcgonagle",
-          password: "Testing123!",
-        },
-      );
+describe("POST /user/login", () => {
+  const path = "/user/login";
+  
+  it("should throw a 200 if successful (username)", async () => {
+    const res = await requestWithSupertest.post(path).send(
+      {
+        username: "william-mcgonagle",
+        password: "Testing123!",
+      },
+    );
 
-      expect200(res);
-      expect(res.type).toEqual(expect.stringContaining("json"));
-    });
+    expect200(res);
+    expect(res.type).toEqual(expect.stringContaining("json"));
+  });
 
-    it("should throw a 200 if successful (email)", async () => {
-      const res = await requestWithSupertest.post(path).send(
-        {
-          email: "testing@fairfieldprogramming.org",
-          password: "Testing123!",
-        },
-      );
+  it("should throw a 200 if successful (email)", async () => {
+    const res = await requestWithSupertest.post(path).send(
+      {
+        email: "testing@fairfieldprogramming.org",
+        password: "Testing123!",
+      },
+    );
 
-      expect200(res);
-      expect(res.type).toEqual(expect.stringContaining("json"));
-    });
+    expect200(res);
+    expect(res.type).toEqual(expect.stringContaining("json"));
+  });
 
-    it("should throw a 404 if account not found (email)", async () => {
-      const res = await requestWithSupertest.post(path).send(
-        {
-          email: "testing@fairfieldprogramming.or",
-          password: "Testing123!",
-        },
-      );
+  it("should throw a 404 if account not found (email)", async () => {
+    const res = await requestWithSupertest.post(path).send(
+      {
+        email: "testing@fairfieldprogramming.or",
+        password: "Testing123!",
+      },
+    );
 
-      expect(res.status).toEqual(404);
-      expectHtmlTypeHeader(res);
-    });
+    expect(res.status).toEqual(404);
+    expectHtmlTypeHeader(res);
+  });
 
-    it("should throw a 404 if account not found (username)", async () => {
-      const res = await requestWithSupertest.post(path).send(
-        {
-          username: "will-mcgonagle",
-          password: "Testing123!",
-        },
-      );
+  it("should throw a 404 if account not found (username)", async () => {
+    const res = await requestWithSupertest.post(path).send(
+      {
+        username: "will-mcgonagle",
+        password: "Testing123!",
+      },
+    );
 
-      expect(res.status).toEqual(404);
-      expectHtmlTypeHeader(res);
-    });
+    expect(res.status).toEqual(404);
+    expectHtmlTypeHeader(res);
+  });
 
-    it("should throw a 403 if incorrect password", async () => {
-      const res = await requestWithSupertest.post(path).send(
-        {
-          username: "william-mcgonagle",
-          password: "Testing123",
-        },
-      );
+  it("should throw a 403 if incorrect password", async () => {
+    const res = await requestWithSupertest.post(path).send(
+      {
+        username: "william-mcgonagle",
+        password: "Testing123",
+      },
+    );
 
-      expect(res.status).toEqual(403);
-      expectHtmlTypeHeader(res);
-    });
+    expect(res.status).toEqual(403);
+    expectHtmlTypeHeader(res);
   });
 });
