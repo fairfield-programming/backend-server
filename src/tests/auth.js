@@ -12,7 +12,7 @@ describe("Auth Endpoints", () => {
     it("should throw a 400 if not all params are given", async () => {
       const res = await requestWithSupertest.post("/user/signup");
 
-      expect(res.status).toEqual(400);
+      expectCode(res, 400);
       expectHtmlTypeHeader(res);
     });
 
@@ -24,7 +24,7 @@ describe("Auth Endpoints", () => {
         },
       );
 
-      expect(res.status).toEqual(400);
+      expectCode(res, 400);
       expectHtmlTypeHeader(res);
     });
 
@@ -36,7 +36,7 @@ describe("Auth Endpoints", () => {
         },
       );
 
-      expect(res.status).toEqual(400);
+      expectCode(res, 400);
       expectHtmlTypeHeader(res);
     });
 
@@ -48,7 +48,7 @@ describe("Auth Endpoints", () => {
         },
       );
 
-      expect(res.status).toEqual(400);
+      expectCode(res, 400);
       expectHtmlTypeHeader(res);
     });
 
@@ -61,7 +61,7 @@ describe("Auth Endpoints", () => {
         },
       );
 
-      expect(res.status).toEqual(400);
+      expectCode(res, 400);
       expectHtmlTypeHeader(res);
     });
 
@@ -74,7 +74,7 @@ describe("Auth Endpoints", () => {
         },
       );
 
-      expect(res.status).toEqual(400);
+      expectCode(res, 400);
       expectHtmlTypeHeader(res);
     });
 
@@ -87,7 +87,7 @@ describe("Auth Endpoints", () => {
         },
       );
 
-      expect(res.status).toEqual(400);
+      expectCode(res, 400);
       expectHtmlTypeHeader(res);
     });
 
@@ -100,7 +100,7 @@ describe("Auth Endpoints", () => {
         },
       );
 
-      expect(res.status).toEqual(400);
+      expectCode(res, 400);
       expectHtmlTypeHeader(res);
     });
 
@@ -113,7 +113,7 @@ describe("Auth Endpoints", () => {
         },
       );
 
-      expect(res.status).toEqual(400);
+      expectCode(res, 400);
       expectHtmlTypeHeader(res);
     });
 
@@ -126,7 +126,7 @@ describe("Auth Endpoints", () => {
         },
       );
 
-      expect(res.status).toEqual(400);
+      expectCode(res, 400);
       expectHtmlTypeHeader(res);
     });
 
@@ -139,7 +139,7 @@ describe("Auth Endpoints", () => {
         },
       );
 
-      expect(res.status).toEqual(400);
+      expectCode(res, 400);
       expectHtmlTypeHeader(res);
     });
 
@@ -152,7 +152,7 @@ describe("Auth Endpoints", () => {
         },
       );
 
-      expect(res.status).toEqual(400);
+      expectCode(res, 400);
       expectHtmlTypeHeader(res);
     });
 
@@ -165,7 +165,7 @@ describe("Auth Endpoints", () => {
         },
       );
 
-      expect(res.status).toEqual(400);
+      expectCode(res, 400);
       expectHtmlTypeHeader(res);
     });
 
@@ -178,7 +178,7 @@ describe("Auth Endpoints", () => {
         },
       );
 
-      expect(res.status).toEqual(400);
+      expectCode(res, 400);
       expectHtmlTypeHeader(res);
     });
 
@@ -191,7 +191,7 @@ describe("Auth Endpoints", () => {
         },
       );
 
-      expect(res.status).toEqual(400);
+      expectCode(res, 400);
       expectHtmlTypeHeader(res);
     });
 
@@ -204,7 +204,7 @@ describe("Auth Endpoints", () => {
         },
       );
 
-      expect(res.status).toEqual(400);
+      expectCode(res, 400);
       expectHtmlTypeHeader(res);
     });
 
@@ -217,7 +217,7 @@ describe("Auth Endpoints", () => {
         },
       );
 
-      expect(res.status).toEqual(400);
+      expectCode(res, 400);
       expectHtmlTypeHeader(res);
     });
 
@@ -297,3 +297,7 @@ describe("Auth Endpoints", () => {
     });
   });
 });
+
+function expectCode(res, code) {
+  expect(res.status).toEqual(code);
+}
