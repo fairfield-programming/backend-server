@@ -14,7 +14,8 @@
     "test": "jest"
   },
   "eaf-linter": {
-    "force-fail": false
+    "force-fail": false,
+    "run-tests": false
   },
   "license": "MIT",
   "dependencies": {
