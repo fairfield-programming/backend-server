@@ -1,5 +1,11 @@
 const supertest = require('supertest');
 const server = require('../index');
+const {
+  expectHtmlTypeHeader,
+  expectCode,
+  expect400,
+  expect200,
+} = require("../library/testUtils");
 
 const requestWithSupertest = supertest(server);
 
@@ -9,7 +15,7 @@ describe('GET /jokes', () => {
 
     expect(typeof res.body).toBe('object');
     expect(Array.isArray(res.body)).toBe(true);
-    expect(res.status).toEqual(200);
+    expect200(res);
     expect(res.type).toEqual(expect.stringContaining('json'));
   });
 });
@@ -30,7 +36,7 @@ describe('GET /jokes/count', () => {
     const number = parseInt(res.text, 10);
     expect(typeof number !== 'number').toBe(false);
 
-    expect(res.status).toEqual(200);
+    expect200(res);
     expect(res.type).toEqual(expect.stringContaining('html'));
   });
 });
@@ -40,7 +46,7 @@ describe('GET /jokes/random', () => {
     const res = await requestWithSupertest.get('/jokes/random');
 
     expect(typeof res.text).toBe('string');
-    expect(res.status).toEqual(200);
+    expect200(res);
     expect(res.type).toEqual(expect.stringContaining('html'));
   });
 });
@@ -50,7 +56,7 @@ describe('GET /joke', () => {
     const res = await requestWithSupertest.get('/joke');
 
     expect(typeof res.text).toBe('string');
-    expect(res.status).toEqual(200);
+    expect200(res);
     expect(res.type).toEqual(expect.stringContaining('html'));
   });
 });

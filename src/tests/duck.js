@@ -4,6 +4,7 @@ const {
   expectHtmlTypeHeader,
   expectCode,
   expect400,
+  expect200,
 } = require("../library/testUtils");
 
 const requestWithSupertest = supertest(server);
@@ -12,7 +13,7 @@ describe("GET /duck", () => {
   it("should return a 200 and a duck along with it", async () => {
     const res = await requestWithSupertest.get("/duck");
 
-    expect(res.status).toEqual(200);
+    expect200(res);
     expect(res.type).toEqual(expect.stringContaining("svg"));
   });
 });
@@ -21,7 +22,7 @@ describe("GET /duck/:id/", () => {
   it("should return a 200 and a duck along with it", async () => {
     const res = await requestWithSupertest.get("/duck/10100000004000032");
 
-    expect(res.status).toEqual(200);
+    expect200(res);
     expect(res.type).toEqual(expect.stringContaining("svg"));
   });
 
@@ -51,7 +52,7 @@ describe("GET /duck/:id/:zoom", () => {
   it("should return a 200 and a duck along with it", async () => {
     const res = await requestWithSupertest.get("/duck/10100000004000032/20");
 
-    expect(res.status).toEqual(200);
+    expect200(res);
     expect(res.type).toEqual(expect.stringContaining("svg"));
   });
 

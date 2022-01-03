@@ -4,6 +4,7 @@ const {
   expectHtmlTypeHeader,
   expectCode,
   expect400,
+  expect200,
 } = require("../library/testUtils");
 const { JWT_TOKEN } = require("../library/constants");
 
@@ -234,7 +235,7 @@ describe("Auth Endpoints", () => {
         },
       );
 
-      expect(res.status).toEqual(200);
+      expect200(res);
       expect(res.type).toEqual(expect.stringContaining("json"));
     });
   });
@@ -248,7 +249,7 @@ describe("Auth Endpoints", () => {
         },
       );
 
-      expect(res.status).toEqual(200);
+      expect200(res);
       expect(res.type).toEqual(expect.stringContaining("json"));
     });
 
@@ -260,7 +261,7 @@ describe("Auth Endpoints", () => {
         },
       );
 
-      expect(res.status).toEqual(200);
+      expect200(res);
       expect(res.type).toEqual(expect.stringContaining("json"));
     });
 

@@ -1,6 +1,12 @@
 // Setup Test
 const fs = require('fs');
 const path = require('path');
+const {
+  expectHtmlTypeHeader,
+  expectCode,
+  expect400,
+  expect200,
+} = require("../library/testUtils");
 
 if (fs.existsSync(path.join(__dirname, '../../database.db'))) {
   fs.rmSync(path.join(__dirname, '../../database.db'));
@@ -39,7 +45,7 @@ describe('GET /user', () => {
     const res = await requestWithSupertest.get('/user/');
 
     expect(Array.isArray(res.body)).toEqual(true);
-    expect(res.status).toEqual(200);
+    expect200(res);
     expect(res.type).toEqual(expect.stringContaining('json'));
   });
 });
@@ -70,7 +76,7 @@ describe('GET /user/:id', () => {
     expect(res.body.password).toBeUndefined();
 
     // Expect HTTP Data
-    expect(res.status).toEqual(200);
+    expect200(res);
     expect(res.type).toEqual(expect.stringContaining('json'));
   });
 });
@@ -83,7 +89,7 @@ describe('GET /user/:id/status', () => {
     expect(typeof res.text).toEqual('string');
 
     // Expect HTTP Data
-    expect(res.status).toEqual(200);
+    expect200(res);
     expect(res.type).toEqual(expect.stringContaining('html'));
   });
 });
