@@ -1,12 +1,20 @@
 const supertest = require("supertest");
 const server = require("../index");
-const {
-  expectHtmlTypeHeader,
-  expectCode,
-  expect200,
-} = require("../library/testUtils");
 
 const requestWithSupertest = supertest(server);
+
+async function expectSuccess(path) {
+  const res = await requestWithSupertest.get(path);
+  expect(res.status).toEqual(200);
+  expect(res.type).toEqual(expect.stringContaining("svg"));
+}
+
+async function expectFailure(path) {
+  const res = await requestWithSupertest.get("/duck/10100(00@04000032/20");
+  expect(res.status).toEqual(400);
+  expect(res.type).toEqual(expect.stringContaining("html"));
+}
+
 
 describe("GET /duck", () => {
   it("should return a 200 and a duck along with it", () => {
@@ -49,15 +57,3 @@ describe("GET /duck/:id/:zoom", () => {
     expectFailure("/duck/10100(00@04000032/20");
   });
 });
-
-async function expectSuccess(path) {
-  const res = await requestWithSupertest.get(path);
-  expect200(res);
-  expect(res.type).toEqual(expect.stringContaining("svg"));
-}
-
-async function expectFailure(path) {
-  const res = await requestWithSupertest.get("/duck/10100(00@04000032/20");
-  expect(res.status).toEqual(400);
-  expect(res.type).toEqual(expect.stringContaining("html"));
-}
