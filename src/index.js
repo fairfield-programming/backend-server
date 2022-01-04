@@ -67,6 +67,7 @@ app.post('/user/:id/follow/:followerId',require('./routes/User/Followers/followU
 app.post('/user/:id/unfollow/:followerId',require('./routes/User/Followers/unfollowUser'));
 app.post('/user/:id/block/:blockId',require('./routes/User/Block/blockUser'));
 app.post('/user/:id/unblock/:blockId', require('./routes/User/Block/unblockUser'))
+app.post('/user/:id/listBlocked/:blockId', require('./routes/User/Block/listBlocked'))
 
 // Event Endpoints
 app.get('/event/', require('./routes/Events/listEvents'));
