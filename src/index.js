@@ -65,7 +65,8 @@ app.post('/user/:id/password', require('./routes/User/Account/setPass'));
 app.post('/user/:id/delete', require('./routes/User/Account/deleteAccount'));
 app.post('/user/:id/follow/:followerId',require('./routes/User/Followers/followUser'));
 app.post('/user/:id/unfollow/:followerId',require('./routes/User/Followers/unfollowUser'));
-app.post('/useruser/:id/block/:blockId',require('./routes/User/Block/blockUser'));
+app.post('/user/:id/block/:blockId',require('./routes/User/Block/blockUser'));
+app.post('/user/:id/unblock/:blockId', require('./routes/User/Block/unblockUser'))
 
 // Event Endpoints
 app.get('/event/', require('./routes/Events/listEvents'));
