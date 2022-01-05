@@ -13,7 +13,7 @@ function TokenizeString(input) {
   // Switch Around Similar Looking Symbols
   let partsRemoved = lowercase;
   partsRemoved = partsRemoved.replace(/\$/g, "s");
-  partsRemoved = partsRemoved.replace(/@/g, "a");
+  partsRemoved = partsRemoved.replace(/\@/g, "a");
 
   return partsRemoved;
 }

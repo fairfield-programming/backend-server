@@ -13,6 +13,7 @@ const gradientData = `<defs>
                 <stop offset='0.833' stop-color='#86007D'/>
             </linearGradient>
         </defs>`;
+        
 function gradientBackground(trueDuckData) {
   return (trueDuckData.color === 'url(#rainbow)'
     || trueDuckData.beakColor === 'url(#rainbow)');
