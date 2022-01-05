@@ -57,6 +57,7 @@ app.get('/user/', require('./routes/User/listUsers'));
 app.get('/user/:id/followers', require('./routes/User/Followers/listFollowers'));
 app.get('/user/:id/followers/:followerId',require('./routes/User/Followers/queryFollower'));
 app.get('/user/:id/block', require('./routes/User/Block/listBlocked'))
+app.get('/user/:id/block/:blockId/query', require('./routes/User/Block/queryBlock.js'))
 
 app.post('/user/signup', require('./routes/User/Account/signup'));
 app.post('/user/login', require('./routes/User/Account/login'));
@@ -67,7 +68,7 @@ app.post('/user/:id/delete', require('./routes/User/Account/deleteAccount'));
 app.post('/user/:id/followers/:followerId/follow',require('./routes/User/Followers/followUser'));
 app.post('/user/:id/followers/:followerId/undo',require('./routes/User/Followers/unfollowUser'));
 app.post('/user/:id/block/:blockId/block',require('./routes/User/Block/blockUser'));
-app.post('/user/:id/block/:blockId/undo', require('./routes/User/Block/unblockUser'))
+app.post('/user/:id/block/:blockId/undo', require('./routes/User/Block/unblockUser'));
 
 
 // Event Endpoints
