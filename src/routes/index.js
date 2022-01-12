@@ -1,6 +1,10 @@
 module.exports = (req, res) => {
 
     // Redirect to Homepage
-    res.setHeader('Location', "https://fairfieldprogramming.org/");    
+    res.set({
+        'Location': "https://fairfieldprogramming.org/"
+    });   
+
+    res.status(308).send();
 
 }
