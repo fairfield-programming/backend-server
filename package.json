@@ -26,7 +26,8 @@
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.7.1",
     "sequelize": "^6.3.5",
-    "sqlite3": "^4.2.0"
+    "sqlite3": "^4.2.0",
+    "duckgen": "^1.0.4"
   },
   "devDependencies": {
     "jest": "^27.4.5",
