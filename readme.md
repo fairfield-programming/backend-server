@@ -64,7 +64,7 @@ To setup this project, you have to follow these simple steps. The required code 
 
 ## Contribute
 
-If you simply star the repo, this helps us out tremendiously. Past that, if you share this repo with your friends, that helps a lot too. If you are feeling super generous, then you can find some issues that you have with the website and try to help us with them.
+If you simply star the repo, this helps us out tremendiously. Past that, if you share this repo with your friends, that helps a lot too. If you are feeling super generous, then you can find some issues that you have with the website and try to help us with them. _You can also contribute to some of our [other projects](https://github.com/fairfield-programming)!_
 
 <p align="center">
 
