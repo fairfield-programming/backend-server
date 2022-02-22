@@ -1,14 +1,13 @@
 const { compare } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 
-function noEmailAndUsername(req) {
-  if (!req.body.email && !req.body.username) return true;
+function is_req_body_okey(req) {
+  if (req.body.email && req.body.username && req.body.password) return true;
   return false;
 }
 
 module.exports = (req, res) => {
-  if (noEmailAndUsername(req)) return res.status(400).send("Not All Parameters Given.");
-  if (!req.body.password) return res.status(400).send("Not All Parameters Given.");
+  if (!is_req_body_okey(req)) return res.status(400).send("Not All Parameters Given.");
 
   User.findOne(
     {
