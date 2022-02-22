@@ -1,9 +1,9 @@
 {
-    "directDependenciesCount": 7,
-    "indirectDependenciesCount": 443,
-    "commentCount": 1290,
-    "lineCount": 13459,
-    "fileCount": 77,
-    "score": 0.22172949002217296,
+    "directDependenciesCount": 9,
+    "indirectDependenciesCount": 532,
+    "commentCount": 1626,
+    "lineCount": 17158,
+    "fileCount": 61,
+    "score": 0.18761726078799248,
     "grade": "F"
 }
