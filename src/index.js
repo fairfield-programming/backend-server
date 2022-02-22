@@ -12,6 +12,7 @@ const port = process.env.PORT || 8080;
 
 // Configure Middleware
 app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Auth Middleware
