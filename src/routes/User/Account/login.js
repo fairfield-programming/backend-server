@@ -30,7 +30,7 @@ module.exports = (req, res) => {
         req.body.password,
         userData.password,
         (err, result) => {
-          if (!result) return res.status(403).send("Incorrect Password.");
+          if (!result) return res.status(403).send("Invalid Credentials.");
 
           if (err) {
             console.log(err);
