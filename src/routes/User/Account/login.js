@@ -37,19 +37,26 @@ module.exports = (req, res) => {
             return res.status(500).send("Internal Server Error.");
           }
 
-          return res.json(
+
+          // save the token.
+          const token = sign(
             {
-              token: sign(
-                {
-                  id: userData.id,
-                  username: userData.username,
-                  email: userData.email,
-                },
-                process.env.JWT_KEY,
-              ),
+              id: userData.id,
+              username: userData.username,
+              email: userData.email,
             },
+            process.env.JWT_KEY,
           );
-        },
+
+          // send back the token to the user via a cookie
+            res.cookie("token", token);
+
+          // redirect the user to the /user page
+
+          res.redirect("/user");
+
+
+        }
       );
     })
     .catch((error) => {
