@@ -1,5 +1,6 @@
 const { compare } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
+const cookie = require("cookie");
 
 function is_req_body_okey(req) {
   if (req.body.email && req.body.username && req.body.password) return true;
@@ -38,7 +39,6 @@ module.exports = (req, res) => {
           }
 
 
-          // save the token.
           const token = sign(
             {
               id: userData.id,
@@ -49,9 +49,17 @@ module.exports = (req, res) => {
           );
 
           // send back the token to the user via a cookie
-            res.cookie("token", token);
+          // the cookie will be sent back in each up comming req within the req.cookie(s) 
+          // or the req.headers.cookie(s) objects
 
-          // redirect the user to the /user page
+          res.setHeader('Set-Cookie', cookie.serialize('token', String(token), {
+            // set these params to maximize security, 
+            // NOTE: secure can break up somethings in the localhost env.
+
+            httpOnly: true, 
+            secure: true, // for https
+          }));
+
 
           res.redirect("/user");
 
