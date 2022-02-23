@@ -1,5 +1,6 @@
 const { hash } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
+const cookie = require("cookie");
 const
   {
     invalidPassword,
@@ -43,18 +44,34 @@ module.exports = async (req, res) => {
                   email: req.body.email,
                 },
               )
-                .then((data) => res.json(
-                  {
-                    token: sign(
-                      {
-                        id: userData.id,
-                        username: data.username,
-                        email: data.email,
-                      },
-                      process.env.JWT_KEY,
-                    ),
-                  },
-                ))
+                .then((data) => {
+
+                  const token = sign(
+                    {
+                      id: data.id,
+                      username: data.username,
+                      email: data.email,
+                    },
+                    process.env.JWT_KEY,
+                  );
+
+                  // send back the token to the user via a cookie
+                  // the cookie will be sent back in each up comming req within the req.cookie(s) 
+                  // or the req.headers.cookie(s) objects
+
+                  res.setHeader('Set-Cookie', cookie.serialize('token', String(token), {
+                    // set these params to maximize security, 
+                    // NOTE: secure can break up somethings in the localhost env.
+
+                    httpOnly: true,
+                    secure: true, // for https
+                  }));
+
+
+                  res.redirect("/user");
+
+                }
+                )
                 .catch((userCreateErr) => handleError500(req, res, userCreateErr));
             }
           });
