@@ -5,6 +5,7 @@ const express = require('express');
 const { verify } = require('jsonwebtoken');
 const { Sequelize } = require('sequelize');
 const models = require('./models');
+const cookieParser = require("cookie-parser");
 
 // Configure Local Variables
 const app = express();
@@ -13,6 +14,7 @@ const port = process.env.PORT || 8080;
 // Configure Middleware
 app.use(express.static('public'));
 app.use(express.json());
+app.use(cookieParser());
 
 // Auth Middleware
 app.use((req, res, next) => {
