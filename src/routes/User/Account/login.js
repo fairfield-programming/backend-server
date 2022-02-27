@@ -1,14 +1,14 @@
 const { compare } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
+const cookie = require("cookie");
 
-function noEmailAndUsername(req) {
-  if (!req.body.email && !req.body.username) return true;
+function is_req_body_okey(req) {
+  if (req.body.email && req.body.username && req.body.password) return true;
   return false;
 }
 
 module.exports = (req, res) => {
-  if (noEmailAndUsername(req)) return res.status(400).send("Not All Parameters Given.");
-  if (!req.body.password) return res.status(400).send("Not All Parameters Given.");
+  if (!is_req_body_okey(req)) return res.status(400).send("Not All Parameters Given.");
 
   User.findOne(
     {
@@ -31,26 +31,40 @@ module.exports = (req, res) => {
         req.body.password,
         userData.password,
         (err, result) => {
-          if (!result) return res.status(403).send("Incorrect Password.");
+          if (!result) return res.status(403).send("Invalid Credentials.");
 
           if (err) {
             console.log(err);
             return res.status(500).send("Internal Server Error.");
           }
 
-          return res.json(
+
+          const token = sign(
             {
-              token: sign(
-                {
-                  id: userData.id,
-                  username: userData.username,
-                  email: userData.email,
-                },
-                process.env.JWT_KEY,
-              ),
+              id: userData.id,
+              username: userData.username,
+              email: userData.email,
             },
+            process.env.JWT_KEY,
           );
-        },
+
+          // send back the token to the user via a cookie
+          // the cookie will be sent back in each up comming req within the req.cookie(s) 
+          // or the req.headers.cookie(s) objects
+
+          res.setHeader('Set-Cookie', cookie.serialize('token', String(token), {
+            // set these params to maximize security, 
+            // NOTE: secure can break up somethings in the localhost env.
+
+            httpOnly: true, 
+            secure: true, // for https
+          }));
+
+
+          res.redirect("/user");
+
+
+        }
       );
     })
     .catch((error) => {
