@@ -1,13 +1,11 @@
 function propertyUndefined(property)
 {
-    if (!property) return true;
-    return false;
+   return property === undefined;
 }
 
 function objectIsNull(obj)
 {
-    if (!obj) return true;
-    return false;
+   return obj === null;
 }
 
 function checkIfNumberInRange(num, min, max) {
