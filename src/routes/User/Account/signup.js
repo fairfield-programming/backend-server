@@ -45,7 +45,6 @@ module.exports = async (req, res) => {
                 },
               )
                 .then((data) => {
-
                   const token = sign(
                     {
                       id: data.id,
