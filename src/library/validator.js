@@ -13,23 +13,25 @@ function checkIfNumberInRange(num, min, max) {
 }
 
 function invalidPassword(password) {
-  if (password.length > 14) return true;
-  if (password.length < 4) return true;
-  if (!password.match(/[A-Z]/)) return true;
-  if (!password.match(/[a-z]/)) return true;
-  if (!password.match(/\d/)) return true;
-  if (!password.match(/[\\#?!@$%^&*\-_]/)) return true;
-  return false;
+  return (
+    (password.length > 14)    ||
+    (password.length < 4)     ||
+    (!password.match(/[A-Z]/))||
+    (!password.match(/[a-z]/))||
+    (!password.match(/\d/))   ||
+    (!password.match(/[\\#?!@$%^&*\-_]/))
+  );
 }
 
 function invalidUsername(username) {
-  if (username.length > 30) return true;
-  if (username.length < 4) return true;
-  if (username.includes(" ")) return true;
-  if (/\d/.test(username)) return true;
-  if (/[!$%^&*()_+|~=`{}[\]:";'<>?,./]/.test(username)) return true;
-  if (username.toLowerCase() !== username) return true;
-  return false;
+  return (
+    (username.length > 30)    ||
+    (username.length < 4)     ||
+    (username.includes(" "))  ||
+    (username.toLowerCase() !== username) ||
+    (/\d/.test(username))     ||
+    (/[!$%^&*()_+|~=`{}[\]:";'<>?,./]/.test(username))
+  );
 }
 
 function invalidEmail(email) {
