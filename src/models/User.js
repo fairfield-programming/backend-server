@@ -7,5 +7,9 @@ module.exports = (sequelize, DataTypes) => sequelize.define(
     biography: DataTypes.TEXT,
     profilePicture: DataTypes.TEXT,
     status: DataTypes.STRING,
+    confirmed_email: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    }
   },
 );
