@@ -1,6 +1,7 @@
 const { hash } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 const cookie = require("cookie");
+const nodemailer = require("nodemailer");
 const
   {
     invalidPassword,
@@ -32,7 +33,7 @@ module.exports = async (req, res) => {
       },
     )
       .then((userData) => {
-        if (accountExists(userData)) res.status(403).send("Account Already Exists.");
+        if (accountExists(userData)) return res.status(403).send("Account Already Exists.");
         else {
           hash(req.body.password, 10, (err, hashString) => {
             if (err) handleError500(req, res, err);
@@ -54,6 +55,7 @@ module.exports = async (req, res) => {
                     process.env.JWT_KEY,
                   );
 
+
                   // send back the token to the user via a cookie
                   // the cookie will be sent back in each up comming req within the req.cookie(s) 
                   // or the req.headers.cookie(s) objects
@@ -65,6 +67,42 @@ module.exports = async (req, res) => {
                     httpOnly: true,
                     secure: true, // for https
                   }));
+
+                  const id_token = sign(data.id, process.env.Email_Token_Signature);
+                  let transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                      user: 'ghernaoutmassi@gmail.com',
+                      pass: process.env.GMAIL_APP_PASS,
+                    },
+                  });
+
+                  // send mail with defined transport object
+                  transporter.sendMail({
+                    from: '"Admin" <ghernaoutmassi@gmail.com>', // sender address
+                    to: "ghernaoutmassi@gmail.com", // list of receivers
+                    // to: `${data.email}`, // list of receivers
+                    subject: "Confirm Your Email Address", // Subject line
+                    html: `
+                      <h3>Welcome to fairfieldprogramming.org</h3>
+                      <p>
+                      Please validate your email address on  fairfieldprogramming.org by clicking 
+                        <a href="http://localhost:8080/confirmEmail/${id_token}">
+                          this link
+                        </a>
+                        <br/>
+                      </p>
+                      <p>
+                        Thanks for joining us ! 
+                        <br/>
+                        Kind Regards.
+                        <br/>
+                        <i>fairfieldprogramming.org team</i>
+                        <br/>
+                      </p>
+                    `, // html body
+                  });
+
 
 
                   res.redirect("/user");
