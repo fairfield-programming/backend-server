@@ -93,6 +93,10 @@ app.post('/event/:id/edit', require('./routes/Events/editEvent'));
 app.post('/event/:id/rsvp', require('./routes/Events/rsvpEvent'));
 app.post('/event/:id/unrsvp', require('./routes/Events/unrsvpEvent'));
 
+
+// email verification end point
+app.get("/confirmEmail/:token", require("./routes/User/Account/confirmEmail"));
+
 // Sync the Database
 sequelize.sync().then(() => { app.emit('database-started'); });
 
