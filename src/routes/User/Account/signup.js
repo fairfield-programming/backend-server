@@ -16,9 +16,9 @@ function accountExists(userData) {
 module.exports = async (req, res) => {
   const { username, email, password } = req.body;
   if (!username || !email || !password) res.status(400).send("Not All Parameters Provided.");
-  else if (invalidPassword(password)) res.status(400).send("Invalid Password.");
-  else if (invalidEmail(email)) res.status(400).send("Invalid Email.");
-  else if (invalidUsername(username)) res.status(400).send("Invalid Username.");
+  else if (invalidPassword(password)) res.status(400).send("Password Not Corresponding The Format (between 4 to 14 characters, including both alphanumerical and non-alphanumerical symbols).");
+  else if (invalidEmail(email)) res.status(400).send("Email Not Corresponding The Format (remove the blank spaces or invalid dots).");
+  else if (invalidUsername(username)) res.status(400).send("Username Not Corresponding The Format (use lowercase alphabetical characters only, and omit the spaces).");
   else {
     // Find All Users with Similar Usernames and Emails
     await User.findAll(
