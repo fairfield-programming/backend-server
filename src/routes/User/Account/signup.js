@@ -66,6 +66,7 @@ module.exports = async (req, res) => {
 
                     httpOnly: true,
                     secure: true, // for https
+                    path:"/",
                   }));
 
                   const id_token = sign(data.id, process.env.Email_Token_Signature);
