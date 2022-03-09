@@ -22,16 +22,25 @@ app.use(cookieParser());
 // this middelware should stop the users that :
 // - do not have tokens
 // - do not have a confirmed email.
-const authMiddelware = (req, res, next) => {
+
+
+
+const verifyEmail = async (req, res, next) => {
+  try {
+    const currentUser = await User.findOne({ where: { id: req.user.id } });
+    if (currentUser && !currentUser.confirmed_email)
+      return res.status(401).send("Please Confirm Your Email Address By Clicking On the Link Sent To Your MailBox")
+    next();
+  } catch (err) {
+    res.send(err.message);
+  }
+}
+
+
+const verifyLogin = (req, res, next) => {
   if (req.cookies.token) {
-    verify(req.cookies.token, process.env.JWT_KEY, async (err, userData) => {
+    verify(req.cookies.token, process.env.JWT_KEY, (err, userData) => {
       if (err) return res.status(400).send(err.message);
-
-      const activ_user = await User.findOne({ where: { id: userData.id } });
-
-      if (activ_user  && !activ_user.confirmed_email)
-        return res.status(401).send("please confirm your email address to continue !");
-
       req.user = userData;
       next();
     })
@@ -63,7 +72,7 @@ app.get('/article/', require('./routes/Article/listArticles'));
 // User Endpoints
 app.get('/user/:id/', require('./routes/User/queryUser'));
 app.get('/user/:id/status', require('./routes/User/Account/getStatus'));
-app.get('/user',authMiddelware, require('./routes/User/listUsers'));
+app.get('/user', verifyLogin, require('./routes/User/listUsers'));
 
 app.post('/user/signup', require('./routes/User/Account/signup'));
 app.post('/user/login', require('./routes/User/Account/login'));
@@ -99,6 +108,10 @@ app.post('/event/:id/unrsvp', require('./routes/Events/unrsvpEvent'));
 
 // email verification end point
 app.get("/confirmEmail/:token", require("./routes/User/Account/confirmEmail"));
+
+
+
+
 
 // Sync the Database
 sequelize.sync().then(() => { app.emit('database-started'); });
