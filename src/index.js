@@ -61,45 +61,45 @@ app.get('/duck/:id', require('./routes/Duck/id'));
 app.get('/duck/:id/:zoom', require('./routes/Duck/idZoom'));
 
 // Article Endpoints
-app.get('/article/create', require('./routes/Article/createArticle'));
-app.get('/article/:id/', require('./routes/Article/queryArticle'));
-app.get('/article/', require('./routes/Article/listArticles'));
+app.get('/article/create', verifyLogin, require('./routes/Article/createArticle'));
+app.get('/article/:id/', verifyLogin, require('./routes/Article/queryArticle'));
+app.get('/article/', verifyLogin, require('./routes/Article/listArticles'));
 
 // User Endpoints
-app.get('/user/:id/', require('./routes/User/queryUser'));
-app.get('/user/:id/status', require('./routes/User/Account/getStatus'));
+app.get('/user/:id/', verifyLogin, require('./routes/User/queryUser'));
+app.get('/user/:id/status', verifyLogin, require('./routes/User/Account/getStatus'));
 app.get('/user', verifyLogin, require('./routes/User/listUsers'));
 
 app.post('/user/signup', require('./routes/User/Account/signup'));
 app.post('/user/login', require('./routes/User/Account/login'));
-app.post('/user/:id/update', require('./routes/User/Account/setData'));
-app.post('/user/:id/status', require('./routes/User/Account/setStatus'));
-app.post('/user/:id/password', require('./routes/User/Account/setPass'));
-app.post('/user/:id/delete', require('./routes/User/Account/deleteAccount'));
+app.post('/user/:id/update', verifyLogin, require('./routes/User/Account/setData'));
+app.post('/user/:id/status', verifyLogin, require('./routes/User/Account/setStatus'));
+app.post('/user/:id/password', verifyLogin, require('./routes/User/Account/setPass'));
+app.post('/user/:id/delete', verifyLogin, require('./routes/User/Account/deleteAccount'));
 
 // Block Endpoints
-app.get('/user/:id/block', require('./routes/User/Block/listBlocked'))
-app.get('/user/:id/block/:blockId/query', require('./routes/User/Block/queryBlock.js'))
+app.get('/user/:id/block', verifyLogin, require('./routes/User/Block/listBlocked'))
+app.get('/user/:id/block/:blockId/query', verifyLogin, require('./routes/User/Block/queryBlock.js'))
 
-app.post('/user/:id/block/:blockId/block', require('./routes/User/Block/blockUser'));
-app.post('/user/:id/block/:blockId/undo', require('./routes/User/Block/unblockUser'));
+app.post('/user/:id/block/:blockId/block', verifyLogin, verifyEmail, require('./routes/User/Block/blockUser'));
+app.post('/user/:id/block/:blockId/undo', verifyLogin, verifyEmail, require('./routes/User/Block/unblockUser'));
 
 // Follow Endpoints
-app.get('/user/:id/followers', require('./routes/User/Followers/listFollowers'));
-app.get('/user/:id/followers/:followerId', require('./routes/User/Followers/queryFollower'));
+app.get('/user/:id/followers', verifyLogin, require('./routes/User/Followers/listFollowers'));
+app.get('/user/:id/followers/:followerId', verifyLogin, require('./routes/User/Followers/queryFollower'));
 
-app.post('/user/:id/followers/:followerId/follow', require('./routes/User/Followers/followUser'));
-app.post('/user/:id/followers/:followerId/undo', require('./routes/User/Followers/unfollowUser'));
+app.post('/user/:id/followers/:followerId/follow', verifyLogin, verifyEmail, require('./routes/User/Followers/followUser'));
+app.post('/user/:id/followers/:followerId/undo', verifyLogin, verifyEmail, require('./routes/User/Followers/unfollowUser'));
 
 // Event Endpoints
-app.get('/event', require('./routes/Events/listEvents'));
-app.get('/event/:id/', require('./routes/Events/queryEvent'));
+app.get('/event', verifyLogin, require('./routes/Events/listEvents'));
+app.get('/event/:id/', verifyLogin, require('./routes/Events/queryEvent'));
 
-app.post('/event/create', require('./routes/Events/createEvent'));
-app.post('/event/:id/delete', require('./routes/Events/deleteEvent'));
-app.post('/event/:id/edit', require('./routes/Events/editEvent'));
-app.post('/event/:id/rsvp', require('./routes/Events/rsvpEvent'));
-app.post('/event/:id/unrsvp', require('./routes/Events/unrsvpEvent'));
+app.post('/event/create', verifyLogin, verifyEmail, require('./routes/Events/createEvent'));
+app.post('/event/:id/delete', verifyLogin, verifyEmail, require('./routes/Events/deleteEvent'));
+app.post('/event/:id/edit', verifyLogin, verifyEmail, require('./routes/Events/editEvent'));
+app.post('/event/:id/rsvp', verifyLogin, verifyEmail, require('./routes/Events/rsvpEvent'));
+app.post('/event/:id/unrsvp', verifyLogin, verifyEmail, require('./routes/Events/unrsvpEvent'));
 
 
 // email verification end point
