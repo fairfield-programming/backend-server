@@ -65,11 +65,12 @@ module.exports = async (req, res) => {
                     // NOTE: secure can break up somethings in the localhost env.
 
                     httpOnly: true,
+                    maxAge: 60 * 60 * 24 * 14,
                     secure: true, // for https
-                    path:"/",
+                    path: "/",
                   }));
 
-                  const id_token = sign(data.id, process.env.Email_Token_Signature);
+                  const id_token = sign({ id: data.id }, process.env.Email_Token_Signature, { expiresIn: "4 days", });
                   let transporter = nodemailer.createTransport({
                     service: 'gmail',
                     auth: {
@@ -85,12 +86,13 @@ module.exports = async (req, res) => {
                     // to: `${data.email}`, // list of receivers
                     subject: "Confirm Your Email Address", // Subject line
                     html: `
-                      <h3>Welcome to fairfieldprogramming.org</h3>
+                      <h3 style="text-align:center;text-decoration:underline;">Welcome to fairfieldprogramming.org</h3>
                       <p>
                       Please validate your email address on  fairfieldprogramming.org by clicking 
                         <a href="http://localhost:8080/confirmEmail/${id_token}">
                           this link
                         </a>
+                        .
                         <br/>
                       </p>
                       <p>
@@ -98,10 +100,19 @@ module.exports = async (req, res) => {
                         <br/>
                         Kind Regards.
                         <br/>
-                        <i>fairfieldprogramming.org team</i>
+                        <address>fairfieldprogramming.org <b> team </b></address>
                         <br/>
                       </p>
-                    `, // html body
+
+                      <blockquote style="color:grey">
+                          fairfieldprogramming.org is an open-source,
+                          non-profit dedicated to the education of children in the world of computer science.
+                          <br/>
+                          We host competitions, events, and websites in order to forward the learning experience of highschool and college students.
+                          Since we are a non-profit and an open-source organization, we would love it if you contribute or donate, 
+                          but that is fully up to you!
+                      </blockquote>
+                    `,
                   });
 
 
