@@ -19,23 +19,26 @@ app.use(cookieParser());
 
 
 // Auth Middleware
-app.use((req, res, next) => {
-  const authHeader = req.headers.authorization;
+// this middelware should stop the users that :
+// - do not have tokens
+// - do not have a confirmed email.
+const authMiddelware = (req, res, next) => {
+  if (req.cookies.token) {
+    verify(req.cookies.token, process.env.JWT_KEY, async (err, userData) => {
+      if (err) return res.status(400).send(err.message);
 
-  if (authHeader) {
-    const token = authHeader.split(' ')[1];
+      const activ_user = await User.findOne({ where: { id: userData.id } });
 
-    verify(token, process.env.JWT_KEY, (err, user) => {
-      if (err) res.sendStatus(403);
-      else {
-        req.user = user;
-        next();
-      }
-    });
-  } else {
-    next();
+      if (activ_user  && !activ_user.confirmed_email)
+        return res.status(401).send("please confirm your email address to continue !");
+
+      req.user = userData;
+      next();
+    })
   }
-});
+  else res.redirect("/login");
+}
+
 
 // Programs
 // app.get('/', require('./routes/index'))
@@ -60,7 +63,7 @@ app.get('/article/', require('./routes/Article/listArticles'));
 // User Endpoints
 app.get('/user/:id/', require('./routes/User/queryUser'));
 app.get('/user/:id/status', require('./routes/User/Account/getStatus'));
-app.get('/user/', require('./routes/User/listUsers'));
+app.get('/user',authMiddelware, require('./routes/User/listUsers'));
 
 app.post('/user/signup', require('./routes/User/Account/signup'));
 app.post('/user/login', require('./routes/User/Account/login'));
@@ -84,7 +87,7 @@ app.post('/user/:id/followers/:followerId/follow', require('./routes/User/Follow
 app.post('/user/:id/followers/:followerId/undo', require('./routes/User/Followers/unfollowUser'));
 
 // Event Endpoints
-app.get('/event/', require('./routes/Events/listEvents'));
+app.get('/event', require('./routes/Events/listEvents'));
 app.get('/event/:id/', require('./routes/Events/queryEvent'));
 
 app.post('/event/create', require('./routes/Events/createEvent'));
