@@ -18,10 +18,6 @@ app.use(express.json());
 app.use(cookieParser());
 
 
-// Auth Middleware
-// this middelware should stop the users that :
-// - do not have tokens
-// - do not have a confirmed email.
 
 
 
