@@ -1,6 +1,5 @@
 const { hash } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
-const cookie = require("cookie");
 
 const
   {
