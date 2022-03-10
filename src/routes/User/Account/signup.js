@@ -74,28 +74,29 @@ module.exports = async (req, res) => {
                   let transporter = nodemailer.createTransport({
                     service: 'gmail',
                     auth: {
-                      user: 'ghernaoutmassi@gmail.com',
+                      user: 'fairfieldprogramming@gmail.com',
                       pass: process.env.GMAIL_APP_PASS,
                     },
                   });
 
                   // send mail with defined transport object
                   transporter.sendMail({
-                    from: '"Admin" <ghernaoutmassi@gmail.com>', // sender address
-                    to: "ghernaoutmassi@gmail.com", // list of receivers
-                    // to: `${data.email}`, // list of receivers
+                    from: '"Fairfield Programming Association" <fairfieldprogramming@gmail.com>', // sender address
+                    to: `${data.email}`, // list of receivers
                     subject: "Confirm Your Email Address", // Subject line
                     html: `
-                      <h3 style="text-align:center;padding-buttom:5px;text-decoration:underline;">Welcome to fairfieldprogramming.org</h3>
+                    <img src="https://raw.githubusercontent.com/fairfield-programming/.github/main/spread.png" style="width:90%; margin-left:5%;" />
+                    <hr/>  
+                    <h3 style="text-align:center;padding-buttom:5px;">
+                    Welcome to Fairfield Programming Association
+                    </h3>
+                    <hr/>  
                       <p>
                       <br/>
-                      Hey ${data.username},
+                      Hey <b> ${data.username} </b>,
                       <br/>
                       Please validate your email address on  fairfieldprogramming.org by clicking 
-                        <a href="http://localhost:8080/confirmEmail/${id_token}">
-                          this link
-                        </a>
-                        .
+                        <a href="https://fairfieldprogramming.org/confirmEmail/${id_token}">this link</a>.
                         <br/>
                       </p>
                       <p>
@@ -109,11 +110,13 @@ module.exports = async (req, res) => {
                       <hr/>
                       <footer style="color:grey">
                           fairfieldprogramming.org is an open-source,
-                          non-profit dedicated to the education of children in the world of computer science.
+                          non-profit association dedicated to the education of children in the world of computer science.
                           We host competitions, events, and websites in order to forward the learning experience of highschool and college students.
                           Since we are a non-profit and an open-source organization, we would love it if you contribute or donate, 
                           but that is fully up to you!
                       </footer>
+                      <hr/>
+
                     `,
                   });
 
