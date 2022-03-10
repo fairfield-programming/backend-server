@@ -32,9 +32,9 @@ module.exports = (req, res) => {
 
           res.json({ token: sign(
             {
-              id: data.id,
-              username: data.username,
-              email: data.email,
+              id: userData.id,
+              username: userData.username,
+              email: userData.email,
             },
             process.env.JWT_KEY,
           )});
