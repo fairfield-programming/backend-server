@@ -38,7 +38,7 @@ app.use((req, res, next) => {
 });
 
 // Programs
-// app.get('/', require('./routes/index'))
+app.get('/', require('./routes/index'))
 
 // Duck Joke Endpoints
 app.get('/joke', require('./routes/Joke/random'));
