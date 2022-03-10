@@ -2,7 +2,7 @@ const { compare } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 
 module.exports = (req, res) => {
-  if (!req.body.email || !req.body.username || !req.body.password) return res.status(400).send("Not All Parameters Given.");
+  if ((!req.body.email && !req.body.username) || !req.body.password) return res.status(400).send("Not All Parameters Given.");
 
   User.findOne({
       where:{
