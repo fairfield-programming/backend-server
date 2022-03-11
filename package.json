@@ -28,6 +28,7 @@
     "eslint-plugin-jest": "^25.3.2",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "nodemailer": "^6.7.2",
     "pg": "^8.7.1",
     "sequelize": "^6.3.5",
     "sqlite3": "^5.0.2"
