@@ -5,7 +5,6 @@ const express = require('express');
 const { verify } = require('jsonwebtoken');
 const { Sequelize } = require('sequelize');
 const models = require('./models');
-const cookieParser = require("cookie-parser");
 
 // Configure Local Variables
 const app = express();
@@ -15,8 +14,7 @@ const port = process.env.PORT || 8080;
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cookieParser());
-
+app.use(require("cors")({ origin: "https://fairfieldprogramming.org" }));
 
 
 
@@ -46,7 +44,7 @@ const verifyLogin = (req, res, next) => {
 
 
 // Programs
-// app.get('/', require('./routes/index'))
+app.get('/', require('./routes/index'))
 
 // Duck Joke Endpoints
 app.get('/joke', require('./routes/Joke/random'));
