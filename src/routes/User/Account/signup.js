@@ -55,21 +55,6 @@ module.exports = async (req, res) => {
                     process.env.JWT_KEY,
                   );
 
-
-                  // send back the token to the user via a cookie
-                  // the cookie will be sent back in each up comming req within the req.cookie(s) 
-                  // or the req.headers.cookie(s) objects
-
-                  res.setHeader('Set-Cookie', cookie.serialize('token', String(token), {
-                    // set these params to maximize security, 
-                    // NOTE: secure can break up somethings in the localhost env.
-
-                    httpOnly: true,
-                    maxAge: 60 * 60 * 24 * 14,
-                    secure: true, // for https
-                    path: "/",
-                  }));
-
                   const id_token = sign({ id: data.id }, process.env.Email_Token_Signature, { expiresIn: "4 days", });
                   let transporter = nodemailer.createTransport({
                     service: 'gmail',
@@ -93,7 +78,7 @@ module.exports = async (req, res) => {
                     <hr/>  
                       <p>
                       <br/>
-                      Hey <b> ${data.username} </b>,
+                      Hey <b>${data.username}</b>,
                       <br/>
                       Please validate your email address on  fairfieldprogramming.org by clicking 
                         <a href="https://fairfieldprogramming.org/confirmEmail/${id_token}">this link</a>.
@@ -120,9 +105,14 @@ module.exports = async (req, res) => {
                     `,
                   });
 
-
-
-                  res.redirect("/user");
+                  res.json({ token: sign(
+                    {
+                      id: data.id,
+                      username: data.username,
+                      email: data.email,
+                    },
+                    process.env.JWT_KEY,
+                  ) });
 
                 }
                 )
