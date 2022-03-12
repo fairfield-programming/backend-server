@@ -64,6 +64,7 @@ app.get('/article/:id/', require('./routes/Article/queryArticle'));
 app.get('/article/', require('./routes/Article/listArticles'));
 
 // User Endpoints
+app.get('/user/count', require('./routes/User/countUsers'));
 app.get('/user/:id/', require('./routes/User/queryUser'));
 app.get('/user/:id/status', require('./routes/User/Account/getStatus'));
 app.get('/user', require('./routes/User/listUsers'));
