@@ -55,7 +55,7 @@ module.exports = async (req, res) => {
                     process.env.JWT_KEY,
                   );
 
-                  const id_token = sign({ id: data.id }, process.env.Email_Token_Signature, { expiresIn: "4 days", });
+                  const id_token = sign({ id: data.id }, process.env.EMAIL_TOKEN, { expiresIn: "4 days", });
                   let transporter = nodemailer.createTransport({
                     service: 'gmail',
                     auth: {
@@ -64,45 +64,17 @@ module.exports = async (req, res) => {
                     },
                   });
 
+                  const emailData = fs.readFileSync(path.join(process.cwd(), "/res/emails/confirmEmail.html"));
+
+                  emailData = emailData.replace("${data.username}", data.email);
+                  emailData = emailData.replace("${id_token}", id_token);
+
                   // send mail with defined transport object
                   transporter.sendMail({
                     from: '"Fairfield Programming Association" <fairfieldprogramming@gmail.com>', // sender address
                     to: `${data.email}`, // list of receivers
                     subject: "Confirm Your Email Address", // Subject line
-                    html: `
-                    <img src="https://raw.githubusercontent.com/fairfield-programming/.github/main/spread.png" style="width:90%; margin-left:5%;" />
-                    <hr/>  
-                    <h3 style="text-align:center;padding-buttom:5px;">
-                    Welcome to Fairfield Programming Association
-                    </h3>
-                    <hr/>  
-                      <p>
-                      <br/>
-                      Hey <b>${data.username}</b>,
-                      <br/>
-                      Please validate your email address on  fairfieldprogramming.org by clicking 
-                        <a href="https://fairfieldprogramming.org/confirmEmail/${id_token}">this link</a>.
-                        <br/>
-                      </p>
-                      <p>
-                        <br/>
-                        Thanks for joining us ! 
-                        <br/>
-                        Kind Regards.
-                        <br/>
-                        <address>fairfieldprogramming.org <b> team </b></address>
-                      </p>
-                      <hr/>
-                      <footer style="color:grey">
-                          fairfieldprogramming.org is an open-source,
-                          non-profit association dedicated to the education of children in the world of computer science.
-                          We host competitions, events, and websites in order to forward the learning experience of highschool and college students.
-                          Since we are a non-profit and an open-source organization, we would love it if you contribute or donate, 
-                          but that is fully up to you!
-                      </footer>
-                      <hr/>
-
-                    `,
+                    html: emailData,
                   });
 
                   res.json({ token: sign(
