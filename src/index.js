@@ -59,14 +59,14 @@ app.get('/duck/:id', require('./routes/Duck/id'));
 app.get('/duck/:id/:zoom', require('./routes/Duck/idZoom'));
 
 // Article Endpoints
-app.get('/article/create', verifyLogin, require('./routes/Article/createArticle'));
-app.get('/article/:id/', verifyLogin, require('./routes/Article/queryArticle'));
-app.get('/article/', verifyLogin, require('./routes/Article/listArticles'));
+app.get('/article/create', require('./routes/Article/createArticle'));
+app.get('/article/:id/', require('./routes/Article/queryArticle'));
+app.get('/article/', require('./routes/Article/listArticles'));
 
 // User Endpoints
-app.get('/user/:id/', verifyLogin, require('./routes/User/queryUser'));
-app.get('/user/:id/status', verifyLogin, require('./routes/User/Account/getStatus'));
-app.get('/user', verifyLogin, require('./routes/User/listUsers'));
+app.get('/user/:id/', require('./routes/User/queryUser'));
+app.get('/user/:id/status', require('./routes/User/Account/getStatus'));
+app.get('/user', require('./routes/User/listUsers'));
 
 app.post('/user/signup', require('./routes/User/Account/signup'));
 app.post('/user/login', require('./routes/User/Account/login'));
@@ -83,15 +83,15 @@ app.post('/user/:id/block/:blockId/block', verifyLogin, verifyEmail, require('./
 app.post('/user/:id/block/:blockId/undo', verifyLogin, verifyEmail, require('./routes/User/Block/unblockUser'));
 
 // Follow Endpoints
-app.get('/user/:id/followers', verifyLogin, require('./routes/User/Followers/listFollowers'));
-app.get('/user/:id/followers/:followerId', verifyLogin, require('./routes/User/Followers/queryFollower'));
+app.get('/user/:id/followers', require('./routes/User/Followers/listFollowers'));
+app.get('/user/:id/followers/:followerId', require('./routes/User/Followers/queryFollower'));
 
 app.post('/user/:id/followers/:followerId/follow', verifyLogin, verifyEmail, require('./routes/User/Followers/followUser'));
 app.post('/user/:id/followers/:followerId/undo', verifyLogin, verifyEmail, require('./routes/User/Followers/unfollowUser'));
 
 // Event Endpoints
-app.get('/event', verifyLogin, require('./routes/Events/listEvents'));
-app.get('/event/:id/', verifyLogin, require('./routes/Events/queryEvent'));
+app.get('/event', require('./routes/Events/listEvents'));
+app.get('/event/:id/', require('./routes/Events/queryEvent'));
 
 app.post('/event/create', verifyLogin, verifyEmail, require('./routes/Events/createEvent'));
 app.post('/event/:id/delete', verifyLogin, verifyEmail, require('./routes/Events/deleteEvent'));
