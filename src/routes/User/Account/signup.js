@@ -64,7 +64,7 @@ module.exports = async (req, res) => {
                     },
                   });
 
-                  const emailData = fs.readFileSync(path.join(process.cwd(), "/res/emails/confirmEmail.html"));
+                  const emailData = fs.readFileSync(path.join(process.cwd(), "/res/emails/confirmEmail.html"), 'ascii');
 
                   emailData = emailData.replace("${data.username}", data.email);
                   emailData = emailData.replace("${id_token}", id_token);
