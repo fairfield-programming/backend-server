@@ -18,7 +18,6 @@ app.use(require("cors")({ origin: "https://fairfieldprogramming.org" }));
 
 
 
-
 const verifyEmail = async (req, res, next) => {
   try {
     const currentUser = await User.findOne({ where: { id: req.user.id } });
