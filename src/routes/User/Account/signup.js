@@ -2,7 +2,6 @@ const fs = require("fs");
 const path = require("path");
 const { hash } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
-const cookie = require("cookie");
 const nodemailer = require("nodemailer");
 const
   {
