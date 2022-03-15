@@ -2,8 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { hash } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
-const cookie = require("cookie");
-const nodemailer = require("nodemailer");
+const { mailer } = require("../../../helpers/mailer");
 const
   {
     invalidPassword,
@@ -58,35 +57,26 @@ module.exports = async (req, res) => {
                   );
 
                   const id_token = sign({ id: data.id }, process.env.EMAIL_TOKEN, { expiresIn: "4 days", });
-                  let transporter = nodemailer.createTransport({
-                    service: 'gmail',
-                    auth: {
-                      user: 'fairfieldprogramming@gmail.com',
-                      pass: process.env.GMAIL_APP_PASS,
-                    },
-                  });
+
 
                   let emailData = fs.readFileSync(path.join(process.cwd(), "/res/emails/confirmEmail.html"), 'ascii');
 
-                  emailData = emailData.replace("${data.username}", data.email);
+                  emailData = emailData.replace("${data.username}", data.username);
                   emailData = emailData.replace("${id_token}", id_token);
 
-                  // send mail with defined transport object
-                  transporter.sendMail({
-                    from: '"Fairfield Programming Association" <fairfieldprogramming@gmail.com>', // sender address
-                    to: `${data.email}`, // list of receivers
-                    subject: "Confirm Your Email Address", // Subject line
-                    html: emailData,
-                  });
+                  // send the email 
+                  mailer(emailData, String(data.email), "Confirm Your Email Address")
 
-                  res.json({ token: sign(
-                    {
-                      id: data.id,
-                      username: data.username,
-                      email: data.email,
-                    },
-                    process.env.JWT_KEY,
-                  ) });
+                  res.json({
+                    token: sign(
+                      {
+                        id: data.id,
+                        username: data.username,
+                        email: data.email,
+                      },
+                      process.env.JWT_KEY,
+                    )
+                  });
 
                 }
                 )

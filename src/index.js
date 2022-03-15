@@ -17,7 +17,13 @@ app.use(express.json());
 app.use(require("cors")({ origin: "https://fairfieldprogramming.org" }));
 
 
-
+/**
+ *  Verfies if the user has a confimed email address, otherwise send an error message
+ * @param {Request} req HTTP Request
+ * @param {Response} res HTTP Response
+ * @param {Middelware} next calls the next middelware
+ * @returns {Response}
+ */
 
 const verifyEmail = async (req, res, next) => {
   try {
@@ -30,6 +36,13 @@ const verifyEmail = async (req, res, next) => {
   }
 }
 
+/**
+ *  Verfies if the user is logged in, otherwise redirect to "/login"
+ * @param {Request} req HTTP Request
+ * @param {Response} res HTTP Response
+ * @param {Middelware} next calls the next middelware
+ * @returns {Response}
+ */
 
 const verifyLogin = (req, res, next) => {
   if (req.cookies.token) {
@@ -84,8 +97,8 @@ app.post('/user/:id/block/:blockId/block', verifyLogin, verifyEmail, require('./
 app.post('/user/:id/block/:blockId/undo', verifyLogin, verifyEmail, require('./routes/User/Block/unblockUser'));
 
 // Follow Endpoints
-app.get('/user/:id/followers', require('./routes/User/Followers/listFollowers'));
-app.get('/user/:id/followers/:followerId', require('./routes/User/Followers/queryFollower'));
+app.get('/user/:id/followers', verifyLogin, require('./routes/User/Followers/listFollowers'));
+app.get('/user/:id/followers/:followerId', verifyLogin, require('./routes/User/Followers/queryFollower'));
 
 app.post('/user/:id/followers/:followerId/follow', verifyLogin, verifyEmail, require('./routes/User/Followers/followUser'));
 app.post('/user/:id/followers/:followerId/undo', verifyLogin, verifyEmail, require('./routes/User/Followers/unfollowUser'));
