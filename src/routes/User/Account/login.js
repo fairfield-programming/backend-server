@@ -1,7 +1,5 @@
-const { compare } = require("bcrypt");
-const { sign } = require("jsonwebtoken");
-
 /**
+ * @module login
  * HTTP POST Request on "/login" handler
  * @param {Request} req - HTTP POST Request on "/login" 
  * @param {Response} res - HTTP Response 
@@ -10,6 +8,9 @@ const { sign } = require("jsonwebtoken");
  * check if all parameter are good, look if there is a user in the data base with those credentials
  * then if all goes well, send back a cookie to the client.
  */
+
+const { compare } = require("bcrypt");
+const { sign } = require("jsonwebtoken");
 
 module.exports = (req, res) => {
   if ((!req.body.email && !req.body.username) || !req.body.password) return res.status(400).send("Not All Parameters Given.");

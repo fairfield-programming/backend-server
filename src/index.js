@@ -17,6 +17,13 @@ app.use(express.json());
 app.use(require("cors")({ origin: "https://fairfieldprogramming.org" }));
 
 
+/**
+ *  Verfies if the user has a confimed email address, otherwise send an error message
+ * @param {Request} req HTTP Request
+ * @param {Response} res HTTP Response
+ * @param {Middelware} next calls the next middelware
+ * @returns {Response}
+ */
 
 const verifyEmail = async (req, res, next) => {
   try {
@@ -29,6 +36,13 @@ const verifyEmail = async (req, res, next) => {
   }
 }
 
+/**
+ *  Verfies if the user is logged in, otherwise redirect to "/login"
+ * @param {Request} req HTTP Request
+ * @param {Response} res HTTP Response
+ * @param {Middelware} next calls the next middelware
+ * @returns {Response}
+ */
 
 const verifyLogin = (req, res, next) => {
   if (req.cookies.token) {
