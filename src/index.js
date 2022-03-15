@@ -83,8 +83,8 @@ app.post('/user/:id/block/:blockId/block', verifyLogin, verifyEmail, require('./
 app.post('/user/:id/block/:blockId/undo', verifyLogin, verifyEmail, require('./routes/User/Block/unblockUser'));
 
 // Follow Endpoints
-app.get('/user/:id/followers', require('./routes/User/Followers/listFollowers'));
-app.get('/user/:id/followers/:followerId', require('./routes/User/Followers/queryFollower'));
+app.get('/user/:id/followers', verifyLogin, require('./routes/User/Followers/listFollowers'));
+app.get('/user/:id/followers/:followerId', verifyLogin, require('./routes/User/Followers/queryFollower'));
 
 app.post('/user/:id/followers/:followerId/follow', verifyLogin, verifyEmail, require('./routes/User/Followers/followUser'));
 app.post('/user/:id/followers/:followerId/undo', verifyLogin, verifyEmail, require('./routes/User/Followers/unfollowUser'));
