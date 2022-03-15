@@ -10,11 +10,10 @@ const transporter = nodemailer.createTransport({
 
 
 /**
- * 
- * @param {String} mailMarkup 
- * @param {String} receivers 
- * @param {String} mailSubject 
- * @description mailer accepts an html based markup as the first argument, a comma sperated list of receivers as the second argument, and the mail subject as the third 
+ * Mailer is an abstraction layer that allows us to send emails using node-mailer under the hood. 
+ * @param {String} mailMarkup - html based markup
+ * @param {String} receivers  - a comma sperated list of email addresses
+ * @param {String} mailSubject - the mail subject
  */
 
 module.exports.mailer = function(mailMarkup, receivers, mailSubject) {
