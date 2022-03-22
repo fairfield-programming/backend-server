@@ -5,6 +5,7 @@ const express = require('express');
 const { verify } = require('jsonwebtoken');
 const { Sequelize } = require('sequelize');
 const models = require('./models');
+const { remove_unconfirmed_email__user_accounts } = require("./background_jobs/unconfirmed_emails");
 
 // Configure Local Variables
 const app = express();
@@ -14,7 +15,7 @@ const port = process.env.PORT || 8080;
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(require("cors")({ origin: "https://fairfieldprogramming.org" }));
+app.use(require("cors")({ origin: "// https://fairfieldprogramming.org" }));
 
 
 /**
@@ -122,7 +123,13 @@ app.get("/confirmEmail/:token", require("./routes/User/Account/confirmEmail"));
 
 
 // Sync the Database
-sequelize.sync().then(() => { app.emit('database-started'); });
+(async () => {
+  // await the database creation process, so as we can access the data on our jobs
+  await sequelize.sync().then(() => { app.emit('database-started'); });
+
+  // execute the job once a while, 30 days in this example
+  setInterval(remove_unconfirmed_email__user_accounts, 30 * 24 * 60 * 60 * 1000)
+})()
 
 // Start Server
 if (process.env.NODE_ENV !== 'test') {
