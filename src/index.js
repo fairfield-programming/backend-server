@@ -5,7 +5,7 @@ const express = require('express');
 const { verify } = require('jsonwebtoken');
 const { Sequelize } = require('sequelize');
 const models = require('./models');
-const {remove_unconfirmed_email_users } = require("./background_jobs/unconfirmed_emails");
+const { remove_unconfirmed_email_users } = require("./background_jobs/unconfirmed_emails");
 
 // Configure Local Variables
 const app = express();
@@ -127,8 +127,9 @@ app.get("/confirmEmail/:token", require("./routes/User/Account/confirmEmail"));
   // await the database creation process, so as we can access the data on our jobs
   await sequelize.sync().then(() => { app.emit('database-started'); });
 
-  // execute the job once a while, 30 days in this example
-  setInterval(remove_unconfirmed_email_users, 30 * 24 * 60 * 60 * 1000)
+  // execute the job once a while, 20 days in this example  
+  // note that there is a limit for the interval since it is an integer
+  setInterval(remove_unconfirmed_email_users, 20 * 24 * 60 * 60 * 1000)
 })()
 
 // Start Server
