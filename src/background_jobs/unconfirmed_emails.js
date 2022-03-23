@@ -4,7 +4,15 @@
  * @description This async functions will search to find all the users on our database where confirmed_email is set to false,
  * it will retreive thier ids, then it deletes all the related data to that user before destroying the user itself.
  * 
+ * @todo
+ * 1- Change how we sync the tables.
+ * 
+ * 2- Think of using the Promise.parallel if the async operations are not dependent between each other.
+ * 
+ * 3- Optimize.
+ * 
  */
+
 
 
 
@@ -72,6 +80,7 @@ module.exports.remove_unconfirmed_email_users = async () => {
         // this will drop the current table and recreate a new one.
         // this not optimal though. 
         await User.sync({ force: true });
+        await Events.sync({ force: true });
     }
 
 
