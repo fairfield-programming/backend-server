@@ -1,4 +1,14 @@
-module.exports.remove_unconfirmed_email__user_accounts = async () => {
+/**
+ * @module Remove User Accounts With Unconfirmed Email Addresses
+ * 
+ * @description This async functions will search to find all the users on our database where confirmed_email is set to false,
+ * it will retreive thier ids, then it deletes all the related data to that user before destroying the user itself.
+ * 
+ */
+
+
+
+module.exports.remove_unconfirmed_email_users = async () => {
 
 
     // find and retreive all the users with an unconfirmed email address
