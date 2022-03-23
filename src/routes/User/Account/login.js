@@ -5,7 +5,7 @@
  * @param {Response} res - HTTP Response 
  * @returns {Response}  HTTP Response
  * @description This route handler will listen to the client request, 
- * check if all parameter are good, look if there is a user in the data base with those credentials
+ * check if all parameter are good, look if there is a user in the database with the passed credentials
  * then if all goes well, send back a cookie to the client.
  */
 
