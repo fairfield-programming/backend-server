@@ -61,21 +61,13 @@ const verifyLogin = (req, res, next) => {
 app.get('/', require('./routes/index'))
 
 // Duck Joke Endpoints
-app.get('/joke', require('./routes/Joke/random'));
-app.get('/jokes', require('./routes/Joke/all'));
-app.get('/jokes/count', require('./routes/Joke/count'));
-app.get('/jokes/random', require('./routes/Joke/random'));
-app.get('/jokes/:id', require('./routes/Joke/id'));
-
+app.use('/jokes', require('./routes/jokeRoutes'))
 // Duck Endpoints
-app.get('/duck', require('./routes/Duck/index'));
-app.get('/duck/:id', require('./routes/Duck/id'));
-app.get('/duck/:id/:zoom', require('./routes/Duck/idZoom'));
+app.use('/duck', require('./routes/duckRoutes'));
 
 // Article Endpoints
-app.get('/article/create', require('./routes/Article/createArticle'));
-app.get('/article/:id/', require('./routes/Article/queryArticle'));
-app.get('/article/', require('./routes/Article/listArticles'));
+app.use('/article', require('./routes/articleRoutes'));
+
 
 // User Endpoints
 app.get('/user/count', require('./routes/User/countUsers'));
