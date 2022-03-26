@@ -13,6 +13,7 @@
 
 
 module.exports.remove_unconfirmed_email_users = async () => {
+    console.log("job executed !")
 
 
     // find and retreive all the users with an unconfirmed email address
