@@ -24,20 +24,21 @@ module.exports.remove_unconfirmed_email_users = async () => {
             {
                 confirmed_email: false,
             },
-            attributes: ['id'],
+            attributes: ['id', 'createdAt'],
             raw: true,
         },
     )
-
+  
     if (found_users != undefined && found_users.length) {
 
-        // at this stage found_users will look like [{id:1}, {id:2}]
-        // we want to turn it into an ids array which will look like [1,2]
+        // at this stage found_users will look like [ { id: 1, createdAt: '2022-03-26 22:23:43.002 +00:00' } ]
+        // we want to turn it into an ids array which will look like [1], if the createdAt refers to a date before a month ago
         const ids = [];
         found_users.forEach((element) => {
-            ids.push(element.id)
+            if (Date.parse(element.createdAt) < (Date.now() - 30 * 24 * 60 * 60 * 1000)) {
+                ids.push(element.id);
+            }
         })
-
 
 
         //remove all the data that belongs to a user with an unconfirmed email address

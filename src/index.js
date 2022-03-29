@@ -4,6 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const { Sequelize } = require('sequelize');
 const models = require('./models');
+const schedule = require('node-schedule');
 const { remove_unconfirmed_email_users } = require("./background_jobs/unconfirmed_emails");
 
 // Configure Local Variables
@@ -44,9 +45,14 @@ app.use("/user", require("./routes/userRoutes"));
   // await the database creation process, so as we can access the data on our jobs
   await sequelize.sync().then(() => { app.emit('database-started'); });
 
-  // execute the job once a while, 20 days in this example  
-  // note that there is a limit for the interval since it is an integer
-  setInterval(remove_unconfirmed_email_users, 20 * 24 * 60 * 60 * 1000)
+  // this will run the job every first day of each month at 00:00;
+  schedule.scheduleJob(
+    "remove user accounts with unconfirmed email addresses",
+    "0 0 1 * *", 
+    () => {
+      remove_unconfirmed_email_users();
+    },
+  )
 })()
 
 // Start Server
