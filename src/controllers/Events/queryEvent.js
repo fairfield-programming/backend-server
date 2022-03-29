@@ -1,4 +1,4 @@
-module.exports = (req, res) => {
+module.exports.queryEvent = (req, res) => {
   if (!req.params.id) return res.status(400).send("Not All Parameters Provided.");
 
   Events.findOne(

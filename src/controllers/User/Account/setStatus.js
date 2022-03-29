@@ -1,7 +1,7 @@
 const vulgarTester = require("../../../library/VulgarTest");
 const { handleError500 } = require("../../../library/errorHandler");
 
-module.exports = (req, res) => {
+module.exports.setStatus = (req, res) => {
   if (!req.user) res.status(403).send("Not Logged In.");
   else {
     User.findOne(

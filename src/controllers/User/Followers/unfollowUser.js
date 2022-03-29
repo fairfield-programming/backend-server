@@ -1,6 +1,6 @@
 const { handleError500 } = require("../../../library/errorHandler");
 
-module.exports = (req, res) => {
+module.exports.unfollowUser = (req, res) => {
   if (!req.user) res.status(403).send("Not Logged In.");
   if (!req.params.id || !req.params.followerId) res.status(400).send("Not All Parameters Provided.");
   else {

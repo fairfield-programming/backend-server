@@ -15,7 +15,7 @@ function accountExists(userData) {
   return userData.length > 0;
 }
 
-module.exports = async (req, res) => {
+module.exports.signup = async (req, res) => {
   const { username, email, password } = req.body;
   if (!username || !email || !password) res.status(400).send("Not All Parameters Provided.");
   else if (invalidPassword(password)) res.status(400).send("Password Not Corresponding The Format (between 4 to 14 characters, including both alphanumerical and non-alphanumerical symbols).");

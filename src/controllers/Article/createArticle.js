@@ -5,7 +5,9 @@ function missingParameters(req) {
   return !title || !description || !body;
 }
 
-module.exports = (req, res) => {
+
+
+module.exports.createArticle = (req, res) => {
   if (missingParameters(req)) res.status(400).send("Not All Parameters Provided.");
   else {
     Article.create(

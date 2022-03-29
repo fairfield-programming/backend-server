@@ -1,7 +1,7 @@
 const { compare } = require("bcrypt");
 const { handleError500 } = require("../../../library/errorHandler");
 
-module.exports = (req, res) => {
+module.exports.deleteAccount = (req, res) => {
   if (!req.params.id) res.status(400).send("Not All Parameters Given.");
   else if (!req.user) res.status(403).send("Not Logged In.");
   else if (req.user.id !== req.params.id) res.status(401).send("Not Authorized.");

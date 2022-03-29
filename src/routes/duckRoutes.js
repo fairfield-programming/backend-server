@@ -1,7 +1,6 @@
-
 const express = require(express);
 const router = express.Router();
-const duckControllers  = require("../controllers/Duck");
+const duckControllers = require("../controllers/Duck");
 
 router.get("/", duckControllers.getDuck);
 router.get("/:id", duckControllers.getDuckById);

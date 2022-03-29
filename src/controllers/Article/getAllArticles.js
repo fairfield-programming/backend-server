@@ -1,6 +1,6 @@
 
 
-module.exports = (req, res) => {
+module.exports.getAllArticles = (req, res) => {
     Article.findAll(
       {},
     )

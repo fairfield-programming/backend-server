@@ -1,4 +1,4 @@
-module.exports = (req, res) => {
+module.exports.listEvents = (req, res) => {
   Events.findAll(
     {},
   )

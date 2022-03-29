@@ -1,4 +1,4 @@
-module.exports = (req, res) => {
+module.exports.getStatus = (req, res) => {
   if (!req.params.id) return res.status(400).send("Not All Parameters Provided.");
 
   User.findOne(

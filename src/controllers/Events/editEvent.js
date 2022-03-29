@@ -2,7 +2,7 @@ const Events = require("../../models/Events");
 const { missingParameters } = require("../../library/eventsUtils");
 const { DetectVulgarWords } = require("../../library/VulgarTest");
 
-module.exports = (req, res) => {
+module.exports.editEvent = (req, res) => {
   if (!req.user) return res.status(403).send("Not Logged In.");
   if (missingParameters(req)) return res.status(400).send("Not All Parameters Provided.");
 

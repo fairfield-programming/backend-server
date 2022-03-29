@@ -1,6 +1,6 @@
 const { handleError500 } = require("../../../library/errorHandler");
 
-module.exports = (req, res) => {
+module.exports.unblockUser = (req, res) => {
   if (!req.user) res.status(403).send("Not Logged In.");
   if (!req.params.id || !req.params.blockId) res.status(400).send("Not All Parameters Provided.");
   else {

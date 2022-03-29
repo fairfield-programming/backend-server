@@ -1,4 +1,4 @@
-module.exports = (req, res) => {
+module.exports.countUsers = (req, res) => {
     User.findAll(
       {},
     )

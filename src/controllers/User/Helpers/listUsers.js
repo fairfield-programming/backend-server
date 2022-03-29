@@ -1,4 +1,4 @@
-module.exports = (req, res) => {
+module.exports.listUsers = (req, res) => {
   User.findAll(
     {},
   )

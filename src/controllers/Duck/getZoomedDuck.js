@@ -1,6 +1,6 @@
 const duckGenerator = require("duckgen");
 
-module.exports = (req, res) => {
+module.exports.getZoomedDuck = (req, res) => {
     // Parse the String
     const duckData = duckGenerator.parseV1String(req.params.id);
     if (!duckData) res.status(400).send("Bad Request.");

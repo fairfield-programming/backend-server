@@ -1,4 +1,4 @@
-module.exports = (req, res) => {
+module.exports.unrsvpEvent = (req, res) => {
   if (!req.user) return res.status(403).send("Not Logged In.");
   if (!req.params.id) return res.status(400).send("Not All Parameters Provided.");
 

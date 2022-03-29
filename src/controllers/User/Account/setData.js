@@ -1,6 +1,6 @@
 const vulgarTester = require("../../../library/VulgarTest");
 
-module.exports = (req, res) => {
+module.exports.setData = (req, res) => {
   if (!req.user) return res.status(403).send("Not Logged In.");
 
   const { biography, profilePicture, username } = req.body;

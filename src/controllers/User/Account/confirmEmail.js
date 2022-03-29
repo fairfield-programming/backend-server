@@ -1,6 +1,6 @@
 const { verify } = require("jsonwebtoken");
 
-module.exports = async (req, res) => {
+module.exports.confirmEmail = async (req, res) => {
     try {
 
         // get the user id from the jwt on the req.params

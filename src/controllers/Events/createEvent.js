@@ -1,6 +1,6 @@
 const { missingParameters } = require("../../library/eventsUtils");
 
-module.exports = (req, res) => {
+module.exports.createEvent = (req, res) => {
   if (!req.user) return res.status(400).send("Not Logged In.");
 
   if (missingParameters(req)) return res.status(400).send("Not All Parameters Provided.");

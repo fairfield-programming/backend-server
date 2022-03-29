@@ -4,7 +4,7 @@ const {
 } = require("bcrypt");
 const { handleError500 } = require("../../../library/errorHandler");
 
-module.exports = (req, res) => {
+module.exports.setPass = (req, res) => {
   if (!req.params.id || !req.body.password || !req.body.newPassword) return res.status(400).send("Not All Parameters Given.");
 
   if (!req.user) return res.status(403).send("Not Logged In.");
