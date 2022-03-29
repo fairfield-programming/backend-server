@@ -5,6 +5,8 @@ const express = require('express');
 const { verify } = require('jsonwebtoken');
 const { Sequelize } = require('sequelize');
 const models = require('./models');
+const schedule = require('node-schedule');
+const { remove_unconfirmed_email_users } = require("./background_jobs/unconfirmed_emails");
 
 // Configure Local Variables
 const app = express();
@@ -122,7 +124,19 @@ app.get("/confirmEmail/:token", require("./routes/User/Account/confirmEmail"));
 
 
 // Sync the Database
-sequelize.sync().then(() => { app.emit('database-started'); });
+(async () => {
+  // await the database creation process, so as we can access the data on our jobs
+  await sequelize.sync().then(() => { app.emit('database-started'); });
+
+  // this will run the job every first day of each month at 00:00;
+  schedule.scheduleJob(
+    "remove user accounts with unconfirmed email addresses",
+    "0 0 1 * *", 
+    () => {
+      remove_unconfirmed_email_users();
+    },
+  )
+})()
 
 // Start Server
 if (process.env.NODE_ENV !== 'test') {
