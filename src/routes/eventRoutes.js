@@ -1,6 +1,9 @@
-const express = require(express);
+const express = require("express");
 const router = express.Router();
 const eventControllers = require("../controllers/Events");
+const { verifyLogin } = require("../middelwares/verifyLogin");
+const { verifyEmail } = require("../middelwares/verifyEmail");
+
 
 
 router.get('/', eventControllers.listEvents);

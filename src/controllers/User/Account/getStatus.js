@@ -14,7 +14,7 @@ module.exports.getStatus = (req, res) => {
 
       res.set("Content-Type", "text/html");
 
-      return res.send(data.status);
+      return res.send(JSON.stringify(data.status));
     })
     .catch((error) => {
       console.log(error);
