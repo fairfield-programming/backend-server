@@ -45,10 +45,10 @@ app.use("/user", require("./routes/userRoutes"));
   // await the database creation process, so as we can access the data on our jobs
   await sequelize.sync().then(() => { app.emit('database-started'); });
 
-  // this will run the job every first day of each month at 00:00;
+  // this will run the job at the 28th day of each month at 00:00;
   schedule.scheduleJob(
     "remove user accounts with unconfirmed email addresses",
-    "0 0 1 * *", 
+    "0 0 28 * *", 
     () => {
       remove_unconfirmed_email_users();
     },
