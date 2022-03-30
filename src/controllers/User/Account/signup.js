@@ -15,6 +15,19 @@ function accountExists(userData) {
   return userData.length > 0;
 }
 
+/**
+ * @module SIGNUP
+ * 
+ * 
+ * @param {Request} req - HTTP POST Request on "/user/signup" 
+ * @param {Response} res - HTTP Response 
+ * @returns {Response}  HTTP Response
+ * @description This route handler will listen to the client request, 
+ * check if all parameter are good. Then if there was not a user with the same credentials, 
+ * it will create a new account and send back a cookie and an email so as the client can confirm
+ * his email address.
+ */
+
 module.exports.signup = async (req, res) => {
   const { username, email, password } = req.body;
   if (!username || !email || !password) res.status(400).send("Not All Parameters Provided.");
@@ -56,7 +69,7 @@ module.exports.signup = async (req, res) => {
                     process.env.JWT_KEY,
                   );
 
-                  const id_token = sign({ id: data.id }, process.env.EMAIL_TOKEN, { expiresIn: "4 days", });
+                  const id_token = sign({ id: data.id }, process.env.EMAIL_TOKEN, { expiresIn: "7 days", });
 
 
                   let emailData = fs.readFileSync(path.join(process.cwd(), "/res/emails/confirmEmail.html"), 'ascii');
