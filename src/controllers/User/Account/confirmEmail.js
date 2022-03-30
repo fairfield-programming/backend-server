@@ -1,4 +1,18 @@
 const { verify } = require("jsonwebtoken");
+/**
+ * @module Confirm Email Controller
+ * @param {Request} req - HTTP Request from the client
+ * @param {Response} res - HTTP Response for the client
+ * 
+ * @description
+ * This controller will allow the user to confirm his email address by a GET HTTP request.
+ * If all the link is valid, update the user data and redirect to /login.
+ * Otherwise, send back an error message and redirect to /login.
+ * 
+ * @todo
+ * Nothing for now.
+ */
+
 
 module.exports.confirmEmail = async (req, res) => {
     try {

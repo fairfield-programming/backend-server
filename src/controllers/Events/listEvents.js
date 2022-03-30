@@ -1,3 +1,17 @@
+
+/**
+ * @module List Events Controller
+ * @param {Request} req - HTTP Request from the client
+ * @param {Response} res - HTTP Response for the client
+ * 
+ * @description
+ * This controller will allow the user to see all the current events, if any.
+ * 
+ * @todo
+ * Nothing for now.
+ */
+
+
 module.exports.listEvents = (req, res) => {
   Events.findAll(
     {},

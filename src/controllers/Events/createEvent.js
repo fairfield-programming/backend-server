@@ -1,5 +1,19 @@
 const { missingParameters } = require("../../library/eventsUtils");
 
+
+
+/**
+ * @module Create Event Controller
+ * @param {Request} req - HTTP Request from the client
+ * @param {Response} res - HTTP Response for the client
+ * 
+ * @description
+ * This controller will allow the user to create his own event, if all parameters are correct.
+ * 
+ * @todo
+ * Nothing for now.
+ */
+
 module.exports.createEvent = (req, res) => {
   if (!req.user) return res.status(400).send("Not Logged In.");
 

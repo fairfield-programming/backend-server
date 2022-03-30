@@ -1,3 +1,15 @@
+
+/**
+ * @module Get Users Controller
+ * @param {Request} req - HTTP Request from the client
+ * @param {Response} res - HTTP Response for the client
+ * 
+ * @description
+ * This controller will allow the user to get the registred users list.
+ * 
+ * @todo
+ * Nothing for now.
+ */
 module.exports.listUsers = (req, res) => {
   User.findAll(
     {},

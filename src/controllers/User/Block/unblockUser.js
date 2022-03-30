@@ -1,7 +1,20 @@
 const { handleError500 } = require("../../../library/errorHandler");
 
+
+/**
+ * @module Block User Controller
+ * @param {Request} req - HTTP Request from the client
+ * @param {Response} res - HTTP Response for the client
+ * 
+ * @description
+ * This controller will allow the user to unblock a specific user, if already blocked and all parameters are correct.
+ * 
+ * @todo
+ * Nothing for now.
+ */
+
+
 module.exports.unblockUser = (req, res) => {
-  if (!req.user) res.status(403).send("Not Logged In.");
   if (!req.params.id || !req.params.blockId) res.status(400).send("Not All Parameters Provided.");
   else {
     User.findOne(

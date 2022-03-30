@@ -1,6 +1,19 @@
+
+/**
+ * @module Query Blocked User Controller
+ * @param {Request} req - HTTP Request from the client
+ * @param {Response} res - HTTP Response for the client
+ * 
+ * @description
+ * This controller will allow the user to fetch a specific blocked user of his own blocked users list, if all parameters are correct.
+ * 
+ * @todo
+ * Nothing for now.
+ */
+
+
 module.exports.queryBlock = (req, res) => {
     if (!req.params.id || !req.params.blockId) return res.status(400).send("Not All Parameters Provided.");
-    if (!req.user) return res.status(403).send("Not Logged In");
   
     User.findOne(
       {
