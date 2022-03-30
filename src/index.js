@@ -2,8 +2,6 @@ require('dotenv').config();
 
 // Configure Imports
 const express = require('express');
-const { Sequelize } = require('sequelize');
-const models = require('./models');
 const schedule = require('node-schedule');
 const { remove_unconfirmed_email_users } = require("./background_jobs/unconfirmed_emails");
 
@@ -24,6 +22,7 @@ app.get('/', require('./routes/index'));
 
 // Duck Joke Endpoints
 app.use('/jokes', require('./routes/jokeRoutes'));
+
 // Duck Endpoints
 app.use('/duck', require('./routes/duckRoutes'));
 
