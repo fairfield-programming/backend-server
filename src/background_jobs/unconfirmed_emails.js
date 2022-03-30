@@ -8,7 +8,7 @@ const path = require("path");
 /**
  * @module Remove User Accounts With Unconfirmed Email Addresses
  * 
- * @description This async functions will search to find all the users on our database where confirmed_email is set to false,
+ * @description This async functions will search to find all the users in our database where confirmed_email is set to false,
  * it will retreive thier ids, then it deletes all the related data to that user before destroying the user itself.
  * 
  * @todo
@@ -75,7 +75,7 @@ module.exports.remove_unconfirmed_email_users = async () => {
 /**
  * @module Email Confirmation Reminder
  * 
- * @description This async functions will search to find all the users on our database where confirmed_email is set to false,
+ * @description This async functions will search to find all the users in our database where confirmed_email is set to false,
  * for the past 10 days, and will send them a new email so as they can confirm their email address.
  * 
  * @todo
