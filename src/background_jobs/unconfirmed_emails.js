@@ -1,11 +1,8 @@
 /**
  * @module Remove User Accounts With Unconfirmed Email Addresses
  * 
- * @description This async functions will search to find all the users on our database where confirmed_email is set to false,
+ * @description This async functions will find all the users on our database where confirmed_email is set to false for the last 30 days,
  * it will retreive thier ids, then it deletes all the related data to that user before destroying the user itself.
- * 
- * @todo
- * Optimize.
  * 
  */
 
