@@ -106,7 +106,7 @@ module.exports.email_confirmation_reminder = async () => {
 
         const selected_users = [];
         found_users.forEach((element) => {
-            if (Date.parse(element.createdAt) < (Date.now() - 1000)) {
+            if (Date.parse(element.createdAt) < (Date.now() - 14 * 24 * 60 * 60 * 1000)) {
                 selected_users.push({
                     id: element.id,
                     username: element.username,
