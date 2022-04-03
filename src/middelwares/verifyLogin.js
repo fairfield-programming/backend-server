@@ -24,6 +24,4 @@ module.exports.verifyLogin = (req, res, next) => {
     next();
   })
   
-  return res.status(403).send("Not Logged In.");
-  
 }
