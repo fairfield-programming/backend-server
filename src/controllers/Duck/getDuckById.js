@@ -2,7 +2,9 @@ const duckGenerator = require('duckgen');
 
 module.exports.getDuckById = (req, res) => {
 	const duckData = duckGenerator.parseV1String(req.params.id);
-	if (!duckData) return res.status(400).send('Bad Request.');
+	if (!duckData) {
+		return res.status(400).send({ msg: 'Invalid duck ID' });
+	}
 
 	res.set('Content-Type', 'image/svg+xml');
 

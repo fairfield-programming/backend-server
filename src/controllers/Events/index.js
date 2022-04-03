@@ -6,10 +6,4 @@ const { queryEvent } = require('./queryEvent');
 const { rsvpEvent } = require('./rsvpEvent');
 const { unrsvpEvent } = require('./unrsvpEvent');
 
-module.exports.createEvent = createEvent;
-module.exports.deleteEvent = deleteEvent;
-module.exports.editEvent = editEvent;
-module.exports.listEvents = listEvents;
-module.exports.queryEvent = queryEvent;
-module.exports.rsvpEvent = rsvpEvent;
-module.exports.unrsvpEvent = unrsvpEvent;
+module.exports = { createEvent, deleteEvent, editEvent, listEvents, queryEvent, rsvpEvent, unrsvpEvent };

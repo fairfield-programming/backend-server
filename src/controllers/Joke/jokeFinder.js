@@ -1,12 +1,10 @@
 const path = require('path');
-const fs = require('fs');
+const { readFileSync } = require('fs');
 const { checkIfNumberInRange } = require('../../library/validator');
 
 // Get the Jokes as an Array
 function getAllJokes() {
-	// Return the Jokes array
-	const fileData = fs.readFileSync(path.join(__dirname, '/jokes.txt'), 'ascii');
-	return fileData.split('\n');
+	return readFileSync(path.join(__dirname, '/jokes.txt'), 'ascii').split('\n');
 }
 
 function getJokeAtIndex(id) {
@@ -15,8 +13,13 @@ function getJokeAtIndex(id) {
 	const jokeCount = jokes.length;
 
 	// Check if Id is out of Range
-	if (typeof id != 'number') return false;
-	if (!checkIfNumberInRange(id, 0, jokeCount)) return false;
+	if (typeof id != 'number') {
+		return false;
+	}
+
+	if (!checkIfNumberInRange(id, 0, jokeCount)) {
+		return false;
+	}
 
 	return jokes[id];
 }
