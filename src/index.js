@@ -5,7 +5,7 @@ const express = require('express');
 const { Sequelize } = require('sequelize');
 const models = require('./models');
 const schedule = require('node-schedule');
-const { remove_unconfirmed_email_users } = require("./background_jobs/unconfirmed_emails");
+const { removeUnconfirmedAccounts } = require('./jobs/accountCleanup');
 
 // Configure Local Variables
 const app = express();
@@ -15,9 +15,7 @@ const port = process.env.PORT || 8080;
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(require("cors")({ origin: "https://fairfieldprogramming.org" }));
-
-
+app.use(require('cors')({ origin: 'https://fairfieldprogramming.org' }));
 
 // Programs
 app.get('/', require('./routes/index'));
@@ -30,37 +28,29 @@ app.use('/duck', require('./routes/duckRoutes'));
 // Article Endpoints
 app.use('/article', require('./routes/articleRoutes'));
 
-
 // Event Endpoints
-app.use("/event", require("./routes/eventRoutes"));
-
+app.use('/event', require('./routes/eventRoutes'));
 
 // User Endpoints
-app.use("/user", require("./routes/userRoutes"));
-
-
+app.use('/user', require('./routes/userRoutes'));
 
 // Sync the Database
 (async () => {
-  // await the database creation process, so as we can access the data on our jobs
-  await sequelize.sync().then(() => { app.emit('database-started'); });
+	// await the database creation process, so as we can access the data on our jobs
+	await sequelize.sync();
+	app.emit('database-started');
+})();
 
-  // this will run the job every first day of each month at 00:00;
-  schedule.scheduleJob(
-    "remove user accounts with unconfirmed email addresses",
-    "0 0 1 * *", 
-    () => {
-      remove_unconfirmed_email_users();
-    },
-  )
-})()
+// run every 7 days
+schedule.scheduleJob('remove unconfirmed accounts', '0 0 * * 0', () => {
+	removeUnconfirmedAccounts();
+});
 
 // Start Server
 if (process.env.NODE_ENV !== 'test') {
-  app.listen(port, () => {
-    // Log Server Port to the Console.
-    console.log(`Server Listening at http://localhost:${port}`);
-  });
+	app.listen(port, () => {
+		console.log(`Server listening at http://localhost:${port}`);
+	});
 }
 
 module.exports = app;
