@@ -13,21 +13,17 @@ module.exports.removeUnconfirmedAccounts = async () => {
 		return;
 	}
 
-	const ids = accounts.map((account) => {
-		if (Date.parse(account.createdAt) < Date.now() - MAX_UNCONFIRMED_ACCOUNT_AGE) {
-			return account.id;
-		}
-	});
+	const accountIds = accounts.filter(account => Date.parse(account.createdAt) < Date.now() - MAX_UNCONFIRMED_ACCOUNT_AGE).map(account => account.id);
 
 	await Promise.all([
 		Events.findAll({
 			where: {
-				ownerId: { [Op.in]: ids },
+				ownerId: { [Op.in]: accountIds },
 			},
 		}),
 		User.destroy({
 			where: {
-				id: { [Op.in]: ids },
+				id: { [Op.in]: accountIds },
 			},
 		}),
 	]);
