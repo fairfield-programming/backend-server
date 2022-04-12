@@ -75,7 +75,8 @@ module.exports.signup = async (req, res) => {
                         email: data.email,
                       },
                       process.env.JWT_KEY,
-                    )
+                    ),
+                    id: data.id
                   });
 
                 }
