@@ -15,7 +15,9 @@ const port = process.env.PORT || 8080;
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(require("cors")());
+app.use(require("cors")({
+    origin: ['https://fairfieldprogramming.org', 'http://localhost:8000/']
+}));
 
 
 
