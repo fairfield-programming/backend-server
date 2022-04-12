@@ -49,7 +49,7 @@ module.exports.login = (req, res) => {
               },
               process.env.JWT_KEY,
             ),
-            id: data.id
+            id: userData.id
          });
 
         }
