@@ -24,6 +24,7 @@ app.get('/', require('./routes/index'));
 
 // Duck Joke Endpoints
 app.use('/jokes', require('./routes/jokeRoutes'));
+
 // Duck Endpoints
 app.use('/duck', require('./routes/duckRoutes'));
 

@@ -3,9 +3,10 @@ const { sign } = require("jsonwebtoken");
 
 
 /**
- * @module login
- * HTTP POST Request on "/login" handler
- * @param {Request} req - HTTP POST Request on "/login" 
+ * @module LOGIN
+ * 
+ * 
+ * @param {Request} req - HTTP POST Request on "/user/login" 
  * @param {Response} res - HTTP Response 
  * @returns {Response}  HTTP Response
  * @description This route handler will listen to the client request, 

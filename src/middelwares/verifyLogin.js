@@ -2,11 +2,16 @@ const { verify } = require('jsonwebtoken');
 
 
 /**
- *  Verfies if the user is logged in, otherwise redirect to "/login"
+ * @module VERIFY LOGIN
+ * 
+ * 
+ * 
  * @param {Request} req HTTP Request
  * @param {Response} res HTTP Response
  * @param {Middelware} next calls the next middelware
- * @returns {Response}
+ * 
+ * @description
+ *  Verfies if the user is logged in, otherwise redirect to "/user/login"
  */
 
 module.exports.verifyLogin = (req, res, next) => {

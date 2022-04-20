@@ -2,8 +2,23 @@ const Events = require("../../models/Events");
 const { missingParameters } = require("../../library/eventsUtils");
 const { DetectVulgarWords } = require("../../library/VulgarTest");
 
+
+
+
+/**
+ * @module Edit Event Controller
+ * @param {Request} req - HTTP Request from the client
+ * @param {Response} res - HTTP Response for the client
+ * 
+ * @description
+ * This controller will allow the user to edit his own event, if all parameters are correct, and no vulgar language detected.
+ * 
+ * @todo
+ * Nothing for now.
+ */
+
+
 module.exports.editEvent = (req, res) => {
-  if (!req.user) return res.status(403).send("Not Logged In.");
   if (missingParameters(req)) return res.status(400).send("Not All Parameters Provided.");
 
   Events.findOne(

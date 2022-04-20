@@ -1,6 +1,17 @@
 const jokeLib = require("./jokeFinder");
 const { propertyUndefined } = require("../../library/validator");
 
+/**
+ * @module Get Joke By ID Controller
+ * @param {Request} req - HTTP Request from the client
+ * @param {Response} res - HTTP Response for the client
+ * 
+ * @description
+ * This controller will allow the user get a specific joke by ID.
+ * 
+ * @todo
+ * Nothing for now.
+ */
 
 
 module.exports.getJokeById= (req, res) => {

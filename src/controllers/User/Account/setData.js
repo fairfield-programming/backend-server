@@ -1,7 +1,19 @@
 const vulgarTester = require("../../../library/VulgarTest");
 
+/**
+ * @module Set Account Data Controller
+ * @param {Request} req - HTTP Request from the client
+ * @param {Response} res - HTTP Response for the client
+ * 
+ * @description
+ * This controller will allow the user to update his account data, if no vulgar language detected and all parameters are correct.
+ * 
+ * @todo
+ * Nothing for now.
+ */
+
+
 module.exports.setData = (req, res) => {
-  if (!req.user) return res.status(403).send("Not Logged In.");
 
   const { biography, profilePicture, username } = req.body;
   if (!biography || !profilePicture || !username) return res.status(400).send("Not All Parameters Given.");
