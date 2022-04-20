@@ -11,9 +11,7 @@
  * Nothing for now.
  */
 module.exports.listUsers = (req, res) => {
-  User.findAll(
-    {},
-  )
+  User.findAll({})
     .then((data) => {
       if (data.length <= 0) return res.status(404).send("No Users.");
 
@@ -23,6 +21,7 @@ module.exports.listUsers = (req, res) => {
       data.forEach((element) => {
         output.push(
           {
+            id: element.id,
             username: element.username,
             email: element.email,
             createdAt: element.createdAt,

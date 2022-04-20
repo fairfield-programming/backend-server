@@ -57,6 +57,10 @@ module.exports.signup = async (req, res) => {
                   username: req.body.username,
                   password: hashString,
                   email: req.body.email,
+                  profilePicture: "https://fairfield-programming.herokuapp.com/duck/10001000005000043/",
+                  biography: "This user hasn't set a biography yet...",
+                  confirmed_email: false,
+                  status: "",
                 },
               )
                 .then((data) => {
@@ -69,8 +73,8 @@ module.exports.signup = async (req, res) => {
                     process.env.JWT_KEY,
                   );
 
-                  const id_token = sign({ id: data.id }, process.env.EMAIL_TOKEN, { expiresIn: "7 days", });
 
+                  const id_token = sign({ id: data.id }, process.env.EMAIL_TOKEN, { expiresIn: "10 days", });
 
                   let emailData = fs.readFileSync(path.join(process.cwd(), "/res/emails/confirmEmail.html"), 'ascii');
 
@@ -88,7 +92,8 @@ module.exports.signup = async (req, res) => {
                         email: data.email,
                       },
                       process.env.JWT_KEY,
-                    )
+                    ),
+                    id: data.id
                   });
 
                 }

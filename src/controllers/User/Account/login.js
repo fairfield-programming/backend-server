@@ -41,14 +41,17 @@ module.exports.login = (req, res) => {
           // In order to support an open-api and multiple platforms, cookies cant be used.
           // User sessions will need to be stored on the client side.
 
-          res.json({ token: sign(
-            {
-              id: userData.id,
-              username: userData.username,
-              email: userData.email,
-            },
-            process.env.JWT_KEY,
-          )});
+          res.json({ 
+            token: sign(
+              {
+                id: userData.id,
+                username: userData.username,
+                email: userData.email,
+              },
+              process.env.JWT_KEY,
+            ),
+            id: userData.id
+         });
 
         }
       );
