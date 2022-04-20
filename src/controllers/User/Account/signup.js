@@ -60,7 +60,7 @@ module.exports.signup = async (req, res) => {
                     process.env.JWT_KEY,
                   );
 
-                  const id_token = sign({ id: data.id }, process.env.EMAIL_TOKEN, { expiresIn: "4 days", });
+                  const id_token = sign({ id: data.id }, process.env.EMAIL_TOKEN, { expiresIn: "10 days", });
 
 
                   let emailData = fs.readFileSync(path.join(process.cwd(), "/res/emails/confirmEmail.html"), 'ascii');

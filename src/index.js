@@ -2,10 +2,8 @@ require('dotenv').config();
 
 // Configure Imports
 const express = require('express');
-const { Sequelize } = require('sequelize');
-const models = require('./models');
 const schedule = require('node-schedule');
-const { remove_unconfirmed_email_users } = require("./background_jobs/unconfirmed_emails");
+const { remove_unconfirmed_email_users, email_confirmation_reminder} = require("./background_jobs/unconfirmed_emails");
 
 // Configure Local Variables
 const app = express();
@@ -47,10 +45,19 @@ app.use("/user", require("./routes/userRoutes"));
   // await the database creation process, so as we can access the data on our jobs
   await sequelize.sync().then(() => { app.emit('database-started'); });
 
-  // this will run the job every first day of each month at 00:00;
+  // this will run the job at the 10th day of each month at 08:00;
+  schedule.scheduleJob(
+    "remind users to confirm their email address",
+    "0 8 10 * *", 
+    () => {
+      email_confirmation_reminder();
+    },
+  )
+
+  // this will run the job at the 28th day of each month at 00:00;
   schedule.scheduleJob(
     "remove user accounts with unconfirmed email addresses",
-    "0 0 1 * *", 
+    "0 0 28 * *", 
     () => {
       remove_unconfirmed_email_users();
     },
