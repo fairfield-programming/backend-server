@@ -19,12 +19,8 @@ const { detectVulgarWords } = require('../../library/VulgarTest');
 
 
 module.exports.editEvent = (req, res) => {
-<<<<<<< HEAD
-  if (missingParameters(req)) return res.status(400).send("Not All Parameters Provided.");
-=======
 	if (!req.user) return res.status(403).send('Not Logged In.');
 	if (missingParameters(req)) return res.status(400).send('Not All Parameters Provided.');
->>>>>>> 40f8b7c5ee62f497de5ed4c7d88ed549512bc3b5
 
 	Events.findOne({
 		where: {

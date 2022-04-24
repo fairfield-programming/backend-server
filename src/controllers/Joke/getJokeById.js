@@ -1,7 +1,6 @@
 const jokeLib = require('./jokeFinder');
 const { propertyUndefined } = require('../../library/validator');
 
-<<<<<<< HEAD
 /**
  * @module Get Joke By ID Controller
  * @param {Request} req - HTTP Request from the client
@@ -13,10 +12,8 @@ const { propertyUndefined } = require('../../library/validator');
  * @todo
  * Nothing for now.
  */
-=======
 module.exports.getJokeById = (req, res) => {
 	res.set('Access-Control-Allow-Origin', '*');
->>>>>>> 40f8b7c5ee62f497de5ed4c7d88ed549512bc3b5
 
 	if (propertyUndefined(req.params.id)) {
 		return res.status(400).send({ msg: 'Missing joke ID' });

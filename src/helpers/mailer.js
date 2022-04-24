@@ -9,12 +9,9 @@ const transporter = nodemailer.createTransport({
 });
 
 /**
-<<<<<<< HEAD
  * @module Mailer
  * 
-=======
  * Mailer is an abstraction layer that allows us to send emails using node-mailer under the hood.
->>>>>>> 40f8b7c5ee62f497de5ed4c7d88ed549512bc3b5
  * @param {String} mailMarkup - html based markup
  * @param {String} receivers  - a comma sperated list of email addresses
  * @param {String} mailSubject - the mail subject
