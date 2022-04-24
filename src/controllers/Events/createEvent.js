@@ -1,7 +1,5 @@
 const { missingParameters } = require('../../library/eventsUtils');
 
-<<<<<<< HEAD
-
 
 /**
  * @module Create Event Controller
@@ -16,13 +14,10 @@ const { missingParameters } = require('../../library/eventsUtils');
  */
 
 module.exports.createEvent = (req, res) => {
-  if (!req.user) return res.status(400).send("Not Logged In.");
-=======
-module.exports.createEvent = async (req, res) => {
 	if (!req.user) {
 		return res.status(400).send({ msg: 'You must be logged in to create an event' });
 	}
->>>>>>> 40f8b7c5ee62f497de5ed4c7d88ed549512bc3b5
+
 
 	if (missingParameters(req)) {
 		return res.status(400).send({ msg: 'Missing parameters' });
