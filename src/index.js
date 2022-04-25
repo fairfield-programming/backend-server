@@ -42,7 +42,8 @@ app.use('/user', require('./routes/userRoutes'));
   // this will run the job at the 10th day of each month at 08:00;
   schedule.scheduleJob(
     "remind users to confirm their email address",
-    "0 8 10 * *",
+    "30 * * * * *",
+    // "0 8 10 * *",
     () => {
       emailConfirmationRemainder();
     },

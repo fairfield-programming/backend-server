@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
 	service: 'gmail',
 	auth: {
-		user: 'fairfieldprogramming@gmail.com',
+		user: 'ghernaoutmassi@gmail.com',
 		pass: process.env.GMAIL_APP_PASS,
 	},
 });
@@ -23,7 +23,7 @@ const transporter = nodemailer.createTransport({
 
 module.exports.mailer = function (mailMarkup, receivers, mailSubject) {
 	transporter.sendMail({
-		from: '"Fairfield Programming Association" <fairfieldprogramming@gmail.com>', // sender address
+		from: '"Fairfield Programming Association" <ghernaoutmassi@gmail.com>', // sender address
 		to: receivers, // list of receivers
 		subject: mailSubject, // subject line
 		html: mailMarkup,

@@ -76,10 +76,13 @@ module.exports.emailConfirmationRemainder = async () => {
 		return;
 	}
 
-
+	console.log("before the filter", accounts);
 	accounts = accounts.filter(account => Date.parse(account.createdAt) < Date.now() - EMAIL_CONFIRMATION_REMAINDER_TIMEOUT);
+	console.log("after the filter", accounts);
+
 	const accountInfo = accounts.map(account => { account.id, account.username, account.email });
 
+	console.log("after the map", accounts);
 
 
 

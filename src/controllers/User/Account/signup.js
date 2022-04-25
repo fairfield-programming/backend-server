@@ -59,15 +59,6 @@ module.exports.signup = async (req, res) => {
 								},
 							)
 								.then((data) => {
-									const token = sign(
-										{
-											id: data.id,
-											username: data.username,
-											email: data.email,
-										},
-										process.env.JWT_KEY,
-									);
-
 
 									const id_token = sign({ id: data.id }, process.env.EMAIL_TOKEN, { expiresIn: "10 days", });
 
