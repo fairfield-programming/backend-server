@@ -20,10 +20,6 @@ module.exports.setPass = (req, res) => {
 	if (!req.params.id || !req.body.password || !req.body.newPassword)
 		return res.status(400).send('Not All Parameters Given.');
 
-<<<<<<< HEAD
-=======
-	if (!req.user) return res.status(403).send('Not Logged In.');
->>>>>>> 40f8b7c5ee62f497de5ed4c7d88ed549512bc3b5
 
 	if (req.user.id !== req.params.id) return res.status(401).send('Not Authorized.');
 

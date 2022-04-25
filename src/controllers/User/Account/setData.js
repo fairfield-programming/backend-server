@@ -14,10 +14,7 @@ const vulgarTester = require('../../../library/VulgarTest');
 
 
 module.exports.setData = (req, res) => {
-<<<<<<< HEAD
-=======
 	if (!req.user) return res.status(403).send('Not Logged In.');
->>>>>>> 40f8b7c5ee62f497de5ed4c7d88ed549512bc3b5
 
 	const { biography, profilePicture, username } = req.body;
 	if (!biography || !profilePicture || !username) return res.status(400).send('Not All Parameters Given.');

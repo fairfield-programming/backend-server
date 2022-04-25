@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const { verify } = require("jsonwebtoken");
 /**
  * @module Confirm Email Controller
@@ -14,9 +13,6 @@ const { verify } = require("jsonwebtoken");
  * Nothing for now.
  */
 
-=======
-const { verify } = require('jsonwebtoken');
->>>>>>> 40f8b7c5ee62f497de5ed4c7d88ed549512bc3b5
 
 module.exports.confirmEmail = async (req, res) => {
 	try {
