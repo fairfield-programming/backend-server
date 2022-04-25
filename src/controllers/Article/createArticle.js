@@ -16,7 +16,7 @@ function missingParameters(req) {
  * @todo
  * Nothing for now.
  */
-module.exports.createArticle = (req, res) => {
+module.exports.createArticle = async(req, res) => {
 	if (missingParameters(req)) res.status(400).send("Not All Parameters Provided.");
  	try {
 		const article = await Article.create({

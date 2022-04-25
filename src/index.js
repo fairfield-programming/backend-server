@@ -2,6 +2,7 @@ require('dotenv').config();
 
 // Configure Imports
 const express = require('express');
+const sequelize = require("sequelize");
 const schedule = require('node-schedule');
 const { removeUnconfirmedAccounts, emailConfirmationRemainder } = require('./jobs/accountCleanup');
 

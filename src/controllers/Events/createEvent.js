@@ -13,7 +13,7 @@ const { missingParameters } = require('../../library/eventsUtils');
  * Nothing for now.
  */
 
-module.exports.createEvent = (req, res) => {
+module.exports.createEvent = async(req, res) => {
 	if (!req.user) {
 		return res.status(400).send({ msg: 'You must be logged in to create an event' });
 	}
