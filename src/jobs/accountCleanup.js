@@ -1,4 +1,7 @@
-const { MAX_UNCONFIRMED_ACCOUNT_AGE, EMAIL_CONFIRMATION_REMAINDER_TIMEOUT } = require('../constants');
+const {
+	MAX_UNCONFIRMED_ACCOUNT_AGE,
+	EMAIL_CONFIRMATION_REMAINDER_TIMEOUT,
+} = require('../constants');
 
 
 
@@ -77,7 +80,7 @@ module.exports.emailConfirmationRemainder = async () => {
 	accounts = accounts.filter(account => Date.parse(account.createdAt) < Date.now() - EMAIL_CONFIRMATION_REMAINDER_TIMEOUT);
 	const accountInfo = accounts.map(account => { account.id, account.username, account.email });
 
-	
+
 
 
 
