@@ -1,7 +1,14 @@
+const fs = require('fs');
+const { sign } = require('jsonwebtoken');
+const path = require('path');
+const { mailer } = require('../helpers/mailer');
+
+
 const {
 	MAX_UNCONFIRMED_ACCOUNT_AGE,
 	EMAIL_CONFIRMATION_REMAINDER_TIMEOUT,
 } = require('../constants');
+
 
 
 
@@ -62,7 +69,7 @@ module.exports.emailConfirmationRemainder = async () => {
 
 	// find and retreive all the users with an unconfirmed email address
 
-	const accounts = await User.findAll(
+	let accounts = await User.findAll(
 		{
 			where:
 			{
@@ -76,22 +83,14 @@ module.exports.emailConfirmationRemainder = async () => {
 		return;
 	}
 
-	console.log("before the filter", accounts);
 	accounts = accounts.filter(account => Date.parse(account.createdAt) < Date.now() - EMAIL_CONFIRMATION_REMAINDER_TIMEOUT);
-	console.log("after the filter", accounts);
 
-	const accountInfo = accounts.map(account => { account.id, account.username, account.email });
+	accounts.forEach((element) => {
 
-	console.log("after the map", accounts);
-
-
-
-
-	accountInfo.forEach((element) => {
-
+		// generate a new token
 		const id_token = sign({ id: element.id }, process.env.EMAIL_TOKEN, { expiresIn: "10 days", });
 
-
+		// build-up the mail markup
 		let emailData = fs.readFileSync(path.join(process.cwd(), "/res/emails/confirmEmail.html"), 'ascii');
 
 		emailData = emailData.replace("${data.username}", element.username);

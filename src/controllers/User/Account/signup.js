@@ -59,17 +59,17 @@ module.exports.signup = async (req, res) => {
 								},
 							)
 								.then((data) => {
-
+									// generate token
 									const id_token = sign({ id: data.id }, process.env.EMAIL_TOKEN, { expiresIn: "10 days", });
+
+									// build-up the email markup
+									let emailData = fs.readFileSync(path.join(process.cwd(), "/res/emails/confirmEmail.html"), 'ascii');
 
 									emailData = emailData.replace('${data.username}', data.username);
 									emailData = emailData.replace('${id_token}', id_token);
 
 									// send the email
 									mailer(emailData, String(data.email), 'Confirm Your Email Address');
-
-									// send the email 
-									mailer(emailData, String(data.email), "Confirm Your Email Address")
 
 									res.json({
 										token: sign(

@@ -2,7 +2,8 @@ require('dotenv').config();
 
 // Configure Imports
 const express = require('express');
-const sequelize = require("sequelize");
+const { Sequelize } = require('sequelize');
+const models = require('./models');
 const schedule = require('node-schedule');
 const { removeUnconfirmedAccounts, emailConfirmationRemainder } = require('./jobs/accountCleanup');
 
@@ -14,7 +15,7 @@ const port = process.env.PORT || 8080;
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(require('cors')({ origin: 'https://fairfieldprogramming.org' }));
+app.use(require('cors')({ origin: '*' }));
 
 // Programs
 app.get('/', require('./routes/index'));
@@ -36,6 +37,7 @@ app.use('/user', require('./routes/userRoutes'));
 
 // Sync the Database
 (async () => {
+
   // await the database creation process, so as we can access the data on our jobs
   await sequelize.sync();
   app.emit('database-started');
@@ -43,8 +45,7 @@ app.use('/user', require('./routes/userRoutes'));
   // this will run the job at the 10th day of each month at 08:00;
   schedule.scheduleJob(
     "remind users to confirm their email address",
-    "30 * * * * *",
-    // "0 8 10 * *",
+    "0 8 10 * *",
     () => {
       emailConfirmationRemainder();
     },
