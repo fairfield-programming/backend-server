@@ -15,7 +15,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(require("cors")({
-    origin: ['https://fairfieldprogramming.org', 'http://localhost:8000/']
+    origin: "*"
 }));
 
 
