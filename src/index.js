@@ -8,6 +8,7 @@ const { remove_unconfirmed_email_users, email_confirmation_reminder} = require("
 // Configure Local Variables
 const app = express();
 const port = process.env.PORT || 8080;
+const models = require('./models');
 
 // Configure Middleware
 app.use(express.static('public'));
