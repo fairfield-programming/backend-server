@@ -1,41 +1,43 @@
 {
-  "name": "fairfield-programming-association",
-  "version": "1.0.0",
-  "description": "The Fairfield Programming Association is a league of schools in the south-eastern Connecticut area that focuses on teaching students important lessons in programming.",
-  "author": "William McGonagle",
-  "keywords": [],
-  "homepage": "https://fairfieldprogramming.org/",
-  "bugs": {
-    "url": "https://fairfieldprogramming.org/bugs",
-    "email": "bugs@fairfieldprogramming.org"
-  },
-  "scripts": {
-    "start": "node src/index.js",
-    "test": "npx eaf-linter"
-  },
-  "eaf-linter": {
-    "force-fail": false,
-    "run-tests": false
-  },
-  "license": "MIT",
-  "dependencies": {
-    "bcrypt": "^5.0.0",
-    "cookie-parser": "^1.4.6",
-    "cors": "^2.8.5",
-    "dotenv": "^10.0.0",
-    "duckgen": "^1.1.0",
-    "eslint-plugin-jest": "^25.3.2",
-    "express": "^4.17.1",
-    "jsdoc": "^3.6.10",
-    "jsonwebtoken": "^8.5.1",
-    "node-schedule": "^2.1.0",
-    "nodemailer": "^6.7.2",
-    "pg": "^8.7.1",
-    "sequelize": "^6.3.5",
-    "sqlite3": "^5.0.2"
-  },
-  "devDependencies": {
-    "jest": "^27.4.5",
-    "supertest": "^6.1.6"
-  }
+	"name": "fairfield-programming-association",
+	"version": "1.0.0",
+	"description": "The Fairfield Programming Association is a league of schools in the south-eastern Connecticut area that focuses on teaching students important lessons in programming.",
+	"author": "William McGonagle",
+	"keywords": [],
+	"homepage": "https://fairfieldprogramming.org/",
+	"bugs": {
+		"url": "https://fairfieldprogramming.org/bugs",
+		"email": "bugs@fairfieldprogramming.org"
+	},
+	"scripts": {
+		"start": "node src/index.js",
+		"test": "npx eaf-linter",
+		"format": "prettier --write \"./**/*.{js,json}\""
+	},
+	"eaf-linter": {
+		"force-fail": false,
+		"run-tests": false
+	},
+	"license": "MIT",
+	"dependencies": {
+		"bcrypt": "^5.0.0",
+		"cookie-parser": "^1.4.6",
+		"cors": "^2.8.5",
+		"dotenv": "^10.0.0",
+		"duckgen": "^1.1.0",
+		"eslint-plugin-jest": "^25.3.2",
+		"express": "^4.17.1",
+		"jsdoc": "^3.6.10",
+		"jsonwebtoken": "^8.5.1",
+		"node-schedule": "^2.1.0",
+		"nodemailer": "^6.7.2",
+		"pg": "^8.7.1",
+		"prettier": "^2.6.2",
+		"sequelize": "^6.3.5",
+		"sqlite3": "^5.0.2"
+	},
+	"devDependencies": {
+		"jest": "^27.4.5",
+		"supertest": "^6.1.6"
+	}
 }

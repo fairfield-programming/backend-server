@@ -1,5 +1,5 @@
-const vulgarTester = require("../../../library/VulgarTest");
-const { handleError500 } = require("../../../library/errorHandler");
+const vulgarTester = require('../../../library/VulgarTest');
+const { handleError500 } = require('../../../library/errorHandler');
 
 
 /**

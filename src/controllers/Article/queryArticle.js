@@ -11,24 +11,24 @@
  * 
  */
 
-module.exports.queryArticle = (req, res) => {
-    if (!req.params.id) return res.status(400).send("Not All Parameters Provided.");
-  
-    Article.findOne(
-      {
-        where:
-        {
-          id: req.params.id,
-        },
+module.exports.queryArticle = async (req, res) => {
+  if (!req.params.id) {
+    return res.status(400).send({ msg: 'Missing parameters' });
+  }
+
+  try {
+    const articles = await Article.findOne({
+      where: {
+        id: req.params.id,
       },
-    ).then((data) => {
-      if (!data) return res.status(404).send("Not Found.");
-  
-      return res.json(data);
-    })
-      .catch((error) => {
-        console.log(error);
-        return res.status(500).send("Internal Server Error.");
-      });
-  };
-  
+    });
+
+    if (!articles?.length) {
+      return res.status(404).send({ msg: 'No articles found' });
+    }
+
+    return res.json({ articles });
+  } catch (e) {
+    return res.status(500).send({ msg: 'Server error' });
+  }
+};

@@ -1,10 +1,9 @@
-const { handleError500 } = require("../../library/errorHandler");
+const { handleError500 } = require('../../library/errorHandler');
 
 function missingParameters(req) {
-  const { title, description, body } = req.body;
-  return !title || !description || !body;
+	const { title, description, body } = req.body;
+	return !title || !description || !body;
 }
-
 
 /**
  * @module Create Article Controller
@@ -17,17 +16,17 @@ function missingParameters(req) {
  * @todo
  * Nothing for now.
  */
-module.exports.createArticle = (req, res) => {
-  if (missingParameters(req)) res.status(400).send("Not All Parameters Provided.");
-  else {
-    Article.create(
-      {
-        title: req.body.title,
-        description: req.body.description,
-        body: req.body.body,
-      },
-    )
-      .then((data) => res.json(data))
-      .catch((error) => handleError500(req, res, error));
-  }
+module.exports.createArticle = async(req, res) => {
+	if (missingParameters(req)) res.status(400).send("Not All Parameters Provided.");
+ 	try {
+		const article = await Article.create({
+			title: req.body.title,
+			description: req.body.description,
+			body: req.body.body,
+		});
+
+		return res.json({ article });
+	} catch (e) {
+		handleError500(req, res, e);
+	}
 };

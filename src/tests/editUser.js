@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 const supertest = require('supertest');
-const { JWT_TOKEN } = require("../library/constants");
+const { JWT_TOKEN } = require('../library/constants');
 
 if (fs.existsSync(path.join(__dirname, '../../database.db'))) fs.rmSync(path.join(__dirname, '../../database.db'));
 
@@ -17,23 +17,21 @@ process.env.JWT_KEY = JWT_TOKEN;
 let token = '';
 
 beforeAll((done) => {
-  server.on('database-started', () => {
-    requestWithSupertest
-      .post('/user/signup')
-      .send(
-        {
-          username: 'william-mcgonagle',
-          email: 'testing@fairfieldprogramming.org',
-          password: 'Testing123!',
-        },
-      )
-      .then((res) => {
-        token = res.body.token;
-        done();
-      });
-  });
+	server.on('database-started', () => {
+		requestWithSupertest
+			.post('/user/signup')
+			.send({
+				username: 'william-mcgonagle',
+				email: 'testing@fairfieldprogramming.org',
+				password: 'Testing123!',
+			})
+			.then((res) => {
+				token = res.body.token;
+				done();
+			});
+	});
 });
 
 it('empty', () => {
-  expect(1).toEqual(1);
+	expect(1).toEqual(1);
 });
