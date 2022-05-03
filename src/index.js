@@ -10,13 +10,14 @@ const { removeUnconfirmedAccounts, emailConfirmationRemainder } = require('./job
 // Configure Local Variables
 const app = express();
 const port = process.env.PORT || 8080;
+const models = require('./models');
 
 // Configure Middleware
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(require("cors")({
-  origin: ['https://fairfieldprogramming.org', 'http://localhost:8000/']
+    origin: "*"
 }));
 
 // Programs
