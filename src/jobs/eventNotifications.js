@@ -9,6 +9,19 @@ const {
 
 
 
+
+
+/**
+ * @module Event Notification | Event Remainder
+ * 
+ * @description This async functions will search to find all the events in our database that will take place in a day or less,
+ * Grab all the subscribers, send them an email notification as a remainder.
+ * 
+ * @todo
+ * Optimize.
+ * 
+ */
+
 module.exports.eventRemainder = async () => {
 
     // find events that will take place soon.
