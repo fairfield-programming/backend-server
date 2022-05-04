@@ -2,6 +2,7 @@ require('dotenv').config();
 
 // Configure Imports
 const express = require('express');
+const cookieParser = require("cookie-parser");
 const { Sequelize } = require('sequelize');
 const schedule = require('node-schedule');
 const { removeUnconfirmedAccounts, emailConfirmationRemainder } = require('./jobs/accountCleanup');
@@ -16,6 +17,7 @@ const models = require('./models');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cookieParser());
 app.use(require("cors")({
   origin: "*"
 }));
@@ -66,10 +68,10 @@ app.use('/user', require('./routes/userRoutes'));
     "remaind users about the events they are subscribed to",
     "0 8 * * *",
     () => {
-       eventRemainder();
+      eventRemainder();
     },
   )
-  
+
 })()
 
 
