@@ -3,9 +3,9 @@ require('dotenv').config();
 // Configure Imports
 const express = require('express');
 const { Sequelize } = require('sequelize');
-const models = require('./models');
 const schedule = require('node-schedule');
 const { removeUnconfirmedAccounts, emailConfirmationRemainder } = require('./jobs/accountCleanup');
+const { eventRemainder } = require("./jobs/eventNotifications");
 
 // Configure Local Variables
 const app = express();
@@ -17,7 +17,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(require("cors")({
-    origin: "*"
+  origin: "*"
 }));
 
 // Programs
@@ -62,7 +62,17 @@ app.use('/user', require('./routes/userRoutes'));
       removeUnconfirmedAccounts();
     },
   )
+  schedule.scheduleJob(
+    "remaind users about the events they are subscribed to",
+    "0 8 * * *",
+    () => {
+       eventRemainder();
+    },
+  )
+  
 })()
+
+
 
 // Start Server
 if (process.env.NODE_ENV !== 'test') {

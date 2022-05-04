@@ -71,4 +71,6 @@ global.User.belongsToMany(global.User, {
 	foreignKey: 'blockedId',
 });
 
+
+
 global.sequelize = sequelize;

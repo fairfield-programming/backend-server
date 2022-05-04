@@ -1,5 +1,3 @@
-const Events = require('../../models/Events');
-
 
 /**
  * @module RSVP Events Controller

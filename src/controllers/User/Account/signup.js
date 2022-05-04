@@ -37,7 +37,8 @@ module.exports.signup = async (req, res) => {
 				{
 					[Op.or]: [
 						{ username: req.body.username },
-						{ email: req.body.email }],
+						{ email: req.body.email }
+					],
 				},
 			},
 		)
