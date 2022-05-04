@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const userControllers = require('../controllers/User');
-const { verifyLogin } = require('../middleware/verifyLogin');
-const { verifyEmail } = require('../middleware/verifyEmail');
+const { verifyLogin } = require('../middelwares/verifyLogin');
+const { verifyEmail } = require('../middelwares/verifyEmail');
 
 // User Endpoints
 router.get('/', userControllers.listUsers);
