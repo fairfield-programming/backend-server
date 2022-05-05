@@ -2,6 +2,7 @@ const vulgarTester = require('../../../library/VulgarTest');
 
 /**
  * @module Set Account Data Controller
+ * 
  * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
  * 
@@ -13,44 +14,48 @@ const vulgarTester = require('../../../library/VulgarTest');
  */
 
 
-module.exports.setData = (req, res) => {
-	if (!req.user) return res.status(403).send('Not Logged In.');
+module.exports.setData = async (req, res) => {
+
+	if (!req.user) return res.status(403).send({ msg: 'Not Logged In.' });
 
 	const { biography, profilePicture, username } = req.body;
-	if (!biography || !profilePicture || !username) return res.status(400).send('Not All Parameters Given.');
 
-	User.findOne({
-		where: {
-			id: req.user.id,
-		},
-	})
-		.then((data) => {
-			if (!data) return res.status(404).send('Not Found.');
+	if (!biography || !profilePicture || !username) {
+		return res.status(400).send({ msg: 'Not All Parameters Are Given.' });
+	}
 
-			if (vulgarTester.detectVulgarWords(req.body.biography)) return res.status(406).send('Vulgar Language Detected.');
-			if (vulgarTester.detectVulgarWords(req.body.username)) return res.status(406).send('Vulgar Language Detected.');
+	try {
 
-			data
-				.update({
-					biography: req.body.biography || data.biography,
-					profilePicture: req.body.profilePicture || data.profilePicture,
-					username: req.body.username || data.username,
-				})
-				.then((newData) =>
-					res.status(200).json({
-						id: newData.id,
-						username: newData.username,
-						biography: newData.biography,
-						profilePicture: newData.profilePicture,
-					}),
-				)
-				.catch((error) => {
-					console.log(error);
-					return res.status(500).send('Internal Server Error.');
-				});
+		const user = await User.findOne({
+			where: {
+				id: req.user.id,
+			},
 		})
-		.catch((error) => {
-			console.log(error);
-			return res.status(500).send('Internal Server Error.');
+
+		if (!user) return res.status(404).send({ msg: 'Account Not Found.' });
+
+		if (vulgarTester.detectVulgarWords(req.body.biography)) {
+			return res.status(406).send({ msg: 'Vulgar Language Detected.' });
+		}
+		if (vulgarTester.detectVulgarWords(req.body.username)) {
+			return res.status(406).send({ msg: 'Vulgar Language Detected.' });
+		}
+
+		const updatedUser = await user.update({
+			biography: req.body.biography || user.biography,
+			profilePicture: req.body.profilePicture || user.profilePicture,
+			username: req.body.username || user.username,
+		})
+
+		res.status(200).json({
+			id: updatedUser.id,
+			username: updatedUser.username,
+			biography: updatedUser.biography,
+			profilePicture: updatedUser.profilePicture,
 		});
+
+	} catch (err) {
+		console.log(err.message);
+		return res.status(500).send({ msg: 'Error on updating account data.' });
+	}
 };

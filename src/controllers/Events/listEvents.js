@@ -1,6 +1,7 @@
 
 /**
  * @module List Events Controller
+ * 
  * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
  * 
@@ -12,15 +13,15 @@
  */
 
 
-module.exports.listEvents = (req, res) => {
-	Events.findAll({})
-		.then((data) => {
-			if (data.length <= 0) return res.status(404).send('Not Found.');
+module.exports.listEvents = async (req, res) => {
+	try {
+		const events = await Events.findAll({});
 
-			return res.json(data);
-		})
-		.catch((error) => {
-			console.log(error);
-			return res.status(500).send('Internal Server Error.');
-		});
+		if (!events.length) return res.status(404).send({ msg: 'No events for now.' });
+
+		return res.json(events);
+
+	} catch (err) {
+		return res.status(500).send({ msg: 'Error on searching for all events.' });
+	}
 };

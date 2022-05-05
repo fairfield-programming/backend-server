@@ -3,6 +3,7 @@ const { missingParameters } = require('../../library/eventsUtils');
 
 /**
  * @module Create Event Controller
+ * 
  * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
  * 

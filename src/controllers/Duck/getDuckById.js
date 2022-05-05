@@ -2,6 +2,7 @@ const duckGenerator = require('duckgen');
 
 /**
  * @module Get Duck By ID Controller
+ * 
  * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
  * 

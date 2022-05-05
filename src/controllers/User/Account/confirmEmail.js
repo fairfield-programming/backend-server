@@ -1,6 +1,7 @@
 const { verify } = require("jsonwebtoken");
 /**
  * @module Confirm Email Controller
+ * 
  * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
  * 
@@ -14,7 +15,7 @@ const { verify } = require("jsonwebtoken");
  */
 
 
-module.exports.confirmEmail =  (req, res) => {
+module.exports.confirmEmail = (req, res) => {
 	try {
 		// get the user id from the jwt on the req.params
 		const id = verify(req.params.token, process.env.EMAIL_TOKEN).id;
@@ -24,8 +25,9 @@ module.exports.confirmEmail =  (req, res) => {
 
 		// if we redirect to login, it will redirect home if already logged in
 		res.redirect('https://fairfieldprogramming.org/auth/login');
+
 	} catch (err) {
-		console.log(err);
+		console.log(err.message);
 		res.redirect('https://fairfieldprogramming.org/auth/login');
 	}
 };
