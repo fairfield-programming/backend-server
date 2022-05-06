@@ -58,7 +58,8 @@ module.exports.signup = async (req, res) => {
 			},
 		})
 
-		if (users) return res.status(403).send({ msg: "Account Already Exists." });
+
+		if (users?.length) return res.status(403).send({ msg: "Account Already Exists." });
 
 		const hashString = hash(req.body.password, 10, (err, hashString) => {
 			if (err) return res.status(500).send({ msg: "Error on signup." })
@@ -81,7 +82,7 @@ module.exports.signup = async (req, res) => {
 		// build-up the email markup
 		let emailData = fs.readFileSync(path.join(process.cwd(), "/res/emails/confirmEmail.html"), 'ascii');
 
-		emailData = emailData.replace('${newUser.username}', newUser.username);
+		emailData = emailData.replace('${data.username}', newUser.username);
 		emailData = emailData.replace('${id_token}', id_token);
 
 		// send the email
