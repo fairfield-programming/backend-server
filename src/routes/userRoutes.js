@@ -28,8 +28,8 @@ router.post('/:id/block/:blockId/undo', verifyLogin, verifyEmail, userController
 router.get('/:id/followers', verifyLogin, userControllers.listFollowers);
 router.get('/:id/followers/:followerId', verifyLogin, userControllers.queryFollower);
 
-router.post('/:id/followers/:followerId/follow', verifyLogin, verifyEmail, userControllers.followUser);
-router.post('/:id/followers/:followerId/undo', verifyLogin, verifyEmail, userControllers.unfollowUser);
+router.post('/:followeeId/follow', verifyLogin, verifyEmail, userControllers.followUser);
+router.post('/:followeeId/unfollow', verifyLogin, verifyEmail, userControllers.unfollowUser);
 
 // email verification end point
 router.get('/confirmEmail/:token', userControllers.confirmEmail);
