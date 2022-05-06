@@ -85,9 +85,9 @@ module.exports.signup = async (req, res) => {
 		emailData = emailData.replace('${id_token}', id_token);
 
 		// send the email
-		mailer(emailData, String(newUser.email), 'Confirm Your Email Address');
+		mailer(emailData, String(newUser.email), 'Confirm Your Email Address.');
 
-		res.json({
+		return res.status(200).json({
 			token: sign(
 				{
 					id: newUser.id,
@@ -99,7 +99,7 @@ module.exports.signup = async (req, res) => {
 			id: newUser.id
 		});
 
-		return res.status(200).send({ msg: "Signed in." });
+
 
 	} catch (err) {
 		console.log(err.message);

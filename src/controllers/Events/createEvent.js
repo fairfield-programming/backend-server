@@ -14,9 +14,10 @@ const { missingParameters } = require('../../library/eventsUtils');
  * Nothing for now.
  */
 
-module.exports.createEvent = async(req, res) => {
+module.exports.createEvent = async (req, res) => {
+
 	if (!req.user) {
-		return res.status(400).send({ msg: 'You must be logged in to create an event' });
+		return res.status(400).send({ msg: 'Not logged in.' });
 	}
 
 
@@ -25,7 +26,8 @@ module.exports.createEvent = async(req, res) => {
 	}
 
 	try {
-		const eventData = await Events.create({
+		
+		const event = await Events.create({
 			name: req.body.name,
 			location: req.body.location,
 			description: req.body.description,
@@ -37,18 +39,22 @@ module.exports.createEvent = async(req, res) => {
 
 		const user = await User.findOne({ where: { id: req.user.id } });
 
-		await user.addEvents(eventData);
+		if (!user) return res.status(404).send({ msg: 'Current user not found.' });
+
+		user.addEvents(event);
 
 		return res.json({
-			name: eventData.name,
-			location: eventData.location,
-			description: eventData.description,
-			host: eventData.host,
-			eventImage: eventData.eventImage,
-			status: eventData.status,
-			date: eventData.date,
+			name: event.name,
+			location: event.location,
+			description: event.description,
+			host: event.host,
+			eventImage: event.eventImage,
+			status: event.status,
+			date: event.date,
 		});
-	} catch (e) {
-		return res.status(400).send({ msg: 'Error creating event' });
+
+	} catch (err) {
+		console.log(err.message);
+		return res.status(400).send({ msg: 'Error on creating event.' });
 	}
 };

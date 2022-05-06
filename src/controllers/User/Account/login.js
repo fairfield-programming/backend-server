@@ -36,7 +36,7 @@ module.exports.login = async (req, res) => {
 
 			if (!result || err) return res.status(403).send({ msg: 'Invalid Credentials.' });
 
-			res.json({
+			return res.status(200).json({
 				token: sign(
 					{
 						id: user.id,
@@ -47,7 +47,6 @@ module.exports.login = async (req, res) => {
 				),
 			});
 
-			res.status(200).send({ msg: 'Logged in.' })
 		});
 
 	} catch (err) {

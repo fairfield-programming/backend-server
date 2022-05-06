@@ -18,6 +18,7 @@ module.exports.deleteEvent = async (req, res) => {
 	if (!req.params.id) return res.status(400).send({ msg: 'Not All Parameters Provided.' });
 
 	try {
+		
 		const event = await Events.findOne({
 			where: {
 				id: req.params.id,
@@ -34,14 +35,14 @@ module.exports.deleteEvent = async (req, res) => {
 
 
 
-		const user = await User.findAll({
+		const users = await User.findAll({
 			where: {
 				events: event,
 			},
 		})
 
 		Promise.allSettled([
-			await user.removeEvents(event),
+			await users.removeEvents(event),
 			await event.destroy()
 		])
 

@@ -24,10 +24,10 @@ module.exports.confirmEmail = (req, res) => {
 		User.update({ confirmed_email: true }, { where: { id: id } });
 
 		// if we redirect to login, it will redirect home if already logged in
-		res.redirect('https://fairfieldprogramming.org/auth/login');
+		return res.status(300).redirect('https://fairfieldprogramming.org/auth/login');
 
 	} catch (err) {
 		console.log(err.message);
-		res.redirect('https://fairfieldprogramming.org/auth/login');
+		return res.status(300).redirect('https://fairfieldprogramming.org/auth/login');
 	}
 };

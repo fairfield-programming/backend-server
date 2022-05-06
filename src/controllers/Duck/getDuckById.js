@@ -21,5 +21,5 @@ module.exports.getDuckById = (req, res) => {
 
 	res.set('Content-Type', 'image/svg+xml');
 
-	return res.send(duckGenerator.formatSVG(duckGenerator.generateDuck(duckData)));
+	return res.status(200).send(duckGenerator.formatSVG(duckGenerator.generateDuck(duckData)));
 };

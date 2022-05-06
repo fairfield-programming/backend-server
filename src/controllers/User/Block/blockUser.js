@@ -1,6 +1,7 @@
 
 /**
  * @module Block User Controller
+ * 
  * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
  * 
@@ -13,36 +14,39 @@
 
 
 
-module.exports.blockUser = (req, res) => {
-  if (!req.params.id || !req.params.blockId) return res.status(400).send("Not All Parameters Provided.");
+module.exports.blockUser = async (req, res) => {
+	if (!req.params.id || !req.params.blockId) {
+		return res.status(400).send({ msg: "Not All Parameters Provided." });
+	}
 
-	User.findOne({
-		where: {
-			id: req.user.id,
-		},
-	})
-		.then((userData) => {
-			User.findOne({
+	try {
+
+		const [user, userToBlock] = Promise.all([
+			await User.findOne({
+				where: {
+					id: req.user.id,
+				},
+			})
+			,
+			await User.findOne({
 				where: {
 					id: req.params.blockId,
 				},
 			})
-				.then((blockData) => {
-					userData
-						.addBlocked(blockData)
-						.then(() => res.json(userData))
-						.catch((error) => {
-							console.log(error);
-							return res.status(500).send('Internal Server Error.');
-						});
-				})
-				.catch((error) => {
-					console.log(error);
-					return res.status(500).send('Internal Server Error.');
-				});
-		})
-		.catch((error) => {
-			console.log(error);
-			return res.status(500).send('Internal Server Error.');
-		});
+		])
+		if (!userToBlock) {
+			return res.status(404).send({ msg: "Account to block Not Found." });
+		}
+		if (!user) {
+			return res.status(404).send({ msg: 'Current account not found.' })
+		}
+
+		user.addBlocked(userToBlock);
+
+		return res.status(200).send({ msg: 'User blocked.' });
+
+	} catch (err) {
+		console.log(err.message);
+		return res.status(500).send({ msg: 'Error on blocking user.' });
+	}
 };
