@@ -13,12 +13,14 @@
  */
 
 
+
+
 module.exports.deleteEvent = async (req, res) => {
 	if (!req.user) return res.status(403).send({ msg: 'Not Logged in.' });
 	if (!req.params.id) return res.status(400).send({ msg: 'Not All Parameters Provided.' });
 
 	try {
-		
+
 		const event = await Events.findOne({
 			where: {
 				id: req.params.id,
@@ -26,7 +28,7 @@ module.exports.deleteEvent = async (req, res) => {
 		})
 
 		if (!event) {
-			return res.status(400).send({ msg: 'Event does not exist' });
+			return res.status(400).send({ msg: 'Event not found.' });
 		}
 
 		if (event.ownerId !== req.user.id) {
@@ -35,16 +37,16 @@ module.exports.deleteEvent = async (req, res) => {
 
 
 
-		const users = await User.findAll({
-			where: {
-				events: event,
-			},
-		})
+		const users = await event.getUsers();
 
-		Promise.allSettled([
-			await users.removeEvents(event),
-			await event.destroy()
-		])
+		users.forEach(user => {
+			user.removeEvents(event);
+		});
+
+		event.destroy();
+
+		return res.status(200).send({ msg: 'Event deleted.' });
+
 
 	} catch (err) {
 		return res.status(500).send({ msg: 'Error deleting event' });

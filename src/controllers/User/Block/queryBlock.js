@@ -19,6 +19,7 @@ module.exports.queryBlock = async (req, res) => {
   }
 
   try {
+   
     const [blockedUser, user] = Promise.all([
       await User.findOne({
         where: {

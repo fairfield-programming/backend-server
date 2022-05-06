@@ -15,7 +15,7 @@
 
 module.exports.followUser = async (req, res) => {
 
-  if (!req.params.id || !req.params.followerId) {
+  if (!req.params.followeeId) {
     return res.status(400).send({ msg: "Not All Parameters Provided." });
   }
 
@@ -31,7 +31,7 @@ module.exports.followUser = async (req, res) => {
 
       await User.findOne({
         where: {
-          id: req.params.followerId,
+          id: req.params.followeeId,
         },
       })
 
@@ -50,8 +50,9 @@ module.exports.followUser = async (req, res) => {
     }
 
 
-    await userToFollow.addFollower(user);
-    return res.status(200).json(userToFollow);
+    userToFollow.addFollower(user);
+
+    return res.status(200).send({ msg: 'You are now following this person.' });
 
   } catch (err) {
     console.log(err.message);

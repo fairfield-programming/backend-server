@@ -47,8 +47,9 @@ module.exports.unblockUser = async (req, res) => {
       return res.status(401).send({ msg: "You have not blocked this person." });
     }
 
-    await user.removeBlocked(blockedUser);
-    return res.status(200).json(user);
+    user.removeBlocked(blockedUser);
+
+    return res.status(200).send({ msg: 'User unblocked.' });
 
   } catch (err) {
     console.log(err.message);

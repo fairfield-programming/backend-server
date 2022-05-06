@@ -15,7 +15,7 @@
 
 module.exports.unfollowUser = async (req, res) => {
 
-  if (!req.params.id || !req.params.followee) {
+  if (!req.params.followeeId) {
     return res.status(400).send({ msg: "Not All Parameters Provided." });
   }
 
@@ -54,8 +54,9 @@ module.exports.unfollowUser = async (req, res) => {
 
 
 
-    await followee.removeFollower(user);
-    return res.status(200).json(user);
+    followee.removeFollower(user);
+
+    return res.status(200).send({ msg: 'Your are not longer following this person.' });
 
   } catch (err) {
     console.log(err.message);

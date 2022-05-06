@@ -27,7 +27,7 @@ module.exports.listFollowers = async (req, res) => {
 		});
 
 		if (!user) {
-			return res.status(404).send({ msg: "Current user not found." });
+			return res.status(404).send({ msg: "User not found." });
 		}
 
 		const followers = await user.getFollowers();

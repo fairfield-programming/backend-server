@@ -14,29 +14,18 @@
 module.exports.listUsers = async (req, res) => {
 
 	try {
-		
-		const users = await User.findAll({});
+
+		const users = await User.findAll(
+			{
+				attributes: ['id', 'username', 'email', 'createdAt', 'updatedAt'],
+			},
+		);
 
 		if (!users?.length) {
 			return res.status(404).send({ msg: "No Users." });
 		}
 
-		const output = [];
-
-
-		users.forEach((user) => {
-			output.push(
-				{
-					id: user.id,
-					username: user.username,
-					email: user.email,
-					createdAt: user.createdAt,
-					updatedAt: user.updatedAt,
-				},
-			);
-		});
-
-		return res.status(200).json(output);
+		return res.status(200).json(users);
 
 	} catch (err) {
 		console.log(err.message);

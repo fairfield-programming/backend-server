@@ -24,6 +24,7 @@ module.exports.editEvent = async (req, res) => {
 	if (missingParameters(req)) return res.status(400).send({ msg: 'Not All Parameters Provided.' });
 
 	try {
+		
 		const event = await Events.findOne({
 			where: {
 				id: req.params.id,

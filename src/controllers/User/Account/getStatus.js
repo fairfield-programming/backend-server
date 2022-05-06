@@ -30,7 +30,7 @@ module.exports.getStatus = async (req, res) => {
 
 	} catch (err) {
 		console.log(err.message);
-		return res.status(500).send({ msg: 'IError on getting account status.' });
+		return res.status(500).send({ msg: 'Error on getting account status.' });
 	}
 
 };

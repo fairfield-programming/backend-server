@@ -15,7 +15,9 @@
 
 
 module.exports.queryEvent = async (req, res) => {
-	if (!req.params.id) return res.status(400).send({ msg: 'Not All Parameters Provided.' });
+	if (!req.params.id) {
+		return res.status(400).send({ msg: 'Not All Parameters Provided.' });
+	}
 
 	try {
 		const event = await Events.findOne({
@@ -23,11 +25,12 @@ module.exports.queryEvent = async (req, res) => {
 				id: req.params.id,
 			},
 		})
+
 		if (!event) {
 			return res.status(404).send({ msg: 'Event Not Found.' });
 		}
 
-		return res.json(event);
+		return res.status(200).json(event);
 
 	} catch (err) {
 		console.log(err.message);

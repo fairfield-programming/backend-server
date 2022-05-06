@@ -17,10 +17,13 @@ const { verify } = require('jsonwebtoken');
 module.exports.verifyLogin = (req, res, next) => {
 
   try {
+
     verify(req.cookies.token, process.env.JWT_KEY, (err, userData) => {
-      if (err) {
-        return res.status(400).send(err.message);
+
+      if (err || !userData) {
+        return res.status(400).send({ msg: 'Error on verifying user login.' });
       }
+
       req.user = userData;
       return next();
     });

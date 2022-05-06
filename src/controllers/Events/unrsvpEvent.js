@@ -21,7 +21,7 @@ module.exports.unrsvpEvent = async (req, res) => {
 
 	try {
 
-		const [event, user] = Promise.allSettled([
+		const [event, user] = Promise.all([
 			await Events.findOne({
 				where: {
 					id: req.params.id,
@@ -42,18 +42,13 @@ module.exports.unrsvpEvent = async (req, res) => {
 		if (!user) {
 			return res.status(400).send({ msg: 'Current user profil not saved' });
 		}
-		
+		if (!user.hasEvent(event)) {
+			return res.status(401).send({ msg: 'You are not subscribed to this event.' });
+		}
+
 		user.removeEvents(event);
 
-		res.json({
-			name: event.name,
-			location: event.location,
-			description: event.description,
-			host: event.host,
-			eventImage: event.eventImage,
-			status: event.status,
-			date: event.date,
-		});
+		res.status(200).json(event);
 
 	} catch (err) {
 		console.log(err.message);

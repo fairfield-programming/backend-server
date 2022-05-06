@@ -26,7 +26,7 @@ module.exports.deleteAccount = async (req, res) => {
 
 		const user = await User.findOne({
 			where: {
-				id: req.params.id,
+				id: req.user.id,
 			},
 		})
 

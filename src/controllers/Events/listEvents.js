@@ -17,11 +17,12 @@ module.exports.listEvents = async (req, res) => {
 	try {
 		const events = await Events.findAll({});
 
-		if (!events.length) return res.status(404).send({ msg: 'No events for now.' });
+		if (!events?.length) return res.status(404).send({ msg: 'No events for now.' });
 
-		return res.json(events);
+		return res.status(200).json(events);
 
 	} catch (err) {
+		console.log(err.message);
 		return res.status(500).send({ msg: 'Error on searching for all events.' });
 	}
 };

@@ -44,8 +44,7 @@ module.exports.setPass = async (req, res) => {
 					return res.status(500).send({ msg: 'Error on updating password.' });
 				}
 
-				const updatedUser = await user.update({ password: hashString })
-				updatedUser.save();
+				user.update({ password: hashString })
 
 				return res.send(200).send({ msg: "Password Set." })
 			});

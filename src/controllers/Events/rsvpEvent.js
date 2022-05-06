@@ -15,12 +15,13 @@
 
 
 module.exports.rsvpEvent = async (req, res) => {
+
 	if (!req.user) return res.status(403).send({ msg: 'Not Logged In.' });
 	if (!req.params.id) return res.status(400).send({ msg: 'Not All Parameters Provided.' });
 
 	try {
 
-		const [event, user] = Promise.allSettled([
+		const [event, user] = Promise.all([
 
 			await Events.findOne({
 				where: {
@@ -39,20 +40,12 @@ module.exports.rsvpEvent = async (req, res) => {
 			return res.status(404).send({ msg: 'Event not found.' });
 		}
 		if (!user) {
-			return res.status(400).send({ msg: 'Current user profil not saved' });
+			return res.status(400).send({ msg: 'Current user not found' });
 		}
 
 		user.addEvents(event);
 
-		res.json({
-			name: event.name,
-			location: event.location,
-			description: event.description,
-			host: event.host,
-			eventImage: event.eventImage,
-			status: event.status,
-			date: event.date,
-		});
+		res.status(200).json(event);
 
 	} catch (err) {
 		console.log(err.message);

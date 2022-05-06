@@ -13,14 +13,21 @@
  */
 
 
- module.exports.verifyEmail = async (req, res, next) => {
+module.exports.verifyEmail = async (req, res, next) => {
 	try {
+
 		const currentUser = await User.findOne({ where: { id: req.user.id } });
+
 		if (!currentUser?.confirmed_email) {
-			return res.status(401).send('Please confirm your email address before logging in.');
+			return res.status(401).send({
+				msg: 'Please confirm your email address, then try logging in.'
+			});
 		}
+
 		return next();
+
 	} catch (err) {
-		return res.send(err.message);
+		console.log(err.message);
+		return res.status(500).send({ msg: 'Error on verifying email address.' });
 	}
 };

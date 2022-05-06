@@ -15,7 +15,7 @@
 
 
 module.exports.blockUser = async (req, res) => {
-	if (!req.params.id || !req.params.blockId) {
+	if (!req.params.blockId) {
 		return res.status(400).send({ msg: "Not All Parameters Provided." });
 	}
 
@@ -39,6 +39,9 @@ module.exports.blockUser = async (req, res) => {
 		}
 		if (!user) {
 			return res.status(404).send({ msg: 'Current account not found.' })
+		}
+		if (user.hasBlocked(userToBlock)) {
+			return res.status(400).send({ msg: 'You have already blocked this person.' });
 		}
 
 		user.addBlocked(userToBlock);

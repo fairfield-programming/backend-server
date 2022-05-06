@@ -51,7 +51,7 @@ module.exports.login = async (req, res) => {
 
 	} catch (err) {
 		console.log(err.message);
-		return res.status(500).send({ msg: 'Error on login in.' })
+		return res.status(500).send({ msg: 'Error on login.' })
 	}
 
 }

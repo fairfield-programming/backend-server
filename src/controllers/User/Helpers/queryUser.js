@@ -12,7 +12,7 @@
  * Nothing for now.
  */
 
-module.exports.queryUser = async(req, res) => {
+module.exports.queryUser = async (req, res) => {
 
 	if (!req.params.id) {
 		return res.status(400).send({ msg: 'Not All Parameters Provided.' });
@@ -24,18 +24,12 @@ module.exports.queryUser = async(req, res) => {
 			where: {
 				id: req.params.id,
 			},
+			attributes: ['username', 'email', 'profilePicture', 'biography', 'createdAt', ' updatedAt'],
 		})
 
 		if (!user) return res.status(404).send({ msg: 'Not Found.' });
 
-		return res.status(200).json({
-			username: user.username,
-			email: user.email,
-			profilePicture: user.profilePicture,
-			biography: user.biography,
-			createdAt: user.createdAt,
-			updatedAt: user.updatedAt,
-		});
+		return res.status(200).json(user);
 
 
 	} catch (err) {

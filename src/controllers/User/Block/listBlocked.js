@@ -25,9 +25,11 @@ module.exports.listBlocked = async (req, res) => {
         id: req.params.id,
       },
     })
+
     if (!user) {
       return res.status(404).send({ msg: 'User not found.' });
     }
+
     const blockedUsers = await user.getBlocked();
     return res.status(200).json(blockedUsers);
 

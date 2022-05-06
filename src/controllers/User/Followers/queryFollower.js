@@ -13,6 +13,7 @@
  */
 
 module.exports.queryFollower = async (req, res) => {
+
 	if (!req.params.id || !req.params.followerId) {
 		return res.status(400).send({ msg: "Not All Parameters Provided." });
 	}
@@ -47,7 +48,9 @@ module.exports.queryFollower = async (req, res) => {
 		}
 
 		if (!followee.hasFollower(follower)) {
-			return res.status(401).send({ msg: `User with id=${req.params.id} is not followed by user with id=${req.params.followerIdI}` });
+			return res.status(401).send({
+				msg: `User with id=${req.params.id} is not followed by user with id=${req.params.followerIdI}`
+			});
 		}
 
 		return res.status(200).json(follower);
