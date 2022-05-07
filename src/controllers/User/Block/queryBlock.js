@@ -19,15 +19,15 @@ module.exports.queryBlock = async (req, res) => {
   }
 
   try {
-   
-    const [blockedUser, user] = Promise.all([
-      await User.findOne({
+
+    const [blockedUser, user] = await Promise.all([
+      User.findOne({
         where: {
           id: req.params.blockId,
         },
       })
       ,
-      await User.findOne({
+      User.findOne({
         where: {
           id: req.user.id,
         },

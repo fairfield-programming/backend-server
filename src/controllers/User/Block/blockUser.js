@@ -21,14 +21,14 @@ module.exports.blockUser = async (req, res) => {
 
 	try {
 
-		const [user, userToBlock] = Promise.all([
-			await User.findOne({
+		const [user, userToBlock] = await Promise.all([
+			User.findOne({
 				where: {
 					id: req.user.id,
 				},
 			})
 			,
-			await User.findOne({
+			User.findOne({
 				where: {
 					id: req.params.blockId,
 				},

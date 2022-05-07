@@ -22,14 +22,14 @@ module.exports.queryFollower = async (req, res) => {
 		// follower is following the followee.
 		// followee is followed by the follower.
 
-		const [follower, followee] = Promise.all([
-			await User.findOne({
+		const [follower, followee] = await Promise.all([
+			User.findOne({
 				where: {
 					id: req.params.followerId,
 				},
 			}),
 
-			await User.findOne({
+			User.findOne({
 				where: {
 					id: req.params.id,
 				},

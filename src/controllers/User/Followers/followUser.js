@@ -21,15 +21,15 @@ module.exports.followUser = async (req, res) => {
 
   try {
 
-    const [user, userToFollow] = Promise.all([
+    const [user, userToFollow] = await Promise.all([
 
-      await User.findOne({
+      User.findOne({
         where: {
           id: req.user.id,
         },
       }),
 
-      await User.findOne({
+      User.findOne({
         where: {
           id: req.params.followeeId,
         },

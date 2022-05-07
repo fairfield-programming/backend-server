@@ -21,20 +21,22 @@ module.exports.rsvpEvent = async (req, res) => {
 
 	try {
 
-		const [event, user] = Promise.all([
+		const [event, user] = await Promise.all([
 
-			await Events.findOne({
+			Events.findOne({
 				where: {
 					id: req.params.id,
 				},
 			})
 			,
-			await User.findOne({
+			User.findOne({
 				where: {
 					id: req.user.id,
 				}
 			})
 		])
+
+
 
 		if (!event) {
 			return res.status(404).send({ msg: 'Event not found.' });
@@ -46,6 +48,8 @@ module.exports.rsvpEvent = async (req, res) => {
 		user.addEvents(event);
 
 		res.status(200).json(event);
+
+
 
 	} catch (err) {
 		console.log(err.message);

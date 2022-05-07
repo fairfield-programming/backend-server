@@ -22,15 +22,15 @@ module.exports.unfollowUser = async (req, res) => {
 
   try {
 
-    const [followee, user] = Promise.all([
+    const [followee, user] = await Promise.all([
 
-      await User.findOne({
+      User.findOne({
         where: {
           id: req.params.followee,
         },
       }),
 
-      await User.findOne({
+      User.findOne({
         where: {
           id: req.user.id,
         },
