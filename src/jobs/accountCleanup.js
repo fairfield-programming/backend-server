@@ -37,7 +37,7 @@ module.exports.removeUnconfirmedAccounts = async () => {
 	accounts = accounts.filter(account => Date.parse(account.createdAt) < Date.now() - MAX_UNCONFIRMED_ACCOUNT_AGE);
 	const accountIds = accounts.map(account => account.id);
 
-	await Promise.all([
+	Promise.all([
 		Events.findAll({
 			where: {
 				ownerId: { [Op.in]: accountIds },
@@ -69,16 +69,14 @@ module.exports.emailConfirmationRemainder = async () => {
 
 	// find and retreive all the users with an unconfirmed email address
 
-	let accounts = await User.findAll(
-		{
-			where:
-			{
-				confirmed_email: false,
-			},
-			attributes: ['id', 'createdAt', 'username', 'email'],
-			raw: true,
+	let accounts = await User.findAll({
+		where: {
+			confirmed_email: false,
 		},
-	)
+		attributes: ['id', 'createdAt', 'username', 'email'],
+		raw: true,
+	})
+
 	if (!accounts?.length) {
 		return;
 	}
