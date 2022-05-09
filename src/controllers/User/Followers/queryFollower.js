@@ -1,6 +1,7 @@
 
 /**
  * @module Query Follower Controller
+ * 
  * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
  * 
@@ -11,36 +12,52 @@
  * Nothing for now.
  */
 
-module.exports.queryFollower = (req, res) => {
-  if (!req.params.id || !req.params.followerId) return res.status(400).send("Not All Parameters Provided.");
+module.exports.queryFollower = async (req, res) => {
 
-	User.findOne({
-		where: {
-			id: req.params.followerId,
-		},
-	})
-		.then((followerData) => {
-			if (!data) return res.status(404).send('Not Found.');
+	if (!req.params.id || !req.params.followerId) {
+		return res.status(400).send({ msg: "Not All Parameters Provided." });
+	}
+
+	try {
+		// follower is following the followee.
+		// followee is followed by the follower.
+
+		const [follower, followee] = await Promise.all([
+			User.findOne({
+				where: {
+					id: req.params.followerId,
+				},
+			}),
 
 			User.findOne({
 				where: {
 					id: req.params.id,
 				},
 			})
-				.then((followeeData) => {
-					if (!followeeData.hasFollower(followerData)) {
-						return res.status(401).send('You do not follow this person');
-					}
 
-					return res.json(followerData);
-				})
-				.catch((error) => {
-					console.log(error);
-					return res.status(500).send('Internal Server Error.');
-				});
-		})
-		.catch((error) => {
-			console.log(error);
-			return res.status(500).send('Internal Server Error.');
-		});
+		])
+
+
+
+		if (!follower) {
+			return res.status(404).send({ msg: 'Follower user not found.' });
+		}
+
+		if (!followee) {
+			return res.status(404).send({ msg: 'Followee user not found.' });
+		}
+
+		if (!followee.hasFollower(follower)) {
+			return res.status(401).send({
+				msg: `User with id=${req.params.id} is not followed by user with id=${req.params.followerIdI}`
+			});
+		}
+
+		return res.status(200).json(follower);
+
+	} catch (err) {
+		console.log(err.message);
+		return res.status(500).send({ msg: 'Error on searching for users followers.' });
+	}
+
 };

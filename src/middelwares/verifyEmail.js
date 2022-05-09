@@ -12,16 +12,22 @@
  *   Verfies if the user has a confimed email address, otherwise ask the user to confirm their email address.
  */
 
+
 module.exports.verifyEmail = async (req, res, next) => {
-  try {
-    const currentUser = await User.findOne({ where: { id: req.user.id } });
+	try {
 
-    if (currentUser && !currentUser.confirmed_email)
-      return res.status(401).send("Please Confirm Your Email Address By Clicking On the Link Sent To Your MailBox");
+		const currentUser = await User.findOne({ where: { id: req.user.id } });
 
-    next();
+		if (!currentUser?.confirmed_email) {
+			return res.status(401).send({
+				msg: 'Please confirm your email address, then try logging in.'
+			});
+		}
 
-  } catch (err) {
-    res.send(err.message);
-  }
-}
+		return next();
+
+	} catch (err) {
+		console.log(err.message);
+		return res.status(500).send({ msg: 'Error on verifying email address.' });
+	}
+};

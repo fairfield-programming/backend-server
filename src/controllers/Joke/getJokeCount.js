@@ -2,6 +2,7 @@ const jokeLib = require('./jokeFinder');
 
 /**
  * @module Get Jokes Count Controller
+ * 
  * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
  * 

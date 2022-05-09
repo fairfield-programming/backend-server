@@ -1,9 +1,9 @@
 const { compare } = require('bcrypt');
-const { handleError500 } = require('../../../library/errorHandler');
 
 
 /**
  * @module Delete Account Controller
+ * 
  * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
  * 
@@ -17,31 +17,32 @@ const { handleError500 } = require('../../../library/errorHandler');
  */
 
 
-module.exports.deleteAccount = (req, res) => {
-	if (!req.params.id) res.status(400).send('Not All Parameters Given.');
-	else if (!req.user) res.status(403).send('Not Logged In.');
-	else if (req.user.id !== req.params.id) res.status(401).send('Not Authorized.');
-	else {
-		User.findOne({
+module.exports.deleteAccount = async (req, res) => {
+	if (!req.params.id) return res.status(400).send({ msg: 'Not All Parameters Given.' });
+	if (!req.user) return res.status(403).send({ msg: 'Not Logged In.' });
+	if (req.user.id !== req.params.id) return res.status(401).send({ msg: 'Not Authorized.' });
+
+	try {
+
+		const user = await User.findOne({
 			where: {
-				id: req.params.id,
+				id: req.user.id,
 			},
 		})
-			.then((userData) => {
-				if (!userData) res.status(404).send('User Not Found.');
-				else {
-					compare(req.body.password, userData.password, (err, result) => {
-						if (err) handleError500(err);
-						else if (!result) res.status(403).send('Incorrect Password.');
-						else {
-							userData
-								.destroy()
-								.then(() => res.status(200).send('Success.'))
-								.catch((error) => handleError500(error));
-						}
-					});
-				}
-			})
-			.catch((error) => handleError500(error));
+
+		if (!user) return res.status(404).send({ msg: 'User Not Found.' });
+
+		compare(req.body.password, user.password, (err, result) => {
+
+			if (!result || err) return res.status(403).send({ msg: 'Invalid Credentials.' });
+
+			user.destroy();
+			return res.status(200).send({ msg: 'Account Deleted.' });
+		});
+
+	} catch (err) {
+		console.log(err.message);
+		return res.status(500).send({ msg: 'Error on deleting account.' });
 	}
+
 };

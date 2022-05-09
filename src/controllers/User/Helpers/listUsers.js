@@ -1,6 +1,7 @@
 
 /**
  * @module Get Users Controller
+ * 
  * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
  * 
@@ -10,30 +11,27 @@
  * @todo
  * Nothing for now.
  */
-module.exports.listUsers = (req, res) => {
-	User.findAll({})
-		.then((data) => {
-			if (data.length <= 0) return res.status(404).send("No Users.");
+module.exports.listUsers = async (req, res) => {
 
-			const output = [];
+	try {
 
-			// Cleanup the Output
-			data.forEach((element) => {
-				output.push(
-					{
-						id: element.id,
-						username: element.username,
-						email: element.email,
-						createdAt: element.createdAt,
-						updatedAt: element.updatedAt,
-					},
-				);
-			});
+		const users = await User.findAll(
+			{
+				attributes: ['id', 'username', 'email', 'createdAt', 'updatedAt'],
+			},
+		);
 
-			return res.json(output);
-		})
-		.catch((error) => {
-			console.log(error);
-			return res.status(500).send('Internal Server Error.');
-		});
+		if (!users?.length) {
+			return res.status(404).send({ msg: "No Users." });
+		}
+
+		return res.status(200).json(users);
+
+	} catch (err) {
+		console.log(err.message);
+		return res.status(500).send({ msg: 'Error on listing users.' });
+	}
+
+
+
 };

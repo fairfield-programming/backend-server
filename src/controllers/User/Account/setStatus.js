@@ -1,9 +1,9 @@
 const vulgarTester = require('../../../library/VulgarTest');
-const { handleError500 } = require('../../../library/errorHandler');
 
 
 /**
  * @module Set Account Status Controller
+ * 
  * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
  * 
@@ -15,29 +15,35 @@ const { handleError500 } = require('../../../library/errorHandler');
  */
 
 
-module.exports.setStatus = (req, res) => {
-  User.findOne(
-    {
-      where:
-      {
+module.exports.setStatus = async (req, res) => {
+
+  try {
+
+    const user = await User.findOne({
+      where: {
         id: req.user.id,
       },
-    },
-  )
-    .then((data) => {
-      if (!data) res.status(404).send("Not Found.");
-      else if (!req.body.status) {
-        if (vulgarTester.DetectVulgarWords(req.body.status)) res.status(406).send("Vulgar Language Detected.");
-      } else {
-        data
-          .update(
-            {
-              status: req.body.status,
-            },
-          )
-          .then((newData) => res.status(200).send(newData.status))
-          .catch((error) => handleError500(error));
-      }
-    })
-    .catch((error) => handleError500(error));
+    });
+
+    if (!user) return res.status(404).send({ msg: "Account Not Found." });
+
+    if (!req.body.status) {
+      return res.status(400).send({ msg: 'Not All Parameters Given.' });
+    }
+
+    if (vulgarTester.DetectVulgarWords(req.body.status)) {
+      return res.status(406).send({ msg: "Vulgar Language Detected." });
+    }
+
+
+    user.update({
+      status: req.body.status,
+    });
+
+    return res.status(200).send({ msg: 'Status set.' });
+
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).send({ msg: 'Error on setting account status' });
+  }
 };

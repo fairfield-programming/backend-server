@@ -15,18 +15,22 @@ const { verify } = require('jsonwebtoken');
  */
 
 module.exports.verifyLogin = (req, res, next) => {
-  
-  let header = req.get("Authorization") || "";
-  let parts = header.split(" ");
-  
-  if (parts.length != 2) return res.status(403).send("Not Logged In.");
-  
-  let token = parts[1];
-  
-  verify(token, process.env.JWT_KEY, (err, userData) => {
-    if (err) return res.status(400).send(err.message);
-    req.user = userData;
-    next();
-  })
-  
-}
+
+  try {
+
+    verify(req.cookies.token, process.env.JWT_KEY, (err, userData) => {
+
+      if (err || !userData) {
+        return res.status(400).send({ msg: 'Error on verifying user login.' });
+      }
+
+      req.user = userData;
+      return next();
+    });
+
+  } catch (err) {
+    console.log(err.message);
+    return res.redirect('/login');
+  }
+
+};
