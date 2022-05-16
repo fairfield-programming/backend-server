@@ -1,6 +1,5 @@
 const { verify } = require('jsonwebtoken');
 
-
 /**
  * @module VERIFY LOGIN
  * 
@@ -13,12 +12,15 @@ const { verify } = require('jsonwebtoken');
  * @description
  *  Verfies if the user is logged in, otherwise redirect to "/user/login"
  */
-
 module.exports.verifyLogin = (req, res, next) => {
+
+  let bearer = req.header('Authorization');
+  let bearerParts = bearer.split(" ") || [];
+  let token = bearerParts[1] || "";
 
   try {
 
-    verify(req.cookies.token, process.env.JWT_KEY, (err, userData) => {
+    verify(token, process.env.JWT_KEY, (err, userData) => {
 
       if (err || !userData) {
         return res.status(400).send({ msg: 'Error on verifying user login.' });
@@ -30,7 +32,7 @@ module.exports.verifyLogin = (req, res, next) => {
 
   } catch (err) {
     console.log(err.message);
-    return res.redirect('/login');
+    return res.redirect('https://fairfieldprogramming.org/login');
   }
 
 };
