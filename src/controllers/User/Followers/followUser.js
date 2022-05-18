@@ -15,7 +15,7 @@
 
 module.exports.followUser = async (req, res) => {
 
-  if (!req.params.followeeId) {
+  if (!req.params.toFollowId) {
     return res.status(400).send({ msg: "Not All Parameters Provided." });
   }
 
@@ -31,7 +31,7 @@ module.exports.followUser = async (req, res) => {
 
       User.findOne({
         where: {
-          id: req.params.followeeId,
+          id: req.params.toFollowId,
         },
       })
 

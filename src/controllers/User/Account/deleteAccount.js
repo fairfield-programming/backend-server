@@ -18,9 +18,8 @@ const { compare } = require('bcrypt');
 
 
 module.exports.deleteAccount = async (req, res) => {
-	if (!req.params.id) return res.status(400).send({ msg: 'Not All Parameters Given.' });
+
 	if (!req.user) return res.status(403).send({ msg: 'Not Logged In.' });
-	if (req.user.id !== req.params.id) return res.status(401).send({ msg: 'Not Authorized.' });
 
 	try {
 
@@ -34,7 +33,7 @@ module.exports.deleteAccount = async (req, res) => {
 
 		compare(req.body.password, user.password, (err, result) => {
 
-			if (!result || err) return res.status(403).send({ msg: 'Invalid Credentials.' });
+			if (!result || err) return res.status(403).send({ msg: 'Error on deleting account.' });
 
 			user.destroy();
 			return res.status(200).send({ msg: 'Account Deleted.' });

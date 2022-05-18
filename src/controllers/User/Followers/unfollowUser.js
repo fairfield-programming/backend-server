@@ -26,7 +26,7 @@ module.exports.unfollowUser = async (req, res) => {
 
       User.findOne({
         where: {
-          id: req.params.followee,
+          id: req.params.followeeId,
         },
       }),
 

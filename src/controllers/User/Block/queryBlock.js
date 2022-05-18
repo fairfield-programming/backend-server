@@ -14,7 +14,7 @@
 
 
 module.exports.queryBlock = async (req, res) => {
-  if (!req.params.id || !req.params.blockId) {
+  if (!req.params.blockedId) {
     return res.status(400).send({ msg: "Not All Parameters Provided." });
   }
 
@@ -38,7 +38,7 @@ module.exports.queryBlock = async (req, res) => {
       return res.status(404).send({ msg: "Blocked User Not Found." });
     }
     if (!user) {
-      return res.status(404).send({ msg: 'Current account not found.' })
+      return res.status(404).send({ msg: 'Current account not found. Try loggin in.' })
     }
 
     if (!user.hasBlocked(blockedUser)) {
