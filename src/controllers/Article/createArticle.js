@@ -1,3 +1,5 @@
+// imported Article model
+const Article = require("../../models/Article");
 
 function missingParameters(req) {
 	const { title, description, body } = req.body;
@@ -24,7 +26,7 @@ module.exports.createArticle = async (req, res) => {
 	}
 
 	try {
-
+// Article model was not initially imported
 		const article = await Article.create({
 			title: req.body.title,
 			description: req.body.description,
