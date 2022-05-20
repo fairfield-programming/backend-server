@@ -1,23 +1,23 @@
 const { compare, hash } = require('bcrypt');
 
-
+// import express Response type
+const { Response } = require('express');
+const { User } = require('../../../models');
 
 /**
  * @module Set Account Password Controller
- * 
- * @param {Request} req - HTTP Request from the client
+ *
+ * @param {import('../../../typings').Express.IRequest} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
- * 
+ *
  * @description
  * This controller will allow the user to update his account password, if all parameters are correct.
- * 
+ *
  * @todo
  * Nothing for now.
  */
 
-
 module.exports.setPass = async (req, res) => {
-
 	if (!req.params.id || !req.body.password || !req.body.newPassword) {
 		return res.status(400).send({ msg: 'Not All Parameters Given.' });
 	}
@@ -31,9 +31,9 @@ module.exports.setPass = async (req, res) => {
 			where: {
 				id: req.params.id,
 			},
-		})
+		});
 
-		if (!user) return res.status(404).send({ msg: "Account Not Found." });
+		if (!user) return res.status(404).send({ msg: 'Account Not Found.' });
 
 		compare(req.body.password, user.password, (err, result) => {
 			if (!result || err) return res.status(403).send('Invalid Credentails.');
@@ -44,15 +44,13 @@ module.exports.setPass = async (req, res) => {
 					return res.status(500).send({ msg: 'Error on updating password.' });
 				}
 
-				user.update({ password: hashString })
+				user.update({ password: hashString });
 
-				return res.send(200).send({ msg: "Password Set." })
+				return res.send(200).send({ msg: 'Password Set.' });
 			});
 		});
-
 	} catch (err) {
 		console.log(err.message);
 		return res.status(500).send({ msg: 'Error on editing password.' });
 	}
-
 };

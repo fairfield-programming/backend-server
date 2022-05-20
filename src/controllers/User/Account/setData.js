@@ -1,21 +1,22 @@
 const vulgarTester = require('../../../library/VulgarTest');
+// import Express types
+const { Response } = require('express');
 
+const { User } = require('../../../models');
 /**
  * @module Set Account Data Controller
- * 
- * @param {Request} req - HTTP Request from the client
+ *
+ * @param {import('../../../typings').Express.IRequest} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
- * 
+ *
  * @description
  * This controller will allow the user to update his account data, if no vulgar language detected and all parameters are correct.
- * 
+ *
  * @todo
  * Nothing for now.
  */
 
-
 module.exports.setData = async (req, res) => {
-
 	if (!req.user) return res.status(403).send({ msg: 'Not Logged In.' });
 
 	const { biography, profilePicture, username } = req.body;
@@ -25,12 +26,11 @@ module.exports.setData = async (req, res) => {
 	}
 
 	try {
-
 		const user = await User.findOne({
 			where: {
 				id: req.user.id,
 			},
-		})
+		});
 
 		if (!user) return res.status(404).send({ msg: 'Account Not Found.' });
 
@@ -45,7 +45,7 @@ module.exports.setData = async (req, res) => {
 			biography: req.body.biography || user.biography,
 			profilePicture: req.body.profilePicture || user.profilePicture,
 			username: req.body.username || user.username,
-		})
+		});
 
 		res.status(200).json({
 			id: updatedUser.id,
@@ -53,7 +53,6 @@ module.exports.setData = async (req, res) => {
 			biography: updatedUser.biography,
 			profilePicture: updatedUser.profilePicture,
 		});
-
 	} catch (err) {
 		console.log(err.message);
 		return res.status(500).send({ msg: 'Error on updating account data.' });

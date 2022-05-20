@@ -1,66 +1,57 @@
-
+const { User } = require('../../../models');
+// import Express types
+const { Response } = require('express');
 
 /**
  * @module Unfollow User Controller
- * 
- * @param {Request} req - HTTP Request from the client
+ *
+ * @param {import('../../../typings').Express.IRequest} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
- * 
+ *
  * @description
  * This controller will allow the user to unfollow a specific user, if already a follower and all parameters are correct.
- * 
+ *
  * @todo
  * Nothing for now.
  */
 
 module.exports.unfollowUser = async (req, res) => {
+	if (!req.params.followeeId) {
+		return res.status(400).send({ msg: 'Not All Parameters Provided.' });
+	}
 
-  if (!req.params.followeeId) {
-    return res.status(400).send({ msg: "Not All Parameters Provided." });
-  }
+	try {
+		const [followee, user] = await Promise.all([
+			User.findOne({
+				where: {
+					id: req.params.followee,
+				},
+			}),
 
+			User.findOne({
+				where: {
+					id: req.user.id,
+				},
+			}),
+		]);
 
-  try {
+		if (!followee) {
+			return res.status(404).send({ msg: 'Followee user not found.' });
+		}
 
-    const [followee, user] = await Promise.all([
+		if (!user) {
+			return res.status(404).send({ msg: 'Current user not found.' });
+		}
 
-      User.findOne({
-        where: {
-          id: req.params.followee,
-        },
-      }),
+		if (!followee.hasFollower(user)) {
+			return res.status(401).send({ msg: 'Your are not following this person.' });
+		}
 
-      User.findOne({
-        where: {
-          id: req.user.id,
-        },
-      })
+		followee.removeFollower(user);
 
-    ])
-
-
-    if (!followee) {
-      return res.status(404).send({ msg: 'Followee user not found.' });
-    }
-
-    if (!user) {
-      return res.status(404).send({ msg: 'Current user not found.' });
-    }
-
-    if (!followee.hasFollower(user)) {
-      return res.status(401).send({ msg: 'Your are not following this person.' });
-    }
-
-
-
-
-    followee.removeFollower(user);
-
-    return res.status(200).send({ msg: 'Your are not longer following this person.' });
-
-  } catch (err) {
-    console.log(err.message);
-    return res.status(500).send({ msg: 'Error on unfollowing a user.' });
-  }
-
+		return res.status(200).send({ msg: 'Your are not longer following this person.' });
+	} catch (err) {
+		console.log(err.message);
+		return res.status(500).send({ msg: 'Error on unfollowing a user.' });
+	}
 };

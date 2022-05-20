@@ -3,10 +3,8 @@ require('dotenv').config();
 // Configure Imports
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const { Sequelize } = require('sequelize');
-const sequelize = new Sequelize({
-	dialect: 'sqlite',
-});
+const { sequelize } = require('./models');
+
 const schedule = require('node-schedule');
 const { removeUnconfirmedAccounts, emailConfirmationRemainder } = require('./jobs/accountCleanup');
 const { eventRemainder } = require('./jobs/eventNotifications');
@@ -19,6 +17,8 @@ const port = process.env.PORT || 8080;
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// @ts-ignore
 app.use(cookieParser());
 app.use(
 	require('cors')({

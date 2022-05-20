@@ -1,6 +1,7 @@
 // [fix] imported Article model
-const Article = require('../../models/Article');
-
+const { Article } = require('../../models');
+// import Express types
+const { Request, Response } = require('express');
 /**
  * @module Get All Articles Controller
  *

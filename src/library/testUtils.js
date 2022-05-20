@@ -1,8 +1,10 @@
 function expectHtmlTypeHeader(res) {
+	// @ts-ignore
 	expect(res.type).toEqual(expect.stringContaining('html'));
 }
 
 function expectCode(res, code) {
+	// @ts-ignore
 	expect(res.status).toEqual(code);
 }
 

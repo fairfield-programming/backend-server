@@ -1,14 +1,15 @@
 const jokeLib = require('./jokeFinder');
-
+// import Express types
+const { Response, Request } = require('express');
 /**
  * @module Get Random Joke Controller
- * 
+ *
  * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
- * 
+ *
  * @description
  * This controller will allow the user to get a random joke.
- * 
+ *
  * @todo
  * Nothing for now.
  */

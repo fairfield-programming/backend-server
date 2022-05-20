@@ -28,49 +28,55 @@ if (env === 'development') {
 }
 
 // Import Models
-const Article = require('./Article');
-const User = require('./User');
-const Events = require('./Events');
+
+const ArticleModel = require('./Article');
+const UserModel = require('./User');
+const EventsModel = require('./Events');
 
 // Define Models
-global.Article = Article(sequelize, DataTypes);
-global.User = User(sequelize, DataTypes);
-global.Events = Events(sequelize, DataTypes);
+const Article = ArticleModel(sequelize, DataTypes);
+const User = UserModel(sequelize, DataTypes);
+const Events = EventsModel(sequelize, DataTypes);
 
 // Setup Relationships
 
 // Relationship for Events
-global.User.belongsToMany(global.Events, {
+User.belongsToMany(Events, {
 	through: 'EventSubscribers',
 });
-global.Events.belongsToMany(global.User, {
+Events.belongsToMany(User, {
 	through: 'EventSubscribers',
 });
 
 // Relationship for Follower System
-global.User.belongsToMany(global.User, {
+User.belongsToMany(User, {
 	through: 'Followers',
 	as: 'Followee',
 	foreignKey: 'followeeId',
 });
-global.User.belongsToMany(global.User, {
+User.belongsToMany(User, {
 	through: 'Followers',
 	as: 'Follower',
 	foreignKey: 'followerId',
 });
 
 // Relationship for Block System
-global.User.belongsToMany(global.User, {
+User.belongsToMany(User, {
 	through: 'Blocked',
 	as: 'Blocker',
 	foreignKey: 'blockerId',
 });
-global.User.belongsToMany(global.User, {
+User.belongsToMany(User, {
 	through: 'Blocked',
 	as: 'BlockedUser',
 	foreignKey: 'blockedId',
 });
 
-
-
 global.sequelize = sequelize;
+module.exports = {
+	sequelize,
+	Article,
+	User,
+	Events,
+	Op,
+};
