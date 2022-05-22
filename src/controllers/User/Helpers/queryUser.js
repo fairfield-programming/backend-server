@@ -24,7 +24,7 @@ module.exports.queryUser = async (req, res) => {
 			where: {
 				id: req.params.id,
 			},
-			attributes: ['username', 'email', 'profilePicture', 'biography', 'createdAt', ' updatedAt'],
+			attributes: ['username', 'email', 'profilePicture', 'biography', 'createdAt', 'updatedAt'],
 		})
 
 		if (!user) return res.status(404).send({ msg: 'Not Found.' });
