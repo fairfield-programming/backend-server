@@ -11,13 +11,13 @@
  */
 
 module.exports.getStatus = (req, res) => {
-  if (!req.params.id) return res.status(400).send("Not All Parameters Provided.");
+  if (!req.params.username) return res.status(400).send("Not All Parameters Provided.");
 
   User.findOne(
     {
       where:
       {
-        id: req.params.id,
+        username: req.params.username,
       },
     },
   )

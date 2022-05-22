@@ -39,7 +39,7 @@ app.use("/event", require("./routes/eventRoutes"));
 
 // User Endpoints
 app.use("/user", require("./routes/userRoutes"));
-
+app.use("/u", require("./routes/uRoutes"));
 
 
 // Sync the Database
