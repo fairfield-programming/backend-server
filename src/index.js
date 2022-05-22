@@ -8,6 +8,8 @@ const schedule = require('node-schedule');
 const { removeUnconfirmedAccounts, emailConfirmationRemainder } = require('./jobs/accountCleanup');
 const { eventRemainder } = require("./jobs/eventNotifications");
 
+require('./models')
+
 // Configure Local Variables
 const app = express();
 const port = process.env.PORT || 8080;
