@@ -1,9 +1,8 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const eventControllers = require("../controllers/Events");
-const { verifyLogin } = require("../middelwares/verifyLogin");
-const { verifyEmail } = require("../middelwares/verifyEmail");
-
+const eventControllers = require('../controllers/Events');
+const { verifyLogin } = require('../middelwares/verifyLogin');
+const { verifyEmail } = require('../middelwares/verifyEmail');
 
 
 router.get('/', eventControllers.listEvents);
@@ -15,7 +14,4 @@ router.post('/:id/edit', verifyLogin, verifyEmail, eventControllers.editEvent);
 router.post('/:id/rsvp', verifyLogin, verifyEmail, eventControllers.rsvpEvent);
 router.post('/:id/unrsvp', verifyLogin, verifyEmail, eventControllers.unrsvpEvent);
 
-
-
 module.exports = router;
-

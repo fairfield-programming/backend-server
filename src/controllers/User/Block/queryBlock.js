@@ -1,6 +1,7 @@
 
 /**
  * @module Query Blocked User Controller
+ * 
  * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
  * 
@@ -12,43 +13,44 @@
  */
 
 
-module.exports.queryBlock = (req, res) => {
-    if (!req.params.id || !req.params.blockId) return res.status(400).send("Not All Parameters Provided.");
-  
-    User.findOne(
-      {
-        where:
-        {
+module.exports.queryBlock = async (req, res) => {
+  if (!req.params.id || !req.params.blockId) {
+    return res.status(400).send({ msg: "Not All Parameters Provided." });
+  }
+
+  try {
+
+    const [blockedUser, user] = await Promise.all([
+      User.findOne({
+        where: {
           id: req.params.blockId,
         },
-      },
-    )
-      .then((blockData) => {
-        if (!blockData) return res.status(404).send("Not Found.");
-  
-        User.findOne(
-          {
-            where:
-            {
-              id: req.user.id,
-            },
-          },
-        )
-          .then((userData) => {
-            if (!userData.hasBlocked(blockData)) {
-              return res.status(401).send("You have not blocked this person");
-            }
-  
-            return res.json(blockData);
-          })
-          .catch((error) => {
-            console.log(error);
-            return res.status(500).send("Internal Server Error.");
-          });
       })
-      .catch((error) => {
-        console.log(error);
-        return res.status(500).send("Internal Server Error.");
-      });
-  };
-  
+      ,
+      User.findOne({
+        where: {
+          id: req.user.id,
+        },
+      })
+    ])
+
+    if (!blockedUser) {
+      return res.status(404).send({ msg: "Blocked User Not Found." });
+    }
+    if (!user) {
+      return res.status(404).send({ msg: 'Current account not found.' })
+    }
+
+    if (!user.hasBlocked(blockedUser)) {
+      return res.status(401).send({ msg: "You have not blocked this person." });
+    }
+
+    return res.status(200).json(blockedUser);
+
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).send({ msg: "Error on searching for a blocked account." });
+  }
+
+};
+

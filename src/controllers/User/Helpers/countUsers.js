@@ -1,6 +1,7 @@
 
 /**
  * @module Get Users Count Controller
+ * 
  * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
  * 
@@ -10,18 +11,17 @@
  * @todo
  * Nothing for now.
  */
-module.exports.countUsers = (req, res) => {
-    User.findAll(
-      {},
-    )
-      .then((data) => {
-        
-        return res.json({ count: data.length });
-        
-      })
-      .catch((error) => {
-        console.log(error);
-        return res.status(500).send("Internal Server Error.");
-      });
-  };
-  
+
+module.exports.countUsers = async (req, res) => {
+
+	try {
+		const usersCount = await User.count({})
+
+		return res.status(200).json({ count: usersCount });
+
+	} catch (err) {
+		console.log(err.message);
+		return res.status(500).send({ msg: 'Error on getting users count.' });
+	}
+
+};

@@ -2,23 +2,24 @@ require('dotenv').config();
 
 // Configure Imports
 const express = require('express');
+const cookieParser = require("cookie-parser");
+const { Sequelize } = require('sequelize');
 const schedule = require('node-schedule');
-const { remove_unconfirmed_email_users, email_confirmation_reminder} = require("./background_jobs/unconfirmed_emails");
+const { removeUnconfirmedAccounts, emailConfirmationRemainder } = require('./jobs/accountCleanup');
+const { eventRemainder } = require("./jobs/eventNotifications");
 
 // Configure Local Variables
 const app = express();
 const port = process.env.PORT || 8080;
-const models = require('./models');
 
 // Configure Middleware
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cookieParser());
 app.use(require("cors")({
-    origin: "*"
+  origin: "*"
 }));
-
-
 
 // Programs
 app.get('/', require('./routes/index'));
@@ -32,45 +33,53 @@ app.use('/duck', require('./routes/duckRoutes'));
 // Article Endpoints
 app.use('/article', require('./routes/articleRoutes'));
 
-
 // Event Endpoints
-app.use("/event", require("./routes/eventRoutes"));
-
+app.use('/event', require('./routes/eventRoutes'));
 
 // User Endpoints
 app.use("/user", require("./routes/userRoutes"));
 app.use("/u", require("./routes/uRoutes"));
 
-
 // Sync the Database
 (async () => {
+
   // await the database creation process, so as we can access the data on our jobs
-  await sequelize.sync().then(() => { app.emit('database-started'); });
+  await sequelize.sync();
+  app.emit('database-started');
 
   // this will run the job at the 10th day of each month at 08:00;
   schedule.scheduleJob(
     "remind users to confirm their email address",
-    "0 8 10 * *", 
+    "0 8 10 * *",
     () => {
-      email_confirmation_reminder();
+      emailConfirmationRemainder();
     },
   )
 
   // this will run the job at the 28th day of each month at 00:00;
   schedule.scheduleJob(
     "remove user accounts with unconfirmed email addresses",
-    "0 0 28 * *", 
+    "0 0 28 * *",
     () => {
-      remove_unconfirmed_email_users();
+      removeUnconfirmedAccounts();
     },
   )
+  schedule.scheduleJob(
+    "remaind users about the events they are subscribed to",
+    "0 8 * * *",
+    () => {
+      eventRemainder();
+    },
+  )
+
 })()
+
+
 
 // Start Server
 if (process.env.NODE_ENV !== 'test') {
   app.listen(port, () => {
-    // Log Server Port to the Console.
-    console.log(`Server Listening at http://localhost:${port}`);
+    console.log(`Server listening at http://localhost:${port}`);
   });
 }
 

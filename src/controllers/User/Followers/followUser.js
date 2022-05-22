@@ -1,8 +1,8 @@
-const { handleError500 } = require("../../../library/errorHandler");
 
 
 /**
  * @module Follow User Controller
+ * 
  * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
  * 
@@ -13,34 +13,50 @@ const { handleError500 } = require("../../../library/errorHandler");
  * Nothing for now.
  */
 
-module.exports.followUser = (req, res) => {
-  if (!req.params.id || !req.params.followerId) res.status(400).send("Not All Parameters Provided.");
-  else {
-    User.findOne(
-      {
-        where:
-        {
+module.exports.followUser = async (req, res) => {
+
+  if (!req.params.followeeId) {
+    return res.status(400).send({ msg: "Not All Parameters Provided." });
+  }
+
+  try {
+
+    const [user, userToFollow] = await Promise.all([
+
+      User.findOne({
+        where: {
           id: req.user.id,
         },
-      },
-    )
-      .then((followerData) => {
-        User.findOne(
-          {
-            where:
-            {
-              id: req.params.followerId,
-            },
-          },
-        )
-          .then((followeeData) => {
-            followeeData
-              .addFollower(followerData)
-              .then(() => res.json(followeeData))
-              .catch((error) => handleError500(error));
-          })
-          .catch((error) => handleError500(error));
+      }),
+
+      User.findOne({
+        where: {
+          id: req.params.followeeId,
+        },
       })
-      .catch((error) => handleError500(error));
+
+    ])
+
+    if (!userToFollow) {
+      return res.status(404).send({ msg: "User to follow  not found." });
+    }
+
+    if (!user) {
+      return res.status(404).send({ msg: 'Current account not found.' });
+    }
+
+    if (userToFollow.hasFollower(user)) {
+      return res.status(401).send({ msg: "You are already following this person." });
+    }
+
+
+    userToFollow.addFollower(user);
+
+    return res.status(200).send({ msg: 'You are now following this person.' });
+
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).send({ msg: 'Error on following a user.' });
   }
+
 };

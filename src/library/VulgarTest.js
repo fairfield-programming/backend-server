@@ -1,36 +1,24 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 
 function getVulgarWords() {
-  // Get the File Data
-  const fileData = fs.readFileSync(path.join(__dirname, "./vulgar.txt"), "ascii");
-  return fileData.split("\n");
+	return fs.readFileSync(path.join(__dirname, './vulgar.txt'), 'ascii').split('\n');
 }
 
-function TokenizeString(input) {
-  const lowercase = input.toLowerCase();
+function formatString(input) {
+	const lowercase = input.toLowerCase();
 
-  // Switch Around Similar Looking Symbols
-  let partsRemoved = lowercase;
-  partsRemoved = partsRemoved.replace(/\$/g, "s");
-  partsRemoved = partsRemoved.replace(/\@/g, "a");
-
-  return partsRemoved;
+	return lowercase.replace.replace(/\$/g, 's').replace(/\@/g, 'a');
 }
 
-function DetectVulgarWords(input) {
-  const tokenizedString = TokenizeString(input);
-  const vulgarWords = getVulgarWords();
+function detectVulgarWords(input) {
+	const formatted = formatString(input);
+	const vulgarWords = getVulgarWords();
 
-  for (let i = 0; i < vulgarWords.length; i += 1) {
-    const word = vulgarWords[i];
-    if (tokenizedString.includes(word)) return true;
-  }
-
-  return false;
+	return vulgarWords.some((vulgarWord) => formatted.includes(vulgarWord));
 }
 
 module.exports = {
-  TokenizeString,
-  DetectVulgarWords,
+	formatString,
+	detectVulgarWords,
 };

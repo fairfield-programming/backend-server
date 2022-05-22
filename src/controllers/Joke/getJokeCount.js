@@ -1,7 +1,8 @@
-const jokeLib = require("./jokeFinder");
+const jokeLib = require('./jokeFinder');
 
 /**
  * @module Get Jokes Count Controller
+ * 
  * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
  * 
@@ -13,6 +14,6 @@ const jokeLib = require("./jokeFinder");
  */
 
 module.exports.getJokeCount = (req, res) => {
-    res.set("Access-Control-Allow-Origin", "*");
-    return res.send(jokeLib.getJokeCount().toString());
+	res.set('Access-Control-Allow-Origin', '*');
+	return res.send(jokeLib.getJokeCount().toString());
 };

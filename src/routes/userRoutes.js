@@ -1,10 +1,8 @@
-
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const userControllers = require("../controllers/User");
-const { verifyLogin } = require("../middelwares/verifyLogin");
-const { verifyEmail } = require("../middelwares/verifyEmail");
-
+const userControllers = require('../controllers/User');
+const { verifyLogin } = require('../middelwares/verifyLogin');
+const { verifyEmail } = require('../middelwares/verifyEmail');
 
 // User Endpoints
 router.get('/', userControllers.listUsers);
@@ -20,8 +18,8 @@ router.post('/:id/password', verifyLogin, userControllers.setPass);
 router.post('/:id/delete', verifyLogin, userControllers.deleteAccount);
 
 // Block Endpoints
-router.get('/:id/block', verifyLogin, userControllers.blockUser)
-router.get('/:id/block/:blockId/query', verifyLogin, userControllers.queryBlock)
+router.get('/:id/block', verifyLogin, userControllers.blockUser);
+router.get('/:id/block/:blockId/query', verifyLogin, userControllers.queryBlock);
 
 router.post('/:id/block/:blockId/block', verifyLogin, verifyEmail, userControllers.blockUser);
 router.post('/:id/block/:blockId/undo', verifyLogin, verifyEmail, userControllers.unblockUser);
@@ -30,14 +28,10 @@ router.post('/:id/block/:blockId/undo', verifyLogin, verifyEmail, userController
 router.get('/:id/followers', verifyLogin, userControllers.listFollowers);
 router.get('/:id/followers/:followerId', verifyLogin, userControllers.queryFollower);
 
-router.post('/:id/followers/:followerId/follow', verifyLogin, verifyEmail, userControllers.followUser);
-router.post('/:id/followers/:followerId/undo', verifyLogin, verifyEmail, userControllers.unfollowUser);
+router.post('/:followeeId/follow', verifyLogin, verifyEmail, userControllers.followUser);
+router.post('/:followeeId/unfollow', verifyLogin, verifyEmail, userControllers.unfollowUser);
 
 // email verification end point
-router.get("/confirmEmail/:token", userControllers.confirmEmail);
-
-
-
-
+router.get('/confirmEmail/:token', userControllers.confirmEmail);
 
 module.exports = router;

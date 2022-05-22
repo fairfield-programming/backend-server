@@ -1,8 +1,8 @@
-const { handleError500 } = require("../../../library/errorHandler");
 
 
 /**
  * @module Block User Controller
+ * 
  * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
  * 
@@ -14,38 +14,46 @@ const { handleError500 } = require("../../../library/errorHandler");
  */
 
 
-module.exports.unblockUser = (req, res) => {
-  if (!req.params.id || !req.params.blockId) res.status(400).send("Not All Parameters Provided.");
-  else {
-    User.findOne(
-      {
-        where:
-        {
+module.exports.unblockUser = async (req, res) => {
+  if (!req.params.id || !req.params.blockId) {
+    return res.status(400).send({ msg: "Not All Parameters Provided." });
+  }
+
+  try {
+
+    const [blockedUser, user] = await Promise.all([
+      User.findOne({
+        where: {
           id: req.params.blockId,
         },
-      },
-    )
-      .then((blockData) => {
-        User.findOne(
-          {
-            where:
-            {
-              id: req.user.id,
-            },
-          },
-        )
-          .then((userData) => {
-            if (!userData.hasBlocked(blockData)) {
-              res.status(401).send("You have not blocked this person");
-            } else {
-              blockData
-                .removeBlocked(blockData)
-                .then(() => res.json(userData))
-                .catch((error) => handleError500(error));
-            }
-          })
-          .catch((error) => handleError500(error));
+      }),
+
+      User.findOne({
+        where: {
+          id: req.user.id,
+        },
       })
-      .catch((error) => handleError500(error));
+    ]);
+
+
+    if (!blockedUser) {
+      return res.status(404).send({ msg: "Blocked User Not Found." });
+    }
+    if (!user) {
+      return res.status(404).send({ msg: 'Current account not found.' });
+    }
+
+    if (!user.hasBlocked(blockedUser)) {
+      return res.status(401).send({ msg: "You have not blocked this person." });
+    }
+
+    user.removeBlocked(blockedUser);
+
+    return res.status(200).send({ msg: 'User unblocked.' });
+
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).send({ msg: 'Error on unblocking a user.' });
   }
-};
+
+}

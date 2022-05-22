@@ -1,6 +1,5 @@
 const { verify } = require('jsonwebtoken');
 
-
 /**
  * @module VERIFY LOGIN
  * 
@@ -13,20 +12,27 @@ const { verify } = require('jsonwebtoken');
  * @description
  *  Verfies if the user is logged in, otherwise redirect to "/user/login"
  */
-
 module.exports.verifyLogin = (req, res, next) => {
-  
-  let header = req.get("Authorization") || "";
-  let parts = header.split(" ");
-  
-  if (parts.length != 2) return res.status(403).send("Not Logged In.");
-  
-  let token = parts[1];
-  
-  verify(token, process.env.JWT_KEY, (err, userData) => {
-    if (err) return res.status(400).send(err.message);
-    req.user = userData;
-    next();
-  })
-  
-}
+
+  let bearer = req.header('Authorization');
+  let bearerParts = bearer.split(" ") || [];
+  let token = bearerParts[1] || "";
+
+  try {
+
+    verify(token, process.env.JWT_KEY, (err, userData) => {
+
+      if (err || !userData) {
+        return res.status(400).send({ msg: 'Error on verifying user login.' });
+      }
+
+      req.user = userData;
+      return next();
+    });
+
+  } catch (err) {
+    console.log(err.message);
+    return res.redirect('https://fairfieldprogramming.org/login');
+  }
+
+};

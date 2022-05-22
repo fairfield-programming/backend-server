@@ -1,5 +1,6 @@
 /**
  * @module Get Account Status Controller
+ * 
  * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
  * 
@@ -31,5 +32,5 @@ module.exports.getStatus = (req, res) => {
     .catch((error) => {
       console.log(error);
       return res.status(500).send("Internal Server Error.");
-    });
+  });
 };

@@ -1,8 +1,9 @@
-const jokeLib = require("./jokeFinder");
-const { propertyUndefined } = require("../../library/validator");
+const jokeLib = require('./jokeFinder');
+const { propertyUndefined } = require('../../library/validator');
 
 /**
  * @module Get Joke By ID Controller
+ * 
  * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
  * 
@@ -12,18 +13,22 @@ const { propertyUndefined } = require("../../library/validator");
  * @todo
  * Nothing for now.
  */
+module.exports.getJokeById = (req, res) => {
+	res.set('Access-Control-Allow-Origin', '*');
 
+	if (propertyUndefined(req.params.id)) {
+		return res.status(400).send({ msg: 'Missing joke ID' });
+	}
 
-module.exports.getJokeById= (req, res) => {
-    res.set("Access-Control-Allow-Origin", "*");
+	const numID = parseInt(req.params.id, 10);
+	if (isNaN(numID) || numID % 1 !== 0) {
+		return res.status(400).send({ msg: 'Joke ID must be an integer' });
+	}
 
-    if (propertyUndefined(req.params.id)) return res.status(400).send("ID Not Given.");
+	const joke = jokeLib.getJokeAtIndex(numID);
+	if (!joke) {
+		return res.status(404).send({ msg: 'Joke not found' });
+	}
 
-    const numID = parseInt(req.params.id, 10);
-    if (typeof numID !== "number") return res.status(400).send("Poorly Formatted ID.");
-
-    const joke = jokeLib.getJokeAtIndex(numID);
-    if (!joke) return res.status(404).send("Joke Not Found.");
-
-    return res.send(joke);
+	return res.send(joke);
 };

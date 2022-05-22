@@ -1,13 +1,10 @@
-const {
-  compare,
-  hash,
-} = require("bcrypt");
-const { handleError500 } = require("../../../library/errorHandler");
+const { compare, hash } = require('bcrypt');
 
 
 
 /**
  * @module Set Account Password Controller
+ * 
  * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
  * 
@@ -19,58 +16,43 @@ const { handleError500 } = require("../../../library/errorHandler");
  */
 
 
-module.exports.setPass = (req, res) => {
-  if (!req.params.id || !req.body.password || !req.body.newPassword) return res.status(400).send("Not All Parameters Given.");
+module.exports.setPass = async (req, res) => {
 
+	if (!req.params.id || !req.body.password || !req.body.newPassword) {
+		return res.status(400).send({ msg: 'Not All Parameters Given.' });
+	}
 
-  if (req.user.id !== req.params.id) return res.status(401).send("Not Authorized.");
+	if (req.user.id !== req.params.id) {
+		return res.status(401).send({ msg: 'Not Authorized.' });
+	}
 
-  User.findOne(
-    {
-      where:
-      {
-        id: req.params.id,
-      },
-    },
-  )
-    .then((userData) => {
-      compare(
-        req.body.password,
-        userData.password,
-        (err, result) => {
-          if (err) {
-            console.log(err);
-            return res.status(500).send("Internal Server Error.");
-          }
-          if (!result) return res.status(403).send("Incorrect Password.");
+	try {
+		const user = await User.findOne({
+			where: {
+				id: req.params.id,
+			},
+		})
 
-          // Hash New Password
-          hash(req.body.newPassword, 10, (newPassErr, hashString) => {
-            if (newPassErr) {
-              console.log(newPassErr);
-              return res.status(500).send("Internal Server Error.");
-            }
+		if (!user) return res.status(404).send({ msg: "Account Not Found." });
 
-            userData
-              .update(
-                { password: hashString },
-              )
-              .then((newUserData) => {
-                newUserData
-                  .save()
-                  .then(() => res.status(200).send("Success."))
-                  .catch((error) => {
-                    console.log(error);
-                    return res.status(500).send("Internal Server Error.");
-                  });
-              })
-              .catch((error) => handleError500(error));
-          });
-        },
-      );
-    })
-    .catch((error) => {
-      console.log(error);
-      return res.status(500).send("Internal Server Error.");
-    });
+		compare(req.body.password, user.password, (err, result) => {
+			if (!result || err) return res.status(403).send('Invalid Credentails.');
+
+			// Hash New Password
+			hash(req.body.newPassword, 10, (newPassErr, hashString) => {
+				if (newPassErr) {
+					return res.status(500).send({ msg: 'Error on updating password.' });
+				}
+
+				user.update({ password: hashString })
+
+				return res.send(200).send({ msg: "Password Set." })
+			});
+		});
+
+	} catch (err) {
+		console.log(err.message);
+		return res.status(500).send({ msg: 'Error on editing password.' });
+	}
+
 };
