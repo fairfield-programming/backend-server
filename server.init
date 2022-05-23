@@ -1,0 +1,6 @@
+git clone "https://github.com/fairfield-programming/backend-server";
+cd backend-server;
+npm install;
+cp ./server.service /etc/systemd/system/server.service;
+sudo systemctl daemon-reload;
+sudo systemctl start server;
