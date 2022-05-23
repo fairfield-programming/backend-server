@@ -13,7 +13,7 @@ if (!process.env.DATABASE_URL) env = 'development';
 
 if (env === 'development') {
 	sequelize = new Sequelize('sqlite::memory:', {
-		logging: true,
+		logging: console.log,
 	});
 } else {
 	sequelize = new Sequelize(process.env.DATABASE_URL, {

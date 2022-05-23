@@ -15,7 +15,7 @@
 
 
 module.exports.blockUser = async (req, res) => {
-	if (!req.params.blockId) {
+	if (!req.params.toBlockId) {
 		return res.status(400).send({ msg: "Not All Parameters Provided." });
 	}
 
@@ -30,7 +30,7 @@ module.exports.blockUser = async (req, res) => {
 			,
 			User.findOne({
 				where: {
-					id: req.params.blockId,
+					id: req.params.toBlockId,
 				},
 			})
 		])

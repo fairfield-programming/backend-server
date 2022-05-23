@@ -6,7 +6,7 @@
  * @param {Response} res - HTTP Response for the client
  * 
  * @description
- * This controller will allow the user to list his followers, if all parameters are correct.
+ * This controller allows to see the followers of a given user, if all parameters are correct.
  * 
  * @todo
  * Nothing for now.

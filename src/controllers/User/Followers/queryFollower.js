@@ -6,7 +6,7 @@
  * @param {Response} res - HTTP Response for the client
  * 
  * @description
- * This controller will allow the user to see a specific follower, if all parameters are correct.
+ * This controller will allow the user to see a specific follower of a specific user, if all parameters are correct.
  * 
  * @todo
  * Nothing for now.
@@ -49,7 +49,7 @@ module.exports.queryFollower = async (req, res) => {
 
 		if (!followee.hasFollower(follower)) {
 			return res.status(401).send({
-				msg: `User with id=${req.params.id} is not followed by user with id=${req.params.followerIdI}`
+				msg: `User with id=${req.params.id} is not followed by user with id=${req.params.followerId}`
 			});
 		}
 

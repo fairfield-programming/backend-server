@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('./models/index');
 
 // Configure Imports
 const express = require('express');

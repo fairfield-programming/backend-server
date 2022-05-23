@@ -15,7 +15,7 @@
 
 
 module.exports.unblockUser = async (req, res) => {
-  if (!req.params.id || !req.params.blockId) {
+  if (!req.params.toUnblockId) {
     return res.status(400).send({ msg: "Not All Parameters Provided." });
   }
 
@@ -24,7 +24,7 @@ module.exports.unblockUser = async (req, res) => {
     const [blockedUser, user] = await Promise.all([
       User.findOne({
         where: {
-          id: req.params.blockId,
+          id: req.params.toUnblockId,
         },
       }),
 

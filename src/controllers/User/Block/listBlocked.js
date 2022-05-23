@@ -6,7 +6,7 @@
  * @param {Response} res - HTTP Response for the client
  * 
  * @description
- * This controller will allow the user to see the his blocked users list, if all parameters are correct.
+ * This controller will allow the user to see the his own blocked Users list, if all parameters are correct.
  * 
  * @todo
  * Nothing for now.
@@ -14,15 +14,14 @@
 
 
 module.exports.listBlocked = async (req, res) => {
-  if (!req.params.id || !req.params.blockId) {
-    return res.status(400).send({ msg: "Not All Parameters Provided." });
-  }
+
+  if (!req.user) return res.status(403).send({ msg: 'Not Logged In.' });
 
   try {
 
     const user = await User.findOne({
       where: {
-        id: req.params.id,
+        id: req.user.id,
       },
     })
 

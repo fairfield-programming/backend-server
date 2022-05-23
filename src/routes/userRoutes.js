@@ -12,23 +12,23 @@ router.get('/:id/status', userControllers.getStatus);
 
 router.post('/signup', userControllers.signup);
 router.post('/login', userControllers.login);
-router.post('/:id/update', verifyLogin, userControllers.setData);
-router.post('/:id/status', verifyLogin, userControllers.setStatus);
-router.post('/:id/password', verifyLogin, userControllers.setPass);
-router.post('/:id/delete', verifyLogin, userControllers.deleteAccount);
+router.post('/update', verifyLogin, userControllers.setData);
+router.post('/setStatus', verifyLogin, userControllers.setStatus);
+router.post('/setPassword', verifyLogin, userControllers.setPass);
+router.post('/delete', verifyLogin, userControllers.deleteAccount);
 
 // Block Endpoints
-router.get('/:id/block', verifyLogin, userControllers.blockUser);
-router.get('/:id/block/:blockId/query', verifyLogin, userControllers.queryBlock);
+router.get('/blockedUsers', verifyLogin, userControllers.listBlocked);
+router.get('/blockedUsers/:blockedId', verifyLogin, userControllers.queryBlock);
 
-router.post('/:id/block/:blockId/block', verifyLogin, verifyEmail, userControllers.blockUser);
-router.post('/:id/block/:blockId/undo', verifyLogin, verifyEmail, userControllers.unblockUser);
+router.post('/:toBlockId/block', verifyLogin, verifyEmail, userControllers.blockUser);
+router.post('/:toUnblockId/unblock', verifyLogin, verifyEmail, userControllers.unblockUser);
 
 // Follow Endpoints
 router.get('/:id/followers', verifyLogin, userControllers.listFollowers);
 router.get('/:id/followers/:followerId', verifyLogin, userControllers.queryFollower);
 
-router.post('/:followeeId/follow', verifyLogin, verifyEmail, userControllers.followUser);
+router.post('/:toFollowId/follow', verifyLogin, verifyEmail, userControllers.followUser);
 router.post('/:followeeId/unfollow', verifyLogin, verifyEmail, userControllers.unfollowUser);
 
 // email verification end point
