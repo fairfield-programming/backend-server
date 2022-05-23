@@ -1,0 +1,13 @@
+[Unit]
+Description=FPA Backend Server
+After=network.target
+
+[Service]
+Type=simple
+Restart=on-failure
+User=bitnami
+WorkingDirectory=/home/bitnami/backend-server/
+ExecStart=/opt/bitnami/node/bin/node /home/bitnami/backend-server/src/index.js
+
+[Install]
+WantedBy=multi-user.target
