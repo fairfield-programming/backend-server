@@ -9,8 +9,6 @@ const { verifyEmail } = require('../middelwares/verifyEmail');
 router.get('/blockedUsers', verifyLogin, userControllers.listBlocked);
 router.get('/blockedUsers/:blockedId', verifyLogin, userControllers.queryBlock);
 
-
-
 router.post('/:toBlockId/block', verifyLogin, verifyEmail, userControllers.blockUser);
 router.post('/:toUnblockId/unblock', verifyLogin, verifyEmail, userControllers.unblockUser);
 
