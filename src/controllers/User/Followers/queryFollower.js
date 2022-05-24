@@ -57,7 +57,7 @@ module.exports.queryFollower = async (req, res) => {
 
 	} catch (err) {
 		console.log(err.message);
-		return res.status(500).send({ msg: 'Error on searching for users followers.' });
+		return res.status(500).send({ msg: 'Error on searching for a specific follower.' });
 	}
 
 };
