@@ -1,13 +1,13 @@
 
 /**
  * @module Block User Controller
- * 
+ *
  * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
- * 
+ *
  * @description
  * This controller will allow the user to block a specific user, if all parameters are correct.
- * 
+ *
  * @todo
  * Nothing for now.
  */
@@ -40,11 +40,14 @@ module.exports.blockUser = async (req, res) => {
 		if (!user) {
 			return res.status(404).send({ msg: 'Current account not found.' })
 		}
-		if (user.hasBlocked(userToBlock)) {
+
+		const alreadyBlocked = await user.hasBlockedUser(userToBlock);
+
+		if (alreadyBlocked) {
 			return res.status(400).send({ msg: 'You have already blocked this person.' });
 		}
 
-		user.addBlocked(userToBlock);
+		user.addBlockedUser(userToBlock);
 
 		return res.status(200).send({ msg: 'User blocked.' });
 

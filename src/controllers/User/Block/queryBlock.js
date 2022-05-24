@@ -23,7 +23,7 @@ module.exports.queryBlock = async (req, res) => {
     const [blockedUser, user] = await Promise.all([
       User.findOne({
         where: {
-          id: req.params.blockId,
+          id: req.params.blockedId,
         },
       })
       ,
@@ -41,7 +41,9 @@ module.exports.queryBlock = async (req, res) => {
       return res.status(404).send({ msg: 'Current account not found. Try loggin in.' })
     }
 
-    if (!user.hasBlocked(blockedUser)) {
+    const alreadyBlocked = await user.hasBlockedUser(blockedUser); 
+    
+    if (!alreadyBlocked) {
       return res.status(401).send({ msg: "You have not blocked this person." });
     }
 
