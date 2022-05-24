@@ -45,7 +45,10 @@ module.exports.followUser = async (req, res) => {
       return res.status(404).send({ msg: 'Current account not found.' });
     }
 
-    if (userToFollow.hasFollower(user)) {
+
+    const alreadyFollower = await userToFollow.hasFollower(user);
+
+    if (alreadyFollower) {
       return res.status(401).send({ msg: "You are already following this person." });
     }
 
