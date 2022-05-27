@@ -42,9 +42,10 @@ module.exports.unrsvpEvent = async (req, res) => {
 		if (!user) {
 			return res.status(400).send({ msg: 'Current user profil not saved' });
 		}
-		if (!user.hasEvent(event)) {
-			return res.status(401).send({ msg: 'You are not subscribed to this event.' });
-		}
+
+		const alreadySub = await user.hasEvent(event);
+
+		if (!alreadySub) return res.status(400).send({ msg: 'You are not subscribed to this event.' });
 
 		user.removeEvents(event);
 

@@ -45,6 +45,10 @@ module.exports.rsvpEvent = async (req, res) => {
 			return res.status(400).send({ msg: 'Current user not found' });
 		}
 
+		const alreadySub = await user.hasEvent(event);
+
+		if (alreadySub) return res.status(400).send({ msg: 'You are already subscribed.' });
+
 		user.addEvents(event);
 
 		res.status(200).json(event);
