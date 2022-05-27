@@ -19,18 +19,19 @@ module.exports.listBlocked = async (req, res) => {
 
   try {
 
-    const user = await User.findOne({
+    const userBlockedList = await User.findOne({
       where: {
         id: req.user.id,
       },
-    })
+      include: 'BlockedUser',
+    });
 
     if (!user) {
       return res.status(404).send({ msg: 'User not found.' });
     }
 
-    const blockedUsers = await user.getBlocked();
-    return res.status(200).json(blockedUsers);
+
+    return res.status(200).json(userBlockedList.BlockedUser);
 
   } catch (err) {
     console.log(err.message);

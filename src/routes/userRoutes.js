@@ -7,8 +7,7 @@ const { verifyEmail } = require('../middelwares/verifyEmail');
 // User Endpoints
 router.get('/', userControllers.listUsers);
 router.get('/count', userControllers.countUsers);
-router.get('/:id/', userControllers.queryUser);
-router.get('/:id/status', userControllers.getStatus);
+
 
 router.post('/signup', userControllers.signup);
 router.post('/login', userControllers.login);
@@ -20,6 +19,14 @@ router.post('/delete', verifyLogin, userControllers.deleteAccount);
 // Block Endpoints
 router.get('/blockedUsers', verifyLogin, userControllers.listBlocked);
 router.get('/blockedUsers/:blockedId', verifyLogin, userControllers.queryBlock);
+
+
+// User endpoints - 
+// Note: since id can be anything the get by id route sould be last to be invoked.
+
+router.get('/:id/', userControllers.queryUser);
+router.get('/:id/status', userControllers.getStatus);
+
 
 router.post('/:toBlockId/block', verifyLogin, verifyEmail, userControllers.blockUser);
 router.post('/:toUnblockId/unblock', verifyLogin, verifyEmail, userControllers.unblockUser);

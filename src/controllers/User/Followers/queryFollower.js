@@ -37,8 +37,6 @@ module.exports.queryFollower = async (req, res) => {
 
 		])
 
-
-
 		if (!follower) {
 			return res.status(404).send({ msg: 'Follower user not found.' });
 		}
@@ -47,8 +45,10 @@ module.exports.queryFollower = async (req, res) => {
 			return res.status(404).send({ msg: 'Followee user not found.' });
 		}
 
-		if (!followee.hasFollower(follower)) {
-			return res.status(401).send({
+		const alreadyFollower = await followee.hasFollower(follower);
+
+		if (!alreadyFollower) {
+			return res.status(400).send({
 				msg: `User with id=${req.params.id} is not followed by user with id=${req.params.followerId}`
 			});
 		}

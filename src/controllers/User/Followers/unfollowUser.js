@@ -19,9 +19,7 @@ module.exports.unfollowUser = async (req, res) => {
     return res.status(400).send({ msg: "Not All Parameters Provided." });
   }
 
-
   try {
-
     const [followee, user] = await Promise.all([
 
       User.findOne({
@@ -47,12 +45,11 @@ module.exports.unfollowUser = async (req, res) => {
       return res.status(404).send({ msg: 'Current user not found.' });
     }
 
-    if (!followee.hasFollower(user)) {
+    const alreadyFollower = await followee.hasFollower(user);
+    
+    if (!alreadyFollower) {
       return res.status(401).send({ msg: 'Your are not following this person.' });
     }
-
-
-
 
     followee.removeFollower(user);
 

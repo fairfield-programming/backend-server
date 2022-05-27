@@ -43,11 +43,13 @@ module.exports.unblockUser = async (req, res) => {
       return res.status(404).send({ msg: 'Current account not found.' });
     }
 
-    if (!user.hasBlocked(blockedUser)) {
+    const alreadyBlocked = await user.hasBlockedUser(blockedUser);
+
+    if (!alreadyBlocked) {
       return res.status(401).send({ msg: "You have not blocked this person." });
     }
 
-    user.removeBlocked(blockedUser);
+    user.removeBlockedUser(blockedUser);
 
     return res.status(200).send({ msg: 'User unblocked.' });
 
