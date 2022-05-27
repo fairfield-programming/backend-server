@@ -51,7 +51,7 @@ module.exports.editEvent = async (req, res) => {
 			date: req.body.date,
 		})
 
-		return res.send(200).send({ msg: 'Event updated.' });
+		return res.status(200).send({ msg: 'Event updated.' });
 
 	} catch (err) {
 		console.log(err.message);

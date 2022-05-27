@@ -8,7 +8,7 @@ function getVulgarWords() {
 function formatString(input) {
 	const lowercase = input.toLowerCase();
 
-	return lowercase.replace.replace(/\$/g, 's').replace(/\@/g, 'a');
+	return lowercase.replace(/\$/g, 's').replace(/\@/g, 'a');
 }
 
 function detectVulgarWords(input) {
