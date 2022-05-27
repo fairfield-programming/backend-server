@@ -11,28 +11,37 @@ const { Response } = require('express');
  * @description
  * This controller will allow the user to list his followers, if all parameters are correct.
  *
+ * This controller allows to see the followers of a given user, if all parameters are correct.
+ * 
+
  * @todo
  * Nothing for now.
  */
 
 module.exports.listFollowers = async (req, res) => {
+
 	if (!req.params.id) {
 		return res.status(400).send({ msg: 'Not All Parameters Provided.' });
 	}
 
 	try {
-		const user = await User.findOne({
+
+		const userFollowersList = await User.findOne({
+
 			where: {
 				id: req.params.id,
 			},
+			include: 'Follower',
 		});
 
-		if (!user) {
-			return res.status(404).send({ msg: 'User not found.' });
+
+		if (!userFollowersList) {
+			return res.status(404).send({ msg: "User not found." });
 		}
 
-		const followers = await user.getFollowers();
-		return res.status(200).json(followers);
+		return res.status(200).json(userFollowersList.Follower);
+
+
 	} catch (err) {
 		console.log(err.message);
 		return res.status(500).send({ msg: 'Error on listing followers.' });

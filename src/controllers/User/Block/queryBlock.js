@@ -16,38 +16,46 @@ const { Response } = require('express');
  */
 
 module.exports.queryBlock = async (req, res) => {
-	if (!req.params.id || !req.params.blockId) {
-		return res.status(400).send({ msg: 'Not All Parameters Provided.' });
-	}
 
-	try {
-		const [blockedUser, user] = await Promise.all([
-			User.findOne({
-				where: {
-					id: req.params.blockId,
-				},
-			}),
-			User.findOne({
-				where: {
-					id: req.user.id,
-				},
-			}),
-		]);
+  if (!req.params.blockedId) {
+    return res.status(400).send({ msg: "Not All Parameters Provided." });
+  }
 
-		if (!blockedUser) {
-			return res.status(404).send({ msg: 'Blocked User Not Found.' });
-		}
-		if (!user) {
-			return res.status(404).send({ msg: 'Current account not found.' });
-		}
+  try {
 
-		if (!user.hasBlocked(blockedUser)) {
-			return res.status(401).send({ msg: 'You have not blocked this person.' });
-		}
+    const [blockedUser, user] = await Promise.all([
+      User.findOne({
+        where: {
+          id: req.params.blockedId,
+        },
+      })
+      ,
+      User.findOne({
+        where: {
+          id: req.user.id,
+        },
+      })
+    ])
 
-		return res.status(200).json(blockedUser);
-	} catch (err) {
-		console.log(err.message);
-		return res.status(500).send({ msg: 'Error on searching for a blocked account.' });
-	}
+    if (!blockedUser) {
+      return res.status(404).send({ msg: "Blocked User Not Found." });
+    }
+    if (!user) {
+      return res.status(404).send({ msg: 'Current account not found. Try loggin in.' })
+    }
+
+    const alreadyBlocked = await user.hasBlockedUser(blockedUser); 
+    
+    if (!alreadyBlocked) {
+      return res.status(401).send({ msg: "You have not blocked this person." });
+    }
+
+    return res.status(200).json(blockedUser);
+
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).send({ msg: "Error on searching for a blocked account." });
+  }
+
+
 };

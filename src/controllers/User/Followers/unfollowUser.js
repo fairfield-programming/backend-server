@@ -16,42 +16,51 @@ const { Response } = require('express');
  */
 
 module.exports.unfollowUser = async (req, res) => {
-	if (!req.params.followeeId) {
-		return res.status(400).send({ msg: 'Not All Parameters Provided.' });
-	}
 
-	try {
-		const [followee, user] = await Promise.all([
-			User.findOne({
-				where: {
-					id: req.params.followee,
-				},
-			}),
+  if (!req.params.followeeId) {
+    return res.status(400).send({ msg: "Not All Parameters Provided." });
+  }
 
-			User.findOne({
-				where: {
-					id: req.user.id,
-				},
-			}),
-		]);
+  try {
+    const [followee, user] = await Promise.all([
 
-		if (!followee) {
-			return res.status(404).send({ msg: 'Followee user not found.' });
-		}
+      User.findOne({
+        where: {
+          id: req.params.followeeId,
+        },
+      }),
 
-		if (!user) {
-			return res.status(404).send({ msg: 'Current user not found.' });
-		}
+      User.findOne({
+        where: {
+          id: req.user.id,
+        },
+      })
 
-		if (!followee.hasFollower(user)) {
-			return res.status(401).send({ msg: 'Your are not following this person.' });
-		}
+    ])
 
-		followee.removeFollower(user);
 
-		return res.status(200).send({ msg: 'Your are not longer following this person.' });
-	} catch (err) {
-		console.log(err.message);
-		return res.status(500).send({ msg: 'Error on unfollowing a user.' });
-	}
+    if (!followee) {
+      return res.status(404).send({ msg: 'Followee user not found.' });
+    }
+
+    if (!user) {
+      return res.status(404).send({ msg: 'Current user not found.' });
+    }
+
+    const alreadyFollower = await followee.hasFollower(user);
+    
+    if (!alreadyFollower) {
+      return res.status(401).send({ msg: 'Your are not following this person.' });
+    }
+
+    followee.removeFollower(user);
+
+    return res.status(200).send({ msg: 'Your are not longer following this person.' });
+
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).send({ msg: 'Error on unfollowing a user.' });
+  }
+
+
 };

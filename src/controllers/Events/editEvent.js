@@ -1,5 +1,6 @@
-const { Events } = require('../../models');
-const { missingParameters } = require('../../library/eventsUtils');
+
+const Events = require('../../models/Events');
+const { missingEventParameters } = require('../../library/eventsUtils');
 const { detectVulgarWords } = require('../../library/VulgarTest');
 // import Express types
 const { Response } = require('express');
@@ -19,7 +20,7 @@ const { Response } = require('express');
 
 module.exports.editEvent = async (req, res) => {
 	if (!req.user) return res.status(403).send({ msg: 'Not Logged In.' });
-	if (missingParameters(req)) return res.status(400).send({ msg: 'Not All Parameters Provided.' });
+	if (missingEventParameters(req)) return res.status(400).send({ msg: 'Not All Parameters Provided.' });
 
 	try {
 		const event = await Events.findOne({
@@ -40,7 +41,7 @@ module.exports.editEvent = async (req, res) => {
 			return res.status(406).send({ msg: 'Vulgar Language Detected.' });
 		}
 
-		await event.update({
+		event.update({
 			name: req.body.name,
 			location: req.body.location,
 			description: req.body.description,

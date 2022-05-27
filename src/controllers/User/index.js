@@ -16,6 +16,9 @@ const { followUser } = require('./Followers/followUser');
 const { listFollowers } = require('./Followers/listFollowers');
 const { queryFollower } = require('./Followers/queryFollower');
 const { unfollowUser } = require('./Followers/unfollowUser');
+const { listFollowings } = require('./Followers/listFollowings');
+const { queryFollowing } = require('./Followers/queryFollowing');
+
 
 const { countUsers } = require('./Helpers/countUsers');
 const { listUsers } = require('./Helpers/listUsers');
@@ -36,7 +39,9 @@ module.exports = {
 	unblockUser,
 	followUser,
 	listFollowers,
+	listFollowings,
 	queryFollower,
+	queryFollowing,
 	unfollowUser,
 	countUsers,
 	listUsers,

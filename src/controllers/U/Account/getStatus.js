@@ -1,27 +1,23 @@
-// import Express types
-const { Response } = require('express');
-const { User } = require('../../../models');
 /**
  * @module Get Account Status Controller
- *
- * @param {import('../../../typings').Express.IRequest} req - HTTP Request from the client
+ * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
- *
+ * 
  * @description
  * This controller will allow the user get the status of a registred user, if all parameters are correct.
- *
+ * 
  * @todo
  * Nothing for now.
  */
 
 module.exports.getStatus = (req, res) => {
-  if (!req.params.id) return res.status(400).send("Not All Parameters Provided.");
+  if (!req.params.username) return res.status(400).send("Not All Parameters Provided.");
 
   User.findOne(
     {
       where:
       {
-        id: req.params.id,
+        username: req.params.username,
       },
     },
   )
@@ -35,6 +31,5 @@ module.exports.getStatus = (req, res) => {
     .catch((error) => {
       console.log(error);
       return res.status(500).send("Internal Server Error.");
-  });
+    });
 };
-

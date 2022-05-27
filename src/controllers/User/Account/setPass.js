@@ -18,18 +18,22 @@ const { User } = require('../../../models');
  */
 
 module.exports.setPass = async (req, res) => {
-	if (!req.params.id || !req.body.password || !req.body.newPassword) {
+
+	if (!req.user) {
+		return res.status(401).send({ msg: 'Not Logged in.' });
+
+	}
+
+
+	if (!req.body.password || !req.body.newPassword) {
 		return res.status(400).send({ msg: 'Not All Parameters Given.' });
 	}
 
-	if (req.user.id !== req.params.id) {
-		return res.status(401).send({ msg: 'Not Authorized.' });
-	}
 
 	try {
 		const user = await User.findOne({
 			where: {
-				id: req.params.id,
+				id: req.user.id,
 			},
 		});
 

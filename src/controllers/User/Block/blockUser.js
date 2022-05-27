@@ -6,6 +6,7 @@ const { Response } = require('express');
  * @module Block User Controller
  *
  * @param {import('../../../typings').Express.IRequest} req - HTTP Request from the client
+
  * @param {Response} res - HTTP Response for the client
  *
  * @description
@@ -16,8 +17,10 @@ const { Response } = require('express');
  */
 
 module.exports.blockUser = async (req, res) => {
-	if (!req.params.blockId) {
-		return res.status(400).send({ msg: 'Not All Parameters Provided.' });
+
+	if (!req.params.toBlockId) {
+		return res.status(400).send({ msg: "Not All Parameters Provided." });
+
 	}
 
 	try {
@@ -29,7 +32,7 @@ module.exports.blockUser = async (req, res) => {
 			}),
 			User.findOne({
 				where: {
-					id: req.params.blockId,
+					id: req.params.toBlockId,
 				},
 			}),
 		]);
@@ -39,11 +42,14 @@ module.exports.blockUser = async (req, res) => {
 		if (!user) {
 			return res.status(404).send({ msg: 'Current account not found.' });
 		}
-		if (user.hasBlocked(userToBlock)) {
+
+		const alreadyBlocked = await user.hasBlockedUser(userToBlock);
+
+		if (alreadyBlocked) {
 			return res.status(400).send({ msg: 'You have already blocked this person.' });
 		}
 
-		user.addBlocked(userToBlock);
+		user.addBlockedUser(userToBlock);
 
 		return res.status(200).send({ msg: 'User blocked.' });
 	} catch (err) {

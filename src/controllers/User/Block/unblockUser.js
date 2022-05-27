@@ -16,41 +16,48 @@ const { User } = require('../../../models');
  */
 
 module.exports.unblockUser = async (req, res) => {
-	if (!req.params.id || !req.params.blockId) {
-		return res.status(400).send({ msg: 'Not All Parameters Provided.' });
-	}
 
-	try {
-		const [blockedUser, user] = await Promise.all([
-			User.findOne({
-				where: {
-					id: req.params.blockId,
-				},
-			}),
+  if (!req.params.toUnblockId) {
+    return res.status(400).send({ msg: "Not All Parameters Provided." });
+  }
 
-			User.findOne({
-				where: {
-					id: req.user.id,
-				},
-			}),
-		]);
+  try {
 
-		if (!blockedUser) {
-			return res.status(404).send({ msg: 'Blocked User Not Found.' });
-		}
-		if (!user) {
-			return res.status(404).send({ msg: 'Current account not found.' });
-		}
+    const [blockedUser, user] = await Promise.all([
+      User.findOne({
+        where: {
+          id: req.params.toUnblockId,
+        },
+      }),
 
-		if (!user.hasBlocked(blockedUser)) {
-			return res.status(401).send({ msg: 'You have not blocked this person.' });
-		}
+      User.findOne({
+        where: {
+          id: req.user.id,
+        },
+      })
+    ]);
 
-		user.removeBlocked(blockedUser);
 
-		return res.status(200).send({ msg: 'User unblocked.' });
-	} catch (err) {
-		console.log(err.message);
-		return res.status(500).send({ msg: 'Error on unblocking a user.' });
-	}
-};
+    if (!blockedUser) {
+      return res.status(404).send({ msg: "Blocked User Not Found." });
+    }
+    if (!user) {
+      return res.status(404).send({ msg: 'Current account not found.' });
+    }
+
+    const alreadyBlocked = await user.hasBlockedUser(blockedUser);
+
+    if (!alreadyBlocked) {
+      return res.status(401).send({ msg: "You have not blocked this person." });
+    }
+
+    user.removeBlockedUser(blockedUser);
+
+    return res.status(200).send({ msg: 'User unblocked.' });
+
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).send({ msg: 'Error on unblocking a user.' });
+  }
+
+}
