@@ -1,4 +1,4 @@
-const { missingParameters } = require('../../library/eventsUtils');
+const { missingEventParameters } = require('../../library/eventsUtils');
 
 
 /**
@@ -21,21 +21,26 @@ module.exports.createEvent = async (req, res) => {
 	}
 
 
-	if (missingParameters(req)) {
+	if (missingEventParameters(req)) {
 		return res.status(400).send({ msg: 'Missing parameters' });
 	}
 
 	try {
-		
-		const event = await Events.create({
-			name: req.body.name,
-			location: req.body.location,
-			description: req.body.description,
-			host: req.body.host,
-			status: req.body.status,
-			date: req.body.date,
-			ownerId: req.user.id,
+
+		const [event, created] = await Event.findOrCreate({
+
+			where: {
+				name: req.body.name,
+				location: req.body.location,
+				description: req.body.description,
+				host: req.body.host,
+				status: req.body.status,
+				date: req.body.date,
+				ownerId: req.user.id,
+			}
 		});
+
+		if (!created) return res.status(400).send({ msg: 'Event already exist.' });
 
 		const user = await User.findOne({ where: { id: req.user.id } });
 

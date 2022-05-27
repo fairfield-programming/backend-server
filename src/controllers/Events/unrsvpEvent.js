@@ -22,7 +22,7 @@ module.exports.unrsvpEvent = async (req, res) => {
 	try {
 
 		const [event, user] = await Promise.all([
-			Events.findOne({
+			Event.findOne({
 				where: {
 					id: req.params.id,
 				},

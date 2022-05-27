@@ -23,7 +23,7 @@ module.exports.rsvpEvent = async (req, res) => {
 
 		const [event, user] = await Promise.all([
 
-			Events.findOne({
+			Event.findOne({
 				where: {
 					id: req.params.id,
 				},

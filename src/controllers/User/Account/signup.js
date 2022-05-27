@@ -53,7 +53,7 @@ module.exports.signup = async (req, res) => {
 			where: {
 				[Op.or]: [
 					{ username: req.body.username },
-					{ email: req.body.email }
+					// { email: req.body.email }
 				],
 			},
 		})

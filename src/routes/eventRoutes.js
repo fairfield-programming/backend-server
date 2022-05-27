@@ -8,10 +8,12 @@ const { verifyEmail } = require('../middelwares/verifyEmail');
 router.get('/', eventControllers.listEvents);
 router.get('/:id', eventControllers.queryEvent);
 
-router.post('/create', verifyLogin, verifyEmail, eventControllers.createEvent);
-router.post('/:id/delete', verifyLogin, verifyEmail, eventControllers.deleteEvent);
-router.post('/:id/edit', verifyLogin, verifyEmail, eventControllers.editEvent);
-router.post('/:id/rsvp', verifyLogin, verifyEmail, eventControllers.rsvpEvent);
-router.post('/:id/unrsvp', verifyLogin, verifyEmail, eventControllers.unrsvpEvent);
+// verifyLogin, verifyEmail,
+
+router.post('/create', eventControllers.createEvent);
+router.post('/:id/delete', eventControllers.deleteEvent);
+router.post('/:id/edit', eventControllers.editEvent);
+router.post('/:id/rsvp', eventControllers.rsvpEvent);
+router.post('/:id/unrsvp', eventControllers.unrsvpEvent);
 
 module.exports = router;

@@ -24,6 +24,22 @@ app.use(require("cors")({
   origin: "*"
 }));
 
+app.all('*', (req, res, next) => {
+  req.user = {
+    id: 1,
+    username: "massiles",
+    email: "ghernaoutmassi@gmail.com",
+    password: null,
+    biography: null,
+    profilePicture: null,
+    status: "greate",
+    confirmed_email: true,
+  }
+  console.log(req.user)
+  next();
+})
+
+
 // Programs
 app.get('/', require('./routes/index'));
 

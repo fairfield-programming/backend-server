@@ -26,7 +26,7 @@ module.exports.eventRemainder = async () => {
 
     // find events that will take place soon.
 
-    const events = await Events.findAll({
+    const events = await Event.findAll({
         where: {
             date: {
                 [Op.lte]: Date.now() + EVENT_REMAINDER,
