@@ -1,4 +1,3 @@
-const Events = require('../../models/Events');
 const { missingEventParameters } = require('../../library/eventsUtils');
 const { detectVulgarWords } = require('../../library/VulgarTest');
 
@@ -25,7 +24,7 @@ module.exports.editEvent = async (req, res) => {
 
 	try {
 		
-		const event = await Events.findOne({
+		const event = await Event.findOne({
 			where: {
 				id: req.params.id,
 			},
@@ -52,7 +51,7 @@ module.exports.editEvent = async (req, res) => {
 			date: req.body.date,
 		})
 
-		return res.send(200).send({ msg: 'Event updated.' });
+		return res.status(200).send({ msg: 'Event updated.' });
 
 	} catch (err) {
 		console.log(err.message);

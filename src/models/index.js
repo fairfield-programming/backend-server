@@ -30,20 +30,20 @@ if (env === 'development') {
 // Import Models
 const Article = require('./Article');
 const User = require('./User');
-const Events = require('./Events');
+const Event = require('./Event');
 
 // Define Models
 global.Article = Article(sequelize, DataTypes);
 global.User = User(sequelize, DataTypes);
-global.Events = Events(sequelize, DataTypes);
+global.Event = Event(sequelize, DataTypes);
 
 // Setup Relationships
 
 // Relationship for Events
-global.User.belongsToMany(global.Events, {
+global.User.belongsToMany(global.Event, {
 	through: 'EventSubscribers',
 });
-global.Events.belongsToMany(global.User, {
+global.Event.belongsToMany(global.User, {
 	through: 'EventSubscribers',
 });
 

@@ -20,7 +20,7 @@ module.exports.queryEvent = async (req, res) => {
 	}
 
 	try {
-		const event = await Events.findOne({
+		const event = await Event.findOne({
 			where: {
 				id: req.params.id,
 			},

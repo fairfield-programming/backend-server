@@ -5,8 +5,9 @@ const { verifyLogin } = require('../middelwares/verifyLogin');
 const { verifyEmail } = require('../middelwares/verifyEmail');
 
 
-router.get('/', eventControllers.listEvents);
-router.get('/:id', eventControllers.queryEvent);
+router.get('/', verifyLogin, eventControllers.listEvents);
+router.get('/:id', verifyLogin, eventControllers.queryEvent);
+
 
 router.post('/create', verifyLogin, verifyEmail, eventControllers.createEvent);
 router.post('/:id/delete', verifyLogin, verifyEmail, eventControllers.deleteEvent);

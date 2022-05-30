@@ -24,6 +24,7 @@ app.use(require("cors")({
   origin: "*"
 }));
 
+
 // Programs
 app.get('/', require('./routes/index'));
 
