@@ -91,7 +91,7 @@ module.exports.signup = async (req, res) => {
 			profilePicture: "https://fairfield-programming.herokuapp.com/duck/10001000005000043/",
 			biography: "This user hasn't set a biography yet...",
 			confirmed_email: false,
-			status: "",
+			status: req.body.userStatus,
 		})
 
 		// generate token

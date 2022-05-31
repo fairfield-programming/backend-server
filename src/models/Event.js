@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
 		host: DataTypes.STRING,
 		eventImage: DataTypes.TEXT,
 		status: DataTypes.STRING,
+		eligibleProfiles: [DataTypes.STRING],
 		date: DataTypes.DATE,
 		ownerId: DataTypes.INTEGER,
 	});

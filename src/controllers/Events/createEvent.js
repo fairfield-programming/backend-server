@@ -35,6 +35,7 @@ module.exports.createEvent = async (req, res) => {
 				description: req.body.description,
 				host: req.body.host,
 				status: req.body.status,
+				eligibleProfiles: req.body.eligibleProfiles,
 				date: req.body.date,
 				ownerId: req.user.id,
 			}
@@ -55,6 +56,7 @@ module.exports.createEvent = async (req, res) => {
 			host: event.host,
 			eventImage: event.eventImage,
 			status: event.status,
+			eligibleProfiles: event.eligibleProfiles,
 			date: event.date,
 		});
 
