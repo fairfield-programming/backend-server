@@ -1,14 +1,13 @@
 
-const Events = require('../../models/Events');
 const { missingEventParameters } = require('../../library/eventsUtils');
 const { detectVulgarWords } = require('../../library/VulgarTest');
 // import Express types
-const { Response } = require('express');
+const { Response,Request } = require('express');
 
 /**
  * @module Edit Event Controller
  *
- * @param {import('../../typings').Express.IRequest} req - HTTP Request from the client
+ * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
  *
  * @description
@@ -23,7 +22,10 @@ module.exports.editEvent = async (req, res) => {
 	if (missingEventParameters(req)) return res.status(400).send({ msg: 'Not All Parameters Provided.' });
 
 	try {
-		const event = await Events.findOne({
+
+		
+		const event = await Event.findOne({
+
 			where: {
 				id: req.params.id,
 			},
@@ -50,7 +52,9 @@ module.exports.editEvent = async (req, res) => {
 			date: req.body.date,
 		});
 
-		return res.send(200).send({ msg: 'Event updated.' });
+
+		return res.status(200).send({ msg: 'Event updated.' });
+
 	} catch (err) {
 		console.log(err.message);
 		return res.status(500).send({ msg: 'Error editing event.' });

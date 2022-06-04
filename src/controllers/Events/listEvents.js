@@ -18,7 +18,7 @@ const { Response, Request } = require('express');
 
 module.exports.listEvents = async (req, res) => {
 	try {
-		const events = await Events.findAll({});
+		const events = await Event.findAll({});
 
 		if (!events?.length) return res.status(404).send({ msg: 'No events for now.' });
 

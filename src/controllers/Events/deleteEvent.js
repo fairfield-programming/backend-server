@@ -1,5 +1,5 @@
 // import Express types
-const { Response } = require('express');
+const { Response,Request } = require('express');
 
 // import Event Model
 const { Events } = require('../../models');
@@ -7,7 +7,7 @@ const { Events } = require('../../models');
 /**
  * @module Delete Event Controller
  *
- * @param {import('../../typings').Express.IRequest} req - HTTP Request from the client
+ * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
  *
  * @description
@@ -22,7 +22,9 @@ module.exports.deleteEvent = async (req, res) => {
 	if (!req.params.id) return res.status(400).send({ msg: 'Not All Parameters Provided.' });
 
 	try {
-		const event = await Events.findOne({
+
+
+		const event = await Event.findOne({
 			where: {
 				id: req.params.id,
 			},

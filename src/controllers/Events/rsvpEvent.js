@@ -1,12 +1,12 @@
 const { Events, User } = require('../../models');
 
 // import Express types
-const { Response } = require('express');
+const { Response,Request } = require('express');
 
 /**
  * @module RSVP Events Controller
  *
- * @param {import('../../typings').Express.IRequest} req - HTTP Request from the client
+ * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
  *
  * @description
@@ -22,7 +22,10 @@ module.exports.rsvpEvent = async (req, res) => {
 
 	try {
 		const [event, user] = await Promise.all([
-			Events.findOne({
+
+
+			Event.findOne({
+
 				where: {
 					id: req.params.id,
 				},
@@ -40,6 +43,17 @@ module.exports.rsvpEvent = async (req, res) => {
 		if (!user) {
 			return res.status(400).send({ msg: 'Current user not found' });
 		}
+
+		const eligible = event.eligibleProfiles.includes(user.status) || user.id === event.ownerId;
+
+
+		if (!eligible) {
+			return res.status(400).send({ msg: 'You are not eligilbe to subscribe to this event.' });
+		}
+
+		const alreadySub = await user.hasEvent(event);
+
+		if (alreadySub) return res.status(400).send({ msg: 'You are already subscribed.' });
 
 		user.addEvents(event);
 

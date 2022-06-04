@@ -1,6 +1,9 @@
-const { missingParameters } = require('../../library/eventsUtils');
+
 // import Express types
-const { Response } = require('express');
+const { Response,Request } = require('express');
+
+const { missingEventParameters } = require('../../library/eventsUtils');
+
 
 // import Event & User Model
 const { Events, User } = require('../../models');
@@ -8,7 +11,7 @@ const { Events, User } = require('../../models');
 /**
  * @module Create Event Controller
  *
- * @param { import('../../typings').Express.IRequest} req - HTTP Request from the client
+ * @param { Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
  *
  * @description
@@ -23,20 +26,30 @@ module.exports.createEvent = async (req, res) => {
 		return res.status(400).send({ msg: 'Not logged in.' });
 	}
 
-	if (missingParameters(req)) {
+	if (missingEventParameters(req)) {
+
 		return res.status(400).send({ msg: 'Missing parameters' });
 	}
 
 	try {
-		const event = await Events.create({
-			name: req.body.name,
-			location: req.body.location,
-			description: req.body.description,
-			host: req.body.host,
-			status: req.body.status,
-			date: req.body.date,
-			ownerId: req.user.id,
+
+
+
+		const [event, created] = await Event.findOrCreate({
+
+			where: {
+				name: req.body.name,
+				location: req.body.location,
+				description: req.body.description,
+				host: req.body.host,
+				status: req.body.status,
+				eligibleProfiles: req.body.eligibleProfiles,
+				date: req.body.date,
+				ownerId: req.user.id,
+			}
 		});
+
+		if (!created) return res.status(400).send({ msg: 'Event already exist.' });
 
 		const user = await User.findOne({ where: { id: req.user.id } });
 
@@ -51,6 +64,7 @@ module.exports.createEvent = async (req, res) => {
 			host: event.host,
 			eventImage: event.eventImage,
 			status: event.status,
+			eligibleProfiles: event.eligibleProfiles,
 			date: event.date,
 		});
 	} catch (err) {
