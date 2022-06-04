@@ -45,6 +45,13 @@ module.exports.rsvpEvent = async (req, res) => {
 			return res.status(400).send({ msg: 'Current user not found' });
 		}
 
+		const eligible = event.eligibleProfiles.includes(user.status) || user.id === event.ownerId;
+
+
+		if (!eligible) {
+			return res.status(400).send({ msg: 'You are not eligilbe to subscribe to this event.' });
+		}
+
 		const alreadySub = await user.hasEvent(event);
 
 		if (alreadySub) return res.status(400).send({ msg: 'You are already subscribed.' });
