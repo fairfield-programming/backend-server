@@ -61,13 +61,31 @@ module.exports.signup = async (req, res) => {
 
 		if (users?.length) return res.status(403).send({ msg: "Account Already Exists." });
 
+
+		// hash the password
+
 		const hashString = hash(req.body.password, 10, (err, hashString) => {
 			if (err) return res.status(500).send({ msg: "Error on signup." })
 			return hashString;
 		});
 
+		// extract the first and the last name
+		let credentials = req.body.username.split('-');
+		
+		// first name will be the first word of the split
+		const firstName = credentials[0];
+
+		// remove the first name from the array of words
+		credentials.shift();
+
+		// last name will be all the remaining words combained
+		const lastName = credentials.join('');
+
+
 		const newUser = await User.create({
 			username: req.body.username,
+			firstName: firstName,
+			lastName: lastName,
 			password: hashString,
 			email: req.body.email,
 			profilePicture: "https://fairfield-programming.herokuapp.com/duck/10001000005000043/",
