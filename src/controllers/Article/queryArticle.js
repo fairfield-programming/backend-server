@@ -1,4 +1,4 @@
-// imported Article model
+
 const { Article } = require('../../models/');
 
 // import Express types
@@ -23,7 +23,7 @@ module.exports.queryArticle = async (req, res) => {
 	}
 
 	try {
-		// Article model was not initially imported
+		
 		const article = await Article.findOne({
 			where: {
 				id: req.params.id,
