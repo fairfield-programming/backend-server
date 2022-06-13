@@ -1,4 +1,4 @@
-// imported Article model
+
 const { Article } = require('../../models');
 
 // imported express types
