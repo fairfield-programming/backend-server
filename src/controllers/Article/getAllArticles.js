@@ -1,4 +1,4 @@
-// [fix] imported Article model
+
 const { Article } = require('../../models');
 // import Express types
 const { Request, Response } = require('express');
@@ -17,7 +17,7 @@ const { Request, Response } = require('express');
 
 module.exports.getAllArticles = async (req, res) => {
 	try {
-		// [fix] Article model was not  imported
+		
 		const articles = await Article.findAll({});
 
 		if (!articles?.length) {
