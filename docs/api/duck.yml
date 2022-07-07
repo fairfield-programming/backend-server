@@ -1,0 +1,73 @@
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: 'Duck API'
+  license:
+    name: MIT
+servers:
+  - url: 'localhost:8080'
+paths:
+  /duck:
+    get:
+      summary: 'Returns a duck svg'
+      operationId: getDuck
+      tags:
+        - duck
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            image/svg+xml:
+              schema:
+                type: string
+                format: binary
+
+  /duck/{id}:
+    get:
+      summary: 'Returns a specific duck svg by ID'
+      operationId: getDuckById
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the duck to get
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            image/svg+xml:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: 'Invalid duck ID'
+
+  /duck/{id}/{zoom}:
+    get:
+      summary: 'Returns a specific duck svg by ID zoomed by given factor'
+      operationId: getDuckByIdAndZoom
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the duck to get
+        - in: path
+          name: zoom
+          schema:
+            type: integer
+          required: true
+          description: Numeric zoom scale factor
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            image/svg+xml:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: 'Invalid duck ID'
