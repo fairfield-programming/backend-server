@@ -1,3 +1,9 @@
+# NOTICE
+
+This repository is being archived in favor of a new backend server built in Bun.js. The new server will have a much clearer architecture with documentation and focus on maintainability. On top of this, the new repository will have a clearer focus with new issues and progress reports each week. 
+
+------
+
 <p align="center">
 <img width="200" src="https://raw.githubusercontent.com/fairfield-programming/backend-server/d84cd53499177b9069d3a0a72c80701627190c18/.github/media/logo-full.svg">
 </p>
