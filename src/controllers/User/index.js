@@ -24,6 +24,11 @@ const { countUsers } = require('./Helpers/countUsers');
 const { listUsers } = require('./Helpers/listUsers');
 const { queryUser } = require('./Helpers/queryUser');
 
+
+const { listPosts } = require('./Posts/listPosts');
+
+
+
 module.exports = {
 	confirmEmail,
 	deleteAccount,
@@ -46,4 +51,5 @@ module.exports = {
 	countUsers,
 	listUsers,
 	queryUser,
+	listPosts,
 };
