@@ -38,6 +38,10 @@ router.post('/setPassword', verifyLogin, userControllers.setPass);
 router.post('/delete', verifyLogin, userControllers.deleteAccount);
 
 
+// user posts endpoints
+
+router.get('/:id/posts', userControllers.listPosts);
+
 
 
 // email verification end point

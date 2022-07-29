@@ -15,7 +15,7 @@
 
 
 
-module.exports.createPost = async (req, res) => {
+module.exports.createPost = (req, res) => {
 
     // check if all the parameters are valid.
 
@@ -30,7 +30,8 @@ module.exports.createPost = async (req, res) => {
     Post.create({
         title: postTitle,
         content: postContent,
-        ownerId: req.user.id,
+        ownerId: 1,
+        // ownerId: req.user.id,
     })
 
 
