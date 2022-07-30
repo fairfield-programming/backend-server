@@ -40,7 +40,8 @@ router.post('/delete', verifyLogin, userControllers.deleteAccount);
 
 // user posts endpoints
 
-router.get('/:id/posts', userControllers.listPosts);
+router.get('/:id/posts', userControllers.listAllUserPosts);
+router.get('/:id/posts/:postId', userControllers.listOneUserPost)
 
 
 

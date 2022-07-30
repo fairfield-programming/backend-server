@@ -3,7 +3,7 @@ const router = express.Router();
 const postControllers = require('../controllers/Post');
 
 
-
+router.get('/', postControllers.getAllPosts)
 router.get('/:postId', postControllers.getPost);
 
 

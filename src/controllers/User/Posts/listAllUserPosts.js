@@ -1,6 +1,6 @@
 
 /**
- * @module list Post Controller
+ * @module list All User Posts Controller
  * 
  * @param {Request} req - HTTP Request from the client
  * @param {Response} res - HTTP Response for the client
@@ -15,7 +15,7 @@
 
 
 
-module.exports.listPosts = async (req, res) => {
+module.exports.listAllUserPosts = async (req, res) => {
 
     // check if all the parameters are valid.
 

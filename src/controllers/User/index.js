@@ -25,7 +25,8 @@ const { listUsers } = require('./Helpers/listUsers');
 const { queryUser } = require('./Helpers/queryUser');
 
 
-const { listPosts } = require('./Posts/listPosts');
+const { listAllUserPosts } = require('./Posts/listAllUserPosts');
+const { listOneUserPost } = require('./Posts/listOneUserPost');
 
 
 
@@ -51,5 +52,6 @@ module.exports = {
 	countUsers,
 	listUsers,
 	queryUser,
-	listPosts,
+	listAllUserPosts,
+	listOneUserPost,
 };
