@@ -15,7 +15,7 @@
 
 
 
-module.exports.updatePost = (req, res) => {
+module.exports.updatePost = async (req, res) => {
 
     // check if all the parameters are valid.
 
@@ -43,6 +43,11 @@ module.exports.updatePost = (req, res) => {
         return res.status(404).send({ msg: 'The post that you are trying to update does not exist.' });
     }
 
+    // check if the owner is the active user.
+
+    if (foundPost.ownerId != req.user.id) {
+        return res.status(401).send({ msg: 'You are not allowed to change a ressource that you do not own.' })
+    }
 
     foundPost.update({
         title: newPostTitle,
