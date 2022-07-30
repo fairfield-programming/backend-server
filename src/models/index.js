@@ -31,11 +31,13 @@ if (env === 'development') {
 const Article = require('./Article');
 const User = require('./User');
 const Event = require('./Event');
+const Post = require('./Post');
 
 // Define Models
 global.Article = Article(sequelize, DataTypes);
 global.User = User(sequelize, DataTypes);
 global.Event = Event(sequelize, DataTypes);
+global.Post = Post(sequelize,DataTypes);
 
 // Setup Relationships
 
@@ -70,6 +72,10 @@ global.User.belongsToMany(global.User, {
 	as: 'BlockedUser',
 	foreignKey: 'blockedId',
 });
+
+
+
+// TODO:  Relationship for post system.
 
 
 
