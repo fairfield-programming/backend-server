@@ -30,8 +30,7 @@ module.exports.createPost = (req, res) => {
     Post.create({
         title: postTitle,
         content: postContent,
-        ownerId: 1,
-        // ownerId: req.user.id,
+        ownerId: req.user.id,
     })
 
 
