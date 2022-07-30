@@ -9,5 +9,6 @@ router.get('/:postId', postControllers.getPost);
 
 
 router.post('/create', postControllers.createPost);
+router.post('/:postId/update', postControllers.updatePost);
 
 module.exports = router;
