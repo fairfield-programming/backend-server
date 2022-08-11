@@ -15,7 +15,7 @@
 
 
 
- module.exports.deletePost = async (req, res) => {
+module.exports.deletePost = async (req, res) => {
 
 
     if (!req.params.postId) {
