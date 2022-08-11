@@ -1,5 +1,5 @@
 require('dotenv').config();
-require('./models/index');
+require('./models')
 
 // Configure Imports
 const express = require('express');
@@ -9,7 +9,6 @@ const schedule = require('node-schedule');
 const { removeUnconfirmedAccounts, emailConfirmationRemainder } = require('./jobs/accountCleanup');
 const { eventRemainder } = require("./jobs/eventNotifications");
 
-require('./models')
 
 // Configure Local Variables
 const app = express();
@@ -43,6 +42,11 @@ app.use('/event', require('./routes/eventRoutes'));
 // User Endpoints
 app.use("/user", require("./routes/userRoutes"));
 app.use("/u", require("./routes/uRoutes"));
+
+// Post Endpoints
+
+app.use('/posts', require('./routes/postRoutes'));
+
 
 // Sync the Database
 (async () => {
