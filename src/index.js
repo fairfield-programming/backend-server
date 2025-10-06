@@ -4,6 +4,7 @@ require('./models/index');
 // Configure Imports
 const express = require('express');
 const cookieParser = require("cookie-parser");
+const helmet = require('helmet');
 const { Sequelize } = require('sequelize');
 const schedule = require('node-schedule');
 const { removeUnconfirmedAccounts, emailConfirmationRemainder } = require('./jobs/accountCleanup');
@@ -20,6 +21,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
+app.use(helmet());
 app.use(require("cors")({
   origin: "*"
 }));
@@ -43,6 +45,25 @@ app.use('/event', require('./routes/eventRoutes'));
 // User Endpoints
 app.use("/user", require("./routes/userRoutes"));
 app.use("/u", require("./routes/uRoutes"));
+
+// Catch 404
+app.use((req, res, next) => {
+    res.status(404).json({
+        success: false,
+        message: 'Route not found.'
+    });
+});
+
+
+// Global Error Handler
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    
+    res.status(err.status || 500).json({
+        success: false,
+        message: err.message || 'An unexpected server error occurred.'
+    });
+});
 
 // Sync the Database
 (async () => {
